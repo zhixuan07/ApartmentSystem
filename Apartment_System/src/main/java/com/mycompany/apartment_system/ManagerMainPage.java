@@ -3,6 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.apartment_system;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,6 +17,7 @@ import javax.swing.table.DefaultTableModel;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.regex.Pattern;
+import javax.swing.JFileChooser;
 import javax.swing.table.TableModel;
 /**
  *
@@ -97,22 +102,29 @@ public class ManagerMainPage extends javax.swing.JFrame {
         BillPanel = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        BillTable = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        UnitInput = new javax.swing.JTextField();
-        SearchUnit = new javax.swing.JButton();
+        billRecord_table = new javax.swing.JTable();
+        generateReport = new javax.swing.JButton();
+        SearchUnitbtn = new javax.swing.JButton();
         generateBillbtn = new javax.swing.JButton();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        monthPicker = new javax.swing.JComboBox<>();
+        yearPicker = new javax.swing.JComboBox<>();
+        unitList = new javax.swing.JComboBox<>();
         generateBillPanel = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
-        billType = new javax.swing.JComboBox<>();
+        billTypeSelection = new javax.swing.JComboBox<>();
         jLabel18 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        allUnit = new javax.swing.JRadioButton();
+        selectedUnit = new javax.swing.JRadioButton();
         jLabel19 = new javax.swing.JLabel();
         unitInput = new javax.swing.JComboBox<>();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        billDescription = new javax.swing.JTextField();
+        sendBill = new javax.swing.JButton();
+        jLabel22 = new javax.swing.JLabel();
+        billAmountTextField = new javax.swing.JTextField();
         jPanel10 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -600,22 +612,22 @@ public class ManagerMainPage extends javax.swing.JFrame {
         jLabel14.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel14.setText("Bills Management");
 
-        BillTable.setModel(new javax.swing.table.DefaultTableModel(
+        billRecord_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Unit", "Bill Type", "Paid Status", "Payment Date", "Payment Method"
+                "ID", "Unit", "Bill Type", "Payment Status", "Payment Date", "Payment Method", "Description", "Created_date"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                true, false, false, false, false, true, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -626,48 +638,73 @@ public class ManagerMainPage extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(BillTable);
+        jScrollPane2.setViewportView(billRecord_table);
 
-        jButton1.setText("Generate Report");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        generateReport.setText("Generate Report");
+        generateReport.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                generateReportActionPerformed(evt);
             }
         });
 
-        UnitInput.addActionListener(new java.awt.event.ActionListener() {
+        SearchUnitbtn.setText("Search Unit");
+        SearchUnitbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UnitInputActionPerformed(evt);
+                SearchUnitbtnActionPerformed(evt);
             }
         });
 
-        SearchUnit.setText("Search Unit");
-
-        generateBillbtn.setText("Generate bill");
+        generateBillbtn.setText("Create bill");
         generateBillbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 generateBillbtnActionPerformed(evt);
             }
         });
 
+        jLabel23.setText("Month:");
+
+        jLabel24.setText("Year");
+
+        monthPicker.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
+        monthPicker.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                monthPickerActionPerformed(evt);
+            }
+        });
+
+        yearPicker.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026" }));
+
         javax.swing.GroupLayout BillPanelLayout = new javax.swing.GroupLayout(BillPanel);
         BillPanel.setLayout(BillPanelLayout);
         BillPanelLayout.setHorizontalGroup(
             BillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(BillPanelLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(BillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, BillPanelLayout.createSequentialGroup()
-                        .addComponent(UnitInput, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(105, 105, 105)
-                        .addComponent(SearchUnit, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1)
-                        .addGap(31, 31, 31)
-                        .addComponent(generateBillbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 1017, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(155, Short.MAX_VALUE))
+                .addGroup(BillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(BillPanelLayout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(BillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, BillPanelLayout.createSequentialGroup()
+                                .addGap(29, 29, 29)
+                                .addComponent(unitList, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(SearchUnitbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(28, 28, 28)
+                                .addComponent(generateBillbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(47, 47, 47)
+                                .addComponent(jLabel23)
+                                .addGap(32, 32, 32)
+                                .addComponent(monthPicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel24)
+                                .addGap(18, 18, 18)
+                                .addComponent(yearPicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(36, 36, 36)
+                                .addComponent(generateReport))
+                            .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(BillPanelLayout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1017, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(128, Short.MAX_VALUE))
         );
         BillPanelLayout.setVerticalGroup(
             BillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -676,10 +713,14 @@ public class ManagerMainPage extends javax.swing.JFrame {
                 .addComponent(jLabel14)
                 .addGap(46, 46, 46)
                 .addGroup(BillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(UnitInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(SearchUnit)
-                    .addComponent(generateBillbtn))
+                    .addComponent(generateReport)
+                    .addComponent(SearchUnitbtn)
+                    .addComponent(generateBillbtn)
+                    .addComponent(jLabel23)
+                    .addComponent(jLabel24)
+                    .addComponent(monthPicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(yearPicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(unitList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(377, Short.MAX_VALUE))
@@ -690,23 +731,28 @@ public class ManagerMainPage extends javax.swing.JFrame {
         jLabel15.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel15.setText("Gererate Bill");
 
-        billType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Maintance fee", "Repair fee", " " }));
-
-        jLabel18.setText("Bill Type:");
-
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setText("All Unit");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        billTypeSelection.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Maintance fee", "Repair fee", " " }));
+        billTypeSelection.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                billTypeSelectionActionPerformed(evt);
             }
         });
 
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setText("Selected Unit");
-        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+        jLabel18.setText("Bill Type:");
+
+        buttonGroup1.add(allUnit);
+        allUnit.setText("All Unit");
+        allUnit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton2ActionPerformed(evt);
+                allUnitActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(selectedUnit);
+        selectedUnit.setText("Selected Unit");
+        selectedUnit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectedUnitActionPerformed(evt);
             }
         });
 
@@ -716,38 +762,58 @@ public class ManagerMainPage extends javax.swing.JFrame {
 
         jLabel21.setText("Description");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        billDescription.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                billDescriptionActionPerformed(evt);
             }
         });
+
+        sendBill.setText("Genarate");
+        sendBill.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sendBillActionPerformed(evt);
+            }
+        });
+
+        jLabel22.setText("Amount:");
 
         javax.swing.GroupLayout generateBillPanelLayout = new javax.swing.GroupLayout(generateBillPanel);
         generateBillPanel.setLayout(generateBillPanelLayout);
         generateBillPanelLayout.setHorizontalGroup(
             generateBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, generateBillPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(sendBill, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(500, 500, 500))
             .addGroup(generateBillPanelLayout.createSequentialGroup()
-                .addGap(421, 421, 421)
+                .addGap(450, 450, 450)
                 .addGroup(generateBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel21)
+                    .addGroup(generateBillPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel22)
+                        .addGap(69, 69, 69)
+                        .addGroup(generateBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(unitInput, 0, 101, Short.MAX_VALUE)
+                            .addComponent(billAmountTextField)))
+                    .addGroup(generateBillPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel21)
+                        .addGap(18, 18, 18)
+                        .addComponent(billDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(generateBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, generateBillPanelLayout.createSequentialGroup()
                             .addComponent(jLabel18)
-                            .addGap(45, 45, 45)
-                            .addComponent(billType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(60, 60, 60)
+                            .addComponent(billTypeSelection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(generateBillPanelLayout.createSequentialGroup()
                             .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(96, 96, 96)
-                            .addComponent(unitInput, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(197, 197, 197))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, generateBillPanelLayout.createSequentialGroup()
                             .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(26, 26, 26)
-                            .addComponent(jRadioButton1)
+                            .addComponent(allUnit)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jRadioButton2))
-                        .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(432, Short.MAX_VALUE))
+                            .addComponent(selectedUnit))
+                        .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(423, Short.MAX_VALUE))
         );
         generateBillPanelLayout.setVerticalGroup(
             generateBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -756,23 +822,31 @@ public class ManagerMainPage extends javax.swing.JFrame {
                 .addComponent(jLabel15)
                 .addGap(54, 54, 54)
                 .addGroup(generateBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(billType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(billTypeSelection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel18))
                 .addGap(35, 35, 35)
                 .addGroup(generateBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton2)
+                    .addComponent(selectedUnit)
                     .addComponent(jLabel19)
-                    .addComponent(jRadioButton1))
+                    .addComponent(allUnit))
                 .addGap(18, 18, 18)
                 .addGroup(generateBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(unitInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel20))
+                .addGap(38, 38, 38)
+                .addGroup(generateBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel22)
+                    .addComponent(billAmountTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
-                .addComponent(jLabel21)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(451, Short.MAX_VALUE))
+                .addGroup(generateBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(billDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel21))
+                .addGap(140, 140, 140)
+                .addComponent(sendBill, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(337, Short.MAX_VALUE))
         );
+
+        unitInput.setEnabled(false);
 
         jTabbedPane2.addTab("tab6", generateBillPanel);
 
@@ -844,7 +918,26 @@ public class ManagerMainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_account_btnActionPerformed
 
     private void openBillpanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openBillpanelActionPerformed
+        
         jTabbedPane2.setSelectedIndex(4); 
+        DefaultTableModel model = (DefaultTableModel) billRecord_table.getModel();
+        model.setRowCount(0);
+        unitList.removeAllItems();
+        rs = floor_unitList();
+        try{
+          
+            while(rs.next()){
+                String unit = rs.getString("floor_unit");
+                unitList.addItem(unit);
+            }
+            
+            
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,e);
+        }
+        
+        load_billRecord();
+
     }//GEN-LAST:event_openBillpanelActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -951,14 +1044,7 @@ public class ManagerMainPage extends javax.swing.JFrame {
     private void resident_tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_resident_tableMouseClicked
                 
         
-        
-       
-        
-        
-   
-        
-        
-        
+         
         
     }//GEN-LAST:event_resident_tableMouseClicked
 
@@ -1044,18 +1130,100 @@ public class ManagerMainPage extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_viewResidentDetailsActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void generateReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateReportActionPerformed
+        conn = sqliteConn2.connect();
+String month = monthPicker.getSelectedItem().toString();
+String year = yearPicker.getSelectedItem().toString();
+String sql = "SELECT * FROM bill_record WHERE created_date BETWEEN ? and ?";
+Object columns[] = {"ID","Unit","Bill_type","Bill_amount","Payment_status","Payment_date","Payment_method","Description","created_date"};
+defaultTableModel.setColumnIdentifiers(columns);
+billRecord_table.setModel(defaultTableModel);
 
-    private void UnitInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UnitInputActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_UnitInputActionPerformed
+try {
+    pst = conn.prepareStatement(sql);
+    pst.setString(1,year+"-"+month+"-"+"01");
+    pst.setString(2,year+"-"+month+"-"+"31");
+    rs = pst.executeQuery();
+    defaultTableModel.setRowCount(0);
+    int rowCount = 0;
+    Object[] columnData = new Object[9];
+
+    while (rs.next()) {
+        columnData[0] = rs.getString("id");
+        columnData[1] = rs.getString("floor_unit");
+        columnData[2] = rs.getString("bill_type");
+        columnData[3] = rs.getString("bill_amount");
+        columnData[4] = rs.getString("payment_status");
+        columnData[5] = rs.getString("payment_date");
+        columnData[6] = rs.getString("payment_method");
+        columnData[7] = rs.getString("description");
+        columnData[8] = rs.getString("created_date");
+
+        defaultTableModel.addRow(columnData);
+        rowCount++;
+    }
+
+    if (rowCount > 0) {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Specify a file to save");
+        int userSelection = fileChooser.showSaveDialog(this);
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            File fileToSave = fileChooser.getSelectedFile();
+            try (FileWriter fw = new FileWriter(fileToSave);
+                 BufferedWriter bw = new BufferedWriter(fw)) {
+                bw.write("Bill record");
+                bw.newLine();
+                for (int i = 0; i < billRecord_table.getRowCount(); i++) {
+                    for (int j = 0; j < billRecord_table.getColumnCount(); j++) {
+                        bw.write(billRecord_table.getValueAt(i, j) + ",");
+                    }
+                    bw.newLine();
+                }
+                JOptionPane.showMessageDialog(this, "Successfully Saved");
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(this, "Error occurred while saving the file", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    } else {
+        JOptionPane.showMessageDialog(null, "No record found");
+    }
+} catch (Exception e) {
+    JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+} finally {
+    // Close resources (result set, statement, connection)
+    if (rs != null) {
+        try {
+            rs.close();
+        } catch (SQLException e) {
+            // Handle exception
+        }
+    }
+    if (pst != null) {
+        try {
+            pst.close();
+        } catch (SQLException e) {
+            // Handle exception
+        }
+    }
+    if (conn != null) {
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            // Handle exception
+        }
+    }
+}
+
+                    
+        
+        
+        
+    }//GEN-LAST:event_generateReportActionPerformed
 
     private void generateBillbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateBillbtnActionPerformed
             jTabbedPane2.setSelectedIndex(5); 
             conn = sqliteConn2.connect();
-            String sql = "SELECT floor_unit from apartment_unit WHERE registered ='false' ";
+            String sql = "SELECT floor_unit from apartment_unit WHERE registered ='true' ";
         try{
             Statement stm = conn.createStatement();
             ResultSet rs = stm.executeQuery(sql);
@@ -1070,17 +1238,150 @@ public class ManagerMainPage extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_generateBillbtnActionPerformed
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+    private void allUnitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_allUnitActionPerformed
+        unitInput.setEnabled(false);
+    }//GEN-LAST:event_allUnitActionPerformed
 
-    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton2ActionPerformed
+    private void selectedUnitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectedUnitActionPerformed
+            unitInput.setEnabled(true);
+    }//GEN-LAST:event_selectedUnitActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void billDescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_billDescriptionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_billDescriptionActionPerformed
+
+    private void sendBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendBillActionPerformed
+        conn = sqliteConn2.connect();
+        String currentDate = getCurrentDate();
+        if(conn != null){
+            if(selectedUnit.isSelected()){
+                String sql = "INSERT INTO bill_record(floor_unit,bill_type,bill_amount,payment_status,description,created_date) values(?,?,?,?,?,?) ";
+                String billType = billTypeSelection.getSelectedItem().toString();
+                String unit = unitInput.getSelectedItem().toString();
+                String amount = billAmountTextField.getText();
+                String description = billDescription.getText();
+                if(amount.equals("")){
+                    JOptionPane.showMessageDialog(null,"Please enter amount");
+                }else if(description.equals("")){
+                    JOptionPane.showMessageDialog(null,"Please give description");
+                }else{
+                    try{
+                        pst = conn.prepareStatement(sql);
+                        pst.setString(1, unit);
+                        pst.setString(2, billType);
+                        pst.setString(3, amount);
+                        pst.setString(4, "false");
+                        pst.setString(5, description);
+                        pst.setString(6, currentDate);
+                        pst.execute();
+                        JOptionPane.showMessageDialog(null,"Bill created");
+                        billAmountTextField.setText("");
+                        billDescription.setText("");
+                    }catch(SQLException e){
+                       JOptionPane.showMessageDialog(null,e);
+                        }
+                }
+                                   
+            }else if(allUnit.isSelected()){
+                String sql = "SELECT floor_unit from apartment_unit WHERE registered ='true' ";
+                String sql2 = "INSERT INTO bill_record (floor_unit,bill_type,bill_amount,payment_status,description,created_date) values(?,?,?,?,?,?)";
+                try{
+                    Statement stm = conn.createStatement();
+                    ResultSet rs = stm.executeQuery(sql);
+                    
+                    while(rs.next()){
+                        String billType = billTypeSelection.getSelectedItem().toString();
+                        
+                        String description = billDescription.getText();
+                        String unit = rs.getString("floor_unit");
+                        String amount = billAmountTextField.getText();
+                        pst = conn.prepareStatement(sql2);
+                        pst.setString(1, unit);
+                        pst.setString(2, billType);
+                        pst.setString(3, amount);
+                        pst.setString(4, "false");
+                        pst.setString(5, description);
+                        pst.setString(6, currentDate);
+                        pst.execute();
+                        
+                    }
+                    JOptionPane.showMessageDialog(null,"Bill created");
+                    
+
+                }catch(Exception e){
+                    JOptionPane.showMessageDialog(null,e);
+                }
+            }else{
+                JOptionPane.showMessageDialog(null,"Select one options at unit");
+            }
+        }
+    }//GEN-LAST:event_sendBillActionPerformed
+
+    private void billTypeSelectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_billTypeSelectionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_billTypeSelectionActionPerformed
+
+    private void monthPickerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_monthPickerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_monthPickerActionPerformed
+
+    private void SearchUnitbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchUnitbtnActionPerformed
+        conn = sqliteConn2.connect();
+        Object columns[] = {"ID","Unit","Bill_type","Bill_amount","Payment_status","Payment_date","Payment_method","Description","created_date"};
+        defaultTableModel.setColumnIdentifiers(columns);
+        billRecord_table.setModel(defaultTableModel);
+        String unit = unitList.getSelectedItem().toString();
+        String sql = "SELECT * from bill_record WHERE floor_unit =?";
+        if(conn !=null){
+            try{
+              pst = conn.prepareStatement(sql);
+              pst.setString(1,unit);
+              rs = pst.executeQuery();
+              defaultTableModel.setRowCount(0);
+              Object[] columnData = new Object[9];
+                while(rs.next()){
+                       columnData[0] = rs.getString("id");
+                       columnData[1] = rs.getString("floor_unit");
+                       columnData[2] = rs.getString("bill_type");
+                       columnData[3] = rs.getString("bill_amount");
+                       columnData[4] = rs.getString("payment_status");
+                       columnData[5] = rs.getString("payment_date");
+                       columnData[6] = rs.getString("payment_method");
+                       columnData[7] = rs.getString("description");
+                       columnData[8] = rs.getString("created_date");
+                     
+                       defaultTableModel.addRow(columnData);
+                       
+                }
+            }catch(SQLException e){
+                   JOptionPane.showMessageDialog(null,e);
+                }finally {
+        // Close resources (result set, statement, connection)
+        if (rs != null) {
+            try {
+                rs.close();
+            } catch (SQLException e) {
+                // Handle exception
+            }
+        }
+        if (pst != null) {
+            try {
+                pst.close();
+            } catch (SQLException e) {
+                // Handle exception
+            }
+        }
+        if (conn != null) {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                // Handle exception
+            }
+        }
+}
+              
+        }
+    }//GEN-LAST:event_SearchUnitbtnActionPerformed
      public void load_residentAccount(){
         conn = sqliteConn2.connect();
         Object columns[] = {"ID","resident_username","floor_unit","resident_email","resident_password","created_date"};
@@ -1110,6 +1411,49 @@ public class ManagerMainPage extends javax.swing.JFrame {
             }
                
         }
+    }
+     public void load_billRecord(){
+        conn = sqliteConn2.connect();
+        Object columns[] = {"ID","Unit","Bill_type","Bill_amount","Payment_status","Payment_date","Payment_method","Description","created_date"};
+        defaultTableModel.setColumnIdentifiers(columns);
+        billRecord_table.setModel(defaultTableModel);
+        if(conn != null){   
+            String sql = "SELECT * FROM bill_record";
+            try {
+                pst = conn.prepareStatement(sql);
+                rs = pst.executeQuery();
+                Object[] columnData = new Object[9];
+                while(rs.next()){
+                       columnData[0] = rs.getString("id");
+                       columnData[1] = rs.getString("floor_unit");
+                       columnData[2] = rs.getString("bill_type");
+                       columnData[3] = rs.getString("bill_amount");
+                       columnData[4] = rs.getString("payment_status");
+                       columnData[5] = rs.getString("payment_date");
+                       columnData[6] = rs.getString("payment_method");
+                       columnData[7] = rs.getString("description");
+                       columnData[8] = rs.getString("created_date");
+                     
+                       defaultTableModel.addRow(columnData);
+                       
+                }
+            }catch(SQLException e){
+                   JOptionPane.showMessageDialog(null,e);
+            }
+               
+        }
+    }
+     public ResultSet floor_unitList() {
+        conn = sqliteConn2.connect();
+        String sql = "SELECT floor_unit from apartment_unit WHERE registered = 'true'";
+        try {
+            Statement stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            return rs;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return null; // Return null if an exception occurs
     }
     private boolean isValidEmail(String email) {
         String emailPattern = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
@@ -1184,23 +1528,25 @@ public class ManagerMainPage extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BillPanel;
-    private javax.swing.JTable BillTable;
-    private javax.swing.JButton SearchUnit;
-    private javax.swing.JTextField UnitInput;
+    private javax.swing.JButton SearchUnitbtn;
     private javax.swing.JButton account_btn;
     private javax.swing.JButton addAcc_btn;
     private javax.swing.JButton addResidentAccount;
     private javax.swing.JPanel addaccPanel;
-    private javax.swing.JComboBox<String> billType;
+    private javax.swing.JRadioButton allUnit;
+    private javax.swing.JTextField billAmountTextField;
+    private javax.swing.JTextField billDescription;
+    private javax.swing.JTable billRecord_table;
+    private javax.swing.JComboBox<String> billTypeSelection;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JButton deleteAccountbtn;
     private javax.swing.JTextField email_input;
     private javax.swing.JPanel generateBillPanel;
     private javax.swing.JButton generateBillbtn;
+    private javax.swing.JButton generateReport;
     private javax.swing.JPanel homePanel;
     private javax.swing.JButton home_btn;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
@@ -1217,6 +1563,9 @@ public class ManagerMainPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1235,13 +1584,11 @@ public class ManagerMainPage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JComboBox<String> monthPicker;
     private javax.swing.JButton openBillpanel;
     private javax.swing.JTextField password_input;
     private javax.swing.JPanel residentAccountInfo;
@@ -1252,8 +1599,12 @@ public class ManagerMainPage extends javax.swing.JFrame {
     private javax.swing.JTable resident_table;
     public javax.swing.JTable resident_vehicle;
     private javax.swing.JPanel residentaccPanel;
+    private javax.swing.JRadioButton selectedUnit;
+    private javax.swing.JButton sendBill;
     private javax.swing.JComboBox<String> unitInput;
+    private javax.swing.JComboBox<String> unitList;
     private javax.swing.JTextField username_input;
     private javax.swing.JButton viewResidentDetails;
+    private javax.swing.JComboBox<String> yearPicker;
     // End of variables declaration//GEN-END:variables
 }

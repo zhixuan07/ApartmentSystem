@@ -69,15 +69,12 @@ public class ManagerLoginNew extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 102, 102));
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/apartment_system/icons8-manager-48.png"))); // NOI18N
         jLabel1.setText("Manager Login Panel");
 
         jLabel2.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/apartment_system/icons8-envelope-48.png"))); // NOI18N
         jLabel2.setText("Username");
 
         jLabel3.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/apartment_system/icons8-password-48.png"))); // NOI18N
         jLabel3.setText("Password");
 
         password_input.addActionListener(new java.awt.event.ActionListener() {
@@ -135,7 +132,7 @@ public class ManagerLoginNew extends javax.swing.JFrame {
                 .addComponent(password_input, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(81, 81, 81)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(376, Short.MAX_VALUE))
+                .addContainerGap(426, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

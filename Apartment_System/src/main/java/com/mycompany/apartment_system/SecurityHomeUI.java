@@ -419,7 +419,7 @@ public class SecurityHomeUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     public void load_data(){
-        conn = sqliteConn.connect();
+        conn = sqliteConn2.connect();
         if(conn != null){   
             String sql = "SELECT name,resident_unit,plate_number,time_in,time_out,date,status,reason FROM visitor";
             try {
