@@ -84,7 +84,6 @@ public class LoginMain extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         jButton1.setForeground(new java.awt.Color(75, 98, 99));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/apartment_system/icons8-user-96.png"))); // NOI18N
         jButton1.setText("Resident   ");
         jButton1.setActionCommand("  ");
         jButton1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(174, 190, 191), 3, true));
@@ -96,7 +95,6 @@ public class LoginMain extends javax.swing.JFrame {
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         jButton2.setForeground(new java.awt.Color(75, 98, 99));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/apartment_system/icons8-manager-96.png"))); // NOI18N
         jButton2.setText("Manager   ");
         jButton2.setActionCommand("  ");
         jButton2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(174, 190, 191), 3, true));
@@ -108,7 +106,6 @@ public class LoginMain extends javax.swing.JFrame {
 
         jButton3.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         jButton3.setForeground(new java.awt.Color(75, 98, 99));
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/apartment_system/icons8-security-guard-96.png"))); // NOI18N
         jButton3.setText("Security    ");
         jButton3.setActionCommand("  ");
         jButton3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(174, 190, 191), 3, true));
@@ -136,13 +133,14 @@ public class LoginMain extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(343, 343, 343)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jLabel3)
                     .addComponent(jLabel2)
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(104, 104, 104)))
                 .addContainerGap(350, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -152,9 +150,9 @@ public class LoginMain extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGap(31, 31, 31)
                 .addComponent(jLabel3)
-                .addGap(57, 57, 57)
+                .addGap(55, 55, 55)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addGap(28, 28, 28)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -204,8 +202,8 @@ public class LoginMain extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         //go to manager login page
-        ManagerLogin managerloginframe = new ManagerLogin();
-        managerloginframe.show(); //display manager login frame here
+       
+        //display manager login frame here
         
         dispose(); //close current frame ( main login frame )
     }//GEN-LAST:event_jButton2ActionPerformed
