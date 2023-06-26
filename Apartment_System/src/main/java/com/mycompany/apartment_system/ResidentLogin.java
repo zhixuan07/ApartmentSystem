@@ -8,12 +8,12 @@ package com.mycompany.apartment_system;
  *
  * @author ching
  */
-public class SecurityLogin extends javax.swing.JFrame {
+public class ResidentLogin extends javax.swing.JFrame {
 
     /**
      * Creates new form ResidentLogin
      */
-    public SecurityLogin() {
+    public ResidentLogin() {
         initComponents();
     }
 

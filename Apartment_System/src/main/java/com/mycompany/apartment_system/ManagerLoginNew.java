@@ -3,6 +3,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.apartment_system;
+import java.awt.Toolkit;
+import java.awt.event.WindowEvent;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -34,8 +42,8 @@ public class ManagerLoginNew extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         username_input = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        password_input = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        loginbtn = new javax.swing.JButton();
+        password_field = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -77,18 +85,12 @@ public class ManagerLoginNew extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         jLabel3.setText("Password");
 
-        password_input.addActionListener(new java.awt.event.ActionListener() {
+        loginbtn.setBackground(new java.awt.Color(164, 221, 221));
+        loginbtn.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        loginbtn.setText("Login");
+        loginbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                password_inputActionPerformed(evt);
-            }
-        });
-
-        jButton2.setBackground(new java.awt.Color(164, 221, 221));
-        jButton2.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
-        jButton2.setText("Login");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                loginbtnActionPerformed(evt);
             }
         });
 
@@ -105,14 +107,13 @@ public class ManagerLoginNew extends javax.swing.JFrame {
                         .addGap(113, 113, 113)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(128, 128, 128)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(username_input, javax.swing.GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE)
-                                .addComponent(password_input)))))
+                        .addGap(180, 180, 180)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(loginbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(username_input, javax.swing.GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE)
+                            .addComponent(password_field))))
                 .addContainerGap(423, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -128,10 +129,10 @@ public class ManagerLoginNew extends javax.swing.JFrame {
                 .addComponent(username_input, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(54, 54, 54)
                 .addComponent(jLabel3)
-                .addGap(26, 26, 26)
-                .addComponent(password_input, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(81, 81, 81)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addComponent(password_field, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(69, 69, 69)
+                .addComponent(loginbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(426, Short.MAX_VALUE))
         );
 
@@ -173,14 +174,28 @@ public class ManagerLoginNew extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void password_inputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_password_inputActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_password_inputActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
-
+    private void loginbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginbtnActionPerformed
+       String username = username_input.getText();
+       char [] password = password_field.getPassword();
+       String ps = new String(password);
+       if(username.equals("admin") || ps.equals("admin")){
+       
+       ManagerMainPage MainPage = new ManagerMainPage();
+       MainPage.setVisible(true);
+       dispose();
+       }else if(username.equals("")|| ps.equals("")){
+           JOptionPane.showMessageDialog(null, "Please enter the username and password");
+       }
+       else{
+           JOptionPane.showMessageDialog(null, "Username or password invalid");
+       }
+        
+             
+    }//GEN-LAST:event_loginbtnActionPerformed
+    public void close(){
+        WindowEvent closewindow = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
+        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closewindow);
+    }
     /**
      * @param args the command line arguments
      */
@@ -218,14 +233,14 @@ public class ManagerLoginNew extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField password_input;
+    private javax.swing.JButton loginbtn;
+    private javax.swing.JPasswordField password_field;
     private javax.swing.JTextField username_input;
     // End of variables declaration//GEN-END:variables
 }

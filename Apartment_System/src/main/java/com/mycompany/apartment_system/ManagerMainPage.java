@@ -16,23 +16,40 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.regex.Pattern;
 import javax.swing.JFileChooser;
 import javax.swing.table.TableModel;
+import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import java.util.Properties;
+import javax.mail.MessagingException;
 /**
  *
  * @author zhixu
  */
-public class ManagerMainPage extends javax.swing.JFrame {
+public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
     Connection conn = null;
     ResultSet rs = null;
     PreparedStatement pst = null;
     DefaultTableModel  defaultTableModel = new DefaultTableModel();
+    String date = getCurrentDate();
+    int hour,minutes,second;
     /**
      * Creates new form ManagerMainPage
      */
     public ManagerMainPage() {
        initComponents();
+       
+       DateLabel.setText(date);
+       Thread t = new Thread(this);
+       t.start();
        
         
        
@@ -59,13 +76,15 @@ public class ManagerMainPage extends javax.swing.JFrame {
         jPanel7 = new javax.swing.JPanel();
         openBillpanel = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
-        jButton6 = new javax.swing.JButton();
+        forumPanelbtn = new javax.swing.JButton();
         jPanel9 = new javax.swing.JPanel();
-        jButton7 = new javax.swing.JButton();
+        vistorPanelbtn = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        DateLabel = new javax.swing.JLabel();
+        TimeLabel = new javax.swing.JLabel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         homePanel = new javax.swing.JPanel();
         residentaccPanel = new javax.swing.JPanel();
@@ -105,12 +124,12 @@ public class ManagerMainPage extends javax.swing.JFrame {
         billRecord_table = new javax.swing.JTable();
         generateReport = new javax.swing.JButton();
         SearchUnitbtn = new javax.swing.JButton();
-        generateBillbtn = new javax.swing.JButton();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         monthPicker = new javax.swing.JComboBox<>();
         yearPicker = new javax.swing.JComboBox<>();
         unitList = new javax.swing.JComboBox<>();
+        sendReminderbtn = new javax.swing.JButton();
         generateBillPanel = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         billTypeSelection = new javax.swing.JComboBox<>();
@@ -125,10 +144,32 @@ public class ManagerMainPage extends javax.swing.JFrame {
         sendBill = new javax.swing.JButton();
         jLabel22 = new javax.swing.JLabel();
         billAmountTextField = new javax.swing.JTextField();
-        jPanel10 = new javax.swing.JPanel();
+        VisitorPanel = new javax.swing.JPanel();
+        jLabel25 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        visitor_table = new javax.swing.JTable();
+        searchVisitorInput = new javax.swing.JTextField();
+        SearchByListVisitor = new javax.swing.JComboBox<>();
+        searchVisitorbtn = new javax.swing.JButton();
+        generateVisitorReport = new javax.swing.JButton();
+        visitorReportMonthSelection = new javax.swing.JComboBox<>();
+        visitorReportYearSelection = new javax.swing.JComboBox<>();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        forumPanel = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        Forum_table = new javax.swing.JTable();
+        forumDicussionPanel = new javax.swing.JPanel();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        createBill = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(1350, 1040));
 
         jPanel2.setBackground(new java.awt.Color(99, 178, 178));
@@ -152,9 +193,7 @@ public class ManagerMainPage extends javax.swing.JFrame {
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(home_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(home_btn, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
         );
 
         account_btn.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
@@ -199,11 +238,11 @@ public class ManagerMainPage extends javax.swing.JFrame {
                 .addComponent(openBillpanel, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jButton6.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jButton6.setText("Resident Forum");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        forumPanelbtn.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        forumPanelbtn.setText("Resident Forum");
+        forumPanelbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                forumPanelbtnActionPerformed(evt);
             }
         });
 
@@ -212,21 +251,21 @@ public class ManagerMainPage extends javax.swing.JFrame {
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(forumPanelbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(forumPanelbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jButton7.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jButton7.setText("Visitor");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        vistorPanelbtn.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        vistorPanelbtn.setText("Visitor");
+        vistorPanelbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                vistorPanelbtnActionPerformed(evt);
             }
         });
 
@@ -234,11 +273,11 @@ public class ManagerMainPage extends javax.swing.JFrame {
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(vistorPanelbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(vistorPanelbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -272,24 +311,36 @@ public class ManagerMainPage extends javax.swing.JFrame {
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(647, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(232, 239, 239));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel11.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel11.setBackground(new java.awt.Color(99, 178, 178));
         jPanel11.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         jPanel11.setForeground(new java.awt.Color(0, 102, 102));
         jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel3.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Date:");
-        jPanel11.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, -1, -1));
+        jPanel11.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, -1, -1));
 
+        jLabel4.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Time:");
-        jPanel11.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 30, -1, -1));
+        jPanel11.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, -1, -1));
 
-        jPanel3.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, -10, 1180, 110));
+        DateLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        DateLabel.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel11.add(DateLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, 80, 20));
+
+        TimeLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        TimeLabel.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel11.add(TimeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, 70, 20));
+
+        jPanel3.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 1160, 80));
 
         homePanel.setBackground(new java.awt.Color(232, 239, 239));
 
@@ -301,7 +352,7 @@ public class ManagerMainPage extends javax.swing.JFrame {
         );
         homePanelLayout.setVerticalGroup(
             homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 955, Short.MAX_VALUE)
+            .addGap(0, 969, Short.MAX_VALUE)
         );
 
         jTabbedPane2.addTab("tab1", homePanel);
@@ -370,36 +421,35 @@ public class ManagerMainPage extends javax.swing.JFrame {
         residentaccPanel.setLayout(residentaccPanelLayout);
         residentaccPanelLayout.setHorizontalGroup(
             residentaccPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, residentaccPanelLayout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1111, Short.MAX_VALUE)
+                .addGap(85, 85, 85))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, residentaccPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(addAcc_btn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(deleteAccountbtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(viewResidentDetails)
+                .addGap(106, 106, 106))
             .addGroup(residentaccPanelLayout.createSequentialGroup()
-                .addGap(65, 65, 65)
+                .addGap(40, 40, 40)
                 .addComponent(jLabel2)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, residentaccPanelLayout.createSequentialGroup()
-                .addGroup(residentaccPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(residentaccPanelLayout.createSequentialGroup()
-                        .addContainerGap(697, Short.MAX_VALUE)
-                        .addComponent(addAcc_btn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(deleteAccountbtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(viewResidentDetails)
-                        .addGap(15, 15, 15)))
-                .addGap(85, 85, 85))
         );
         residentaccPanelLayout.setVerticalGroup(
             residentaccPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(residentaccPanelLayout.createSequentialGroup()
-                .addGap(48, 48, 48)
+                .addGap(36, 36, 36)
                 .addComponent(jLabel2)
-                .addGap(21, 21, 21)
+                .addGap(62, 62, 62)
                 .addGroup(residentaccPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addAcc_btn)
                     .addComponent(deleteAccountbtn)
                     .addComponent(viewResidentDetails))
-                .addGap(39, 39, 39)
+                .addGap(20, 20, 20)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 594, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(202, Short.MAX_VALUE))
+                .addContainerGap(206, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("tab2", residentaccPanel);
@@ -491,7 +541,7 @@ public class ManagerMainPage extends javax.swing.JFrame {
                 .addComponent(password_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addComponent(addResidentAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(420, Short.MAX_VALUE))
+                .addContainerGap(440, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("tab3", addaccPanel);
@@ -500,7 +550,7 @@ public class ManagerMainPage extends javax.swing.JFrame {
 
         jPanel12.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel6.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel6.setText("Basic Information");
 
         jLabel7.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
@@ -554,14 +604,16 @@ public class ManagerMainPage extends javax.swing.JFrame {
                         .addComponent(resident_name, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel12Layout.createSequentialGroup()
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(83, 83, 83)
                         .addComponent(resident_ic, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel12Layout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(148, 148, 148)
                         .addComponent(resident_contact, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 665, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 665, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(594, 594, 594)))
                 .addContainerGap(451, Short.MAX_VALUE))
         );
         jPanel12Layout.setVerticalGroup(
@@ -574,20 +626,20 @@ public class ManagerMainPage extends javax.swing.JFrame {
                     .addComponent(jLabel10)
                     .addComponent(resident_name, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(resident_ic, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(28, 28, 28)
-                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9)
-                    .addComponent(resident_contact, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
+                .addComponent(resident_ic, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel7)
+                .addGap(10, 10, 10)
+                .addComponent(resident_contact, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
+                .addComponent(jLabel9)
+                .addGap(44, 44, 44)
                 .addComponent(jLabel16)
-                .addGap(154, 154, 154)
+                .addGap(118, 118, 118)
                 .addComponent(jLabel17)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(143, Short.MAX_VALUE))
+                .addContainerGap(133, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout residentAccountInfoLayout = new javax.swing.GroupLayout(residentAccountInfo);
@@ -604,10 +656,12 @@ public class ManagerMainPage extends javax.swing.JFrame {
             .addGroup(residentAccountInfoLayout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(155, Short.MAX_VALUE))
+                .addContainerGap(169, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("tab4", residentAccountInfo);
+
+        BillPanel.setBackground(new java.awt.Color(232, 239, 239));
 
         jLabel14.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel14.setText("Bills Management");
@@ -654,13 +708,6 @@ public class ManagerMainPage extends javax.swing.JFrame {
             }
         });
 
-        generateBillbtn.setText("Create bill");
-        generateBillbtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                generateBillbtnActionPerformed(evt);
-            }
-        });
-
         jLabel23.setText("Month:");
 
         jLabel24.setText("Year");
@@ -674,6 +721,13 @@ public class ManagerMainPage extends javax.swing.JFrame {
 
         yearPicker.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026" }));
 
+        sendReminderbtn.setText("Send Reminder");
+        sendReminderbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sendReminderbtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout BillPanelLayout = new javax.swing.GroupLayout(BillPanel);
         BillPanel.setLayout(BillPanelLayout);
         BillPanelLayout.setHorizontalGroup(
@@ -681,30 +735,29 @@ public class ManagerMainPage extends javax.swing.JFrame {
             .addGroup(BillPanelLayout.createSequentialGroup()
                 .addGroup(BillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(BillPanelLayout.createSequentialGroup()
-                        .addGap(24, 24, 24)
+                        .addGap(15, 15, 15)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1017, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(BillPanelLayout.createSequentialGroup()
+                        .addGap(47, 47, 47)
                         .addGroup(BillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, BillPanelLayout.createSequentialGroup()
-                                .addGap(29, 29, 29)
+                            .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(BillPanelLayout.createSequentialGroup()
                                 .addComponent(unitList, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(SearchUnitbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(28, 28, 28)
-                                .addComponent(generateBillbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(47, 47, 47)
-                                .addComponent(jLabel23)
-                                .addGap(32, 32, 32)
-                                .addComponent(monthPicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel24)
-                                .addGap(18, 18, 18)
-                                .addComponent(yearPicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(36, 36, 36)
-                                .addComponent(generateReport))
-                            .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(BillPanelLayout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1017, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(128, Short.MAX_VALUE))
+                                .addComponent(SearchUnitbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(180, 180, 180)
+                        .addComponent(jLabel23)
+                        .addGap(32, 32, 32)
+                        .addComponent(monthPicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel24)
+                        .addGap(18, 18, 18)
+                        .addComponent(yearPicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36)
+                        .addComponent(generateReport)
+                        .addGap(18, 18, 18)
+                        .addComponent(sendReminderbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(164, Short.MAX_VALUE))
         );
         BillPanelLayout.setVerticalGroup(
             BillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -715,29 +768,32 @@ public class ManagerMainPage extends javax.swing.JFrame {
                 .addGroup(BillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(generateReport)
                     .addComponent(SearchUnitbtn)
-                    .addComponent(generateBillbtn)
                     .addComponent(jLabel23)
                     .addComponent(jLabel24)
                     .addComponent(monthPicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(yearPicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(unitList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(unitList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sendReminderbtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(377, Short.MAX_VALUE))
+                .addContainerGap(397, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("tab5", BillPanel);
 
-        jLabel15.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        generateBillPanel.setBackground(new java.awt.Color(232, 239, 239));
+
+        jLabel15.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel15.setText("Gererate Bill");
 
-        billTypeSelection.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Maintance fee", "Repair fee", " " }));
+        billTypeSelection.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Maintance fee", "Sinking fee", " " }));
         billTypeSelection.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 billTypeSelectionActionPerformed(evt);
             }
         });
 
+        jLabel18.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         jLabel18.setText("Bill Type:");
 
         buttonGroup1.add(allUnit);
@@ -756,10 +812,13 @@ public class ManagerMainPage extends javax.swing.JFrame {
             }
         });
 
+        jLabel19.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         jLabel19.setText("To:");
 
+        jLabel20.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         jLabel20.setText("Select Unit:");
 
+        jLabel21.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         jLabel21.setText("Description");
 
         billDescription.addActionListener(new java.awt.event.ActionListener() {
@@ -775,45 +834,44 @@ public class ManagerMainPage extends javax.swing.JFrame {
             }
         });
 
+        jLabel22.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         jLabel22.setText("Amount:");
 
         javax.swing.GroupLayout generateBillPanelLayout = new javax.swing.GroupLayout(generateBillPanel);
         generateBillPanel.setLayout(generateBillPanelLayout);
         generateBillPanelLayout.setHorizontalGroup(
             generateBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, generateBillPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(sendBill, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(500, 500, 500))
             .addGroup(generateBillPanelLayout.createSequentialGroup()
                 .addGap(450, 450, 450)
                 .addGroup(generateBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(generateBillPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel22)
-                        .addGap(69, 69, 69)
-                        .addGroup(generateBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(unitInput, 0, 101, Short.MAX_VALUE)
-                            .addComponent(billAmountTextField)))
+                        .addGroup(generateBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel22)
+                            .addComponent(jLabel20)
+                            .addComponent(jLabel21))
+                        .addGap(45, 45, 45)
+                        .addGroup(generateBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(billDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(generateBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(unitInput, 0, 101, Short.MAX_VALUE)
+                                .addComponent(billAmountTextField))))
                     .addGroup(generateBillPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel21)
-                        .addGap(18, 18, 18)
-                        .addComponent(billDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(generateBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, generateBillPanelLayout.createSequentialGroup()
+                        .addGroup(generateBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel18)
-                            .addGap(60, 60, 60)
-                            .addComponent(billTypeSelection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(generateBillPanelLayout.createSequentialGroup()
-                            .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(197, 197, 197))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, generateBillPanelLayout.createSequentialGroup()
-                            .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(26, 26, 26)
-                            .addComponent(allUnit)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(selectedUnit))
-                        .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(423, Short.MAX_VALUE))
+                            .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(60, 60, 60)
+                        .addGroup(generateBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(generateBillPanelLayout.createSequentialGroup()
+                                .addComponent(allUnit)
+                                .addGap(54, 54, 54)
+                                .addComponent(selectedUnit))
+                            .addComponent(billTypeSelection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(401, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, generateBillPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(sendBill, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(522, 522, 522))
         );
         generateBillPanelLayout.setVerticalGroup(
             generateBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -841,29 +899,182 @@ public class ManagerMainPage extends javax.swing.JFrame {
                 .addGroup(generateBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(billDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel21))
-                .addGap(140, 140, 140)
+                .addGap(114, 114, 114)
                 .addComponent(sendBill, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(337, Short.MAX_VALUE))
+                .addContainerGap(382, Short.MAX_VALUE))
         );
 
         unitInput.setEnabled(false);
 
         jTabbedPane2.addTab("tab6", generateBillPanel);
 
-        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
-        jPanel10.setLayout(jPanel10Layout);
-        jPanel10Layout.setHorizontalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1196, Short.MAX_VALUE)
+        VisitorPanel.setBackground(new java.awt.Color(232, 239, 239));
+
+        jLabel25.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        jLabel25.setText("Visitor Record");
+
+        visitor_table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Name", "Unit", "Plate Number", "Time in", "Time out", "Status", "Date", "Reason"
+            }
+        ));
+        jScrollPane4.setViewportView(visitor_table);
+
+        searchVisitorInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchVisitorInputActionPerformed(evt);
+            }
+        });
+
+        SearchByListVisitor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "name", "resident_unit", "plate_number" }));
+
+        searchVisitorbtn.setText("Search");
+        searchVisitorbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchVisitorbtnActionPerformed(evt);
+            }
+        });
+
+        generateVisitorReport.setText("Generate Report");
+        generateVisitorReport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                generateVisitorReportActionPerformed(evt);
+            }
+        });
+
+        visitorReportMonthSelection.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
+
+        visitorReportYearSelection.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2020", "2021", "2022", "2023" }));
+
+        jLabel26.setText("Month:");
+
+        jLabel27.setText("Year:");
+
+        javax.swing.GroupLayout VisitorPanelLayout = new javax.swing.GroupLayout(VisitorPanel);
+        VisitorPanel.setLayout(VisitorPanelLayout);
+        VisitorPanelLayout.setHorizontalGroup(
+            VisitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(VisitorPanelLayout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addGroup(VisitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel25)
+                    .addGroup(VisitorPanelLayout.createSequentialGroup()
+                        .addComponent(SearchByListVisitor, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(searchVisitorInput, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(searchVisitorbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(71, 71, 71)
+                        .addComponent(jLabel26)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(visitorReportMonthSelection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel27)
+                        .addGap(18, 18, 18)
+                        .addComponent(visitorReportYearSelection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(generateVisitorReport)))
+                .addContainerGap(339, Short.MAX_VALUE))
+            .addGroup(VisitorPanelLayout.createSequentialGroup()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 1085, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
-        jPanel10Layout.setVerticalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 949, Short.MAX_VALUE)
+        VisitorPanelLayout.setVerticalGroup(
+            VisitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(VisitorPanelLayout.createSequentialGroup()
+                .addGap(67, 67, 67)
+                .addComponent(jLabel25)
+                .addGap(44, 44, 44)
+                .addGroup(VisitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(SearchByListVisitor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchVisitorInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchVisitorbtn)
+                    .addComponent(jLabel26)
+                    .addComponent(visitorReportMonthSelection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel27)
+                    .addComponent(visitorReportYearSelection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(generateVisitorReport))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(362, Short.MAX_VALUE))
         );
 
-        jTabbedPane2.addTab("tab7", jPanel10);
+        jTabbedPane2.addTab("tab7", VisitorPanel);
 
-        jPanel3.add(jTabbedPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 53, 1160, 980));
+        Forum_table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "ID", "Pubilsher", "Title", "Content", "Created_date"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane5.setViewportView(Forum_table);
+
+        javax.swing.GroupLayout forumPanelLayout = new javax.swing.GroupLayout(forumPanel);
+        forumPanel.setLayout(forumPanelLayout);
+        forumPanelLayout.setHorizontalGroup(
+            forumPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(forumPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 1031, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(159, Short.MAX_VALUE))
+        );
+        forumPanelLayout.setVerticalGroup(
+            forumPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(forumPanelLayout.createSequentialGroup()
+                .addGap(101, 101, 101)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(441, Short.MAX_VALUE))
+        );
+
+        jTabbedPane2.addTab("tab8", forumPanel);
+
+        jLabel28.setText("Title:");
+
+        jLabel29.setText("Content:");
+
+        javax.swing.GroupLayout forumDicussionPanelLayout = new javax.swing.GroupLayout(forumDicussionPanel);
+        forumDicussionPanel.setLayout(forumDicussionPanelLayout);
+        forumDicussionPanelLayout.setHorizontalGroup(
+            forumDicussionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(forumDicussionPanelLayout.createSequentialGroup()
+                .addGap(150, 150, 150)
+                .addGroup(forumDicussionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel29)
+                    .addComponent(jLabel28))
+                .addContainerGap(997, Short.MAX_VALUE))
+        );
+        forumDicussionPanelLayout.setVerticalGroup(
+            forumDicussionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(forumDicussionPanelLayout.createSequentialGroup()
+                .addGap(54, 54, 54)
+                .addComponent(jLabel28)
+                .addGap(26, 26, 26)
+                .addComponent(jLabel29)
+                .addContainerGap(855, Short.MAX_VALUE))
+        );
+
+        jTabbedPane2.addTab("tab9", forumDicussionPanel);
+
+        jPanel3.add(jTabbedPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 33, 1160, 1000));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -872,17 +1083,31 @@ public class ManagerMainPage extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 1177, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(21, 21, 21))
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+
+        jMenu1.setText("Bill");
+
+        createBill.setText("Create Bill");
+        createBill.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createBillActionPerformed(evt);
+            }
+        });
+        jMenu1.add(createBill);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -940,13 +1165,19 @@ public class ManagerMainPage extends javax.swing.JFrame {
 
     }//GEN-LAST:event_openBillpanelActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+    private void forumPanelbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_forumPanelbtnActionPerformed
+        jTabbedPane2.setSelectedIndex(7); 
+        DefaultTableModel model = (DefaultTableModel) Forum_table.getModel();
+        model.setRowCount(0);
+        load_forumRecord();
+    }//GEN-LAST:event_forumPanelbtnActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton7ActionPerformed
+    private void vistorPanelbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vistorPanelbtnActionPerformed
+        jTabbedPane2.setSelectedIndex(6);  
+        DefaultTableModel model = (DefaultTableModel) visitor_table.getModel();
+        model.setRowCount(0);
+        load_visitorRecord();
+    }//GEN-LAST:event_vistorPanelbtnActionPerformed
 
     private void username_inputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_username_inputActionPerformed
         // TODO add your handling code here:
@@ -1220,24 +1451,6 @@ try {
         
     }//GEN-LAST:event_generateReportActionPerformed
 
-    private void generateBillbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateBillbtnActionPerformed
-            jTabbedPane2.setSelectedIndex(5); 
-            conn = sqliteConn2.connect();
-            String sql = "SELECT floor_unit from apartment_unit WHERE registered ='true' ";
-        try{
-            Statement stm = conn.createStatement();
-            ResultSet rs = stm.executeQuery(sql);
-            while(rs.next()){
-                String unit = rs.getString("floor_unit");
-                unitInput.addItem(unit);
-            }
-            
-            
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null,e);
-        }
-    }//GEN-LAST:event_generateBillbtnActionPerformed
-
     private void allUnitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_allUnitActionPerformed
         unitInput.setEnabled(false);
     }//GEN-LAST:event_allUnitActionPerformed
@@ -1382,6 +1595,330 @@ try {
               
         }
     }//GEN-LAST:event_SearchUnitbtnActionPerformed
+
+    private void sendReminderbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendReminderbtnActionPerformed
+         Properties properties =new Properties();
+         properties.put("mail.smtp.auth","true");
+         properties.put("mail.smtp.starttls.enable", "true");
+         properties.put("mail.smtp.host", "stmp.gmail.com");
+         properties.put("mail.smtp.port", "110");
+         
+         Session session = Session.getDefaultInstance(properties);
+            try {
+                InternetAddress fromAddress = new InternetAddress("zhixuanchu3131@gmail.com");
+                InternetAddress toAddress = new InternetAddress("p22013790@student.newinti.edu.my");
+
+                Message message = new MimeMessage(session);
+                message.setFrom(fromAddress);
+                message.setRecipient(Message.RecipientType.TO, toAddress);
+                message.setSubject("Bill reminder");
+                message.setText("Please submit the lastest bill ");
+
+                Transport.send(message, "zhixuanchu3131@gmail.com",
+                        new String("Chuzhixuan@0110"));
+            } catch (MessagingException ex) {
+                ex.printStackTrace();
+            }
+         
+    }//GEN-LAST:event_sendReminderbtnActionPerformed
+
+    private void createBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createBillActionPerformed
+            jTabbedPane2.setSelectedIndex(5); 
+            conn = sqliteConn2.connect();
+            String sql = "SELECT floor_unit from apartment_unit WHERE registered ='true' ";
+        try{
+            Statement stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while(rs.next()){
+                String unit = rs.getString("floor_unit");
+                unitInput.addItem(unit);
+            }
+            
+            
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,e);
+        }
+    }//GEN-LAST:event_createBillActionPerformed
+
+    private void searchVisitorInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchVisitorInputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchVisitorInputActionPerformed
+
+    private void searchVisitorbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchVisitorbtnActionPerformed
+        conn = sqliteConn2.connect();
+        String searchBy = SearchByListVisitor.getSelectedItem().toString();
+        String input = searchVisitorInput.getText();
+        
+        Object columns[] = {"Name","Unit","Plate number","Time in","Time out","Status","Date","Reason"};
+        
+        defaultTableModel.setColumnIdentifiers(columns);
+        visitor_table.setModel(defaultTableModel);
+        if(conn != null){   
+             
+            
+            if(searchBy.equals("name")){
+                String sql = "SELECT name,resident_unit,plate_number,time_in,time_out,status,date,reason FROM visitor WHERE name = ? ";
+                try {
+                  int rowCount = 0;
+                pst = conn.prepareStatement(sql);
+                pst.setString(1, input);
+                //pst.setString(2,input);
+                rs = pst.executeQuery();
+                defaultTableModel.setRowCount(0);
+                Object[] columnData = new Object[9];
+                while(rs.next()){
+                       columnData[0] = rs.getString("name");
+                       columnData[1] = rs.getString("resident_unit");
+                       columnData[2] = rs.getString("plate_number");
+                       columnData[3] = rs.getString("time_in");
+                       columnData[4] = rs.getString("time_out");
+                       columnData[5] = rs.getString("status");
+                       columnData[6] = rs.getString("date");
+                       columnData[7] = rs.getString("reason");
+                       
+                     
+                       defaultTableModel.addRow(columnData);
+                       rowCount++;
+
+                }
+                if(rowCount <=0){
+                        JOptionPane.showMessageDialog(null,"Record not found");
+                    }
+            }catch(SQLException e){
+                   JOptionPane.showMessageDialog(null,e);
+            }finally {
+    // Close resources (result set, statement, connection)
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+            if (pst != null) {
+                try {
+                    pst.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+        }
+            }else if(searchBy.equals("resident_unit")){
+                String sql = "SELECT name,resident_unit,plate_number,time_in,time_out,status,date,reason FROM visitor WHERE resident_unit = ? ";
+                try {
+                  int rowCount = 0;
+                pst = conn.prepareStatement(sql);
+                pst.setString(1, input);
+                //pst.setString(2,input);
+                rs = pst.executeQuery();
+                defaultTableModel.setRowCount(0);
+                Object[] columnData = new Object[9];
+                while(rs.next()){
+                       columnData[0] = rs.getString("name");
+                       columnData[1] = rs.getString("resident_unit");
+                       columnData[2] = rs.getString("plate_number");
+                       columnData[3] = rs.getString("time_in");
+                       columnData[4] = rs.getString("time_out");
+                       columnData[5] = rs.getString("status");
+                       columnData[6] = rs.getString("date");
+                       columnData[7] = rs.getString("reason");
+                       
+                     
+                       defaultTableModel.addRow(columnData);
+                       rowCount++;
+
+                }
+                if(rowCount <=0){
+                        JOptionPane.showMessageDialog(null,"Record not found");
+                    }
+            }catch(SQLException e){
+                   JOptionPane.showMessageDialog(null,e);
+            }finally {
+    // Close resources (result set, statement, connection)
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+            if (pst != null) {
+                try {
+                    pst.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+        }
+            }else if(searchBy.equals("plate_number")){
+                String sql = "SELECT name,resident_unit,plate_number,time_in,time_out,status,date,reason FROM visitor WHERE plate_number = ? ";
+                try {
+                  int rowCount = 0;
+                pst = conn.prepareStatement(sql);
+                pst.setString(1, input);
+                //pst.setString(2,input);
+                rs = pst.executeQuery();
+                defaultTableModel.setRowCount(0);
+                Object[] columnData = new Object[9];
+                while(rs.next()){
+                       columnData[0] = rs.getString("name");
+                       columnData[1] = rs.getString("resident_unit");
+                       columnData[2] = rs.getString("plate_number");
+                       columnData[3] = rs.getString("time_in");
+                       columnData[4] = rs.getString("time_out");
+                       columnData[5] = rs.getString("status");
+                       columnData[6] = rs.getString("date");
+                       columnData[7] = rs.getString("reason");
+                       
+                     
+                       defaultTableModel.addRow(columnData);
+                       rowCount++;
+
+                }
+                if(rowCount <=0){
+                        JOptionPane.showMessageDialog(null,"Record not found");
+                    }
+            }catch(SQLException e){
+                   JOptionPane.showMessageDialog(null,e);
+            }finally {
+    // Close resources (result set, statement, connection)
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+            if (pst != null) {
+                try {
+                    pst.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+        }
+            }
+
+               
+        }
+        
+    }//GEN-LAST:event_searchVisitorbtnActionPerformed
+
+    private void generateVisitorReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateVisitorReportActionPerformed
+        conn = sqliteConn2.connect();
+        String month = visitorReportMonthSelection.getSelectedItem().toString();
+        String year = visitorReportYearSelection.getSelectedItem().toString();
+        String sql = "SELECT * FROM visitor WHERE date BETWEEN  ? AND ?";
+        String sql2 = "SELECT COUNT(date) as 'Total_of_visitor_in_month' FROM visitor WHERE date BETWEEN  ? AND ?";
+        Object columns[] = {"Name","Unit","Plate number","Time in","Time out","Status","Date","Reason"};
+        defaultTableModel.setColumnIdentifiers(columns);
+        visitor_table.setModel(defaultTableModel);
+
+        try {
+            pst = conn.prepareStatement(sql);
+            
+            pst.setString(1,year+"-"+month+"-"+"01");
+            pst.setString(2,year+"-"+month+"-"+"31");
+            rs = pst.executeQuery();
+            defaultTableModel.setRowCount(0);
+            int rowCount = 0;
+            Object[] columnData = new Object[9];
+
+            while (rs.next()) {
+                       columnData[0] = rs.getString("name");
+                       columnData[1] = rs.getString("resident_unit");
+                       columnData[2] = rs.getString("plate_number");
+                       columnData[3] = rs.getString("time_in");
+                       columnData[4] = rs.getString("time_out");
+                       columnData[5] = rs.getString("status");
+                       columnData[6] = rs.getString("date");
+                       columnData[7] = rs.getString("reason");
+
+                defaultTableModel.addRow(columnData);
+                rowCount++;
+            }
+            pst = conn.prepareStatement(sql2);
+            pst.setString(1,year+"-"+month+"-"+"01");
+            pst.setString(2,year+"-"+month+"-"+"31");
+            rs = pst.executeQuery();
+            String total = rs.getString("Total_of_visitor_in_month");
+            System.out.println(total);
+
+            if (rowCount > 0) {
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setDialogTitle("Specify a file to save");
+                int userSelection = fileChooser.showSaveDialog(this);
+                if (userSelection == JFileChooser.APPROVE_OPTION) {
+                    File fileToSave = fileChooser.getSelectedFile();
+                    try (FileWriter fw = new FileWriter(fileToSave);
+                         BufferedWriter bw = new BufferedWriter(fw)) {
+                        bw.write("Vistor report");
+                        bw.newLine();
+                        bw.write("Total visitor in month:" +total);
+                        bw.newLine();
+                        
+                        for (int i = 0; i < visitor_table.getRowCount(); i++) {
+                            for (int j = 0; j < visitor_table.getColumnCount(); j++) {
+                                bw.write(visitor_table.getValueAt(i, j) + ",");
+                            }
+                            bw.newLine();
+                        }
+                        JOptionPane.showMessageDialog(this, "Successfully Saved");
+                    } catch (IOException ex) {
+                        JOptionPane.showMessageDialog(this, "Error occurred while saving the file", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "No record found");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            // Close resources (result set, statement, connection)
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+            if (pst != null) {
+                try {
+                    pst.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+        }
+    }//GEN-LAST:event_generateVisitorReportActionPerformed
      public void load_residentAccount(){
         conn = sqliteConn2.connect();
         Object columns[] = {"ID","resident_username","floor_unit","resident_email","resident_password","created_date"};
@@ -1414,9 +1951,7 @@ try {
     }
      public void load_billRecord(){
         conn = sqliteConn2.connect();
-        Object columns[] = {"ID","Unit","Bill_type","Bill_amount","Payment_status","Payment_date","Payment_method","Description","created_date"};
-        defaultTableModel.setColumnIdentifiers(columns);
-        billRecord_table.setModel(defaultTableModel);
+        
         if(conn != null){   
             String sql = "SELECT * FROM bill_record";
             try {
@@ -1433,8 +1968,8 @@ try {
                        columnData[6] = rs.getString("payment_method");
                        columnData[7] = rs.getString("description");
                        columnData[8] = rs.getString("created_date");
-                     
-                       defaultTableModel.addRow(columnData);
+                       DefaultTableModel bill_table = (DefaultTableModel)billRecord_table.getModel();
+                       bill_table.addRow(columnData);
                        
                 }
             }catch(SQLException e){
@@ -1443,6 +1978,69 @@ try {
                
         }
     }
+     
+     public void load_visitorRecord(){
+        conn = sqliteConn2.connect();
+        Object columns[] = {"Name","Unit","Plate number","Time in","Time out","Status","Date","Reason"};
+        
+        if(conn != null){   
+            String sql = "SELECT name,resident_unit,plate_number,time_in,time_out,status,date,reason FROM visitor";
+            try {
+                pst = conn.prepareStatement(sql);
+                rs = pst.executeQuery();
+                
+                while(rs.next()){
+                       String name = rs.getString("name");
+                       String resident_unit = rs.getString("resident_unit");
+                       String plate_number = rs.getString("plate_number");
+                       String time_in = rs.getString("time_in");
+                       String time_out = rs.getString("time_out");
+                       String status = rs.getString("status");
+                       String date = rs.getString("date");
+                       String reason = rs.getString("reason");
+                       String tbData[] ={name,resident_unit,plate_number,time_in,time_out,status,date,reason};
+                       DefaultTableModel visitorRecord_table = (DefaultTableModel)visitor_table.getModel();
+                       visitorRecord_table.addRow(tbData);
+                       
+                }
+            }catch(SQLException e){
+                   JOptionPane.showMessageDialog(null,e);
+            }
+               
+        }
+    }
+     
+     public void load_forumRecord(){
+        conn = sqliteConn2.connect();
+        
+         
+        
+        if(conn != null){   
+            String sql = "SELECT id,forum_author,forum_title,forum_content,created_date FROM forum";
+            try {
+                pst = conn.prepareStatement(sql);
+                rs = pst.executeQuery();
+                
+                while(rs.next()){
+                       String id = rs.getString("id");
+                       String forum_author = rs.getString("forum_author");
+             
+                       String forum_title = rs.getString("forum_title");
+                       String forum_content = rs.getString("forum_content");
+                       String created_date = rs.getString("created_date");
+                       String tbData[] ={id,forum_author,forum_title,forum_content,created_date};
+                       DefaultTableModel forum_table = (DefaultTableModel)Forum_table.getModel();
+                     
+                       forum_table.addRow(tbData);
+                       
+                }
+            }catch(SQLException e){
+                   JOptionPane.showMessageDialog(null,e);
+            }
+               
+        }
+    }
+     
      public ResultSet floor_unitList() {
         conn = sqliteConn2.connect();
         String sql = "SELECT floor_unit from apartment_unit WHERE registered = 'true'";
@@ -1491,6 +2089,11 @@ try {
     Date currentDate = new Date();
     return dateFormat.format(currentDate);
     }
+    private String getCurrentTime(){
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
+        LocalTime localTime = LocalTime.now();
+        return dtf.format(localTime);
+    }
     /**
      * @param args the command line arguments
      */
@@ -1528,7 +2131,12 @@ try {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BillPanel;
+    private javax.swing.JLabel DateLabel;
+    private javax.swing.JTable Forum_table;
+    private javax.swing.JComboBox<String> SearchByListVisitor;
     private javax.swing.JButton SearchUnitbtn;
+    private javax.swing.JLabel TimeLabel;
+    private javax.swing.JPanel VisitorPanel;
     private javax.swing.JButton account_btn;
     private javax.swing.JButton addAcc_btn;
     private javax.swing.JButton addResidentAccount;
@@ -1540,15 +2148,17 @@ try {
     private javax.swing.JComboBox<String> billTypeSelection;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.JMenuItem createBill;
     private javax.swing.JButton deleteAccountbtn;
     private javax.swing.JTextField email_input;
+    private javax.swing.JPanel forumDicussionPanel;
+    private javax.swing.JPanel forumPanel;
+    private javax.swing.JButton forumPanelbtn;
     private javax.swing.JPanel generateBillPanel;
-    private javax.swing.JButton generateBillbtn;
     private javax.swing.JButton generateReport;
+    private javax.swing.JButton generateVisitorReport;
     private javax.swing.JPanel homePanel;
     private javax.swing.JButton home_btn;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1566,6 +2176,11 @@ try {
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1573,8 +2188,10 @@ try {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel2;
@@ -1587,6 +2204,8 @@ try {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JComboBox<String> monthPicker;
     private javax.swing.JButton openBillpanel;
@@ -1599,12 +2218,34 @@ try {
     private javax.swing.JTable resident_table;
     public javax.swing.JTable resident_vehicle;
     private javax.swing.JPanel residentaccPanel;
+    private javax.swing.JTextField searchVisitorInput;
+    private javax.swing.JButton searchVisitorbtn;
     private javax.swing.JRadioButton selectedUnit;
     private javax.swing.JButton sendBill;
+    private javax.swing.JButton sendReminderbtn;
     private javax.swing.JComboBox<String> unitInput;
     private javax.swing.JComboBox<String> unitList;
     private javax.swing.JTextField username_input;
     private javax.swing.JButton viewResidentDetails;
+    private javax.swing.JComboBox<String> visitorReportMonthSelection;
+    private javax.swing.JComboBox<String> visitorReportYearSelection;
+    private javax.swing.JTable visitor_table;
+    private javax.swing.JButton vistorPanelbtn;
     private javax.swing.JComboBox<String> yearPicker;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void run() {
+        while(true){
+            Calendar cal = Calendar.getInstance();
+            hour = cal.get(Calendar.HOUR_OF_DAY);
+            minutes = cal.get(Calendar.MINUTE);
+            second = cal.get(Calendar.SECOND);
+            
+            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+            Date dat = cal.getTime();
+            String time = sdf.format(dat);
+            TimeLabel.setText(time);
+        }
+    }
 }
