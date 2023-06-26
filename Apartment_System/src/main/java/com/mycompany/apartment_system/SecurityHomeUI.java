@@ -8,8 +8,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -23,10 +29,10 @@ public class SecurityHomeUI extends javax.swing.JFrame {
     DefaultTableModel  defaultTableModel = new DefaultTableModel();
     public SecurityHomeUI() {
         initComponents();
-        Object columns[] = {"Visitor","Resident Unit","Plate number","Time in","Time out","Date","Status","Reason"};
+        Object columns[] = {"ID","Visitor","IC","Contact","Resident Unit","Plate number","Time in","Time out","Date","Status","Reason"};
         defaultTableModel.setColumnIdentifiers(columns);
         visitor_table.setModel(defaultTableModel);
-        load_data();
+        
     }
 
     /**
@@ -39,22 +45,9 @@ public class SecurityHomeUI extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        Home_btn = new javax.swing.JButton();
-        Visitor_btn = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
-        jPanel10 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        visitor_table = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jLabel9 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        Add_visitor_btn = new javax.swing.JButton();
-        Delete_visitor_btn = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jPanel9 = new javax.swing.JPanel();
+        homePanel = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -67,166 +60,71 @@ public class SecurityHomeUI extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
+        visitorPanel = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        visitor_table = new javax.swing.JTable();
+        searchVisitorbtn = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        inputTextField = new javax.swing.JTextField();
+        Add_visitor_btn = new javax.swing.JButton();
+        Delete_visitor_btn = new javax.swing.JButton();
+        searchVisitorListBox = new javax.swing.JComboBox<>();
+        viewVisitorbtn = new javax.swing.JButton();
+        addVisitorPanel = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        visitorNameTextField = new javax.swing.JTextField();
+        visitorICTextField = new javax.swing.JTextField();
+        visitorContactTextField = new javax.swing.JTextField();
+        residentUnitListBox = new javax.swing.JComboBox<>();
+        visitReasonTextField = new javax.swing.JTextField();
+        AddVistorbtn = new javax.swing.JButton();
+        jLabel16 = new javax.swing.JLabel();
+        visitorCarPlateTextField = new javax.swing.JTextField();
+        viewVisitorPanel = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        visitorNameLabel = new javax.swing.JLabel();
+        visitorContactLabel = new javax.swing.JLabel();
+        residentUnitLabel = new javax.swing.JLabel();
+        reasonVisitLabel = new javax.swing.JLabel();
+        statusLabel = new javax.swing.JLabel();
+        timeInLabel = new javax.swing.JLabel();
+        timeOutLabel = new javax.swing.JLabel();
+        visitorICLabel = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        visitorCarPlateLabel = new javax.swing.JLabel();
+        saveTimeOutbtn = new javax.swing.JButton();
+        visitorIDLabel = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        Home_btn = new javax.swing.JButton();
+        Visitor_btn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1350, 1041));
+        setBackground(new java.awt.Color(255, 255, 255));
+        setPreferredSize(new java.awt.Dimension(1350, 1040));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(1024, 1024));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(214, 214, 214), 1, true));
-        jPanel2.setPreferredSize(new java.awt.Dimension(240, 1170));
-
-        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
-        jLabel1.setText("SPARROW");
-
-        Home_btn.setText("Home");
-        Home_btn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Home_btnActionPerformed(evt);
-            }
-        });
-
-        Visitor_btn.setText("Visitor");
-        Visitor_btn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Visitor_btnActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(61, 61, 61)
-                .addComponent(jLabel1)
-                .addContainerGap(74, Short.MAX_VALUE))
-            .addComponent(Home_btn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(Visitor_btn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(Home_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Visitor_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1024, Short.MAX_VALUE))
-        );
-
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 1170));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTabbedPane2.setBackground(new java.awt.Color(255, 255, 255));
         jTabbedPane2.setPreferredSize(new java.awt.Dimension(1350, 1080));
 
-        jPanel10.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel10.setPreferredSize(new java.awt.Dimension(1024, 69));
-
-        visitor_table.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "Visitor", "Resident Unit", "Plate number", "Time in", "Time out", "Date", "Status", "Reason"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Long.class, java.lang.Long.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(visitor_table);
-
-        jButton1.setText("Search");
-
-        jLabel9.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
-        jLabel9.setText("Visitor Management");
-
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-
-        Add_visitor_btn.setText("Add");
-
-        Delete_visitor_btn.setText("Delete");
-
-        jButton2.setText("Clear Filter");
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
-        jPanel10.setLayout(jPanel10Layout);
-        jPanel10Layout.setHorizontalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1110, Short.MAX_VALUE)
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jLabel9)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2)
-                        .addGap(18, 18, 18)
-                        .addComponent(Add_visitor_btn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Delete_visitor_btn)
-                    .addComponent(jButton1))
-                .addGap(14, 14, 14))
-        );
-        jPanel10Layout.setVerticalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(jLabel9)
-                .addGap(44, 44, 44)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Delete_visitor_btn)
-                    .addComponent(Add_visitor_btn)
-                    .addComponent(jButton2)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(419, Short.MAX_VALUE))
-        );
-
-        jTabbedPane2.addTab("tab2", jPanel10);
-
-        jPanel9.setBackground(new java.awt.Color(255, 255, 255));
+        homePanel.setBackground(new java.awt.Color(255, 255, 255));
+        homePanel.setPreferredSize(new java.awt.Dimension(1350, 1049));
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(225, 227, 226), 1, true));
@@ -247,11 +145,11 @@ public class SecurityHomeUI extends javax.swing.JFrame {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(93, 93, 93)
+                .addGap(98, 98, 98)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addGap(26, 26, 26)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 936, Short.MAX_VALUE)
                 .addComponent(logout_btn)
                 .addGap(66, 66, 66))
         );
@@ -320,14 +218,22 @@ public class SecurityHomeUI extends javax.swing.JFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jLabel6)
+<<<<<<< HEAD
                 .addContainerGap(59, Short.MAX_VALUE))
+=======
+                .addContainerGap(82, Short.MAX_VALUE))
+>>>>>>> origin/main
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(jLabel6)
+<<<<<<< HEAD
                 .addContainerGap(24, Short.MAX_VALUE))
+=======
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+>>>>>>> origin/main
         );
 
         jPanel8.setBackground(new java.awt.Color(82, 223, 82));
@@ -351,26 +257,47 @@ public class SecurityHomeUI extends javax.swing.JFrame {
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
+<<<<<<< HEAD
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
+=======
+        javax.swing.GroupLayout homePanelLayout = new javax.swing.GroupLayout(homePanel);
+        homePanel.setLayout(homePanelLayout);
+        homePanelLayout.setHorizontalGroup(
+            homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(homePanelLayout.createSequentialGroup()
+>>>>>>> origin/main
                 .addGap(16, 16, 16)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(92, 92, 92)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+<<<<<<< HEAD
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(80, 80, 80)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19))
             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+=======
+                .addGap(52, 52, 52)
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(64, 64, 64)
+                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(homePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+>>>>>>> origin/main
         );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
+        homePanelLayout.setVerticalGroup(
+            homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(homePanelLayout.createSequentialGroup()
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+<<<<<<< HEAD
                 .addGap(64, 64, 64)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -378,24 +305,487 @@ public class SecurityHomeUI extends javax.swing.JFrame {
                     .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 876, Short.MAX_VALUE))
+=======
+                .addGap(56, 56, 56)
+                .addGroup(homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 884, Short.MAX_VALUE))
+>>>>>>> origin/main
         );
 
-        jTabbedPane2.addTab("tab1", jPanel9);
+        jTabbedPane2.addTab("tab1", homePanel);
 
-        jPanel1.add(jTabbedPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, -30, 1110, 1080));
+        visitorPanel.setBackground(new java.awt.Color(255, 255, 255));
+        visitorPanel.setPreferredSize(new java.awt.Dimension(1024, 69));
+
+        visitor_table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID", "Visitor", "Resident Unit", "Plate number", "Time in", "Time out", "Date", "Status", "Reason"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Long.class, java.lang.Long.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            };
+
+        });
+        jScrollPane1.setViewportView(visitor_table);
+
+        searchVisitorbtn.setText("Search");
+        searchVisitorbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchVisitorbtnActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        jLabel9.setText("Visitor Management");
+
+        inputTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputTextFieldActionPerformed(evt);
+            }
+        });
+
+        Add_visitor_btn.setText("Add");
+        Add_visitor_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Add_visitor_btnActionPerformed(evt);
+            }
+        });
+
+        Delete_visitor_btn.setText("Delete");
+        Delete_visitor_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Delete_visitor_btnActionPerformed(evt);
+            }
+        });
+
+        searchVisitorListBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "name", "ic", "plate_number", "date", " " }));
+
+        viewVisitorbtn.setText("View");
+        viewVisitorbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewVisitorbtnActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout visitorPanelLayout = new javax.swing.GroupLayout(visitorPanel);
+        visitorPanel.setLayout(visitorPanelLayout);
+        visitorPanelLayout.setHorizontalGroup(
+            visitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, visitorPanelLayout.createSequentialGroup()
+                .addGroup(visitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(visitorPanelLayout.createSequentialGroup()
+                        .addContainerGap(372, Short.MAX_VALUE)
+                        .addComponent(searchVisitorListBox, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(inputTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
+                        .addComponent(searchVisitorbtn)
+                        .addGap(30, 30, 30)
+                        .addComponent(Add_visitor_btn)
+                        .addGap(30, 30, 30)
+                        .addComponent(Delete_visitor_btn)
+                        .addGap(27, 27, 27)
+                        .addComponent(viewVisitorbtn)))
+                .addGap(276, 276, 276))
+            .addGroup(visitorPanelLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jLabel9)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        visitorPanelLayout.setVerticalGroup(
+            visitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(visitorPanelLayout.createSequentialGroup()
+                .addGap(121, 121, 121)
+                .addComponent(jLabel9)
+                .addGap(18, 18, 18)
+                .addGroup(visitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(searchVisitorbtn)
+                    .addComponent(inputTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchVisitorListBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Add_visitor_btn)
+                    .addComponent(Delete_visitor_btn)
+                    .addComponent(viewVisitorbtn))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(444, Short.MAX_VALUE))
+        );
+
+        jTabbedPane2.addTab("tab2", visitorPanel);
+
+        addVisitorPanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel8.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel8.setText("Add new visitor");
+
+        jLabel10.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
+        jLabel10.setText("Visitor name:");
+
+        jLabel11.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
+        jLabel11.setText("Visitor IC:");
+
+        jLabel12.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
+        jLabel12.setText("Visitor contact number:");
+
+        jLabel14.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
+        jLabel14.setText("Resident Unit to visit:");
+
+        jLabel15.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
+        jLabel15.setText("Reason to visit:");
+
+        residentUnitListBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+
+        AddVistorbtn.setText("Save");
+        AddVistorbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddVistorbtnActionPerformed(evt);
+            }
+        });
+
+        jLabel16.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
+        jLabel16.setText("Visitor car plate:");
+
+        javax.swing.GroupLayout addVisitorPanelLayout = new javax.swing.GroupLayout(addVisitorPanel);
+        addVisitorPanel.setLayout(addVisitorPanelLayout);
+        addVisitorPanelLayout.setHorizontalGroup(
+            addVisitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(addVisitorPanelLayout.createSequentialGroup()
+                .addGroup(addVisitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(addVisitorPanelLayout.createSequentialGroup()
+                        .addGap(117, 117, 117)
+                        .addGroup(addVisitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(addVisitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(addVisitorPanelLayout.createSequentialGroup()
+                                    .addComponent(jLabel11)
+                                    .addGap(117, 117, 117)
+                                    .addComponent(visitorICTextField))
+                                .addGroup(addVisitorPanelLayout.createSequentialGroup()
+                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(90, 90, 90)
+                                    .addComponent(visitorNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(addVisitorPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel12)
+                                .addGap(26, 26, 26)
+                                .addComponent(visitorContactTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(138, 138, 138)
+                        .addGroup(addVisitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel14)
+                            .addComponent(jLabel15)
+                            .addComponent(jLabel16))
+                        .addGap(37, 37, 37)
+                        .addGroup(addVisitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(visitorCarPlateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(visitReasonTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(residentUnitListBox, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(addVisitorPanelLayout.createSequentialGroup()
+                        .addGap(103, 103, 103)
+                        .addComponent(jLabel8))
+                    .addGroup(addVisitorPanelLayout.createSequentialGroup()
+                        .addGap(485, 485, 485)
+                        .addComponent(AddVistorbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(372, Short.MAX_VALUE))
+        );
+        addVisitorPanelLayout.setVerticalGroup(
+            addVisitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(addVisitorPanelLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jLabel8)
+                .addGap(60, 60, 60)
+                .addGroup(addVisitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(visitorNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel16)
+                    .addComponent(visitorCarPlateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(addVisitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(addVisitorPanelLayout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addGroup(addVisitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel11)
+                            .addComponent(visitorICTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(47, 47, 47))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addVisitorPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(addVisitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel14)
+                            .addComponent(residentUnitListBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(50, 50, 50)))
+                .addGroup(addVisitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(visitorContactTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15)
+                    .addComponent(visitReasonTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(159, 159, 159)
+                .addComponent(AddVistorbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(566, Short.MAX_VALUE))
+        );
+
+        jTabbedPane2.addTab("tab3", addVisitorPanel);
+
+        viewVisitorPanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel13.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        jLabel13.setText("Visitor IC                  :");
+
+        jLabel17.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        jLabel17.setText("Visitor Contact       :");
+
+        jLabel18.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        jLabel18.setText("Resident Unit         :");
+
+        jLabel19.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        jLabel19.setText("Status                      :");
+
+        jLabel20.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        jLabel20.setText("Visitor Name           :");
+
+        jLabel21.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        jLabel21.setText("Reason to Visit     :");
+
+        jLabel22.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        jLabel22.setText("Time out                 :");
+
+        jLabel23.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        jLabel23.setText("Time in                    :");
+
+        visitorNameLabel.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+
+        visitorContactLabel.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+
+        residentUnitLabel.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+
+        reasonVisitLabel.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+
+        statusLabel.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+
+        timeInLabel.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+
+        timeOutLabel.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+
+        visitorICLabel.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+
+        jLabel24.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        jLabel24.setText("Visitor Car Plate     :");
+
+        visitorCarPlateLabel.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+
+        saveTimeOutbtn.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        saveTimeOutbtn.setText("Save Time Out");
+        saveTimeOutbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveTimeOutbtnActionPerformed(evt);
+            }
+        });
+
+        visitorIDLabel.setBackground(new java.awt.Color(255, 255, 255));
+        visitorIDLabel.setForeground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout viewVisitorPanelLayout = new javax.swing.GroupLayout(viewVisitorPanel);
+        viewVisitorPanel.setLayout(viewVisitorPanelLayout);
+        viewVisitorPanelLayout.setHorizontalGroup(
+            viewVisitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(viewVisitorPanelLayout.createSequentialGroup()
+                .addGroup(viewVisitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(viewVisitorPanelLayout.createSequentialGroup()
+                        .addGroup(viewVisitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(viewVisitorPanelLayout.createSequentialGroup()
+                                .addGap(249, 249, 249)
+                                .addGroup(viewVisitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(viewVisitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addGroup(viewVisitorPanelLayout.createSequentialGroup()
+                                .addGap(250, 250, 250)
+                                .addGroup(viewVisitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(viewVisitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(56, 56, 56)
+                        .addGroup(viewVisitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(visitorNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(visitorContactLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(residentUnitLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(reasonVisitLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(statusLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(timeInLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(timeOutLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(visitorICLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(visitorCarPlateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(viewVisitorPanelLayout.createSequentialGroup()
+                        .addGap(440, 440, 440)
+                        .addComponent(saveTimeOutbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(viewVisitorPanelLayout.createSequentialGroup()
+                        .addGap(210, 210, 210)
+                        .addComponent(visitorIDLabel)))
+                .addContainerGap(678, Short.MAX_VALUE))
+        );
+        viewVisitorPanelLayout.setVerticalGroup(
+            viewVisitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(viewVisitorPanelLayout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addComponent(visitorIDLabel)
+                .addGap(68, 68, 68)
+                .addGroup(viewVisitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel20)
+                    .addComponent(visitorNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
+                .addGroup(viewVisitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel24)
+                    .addComponent(visitorCarPlateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(viewVisitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel13)
+                    .addComponent(visitorICLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(viewVisitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel17)
+                    .addComponent(visitorContactLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addGroup(viewVisitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel18)
+                    .addComponent(residentUnitLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
+                .addGroup(viewVisitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(viewVisitorPanelLayout.createSequentialGroup()
+                        .addComponent(reasonVisitLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                        .addComponent(statusLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(viewVisitorPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel21)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel19)))
+                .addGap(26, 26, 26)
+                .addGroup(viewVisitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel23)
+                    .addComponent(timeInLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addGroup(viewVisitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel22)
+                    .addComponent(timeOutLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(55, 55, 55)
+                .addComponent(saveTimeOutbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(430, 430, 430))
+        );
+
+        jTabbedPane2.addTab("tab4", viewVisitorPanel);
+
+        jPanel3.add(jTabbedPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -30, 1340, 1080));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 1188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 13, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 1120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        jPanel2.setBackground(new java.awt.Color(82, 178, 178));
+        jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(214, 214, 214), 1, true));
+        jPanel2.setPreferredSize(new java.awt.Dimension(240, 1170));
+
+        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
+        jLabel1.setText("Sparrow Apartment");
+
+        Home_btn.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        Home_btn.setText("Home");
+        Home_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Home_btnActionPerformed(evt);
+            }
+        });
+
+        Visitor_btn.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        Visitor_btn.setText("Visitor");
+        Visitor_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Visitor_btnActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Home_btn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(Visitor_btn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(24, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(Home_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(Visitor_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(943, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1344, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1041, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1170, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -412,38 +802,480 @@ public class SecurityHomeUI extends javax.swing.JFrame {
 
     private void Visitor_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Visitor_btnActionPerformed
         jTabbedPane2.setSelectedIndex(1); 
+         DefaultTableModel model = (DefaultTableModel) visitor_table.getModel();
+         model.setRowCount(0);
+        load_data();
+        
     }//GEN-LAST:event_Visitor_btnActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void inputTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_inputTextFieldActionPerformed
+
+    private void AddVistorbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddVistorbtnActionPerformed
+        conn = sqliteConn2.connect();
+        String sql = "INSERT INTO visitor (name,IC,resident_unit,plate_number,time_in,status,date,reason,contact_number) values (?,?,?,?,?,?,?,?,?)";
+        String name = visitorNameTextField.getText();
+        String ic = visitorICTextField.getText();
+        String contact = visitorContactTextField.getText();
+        String car_plate = visitorCarPlateTextField.getText();
+        String unit = residentUnitListBox.getSelectedItem().toString();
+        String reason = visitReasonTextField.getText();
+        String date = getCurrentDate();
+        String time = getCurrentTime();
+        
+        try{
+            pst = conn.prepareStatement(sql);
+            pst.setString(1,name);
+            pst.setString(2,ic);
+            pst.setString(3,unit);
+            pst.setString(4,car_plate);
+            pst.setString(5,time);
+            pst.setString(6,"IN");
+            pst.setString(7,date);
+            pst.setString(8,reason);
+            pst.setString(9,contact);
+            pst.execute();
+            JOptionPane.showMessageDialog(null,"Visitor Added");
+            visitorNameTextField.setText("");
+            visitorICTextField.setText("");
+            visitorContactTextField.setText("");
+            visitorCarPlateTextField.setText("");
+            visitReasonTextField.setText("");
+            DefaultTableModel model = (DefaultTableModel) visitor_table.getModel();
+            model.setRowCount(0);
+            jTabbedPane2.setSelectedIndex(1);
+        }catch(SQLException e){
+                   JOptionPane.showMessageDialog(null,e);
+            }finally {
+    // Close resources (result set, statement, connection)
+    if (rs != null) {
+        try {
+            rs.close();
+        } catch (SQLException e) {
+            // Handle exception
+        }
+    }
+    if (pst != null) {
+        try {
+            pst.close();
+        } catch (SQLException e) {
+            // Handle exception
+        }
+    }
+    if (conn != null) {
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            // Handle exception
+        }
+    }
+}
+
+        
+    }//GEN-LAST:event_AddVistorbtnActionPerformed
+
+    private void Add_visitor_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Add_visitor_btnActionPerformed
+        jTabbedPane2.setSelectedIndex(2);
+        residentUnitListBox.removeAllItems();
+        rs = floor_unitList();
+        try{
+          
+            while(rs.next()){
+                String unit = rs.getString("floor_unit");
+                residentUnitListBox.addItem(unit);
+            }
+            
+            
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,e);
+        }
+    }//GEN-LAST:event_Add_visitor_btnActionPerformed
+
+    private void viewVisitorbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewVisitorbtnActionPerformed
+        int index = visitor_table.getSelectedRow();
+        TableModel model = visitor_table.getModel();
+        String id = model.getValueAt(index, 0).toString();
+        conn = sqliteConn2.connect();
+
+        if(conn!= null){
+            jTabbedPane2.setSelectedIndex(3);
+            if(timeOutLabel.equals("OUT")){
+                  saveTimeOutbtn.setVisible(false);
+              } 
+              
+              
+            String sql = "SELECT name,ic,resident_unit,contact_number,plate_number,time_in,time_out,date,status,reason FROM visitor WHERE id =?";
+            try{
+               pst = conn.prepareStatement(sql);
+               pst.setString(1,id);
+               rs = pst.executeQuery();
+               visitorIDLabel.setText(id);
+               visitorNameLabel.setText(rs.getString("name"));
+               visitorICLabel.setText(rs.getString("ic"));
+               visitorContactLabel.setText(rs.getString("contact_number"));
+               visitorCarPlateLabel.setText(rs.getString("plate_number"));
+               reasonVisitLabel.setText(rs.getString("reason"));
+               residentUnitLabel.setText(rs.getString("resident_unit"));
+               statusLabel.setText(rs.getString("status"));
+               timeInLabel.setText(rs.getString("time_in"));
+               timeOutLabel.setText(rs.getString("time_out"));
+               
+              
+                
+                      
+              
+          
+        
+               
+            }catch (Exception e){
+                JOptionPane.showMessageDialog(null,e);
+            }finally {
+    // Close resources (result set, statement, connection)
+    if (rs != null) {
+        try {
+            rs.close();
+        } catch (SQLException e) {
+            // Handle exception
+        }
+    }
+    if (pst != null) {
+        try {
+            pst.close();
+        } catch (SQLException e) {
+            // Handle exception
+        }
+    }
+    if (conn != null) {
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            // Handle exception
+        }
+    }
+}
+
+         
+        }
+    }//GEN-LAST:event_viewVisitorbtnActionPerformed
+
+    private void saveTimeOutbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveTimeOutbtnActionPerformed
+        conn = sqliteConn2.connect();
+        String sql = "UPDATE visitor SET time_out =? ,status ='OUT' WHERE id=? ";
+        String time = getCurrentTime();
+        String id = visitorIDLabel.getText();
+        try{
+            pst =conn.prepareStatement(sql);
+            System.out.println(id);
+            pst.setString(1,time);
+            pst.setString(2, id);
+            pst.execute();
+            JOptionPane.showMessageDialog(null,"Check out successfully");
+            
+        }catch(SQLException e){
+                   JOptionPane.showMessageDialog(null,e);
+            }finally {
+    // Close resources (result set, statement, connection)
+    if (rs != null) {
+        try {
+            rs.close();
+        } catch (SQLException e) {
+            // Handle exception
+        }
+    }
+    if (pst != null) {
+        try {
+            pst.close();
+        } catch (SQLException e) {
+            // Handle exception
+        }
+    }
+    if (conn != null) {
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            // Handle exception
+        }
+    }
+}
+
+    }//GEN-LAST:event_saveTimeOutbtnActionPerformed
+
+    private void searchVisitorbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchVisitorbtnActionPerformed
+        conn = sqliteConn2.connect();
+        String searchBy  = searchVisitorListBox.getSelectedItem().toString();
+        String input = inputTextField.getText();
+        
+        if(conn != null){
+            if( searchBy.equals("name")){
+                try{
+                    int rowCount = 0;
+                    String sql = "SELECT * FROM visitor WHERE name=?";
+                    pst = conn.prepareStatement(sql);
+                    pst.setString(1,input);
+                    rs = pst.executeQuery();
+                    Object[] columnData = new Object[11];
+                    defaultTableModel.setRowCount(0);
+                while(rs.next()){
+                       columnData[0] = rs.getString("id");
+                       columnData[1] = rs.getString("name");
+                       columnData[2] = rs.getString("ic");
+                       columnData[3] = rs.getString("contact_number");
+                       columnData[4] = rs.getString("resident_unit");
+                       columnData[5] = rs.getString("plate_number");
+                       columnData[6] = rs.getString("time_in");
+                       columnData[7] = rs.getString("time_out");
+                       columnData[8] = rs.getString("date");
+                       columnData[9] = rs.getString("status");
+                       columnData[10] = rs.getString("reason");
+
+                       defaultTableModel.addRow(columnData);
+                       rowCount++;
+                }if(rowCount <=0){
+                        JOptionPane.showMessageDialog(null,"Record not found");
+                    }
+                    
+                }catch(SQLException e){
+                   JOptionPane.showMessageDialog(null,e);
+                }
+            }else if(searchBy.equals("ic")){
+                try{
+                    int rowCount = 0;
+                    String sql = "SELECT * FROM visitor WHERE ic=?";
+                    pst = conn.prepareStatement(sql);
+                    pst.setString(1,input);
+                    rs = pst.executeQuery();
+                    Object[] columnData = new Object[11];
+                    defaultTableModel.setRowCount(0);
+                    
+                while(rs.next()){
+                       columnData[0] = rs.getString("id");
+                       columnData[1] = rs.getString("name");
+                       columnData[2] = rs.getString("ic");
+                       columnData[3] = rs.getString("contact_number");
+                       columnData[4] = rs.getString("resident_unit");
+                       columnData[5] = rs.getString("plate_number");
+                       columnData[6] = rs.getString("time_in");
+                       columnData[7] = rs.getString("time_out");
+                       columnData[8] = rs.getString("date");
+                       columnData[9] = rs.getString("status");
+                       columnData[10] = rs.getString("reason");
+                       defaultTableModel.addRow(columnData);
+                       rowCount++;
+                }if(rowCount <=0){
+                        JOptionPane.showMessageDialog(null,"Record not found");
+                    }
+                    
+                }catch(SQLException e){
+                   JOptionPane.showMessageDialog(null,e);
+                }
+            }else if(searchBy.equals("plate_number")){
+                try{
+                    int rowCount = 0;
+                    String sql = "SELECT * FROM visitor WHERE plate_number=?";
+                    pst = conn.prepareStatement(sql);
+                    pst.setString(1,input);
+                    rs = pst.executeQuery();
+                    Object[] columnData = new Object[11];
+                    defaultTableModel.setRowCount(0);
+                    
+                while(rs.next()){
+                       columnData[0] = rs.getString("id");
+                       columnData[1] = rs.getString("name");
+                       columnData[2] = rs.getString("ic");
+                       columnData[3] = rs.getString("contact_number");
+                       columnData[4] = rs.getString("resident_unit");
+                       columnData[5] = rs.getString("plate_number");
+                       columnData[6] = rs.getString("time_in");
+                       columnData[7] = rs.getString("time_out");
+                       columnData[8] = rs.getString("date");
+                       columnData[9] = rs.getString("status");
+                       columnData[10] = rs.getString("reason");
+                       defaultTableModel.addRow(columnData);
+                       rowCount++;
+                }if(rowCount <=0){
+                        JOptionPane.showMessageDialog(null,"Record not found");
+                    }
+                    
+                }catch(SQLException e){
+                   JOptionPane.showMessageDialog(null,e);
+                }
+            }else if(searchBy.equals("date")){
+                try{
+                    int rowCount = 0;
+                    String sql = "SELECT * FROM visitor WHERE date=?";
+                    pst = conn.prepareStatement(sql);
+                    pst.setString(1,input);
+                    rs = pst.executeQuery();
+                    Object[] columnData = new Object[11];
+                    defaultTableModel.setRowCount(0);
+                    
+                while(rs.next()){
+                       columnData[0] = rs.getString("id");
+                       columnData[1] = rs.getString("name");
+                       columnData[2] = rs.getString("ic");
+                       columnData[3] = rs.getString("contact_number");
+                       columnData[4] = rs.getString("resident_unit");
+                       columnData[5] = rs.getString("plate_number");
+                       columnData[6] = rs.getString("time_in");
+                       columnData[7] = rs.getString("time_out");
+                       columnData[8] = rs.getString("date");
+                       columnData[9] = rs.getString("status");
+                       columnData[10] = rs.getString("reason");
+                       defaultTableModel.addRow(columnData);
+                       rowCount++;
+                }if(rowCount <=0){
+                        JOptionPane.showMessageDialog(null,"Record not found");
+                    }
+                    
+                }catch(SQLException e){
+                   JOptionPane.showMessageDialog(null,e);
+                }
+            }
+            
+        }
+    }//GEN-LAST:event_searchVisitorbtnActionPerformed
+
+    private void Delete_visitor_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Delete_visitor_btnActionPerformed
+        conn = sqliteConn2.connect();
+        DefaultTableModel visitorTbl = (DefaultTableModel) visitor_table.getModel();
+        int row = visitor_table.getSelectedRow();
+        if(visitor_table.getSelectedRowCount() ==1){
+            
+            String id = visitor_table.getModel().getValueAt(row, 0).toString();
+            System.out.println(id);
+            String sql = "DELETE  FROM visitor WHERE id=?";
+            
+           
+            visitorTbl.removeRow(visitor_table.getSelectedRow());
+            
+            try{
+                pst = conn.prepareStatement(sql);
+                pst.setString(1,id);
+                pst.executeUpdate();
+    
+                JOptionPane.showMessageDialog(this,"Visitor Info Delete Successfully");
+                
+                
+            }catch(SQLException e){
+                   JOptionPane.showMessageDialog(null,e);
+            }
+            
+        
+            
+               
+        }else{
+                if(visitor_table.getRowCount()==0){
+                    JOptionPane.showMessageDialog(this, "This table is empty");
+                }else{
+                    JOptionPane.showMessageDialog(this, "Please select one row of table to delete");
+                }
+     }
+    }//GEN-LAST:event_Delete_visitor_btnActionPerformed
 
     public void load_data(){
-        conn = sqliteConn.connect();
+        conn = sqliteConn2.connect();
         if(conn != null){   
-            String sql = "SELECT name,resident_unit,plate_number,time_in,time_out,date,status,reason FROM visitor";
+            String sql = "SELECT id,name,ic,resident_unit,contact_number,plate_number,time_in,time_out,date,status,reason FROM visitor";
             try {
                 pst = conn.prepareStatement(sql);
                 rs = pst.executeQuery();
-                Object[] columnData = new Object[8];
+                Object[] columnData = new Object[11];
                 while(rs.next()){
-                       columnData[0] = rs.getString("name");
-                       columnData[1] = rs.getString("resident_unit");
-                       columnData[2] = rs.getString("plate_number");
-                       columnData[3] = rs.getString("time_in");
-                       columnData[4] = rs.getString("time_out");
-                       columnData[5] = rs.getString("date");
-                       columnData[6] = rs.getString("status");
-                       columnData[7] = rs.getString("reason");
+                       columnData[0] = rs.getString("id");
+                       columnData[1] = rs.getString("name");
+                       columnData[2] = rs.getString("ic");
+                       columnData[3] = rs.getString("contact_number");
+                       columnData[4] = rs.getString("resident_unit");
+                       columnData[5] = rs.getString("plate_number");
+                       columnData[6] = rs.getString("time_in");
+                       columnData[7] = rs.getString("time_out");
+                       columnData[8] = rs.getString("date");
+                       columnData[9] = rs.getString("status");
+                       columnData[10] = rs.getString("reason");
                        defaultTableModel.addRow(columnData);
                        
                 }
             }catch(SQLException e){
                    JOptionPane.showMessageDialog(null,e);
-            }
+            }finally {
+    // Close resources (result set, statement, connection)
+    if (rs != null) {
+        try {
+            rs.close();
+        } catch (SQLException e) {
+            // Handle exception
+        }
+    }
+    if (pst != null) {
+        try {
+            pst.close();
+        } catch (SQLException e) {
+            // Handle exception
+        }
+    }
+    if (conn != null) {
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            // Handle exception
+        }
+    }
+}
+
                
         }
     }
+    private String getCurrentDate() {
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    Date currentDate = new Date();
+    return dateFormat.format(currentDate);
+    }
+    
+    private String getCurrentTime(){
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
+        LocalTime localTime = LocalTime.now();
+        return dtf.format(localTime);
+    }
+    
+    public ResultSet floor_unitList() {
+        conn = sqliteConn2.connect();
+        String sql = "SELECT floor_unit from apartment_unit WHERE registered = 'true'";
+        try {
+            Statement stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            return rs;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }finally {
+    // Close resources (result set, statement, connection)
+    if (rs != null) {
+        try {
+            rs.close();
+        } catch (SQLException e) {
+            // Handle exception
+        }
+    }
+    if (pst != null) {
+        try {
+            pst.close();
+        } catch (SQLException e) {
+            // Handle exception
+        }
+    }
+    if (conn != null) {
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            // Handle exception
+        }
+    }
+}
+
+        return null; // Return null if an exception occurs
+    }
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -480,34 +1312,71 @@ public class SecurityHomeUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AddVistorbtn;
     private javax.swing.JButton Add_visitor_btn;
     private javax.swing.JButton Delete_visitor_btn;
     private javax.swing.JButton Home_btn;
     private javax.swing.JButton Visitor_btn;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JPanel addVisitorPanel;
+    private javax.swing.JPanel homePanel;
+    private javax.swing.JTextField inputTextField;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JButton logout_btn;
-    private javax.swing.JTable visitor_table;
+    private javax.swing.JLabel reasonVisitLabel;
+    private javax.swing.JLabel residentUnitLabel;
+    private javax.swing.JComboBox<String> residentUnitListBox;
+    private javax.swing.JButton saveTimeOutbtn;
+    private javax.swing.JComboBox<String> searchVisitorListBox;
+    private javax.swing.JButton searchVisitorbtn;
+    private javax.swing.JLabel statusLabel;
+    private javax.swing.JLabel timeInLabel;
+    private javax.swing.JLabel timeOutLabel;
+    private javax.swing.JPanel viewVisitorPanel;
+    private javax.swing.JButton viewVisitorbtn;
+    private javax.swing.JTextField visitReasonTextField;
+    private javax.swing.JLabel visitorCarPlateLabel;
+    private javax.swing.JTextField visitorCarPlateTextField;
+    private javax.swing.JLabel visitorContactLabel;
+    private javax.swing.JTextField visitorContactTextField;
+    private javax.swing.JLabel visitorICLabel;
+    private javax.swing.JTextField visitorICTextField;
+    private javax.swing.JLabel visitorIDLabel;
+    private javax.swing.JLabel visitorNameLabel;
+    private javax.swing.JTextField visitorNameTextField;
+    private javax.swing.JPanel visitorPanel;
+    javax.swing.JTable visitor_table;
     // End of variables declaration//GEN-END:variables
 }
