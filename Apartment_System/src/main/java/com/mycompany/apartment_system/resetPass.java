@@ -128,11 +128,53 @@ public class resetPass extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       conn = sqliteConn2.connect();
         char [] password = passwordField.getPassword();
        String ps = new String(password);
        char [] repassword = reEnterPasswordField.getPassword();
        String reps = new String(repassword);
+       String id  = residentID.getText();
+       
        String sql = "UPDATE resident_account SET password = ? WHERE id=?";
+       if(!ps.equals(reps) || !reps.equals(ps)){
+           JOptionPane.showMessageDialog(null,"Password Not Same");
+       }else if(ps.equals("") || reps.equals("")){
+           JOptionPane.showMessageDialog(null,"Please fill up all the fields");
+       }else{
+           try{
+           pst = conn.prepareStatement(sql);
+           pst.setString(1,ps);
+           pst.setString(2,id);
+           pst.execute();
+           JOptionPane.showMessageDialog(null,"Reset Password Sucessfully");
+       }catch(SQLException e){
+                   JOptionPane.showMessageDialog(null,e);
+       }finally {
+                    // Close resources (result set, statement, connection)
+                    if (rs != null) {
+                        try {
+                            rs.close();
+                        } catch (SQLException e) {
+                            // Handle exception
+                        }
+                    }
+                    if (pst != null) {
+                        try {
+                            pst.close();
+                        } catch (SQLException e) {
+                            // Handle exception
+                        }
+                    }
+                    if (conn != null) {
+                        try {
+                            conn.close();
+                        } catch (SQLException e) {
+                            // Handle exception
+                        }
+                    }
+                }
+       }
+       
        
     }//GEN-LAST:event_jButton1ActionPerformed
 

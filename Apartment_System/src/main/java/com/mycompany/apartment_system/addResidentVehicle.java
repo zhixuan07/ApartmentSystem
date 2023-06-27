@@ -178,7 +178,12 @@ public class addResidentVehicle extends javax.swing.JFrame {
         String sql = "INSERT INTO resident_vehicle (resident_id,plate_number,brand,model,color) values (?,?,?,?,?)";
         if(brand.equals("")|| model.equals("") ||color.equals("") || plate.equals("")){
             JOptionPane.showMessageDialog(null,"Please fill up all the fields");
-        }else{
+        }else if(!isAlphabetic(brand)){
+            JOptionPane.showMessageDialog(null," Number not accepted! ");
+        }else if(!isAlphabetic(color)){
+            JOptionPane.showMessageDialog(null," Number not accepted! ");
+        }
+        else{
             try{
             
             pst =conn.prepareStatement(sql);
@@ -221,7 +226,9 @@ public class addResidentVehicle extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_addBtnActionPerformed
-
+public static boolean isAlphabetic(String input) {
+    return input.matches("[a-zA-Z]+");
+}
     /**
      * @param args the command line arguments
      */
