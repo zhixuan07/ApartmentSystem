@@ -80,7 +80,6 @@ public class SecurityLogin extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 35)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(54, 84, 85));
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/apartment_system/icons8-security-guard-48.png"))); // NOI18N
         jLabel2.setText("SECURITY LOG IN");
 
         jSeparator1.setBackground(new java.awt.Color(75, 98, 99));
@@ -125,13 +124,11 @@ public class SecurityLogin extends javax.swing.JFrame {
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(54, 84, 85));
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/apartment_system/icons8-password-48.png"))); // NOI18N
         jLabel4.setText("Password");
 
         jLabel7.setBackground(new java.awt.Color(255, 255, 255));
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(54, 84, 85));
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/apartment_system/icons8-envelope-48.png"))); // NOI18N
         jLabel7.setText("Username");
 
         jButton2.setBackground(new java.awt.Color(232, 239, 239));
