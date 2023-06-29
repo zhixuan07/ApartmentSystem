@@ -234,6 +234,8 @@ public class ResidentLoginNew extends javax.swing.JFrame {
                 resident.residentUnitLabel.setText(unit);
                 resident.residentIDLabel.setText(rs.getString("id"));
                 resident.loadResident();
+                residentUsernameInput.setText("");
+                residentPasswordInput.setText("");
                 dispose();
                 
                 

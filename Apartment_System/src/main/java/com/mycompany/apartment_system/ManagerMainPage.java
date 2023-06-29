@@ -68,17 +68,14 @@ public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
         buttonGroup2 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel85 = new javax.swing.JLabel();
         home_btn = new javax.swing.JButton();
-        jPanel5 = new javax.swing.JPanel();
         account_btn = new javax.swing.JButton();
-        jPanel7 = new javax.swing.JPanel();
         openBillpanel = new javax.swing.JButton();
-        jPanel8 = new javax.swing.JPanel();
-        forumPanelbtn = new javax.swing.JButton();
-        jPanel9 = new javax.swing.JPanel();
+        managementForumPanelbtn = new javax.swing.JButton();
         vistorPanelbtn = new javax.swing.JButton();
+        residentForumPanelbtn = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -87,6 +84,25 @@ public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
         TimeLabel = new javax.swing.JLabel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         homePanel = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jLabel31 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabel30 = new javax.swing.JLabel();
+        jPanel7 = new javax.swing.JPanel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        jTextArea2 = new javax.swing.JTextArea();
+        jLabel32 = new javax.swing.JLabel();
+        jPanel8 = new javax.swing.JPanel();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        jTextArea3 = new javax.swing.JTextArea();
+        jLabel33 = new javax.swing.JLabel();
+        jPanel9 = new javax.swing.JPanel();
+        jScrollPane10 = new javax.swing.JScrollPane();
+        jTextArea4 = new javax.swing.JTextArea();
+        jLabel34 = new javax.swing.JLabel();
+        logOutbtn = new javax.swing.JButton();
         residentaccPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -156,12 +172,33 @@ public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
         visitorReportYearSelection = new javax.swing.JComboBox<>();
         jLabel26 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
-        forumPanel = new javax.swing.JPanel();
+        managementForum = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
-        Forum_table = new javax.swing.JTable();
-        forumDicussionPanel = new javax.swing.JPanel();
+        managementForumTable = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        managementForumDicussionPanel = new javax.swing.JPanel();
+        jLabel51 = new javax.swing.JLabel();
+        jPanel21 = new javax.swing.JPanel();
+        jLabel52 = new javax.swing.JLabel();
+        jLabel53 = new javax.swing.JLabel();
+        jLabel54 = new javax.swing.JLabel();
+        jLabel55 = new javax.swing.JLabel();
+        jScrollPane14 = new javax.swing.JScrollPane();
+        postContentLabel = new javax.swing.JTextArea();
+        postAuthorLabel = new javax.swing.JTextField();
+        postTitleLabel = new javax.swing.JTextField();
+        postDateLabel = new javax.swing.JTextField();
+        jScrollPane13 = new javax.swing.JScrollPane();
+        repliesTable = new javax.swing.JTable();
         jLabel28 = new javax.swing.JLabel();
+        typeForum = new javax.swing.JLabel();
+        forumID = new javax.swing.JLabel();
+        backToForumTable = new javax.swing.JButton();
+        residentForum = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        residentForumTable = new javax.swing.JTable();
         jLabel29 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         createBill = new javax.swing.JMenuItem();
@@ -172,12 +209,32 @@ public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(1350, 1040));
 
-        jPanel2.setBackground(new java.awt.Color(99, 178, 178));
+        jPanel2.setBackground(new java.awt.Color(232, 239, 239));
 
-        jLabel1.setFont(new java.awt.Font("Mukta Malar", 1, 24)); // NOI18N
-        jLabel1.setText("Sparrow Apartment");
+        jPanel6.setBackground(new java.awt.Color(98, 178, 178));
 
-        home_btn.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel85.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel85.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel85.setText("SPARROW");
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap(88, Short.MAX_VALUE)
+                .addComponent(jLabel85, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(57, 57, 57))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jLabel85)
+                .addContainerGap(22, Short.MAX_VALUE))
+        );
+
+        home_btn.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         home_btn.setText("Home");
         home_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -185,18 +242,7 @@ public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
             }
         });
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(home_btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(home_btn, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
-        );
-
-        account_btn.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        account_btn.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         account_btn.setText("Resident Account");
         account_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -204,20 +250,7 @@ public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
             }
         });
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(account_btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(account_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-
-        openBillpanel.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        openBillpanel.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         openBillpanel.setText("Resident Bills");
         openBillpanel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -225,43 +258,15 @@ public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
             }
         });
 
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(openBillpanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(openBillpanel, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        forumPanelbtn.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        forumPanelbtn.setText("Resident Forum");
-        forumPanelbtn.addActionListener(new java.awt.event.ActionListener() {
+        managementForumPanelbtn.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        managementForumPanelbtn.setText("Management Forum");
+        managementForumPanelbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                forumPanelbtnActionPerformed(evt);
+                managementForumPanelbtnActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addComponent(forumPanelbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(forumPanelbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        vistorPanelbtn.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        vistorPanelbtn.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         vistorPanelbtn.setText("Visitor");
         vistorPanelbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -269,49 +274,57 @@ public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
             }
         });
 
-        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(vistorPanelbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(vistorPanelbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
+        residentForumPanelbtn.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        residentForumPanelbtn.setText("Resident Forum");
+        residentForumPanelbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                residentForumPanelbtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(27, 27, 27))
-            .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addComponent(home_btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(managementForumPanelbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(vistorPanelbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(openBillpanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(account_btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(residentForumPanelbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jLabel1)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(home_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(account_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(openBillpanel, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(managementForumPanelbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(residentForumPanelbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(647, Short.MAX_VALUE))
+                .addComponent(vistorPanelbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(232, 239, 239));
@@ -342,17 +355,181 @@ public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
 
         jPanel3.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 1160, 80));
 
-        homePanel.setBackground(new java.awt.Color(232, 239, 239));
+        homePanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jTextArea1.setText("You can view the resident account details and add or delete \nthe account.\n");
+        jScrollPane7.setViewportView(jTextArea1);
+
+        jLabel31.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel31.setText("Resident Account");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel31)
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(38, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(18, Short.MAX_VALUE)
+                .addComponent(jLabel31)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18))
+        );
+
+        jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabel30.setFont(new java.awt.Font("Segoe UI", 1, 28)); // NOI18N
+        jLabel30.setText("Welcome Admin!");
+
+        jTextArea2.setColumns(20);
+        jTextArea2.setRows(5);
+        jTextArea2.setText("You can view the management forum and resident forum \nwith replies.\n");
+        jScrollPane8.setViewportView(jTextArea2);
+
+        jLabel32.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel32.setText("Forum");
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel32)
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(38, Short.MAX_VALUE))
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addContainerGap(18, Short.MAX_VALUE)
+                .addComponent(jLabel32)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18))
+        );
+
+        jTextArea3.setColumns(20);
+        jTextArea3.setRows(5);
+        jTextArea3.setText("You can create the bills for resident.\n");
+        jScrollPane9.setViewportView(jTextArea3);
+
+        jLabel33.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel33.setText("Resident Bills");
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel33)
+                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(38, Short.MAX_VALUE))
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                .addContainerGap(18, Short.MAX_VALUE)
+                .addComponent(jLabel33)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18))
+        );
+
+        jTextArea4.setColumns(20);
+        jTextArea4.setRows(5);
+        jTextArea4.setText("You can view and edit your resident\ninformation that is shared to the\napartment manager.");
+        jScrollPane10.setViewportView(jTextArea4);
+
+        jLabel34.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel34.setText("Notification");
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel34)
+                    .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(38, Short.MAX_VALUE))
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel34)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30))
+        );
+
+        logOutbtn.setText("Log Out");
+        logOutbtn.setPreferredSize(new java.awt.Dimension(268, 61));
+        logOutbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logOutbtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout homePanelLayout = new javax.swing.GroupLayout(homePanel);
         homePanel.setLayout(homePanelLayout);
         homePanelLayout.setHorizontalGroup(
             homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1196, Short.MAX_VALUE)
+            .addGroup(homePanelLayout.createSequentialGroup()
+                .addGroup(homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(homePanelLayout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addGroup(homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 1015, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(homePanelLayout.createSequentialGroup()
+                                .addGroup(homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(85, 85, 85)
+                                .addGroup(homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(67, 67, 67))))
+                    .addGroup(homePanelLayout.createSequentialGroup()
+                        .addGap(381, 381, 381)
+                        .addComponent(jLabel30)
+                        .addGap(262, 262, 262)
+                        .addComponent(logOutbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(145, Short.MAX_VALUE))
         );
         homePanelLayout.setVerticalGroup(
             homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 969, Short.MAX_VALUE)
+            .addGroup(homePanelLayout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addGroup(homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel30)
+                    .addComponent(logOutbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43)
+                .addGroup(homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(46, 46, 46)
+                .addGroup(homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(217, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("tab1", homePanel);
@@ -433,16 +610,16 @@ public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
                 .addComponent(viewResidentDetails)
                 .addGap(106, 106, 106))
             .addGroup(residentaccPanelLayout.createSequentialGroup()
-                .addGap(40, 40, 40)
+                .addGap(24, 24, 24)
                 .addComponent(jLabel2)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         residentaccPanelLayout.setVerticalGroup(
             residentaccPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(residentaccPanelLayout.createSequentialGroup()
-                .addGap(36, 36, 36)
+                .addGap(35, 35, 35)
                 .addComponent(jLabel2)
-                .addGap(62, 62, 62)
+                .addGap(63, 63, 63)
                 .addGroup(residentaccPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addAcc_btn)
                     .addComponent(deleteAccountbtn)
@@ -500,48 +677,45 @@ public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
         addaccPanel.setLayout(addaccPanelLayout);
         addaccPanelLayout.setHorizontalGroup(
             addaccPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addaccPanelLayout.createSequentialGroup()
-                .addContainerGap(531, Short.MAX_VALUE)
+            .addGroup(addaccPanelLayout.createSequentialGroup()
+                .addGap(31, 31, 31)
                 .addGroup(addaccPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addaccPanelLayout.createSequentialGroup()
-                        .addGroup(addaccPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(password_input)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(username_input)
-                            .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8)
-                            .addComponent(email_input)
-                            .addComponent(addResidentAccount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(residentUnitInput, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(97, 97, 97)))
-                .addGap(338, 338, 338))
+                    .addComponent(addResidentAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(password_input, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(email_input, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(residentUnitInput, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8)
+                    .addComponent(username_input, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addContainerGap(838, Short.MAX_VALUE))
         );
         addaccPanelLayout.setVerticalGroup(
             addaccPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(addaccPanelLayout.createSequentialGroup()
-                .addGap(73, 73, 73)
+                .addGap(29, 29, 29)
                 .addComponent(jLabel5)
-                .addGap(72, 72, 72)
+                .addGap(36, 36, 36)
                 .addComponent(jLabel11)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(username_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addComponent(jLabel8)
-                .addGap(11, 11, 11)
-                .addComponent(residentUnitInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel13)
+                .addComponent(username_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(residentUnitInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel13)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(email_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(password_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addGap(42, 42, 42)
                 .addComponent(addResidentAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(440, Short.MAX_VALUE))
+                .addContainerGap(522, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("tab3", addaccPanel);
@@ -629,7 +803,7 @@ public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
                 .addComponent(resident_ic, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7)
-                .addGap(10, 10, 10)
+                .addGap(29, 29, 29)
                 .addComponent(resident_contact, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(4, 4, 4)
                 .addComponent(jLabel9)
@@ -639,7 +813,7 @@ public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
                 .addComponent(jLabel17)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(133, Short.MAX_VALUE))
+                .addContainerGap(114, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout residentAccountInfoLayout = new javax.swing.GroupLayout(residentAccountInfo);
@@ -738,13 +912,13 @@ public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
                         .addGap(15, 15, 15)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1017, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(BillPanelLayout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addGroup(BillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(24, 24, 24)
+                        .addGroup(BillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(BillPanelLayout.createSequentialGroup()
                                 .addComponent(unitList, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(SearchUnitbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(41, 41, 41)
+                                .addComponent(SearchUnitbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(180, 180, 180)
                         .addComponent(jLabel23)
                         .addGap(32, 32, 32)
@@ -982,7 +1156,7 @@ public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
                         .addComponent(generateVisitorReport)))
                 .addContainerGap(339, Short.MAX_VALUE))
             .addGroup(VisitorPanelLayout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 1085, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 1070, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         VisitorPanelLayout.setVerticalGroup(
@@ -1007,7 +1181,9 @@ public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
 
         jTabbedPane2.addTab("tab7", VisitorPanel);
 
-        Forum_table.setModel(new javax.swing.table.DefaultTableModel(
+        managementForum.setBackground(new java.awt.Color(232, 239, 239));
+
+        managementForumTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -1026,53 +1202,295 @@ public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
                 return types [columnIndex];
             }
         });
-        jScrollPane5.setViewportView(Forum_table);
+        managementForumTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                managementForumTableMouseClicked(evt);
+            }
+        });
+        jScrollPane5.setViewportView(managementForumTable);
 
-        javax.swing.GroupLayout forumPanelLayout = new javax.swing.GroupLayout(forumPanel);
-        forumPanel.setLayout(forumPanelLayout);
-        forumPanelLayout.setHorizontalGroup(
-            forumPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(forumPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 1031, javax.swing.GroupLayout.PREFERRED_SIZE)
+        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
+        jLabel1.setText("Management Forum");
+
+        javax.swing.GroupLayout managementForumLayout = new javax.swing.GroupLayout(managementForum);
+        managementForum.setLayout(managementForumLayout);
+        managementForumLayout.setHorizontalGroup(
+            managementForumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(managementForumLayout.createSequentialGroup()
+                .addGroup(managementForumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(managementForumLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 1031, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(managementForumLayout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(jLabel1)))
                 .addContainerGap(159, Short.MAX_VALUE))
         );
-        forumPanelLayout.setVerticalGroup(
-            forumPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(forumPanelLayout.createSequentialGroup()
-                .addGap(101, 101, 101)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(441, Short.MAX_VALUE))
-        );
-
-        jTabbedPane2.addTab("tab8", forumPanel);
-
-        jLabel28.setText("Title:");
-
-        jLabel29.setText("Content:");
-
-        javax.swing.GroupLayout forumDicussionPanelLayout = new javax.swing.GroupLayout(forumDicussionPanel);
-        forumDicussionPanel.setLayout(forumDicussionPanelLayout);
-        forumDicussionPanelLayout.setHorizontalGroup(
-            forumDicussionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(forumDicussionPanelLayout.createSequentialGroup()
-                .addGap(150, 150, 150)
-                .addGroup(forumDicussionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel29)
-                    .addComponent(jLabel28))
-                .addContainerGap(997, Short.MAX_VALUE))
-        );
-        forumDicussionPanelLayout.setVerticalGroup(
-            forumDicussionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(forumDicussionPanelLayout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addComponent(jLabel28)
+        managementForumLayout.setVerticalGroup(
+            managementForumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(managementForumLayout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addComponent(jLabel29)
-                .addContainerGap(855, Short.MAX_VALUE))
+                .addComponent(jLabel1)
+                .addGap(58, 58, 58)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(428, Short.MAX_VALUE))
         );
 
-        jTabbedPane2.addTab("tab9", forumDicussionPanel);
+        jTabbedPane2.addTab("tab8", managementForum);
+
+        managementForumDicussionPanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel51.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel51.setText("View Post");
+
+        jPanel21.setBackground(new java.awt.Color(232, 239, 239));
+        jPanel21.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85)));
+        jPanel21.setForeground(new java.awt.Color(54, 84, 85));
+
+        jLabel52.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel52.setText("Author:");
+
+        jLabel53.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel53.setText("Title:");
+
+        jLabel54.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel54.setText("Date:");
+
+        jLabel55.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel55.setText("Content:");
+
+        postContentLabel.setEditable(false);
+        postContentLabel.setBackground(new java.awt.Color(232, 239, 239));
+        postContentLabel.setColumns(20);
+        postContentLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        postContentLabel.setRows(5);
+        jScrollPane14.setViewportView(postContentLabel);
+
+        postAuthorLabel.setEditable(false);
+        postAuthorLabel.setBackground(new java.awt.Color(232, 239, 239));
+        postAuthorLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        postAuthorLabel.setText("(content)");
+        postAuthorLabel.setBorder(null);
+
+        postTitleLabel.setEditable(false);
+        postTitleLabel.setBackground(new java.awt.Color(232, 239, 239));
+        postTitleLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        postTitleLabel.setText("(content)");
+        postTitleLabel.setBorder(null);
+
+        postDateLabel.setEditable(false);
+        postDateLabel.setBackground(new java.awt.Color(232, 239, 239));
+        postDateLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        postDateLabel.setText("(content)");
+        postDateLabel.setBorder(null);
+
+        javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
+        jPanel21.setLayout(jPanel21Layout);
+        jPanel21Layout.setHorizontalGroup(
+            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel21Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 927, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel21Layout.createSequentialGroup()
+                        .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel52)
+                            .addComponent(jLabel53)
+                            .addComponent(jLabel54)
+                            .addComponent(jLabel55))
+                        .addGap(24, 24, 24)
+                        .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(postDateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(postTitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(postAuthorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel21Layout.setVerticalGroup(
+            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel21Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel52)
+                    .addComponent(postAuthorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
+                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel53)
+                    .addComponent(postTitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(postDateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel54))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel55)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(28, Short.MAX_VALUE))
+        );
+
+        repliesTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "ID", "Replies", "Commenter", "Date"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                true, true, true, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane13.setViewportView(repliesTable);
+
+        jLabel28.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
+        jLabel28.setText("View Reply");
+
+        typeForum.setFont(new java.awt.Font("Helvetica Neue", 0, 1)); // NOI18N
+        typeForum.setText("jLabel30");
+
+        forumID.setFont(new java.awt.Font("Helvetica Neue", 0, 1)); // NOI18N
+        forumID.setText("jLabel30");
+
+        backToForumTable.setBackground(new java.awt.Color(164, 221, 221));
+        backToForumTable.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        backToForumTable.setForeground(new java.awt.Color(54, 84, 85));
+        backToForumTable.setText("Back");
+        backToForumTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85), 2));
+        backToForumTable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backToForumTableActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout managementForumDicussionPanelLayout = new javax.swing.GroupLayout(managementForumDicussionPanel);
+        managementForumDicussionPanel.setLayout(managementForumDicussionPanelLayout);
+        managementForumDicussionPanelLayout.setHorizontalGroup(
+            managementForumDicussionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(managementForumDicussionPanelLayout.createSequentialGroup()
+                .addGap(43, 43, 43)
+                .addGroup(managementForumDicussionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, 742, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(backToForumTable, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel28)
+                    .addGroup(managementForumDicussionPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel51)
+                        .addGroup(managementForumDicussionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(managementForumDicussionPanelLayout.createSequentialGroup()
+                                .addGap(90, 90, 90)
+                                .addComponent(typeForum))
+                            .addGroup(managementForumDicussionPanelLayout.createSequentialGroup()
+                                .addGap(290, 290, 290)
+                                .addComponent(forumID))))
+                    .addComponent(jPanel21, javax.swing.GroupLayout.PREFERRED_SIZE, 717, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(411, Short.MAX_VALUE))
+        );
+        managementForumDicussionPanelLayout.setVerticalGroup(
+            managementForumDicussionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(managementForumDicussionPanelLayout.createSequentialGroup()
+                .addGroup(managementForumDicussionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(managementForumDicussionPanelLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(managementForumDicussionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel51)
+                            .addComponent(typeForum)))
+                    .addGroup(managementForumDicussionPanelLayout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(forumID)))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41)
+                .addComponent(jLabel28)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(backToForumTable, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(161, Short.MAX_VALUE))
+        );
+
+        jTabbedPane2.addTab("tab9", managementForumDicussionPanel);
+
+        residentForum.setBackground(new java.awt.Color(232, 239, 239));
+
+        residentForumTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "ID", "Pubilsher", "Title", "Content", "Created_date"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        residentForumTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                residentForumTableMouseClicked(evt);
+            }
+        });
+        jScrollPane6.setViewportView(residentForumTable);
+
+        jLabel29.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
+        jLabel29.setText("Resident Forum");
+
+        javax.swing.GroupLayout residentForumLayout = new javax.swing.GroupLayout(residentForum);
+        residentForum.setLayout(residentForumLayout);
+        residentForumLayout.setHorizontalGroup(
+            residentForumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(residentForumLayout.createSequentialGroup()
+                .addGroup(residentForumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(residentForumLayout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addComponent(jLabel29))
+                    .addGroup(residentForumLayout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 980, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(191, Short.MAX_VALUE))
+        );
+        residentForumLayout.setVerticalGroup(
+            residentForumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(residentForumLayout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addComponent(jLabel29)
+                .addGap(33, 33, 33)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(435, Short.MAX_VALUE))
+        );
+
+        jTabbedPane2.addTab("tab10", residentForum);
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1196, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 969, Short.MAX_VALUE)
+        );
+
+        jTabbedPane2.addTab("tab11", jPanel5);
 
         jPanel3.add(jTabbedPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 33, 1160, 1000));
 
@@ -1081,15 +1499,15 @@ public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 1177, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 1040, Short.MAX_VALUE)
         );
 
         jMenu1.setText("Bill");
@@ -1164,13 +1582,6 @@ public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
         load_billRecord();
 
     }//GEN-LAST:event_openBillpanelActionPerformed
-
-    private void forumPanelbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_forumPanelbtnActionPerformed
-        jTabbedPane2.setSelectedIndex(7); 
-        DefaultTableModel model = (DefaultTableModel) Forum_table.getModel();
-        model.setRowCount(0);
-        load_forumRecord();
-    }//GEN-LAST:event_forumPanelbtnActionPerformed
 
     private void vistorPanelbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vistorPanelbtnActionPerformed
         jTabbedPane2.setSelectedIndex(6);  
@@ -1597,28 +2008,57 @@ try {
     }//GEN-LAST:event_SearchUnitbtnActionPerformed
 
     private void sendReminderbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendReminderbtnActionPerformed
-         Properties properties =new Properties();
-         properties.put("mail.smtp.auth","true");
-         properties.put("mail.smtp.starttls.enable", "true");
-         properties.put("mail.smtp.host", "stmp.gmail.com");
-         properties.put("mail.smtp.port", "110");
-         
-         Session session = Session.getDefaultInstance(properties);
-            try {
-                InternetAddress fromAddress = new InternetAddress("zhixuanchu3131@gmail.com");
-                InternetAddress toAddress = new InternetAddress("p22013790@student.newinti.edu.my");
-
-                Message message = new MimeMessage(session);
-                message.setFrom(fromAddress);
-                message.setRecipient(Message.RecipientType.TO, toAddress);
-                message.setSubject("Bill reminder");
-                message.setText("Please submit the lastest bill ");
-
-                Transport.send(message, "zhixuanchu3131@gmail.com",
-                        new String("Chuzhixuan@0110"));
-            } catch (MessagingException ex) {
-                ex.printStackTrace();
+         conn =sqliteConn2.connect();
+         String date = getCurrentDate();
+         rs = bill_due_list();
+         int count =0;
+         String sql = "INSERT INTO bill_notification (title,unit,content,mark_as_read,created_date) values(?,?,?,?,?) ";
+         try{
+            while(rs.next()){
+             
+                 String unit = rs.getString("floor_unit");
+                 pst = conn.prepareStatement(sql);
+                 pst.setString(1, "Bill Reminder");
+                 pst.setString(2, unit);
+                 pst.setString(3, "Please pay the bill that have been due, thank for your cooperation");
+                 pst.setString(4, "false");
+                 pst.setString(5,date);
+                 pst.execute();
+                 count++;
+             
+             }
+            if(count>0){
+                JOptionPane.showMessageDialog(null,"Reminder Sent");
             }
+         }catch(SQLException e){
+                   JOptionPane.showMessageDialog(null,e);
+                }finally {
+        // Close resources (result set, statement, connection)
+                    if (rs != null) {
+                        try {
+                            rs.close();
+                        } catch (SQLException e) {
+                            // Handle exception
+                        }
+                    }
+                    if (pst != null) {
+                        try {
+                            pst.close();
+                        } catch (SQLException e) {
+                            // Handle exception
+                        }
+                    }
+                    if (conn != null) {
+                        try {
+                            conn.close();
+                        } catch (SQLException e) {
+                            // Handle exception
+                        }
+                    }
+            }
+             
+             
+         
          
     }//GEN-LAST:event_sendReminderbtnActionPerformed
 
@@ -1919,6 +2359,82 @@ try {
             }
         }
     }//GEN-LAST:event_generateVisitorReportActionPerformed
+
+    private void managementForumPanelbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_managementForumPanelbtnActionPerformed
+        jTabbedPane2.setSelectedIndex(7);
+        DefaultTableModel model = (DefaultTableModel) managementForumTable.getModel();
+        model.setRowCount(0);
+        loadManagementForum();
+    }//GEN-LAST:event_managementForumPanelbtnActionPerformed
+
+    private void managementForumTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_managementForumTableMouseClicked
+        jTabbedPane2.setSelectedIndex(8);
+        typeForum.setText("Management");
+        DefaultTableModel management_forum = (DefaultTableModel)managementForumTable.getModel();
+        int row = managementForumTable.getSelectedRow();
+        if(managementForumTable.getSelectedRowCount() ==1){
+            String id = managementForumTable.getModel().getValueAt(row, 0).toString();
+            String title= managementForumTable.getModel().getValueAt(row, 1).toString();
+            String author = managementForumTable.getModel().getValueAt(row, 2).toString();
+            String content = managementForumTable.getModel().getValueAt(row, 3).toString();
+            String date = managementForumTable.getModel().getValueAt(row, 4).toString();
+
+            postTitleLabel.setText(title);
+            postContentLabel.setText(content);
+            postAuthorLabel.setText(author);
+            postDateLabel.setText(date);
+            DefaultTableModel replies = (DefaultTableModel)repliesTable.getModel();
+            replies.setRowCount(0);
+            loadManagementReply(id);
+            forumID.setText(id);
+        }
+    }//GEN-LAST:event_managementForumTableMouseClicked
+
+    private void residentForumTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_residentForumTableMouseClicked
+        jTabbedPane2.setSelectedIndex(8);
+        typeForum.setText("Resident");
+        DefaultTableModel resident_forum = (DefaultTableModel)residentForumTable.getModel();
+        int row = residentForumTable.getSelectedRow();
+        if(residentForumTable.getSelectedRowCount() ==1){
+            String id = residentForumTable.getModel().getValueAt(row, 0).toString();
+            String title= residentForumTable.getModel().getValueAt(row, 1).toString();
+            String author = residentForumTable.getModel().getValueAt(row, 2).toString();
+            String content = residentForumTable.getModel().getValueAt(row, 3).toString();
+            String date = residentForumTable.getModel().getValueAt(row, 4).toString();
+
+            postTitleLabel.setText(title);
+            postContentLabel.setText(content);
+            postAuthorLabel.setText(author);
+            postDateLabel.setText(date);
+            DefaultTableModel replies = (DefaultTableModel)repliesTable.getModel();
+            replies.setRowCount(0);
+            loadManagementReply(id);
+            forumID.setText(id);
+        }
+    }//GEN-LAST:event_residentForumTableMouseClicked
+
+    private void residentForumPanelbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_residentForumPanelbtnActionPerformed
+        jTabbedPane2.setSelectedIndex(9);
+        DefaultTableModel resident_model = (DefaultTableModel) residentForumTable.getModel();
+        resident_model.setRowCount(0);
+        loadResidentForum();
+    }//GEN-LAST:event_residentForumPanelbtnActionPerformed
+
+    private void backToForumTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToForumTableActionPerformed
+        String type = typeForum.getText();
+        if(type.equals("Management")){
+            jTabbedPane2.setSelectedIndex(7);
+        }else {
+            jTabbedPane2.setSelectedIndex(9);
+        }
+
+    }//GEN-LAST:event_backToForumTableActionPerformed
+
+    private void logOutbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logOutbtnActionPerformed
+        dispose();
+        ManagerLoginNew login = new ManagerLoginNew();
+        login.setVisible(true);
+    }//GEN-LAST:event_logOutbtnActionPerformed
      public void load_residentAccount(){
         conn = sqliteConn2.connect();
         Object columns[] = {"ID","resident_username","floor_unit","resident_email","resident_password","created_date"};
@@ -2010,38 +2526,203 @@ try {
         }
     }
      
-     public void load_forumRecord(){
+public void loadManagementForum(){
+        DefaultTableModel forum = (DefaultTableModel)managementForumTable.getModel();
         conn = sqliteConn2.connect();
-        
-         
-        
-        if(conn != null){   
-            String sql = "SELECT id,forum_author,forum_title,forum_content,created_date FROM forum";
-            try {
-                pst = conn.prepareStatement(sql);
-                rs = pst.executeQuery();
-                
-                while(rs.next()){
-                       String id = rs.getString("id");
-                       String forum_author = rs.getString("forum_author");
-             
-                       String forum_title = rs.getString("forum_title");
-                       String forum_content = rs.getString("forum_content");
-                       String created_date = rs.getString("created_date");
-                       String tbData[] ={id,forum_author,forum_title,forum_content,created_date};
-                       DefaultTableModel forum_table = (DefaultTableModel)Forum_table.getModel();
-                     
-                       forum_table.addRow(tbData);
-                       
-                }
-            }catch(SQLException e){
-                   JOptionPane.showMessageDialog(null,e);
+        forum.setRowCount(0);
+        String sql = "SELECT id,forum_title,forum_content,forum_author,created_date FROM management_forum";
+        try{
+            pst = conn.prepareStatement(sql);
+            rs = pst.executeQuery();
+            while(rs.next()){
+                String id = rs.getString("id");
+                 String title = rs.getString("forum_title");
+                 String author = rs.getString("forum_author");
+                 String content = rs.getString("forum_content");
+                 String date = rs.getString("created_date");
+                 String tbData[] ={id,title,author,content,date};
+                 
+                 forum.addRow(tbData);
             }
-               
+           
+        }catch(SQLException e){
+                   JOptionPane.showMessageDialog(null,e);
+        }finally {
+            // Close resources (result set, statement, connection)
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+            if (pst != null) {
+                try {
+                    pst.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
         }
-    }
-     
-     public ResultSet floor_unitList() {
+}
+    
+public void loadManagementReply(String forum_id){
+    conn = sqliteConn2.connect();
+    DefaultTableModel replies = (DefaultTableModel)repliesTable.getModel();
+    String sql = "SELECT * FROM management_forum_replies where forum_id =?";
+    try{
+        pst = conn.prepareStatement(sql);
+        pst.setString(1, forum_id);
+        rs = pst.executeQuery();
+        while(rs.next()){
+            String id = rs.getString("id");
+            String replyer = rs.getString("replyer");
+            String comment = rs.getString("comment");
+            String date = rs.getString("reply_date");
+            String tbData[] ={id,comment,replyer,date};
+                 
+            replies.addRow(tbData);
+        }
+    }catch(SQLException e){
+            JOptionPane.showMessageDialog(null,e);
+        }finally {
+            // Close resources (result set, statement, connection)
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+            if (pst != null) {
+                try {
+                    pst.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+        }
+}
+
+public void loadResidentReply(String forum_id){
+    conn = sqliteConn2.connect();
+    DefaultTableModel replies = (DefaultTableModel)repliesTable.getModel();
+    String sql = "SELECT * FROM resident_forum_replies where forum_id =?";
+    try{
+        pst = conn.prepareStatement(sql);
+        pst.setString(1, forum_id);
+        rs = pst.executeQuery();
+        while(rs.next()){
+            String id = rs.getString("id");
+            String replyer = rs.getString("replyer");
+            String comment = rs.getString("comment");
+            String date = rs.getString("reply_date");
+            String tbData[] ={id,comment,replyer,date};
+                 
+            replies.addRow(tbData);
+        }
+    }catch(SQLException e){
+            JOptionPane.showMessageDialog(null,e);
+        }finally {
+            // Close resources (result set, statement, connection)
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+            if (pst != null) {
+                try {
+                    pst.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+        }
+}
+
+
+public void loadResidentForum(){
+        DefaultTableModel resident_forum = (DefaultTableModel)residentForumTable.getModel();
+        conn = sqliteConn2.connect();
+        resident_forum.setRowCount(0);
+        String sql = "SELECT id,forum_title,forum_content,forum_author,created_date FROM resident_forum";
+        try{
+            pst = conn.prepareStatement(sql);
+            rs = pst.executeQuery();
+            while(rs.next()){
+                String id = rs.getString("id");
+                 String title = rs.getString("forum_title");
+                 String author = rs.getString("forum_author");
+                 String content = rs.getString("forum_content");
+                 String date = rs.getString("created_date");
+                 String tbData[] ={id,title,author,content,date};
+                 
+                 resident_forum.addRow(tbData);
+            }
+           
+        }catch(SQLException e){
+                   JOptionPane.showMessageDialog(null,e);
+        }finally {
+            // Close resources (result set, statement, connection)
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+            if (pst != null) {
+                try {
+                    pst.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+        }
+}
+public ResultSet bill_due_list(){
+    conn = sqliteConn2.connect();
+    String bill = "SELECT COUNT(floor_unit) as payment_due,floor_unit,payment_status FROM bill_record WHERE payment_status ='false' GROUP BY floor_unit";
+    try {
+            Statement stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery(bill);
+            return rs;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return null;
+}
+public ResultSet floor_unitList() {
         conn = sqliteConn2.connect();
         String sql = "SELECT floor_unit from apartment_unit WHERE registered = 'true'";
         try {
@@ -2132,7 +2813,6 @@ try {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BillPanel;
     private javax.swing.JLabel DateLabel;
-    private javax.swing.JTable Forum_table;
     private javax.swing.JComboBox<String> SearchByListVisitor;
     private javax.swing.JButton SearchUnitbtn;
     private javax.swing.JLabel TimeLabel;
@@ -2142,6 +2822,7 @@ try {
     private javax.swing.JButton addResidentAccount;
     private javax.swing.JPanel addaccPanel;
     private javax.swing.JRadioButton allUnit;
+    private javax.swing.JButton backToForumTable;
     private javax.swing.JTextField billAmountTextField;
     private javax.swing.JTextField billDescription;
     private javax.swing.JTable billRecord_table;
@@ -2151,9 +2832,7 @@ try {
     private javax.swing.JMenuItem createBill;
     private javax.swing.JButton deleteAccountbtn;
     private javax.swing.JTextField email_input;
-    private javax.swing.JPanel forumDicussionPanel;
-    private javax.swing.JPanel forumPanel;
-    private javax.swing.JButton forumPanelbtn;
+    private javax.swing.JLabel forumID;
     private javax.swing.JPanel generateBillPanel;
     private javax.swing.JButton generateReport;
     private javax.swing.JButton generateVisitorReport;
@@ -2182,11 +2861,22 @@ try {
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel51;
+    private javax.swing.JLabel jLabel52;
+    private javax.swing.JLabel jLabel53;
+    private javax.swing.JLabel jLabel54;
+    private javax.swing.JLabel jLabel55;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel85;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -2195,22 +2885,49 @@ try {
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel21;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane10;
+    private javax.swing.JScrollPane jScrollPane13;
+    private javax.swing.JScrollPane jScrollPane14;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JTextArea jTextArea3;
+    private javax.swing.JTextArea jTextArea4;
+    private javax.swing.JButton logOutbtn;
+    private javax.swing.JPanel managementForum;
+    private javax.swing.JPanel managementForumDicussionPanel;
+    private javax.swing.JButton managementForumPanelbtn;
+    private javax.swing.JTable managementForumTable;
     private javax.swing.JComboBox<String> monthPicker;
     private javax.swing.JButton openBillpanel;
     private javax.swing.JTextField password_input;
+    private javax.swing.JTextField postAuthorLabel;
+    private javax.swing.JTextArea postContentLabel;
+    private javax.swing.JTextField postDateLabel;
+    private javax.swing.JTextField postTitleLabel;
+    private javax.swing.JTable repliesTable;
     private javax.swing.JPanel residentAccountInfo;
+    private javax.swing.JPanel residentForum;
+    private javax.swing.JButton residentForumPanelbtn;
+    private javax.swing.JTable residentForumTable;
     private javax.swing.JComboBox<String> residentUnitInput;
     public javax.swing.JLabel resident_contact;
     public javax.swing.JLabel resident_ic;
@@ -2223,6 +2940,7 @@ try {
     private javax.swing.JRadioButton selectedUnit;
     private javax.swing.JButton sendBill;
     private javax.swing.JButton sendReminderbtn;
+    private javax.swing.JLabel typeForum;
     private javax.swing.JComboBox<String> unitInput;
     private javax.swing.JComboBox<String> unitList;
     private javax.swing.JTextField username_input;

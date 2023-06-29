@@ -8,8 +8,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.regex.Pattern;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -44,21 +46,19 @@ public class ResidentMainPage extends javax.swing.JFrame {
     private void initComponents() {
 
         MenuBarPanel = new javax.swing.JPanel();
+        homePanelbtn = new javax.swing.JButton();
         profilePanelbtn = new javax.swing.JButton();
-        profilePanelbtn1 = new javax.swing.JButton();
-        profilePanelbtn2 = new javax.swing.JButton();
-        profilePanelbtn3 = new javax.swing.JButton();
-        profilePanelbtn4 = new javax.swing.JButton();
-        profilePanelbtn5 = new javax.swing.JButton();
+        billPanelbtn = new javax.swing.JButton();
+        forumPanelbtn = new javax.swing.JButton();
+        residentForumPanelbtn = new javax.swing.JButton();
+        notificationPanelbtn = new javax.swing.JButton();
         jPanel16 = new javax.swing.JPanel();
         jLabel85 = new javax.swing.JLabel();
         jTabbedPane3 = new javax.swing.JTabbedPane();
         ResHome = new javax.swing.JPanel();
         jLabel28 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jPanel8 = new javax.swing.JPanel();
-        profilePanelbtn6 = new javax.swing.JButton();
+        residentIDLabel = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jPanel2 = new javax.swing.JPanel();
@@ -77,37 +77,39 @@ public class ResidentMainPage extends javax.swing.JFrame {
         jScrollPane8 = new javax.swing.JScrollPane();
         jTextArea4 = new javax.swing.JTextArea();
         jLabel34 = new javax.swing.JLabel();
+        logOutbtn = new javax.swing.JButton();
         Bills = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
         jLabel35 = new javax.swing.JLabel();
         jScrollPane9 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        pendingTable = new javax.swing.JTable();
         jScrollPane10 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        historyTable = new javax.swing.JTable();
         jLabel36 = new javax.swing.JLabel();
         jLabel37 = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        paymentCreditMaintainencebtn = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel38 = new javax.swing.JLabel();
         jLabel40 = new javax.swing.JLabel();
         jPanel12 = new javax.swing.JPanel();
-        jButton4 = new javax.swing.JButton();
+        paySinkingCredit = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         CreditCard = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
         jLabel39 = new javax.swing.JLabel();
         jPanel14 = new javax.swing.JPanel();
         jLabel42 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        cardHolderTextField = new javax.swing.JTextField();
         jLabel43 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jTextField3 = new javax.swing.JTextField();
+        cardNumberTextField = new javax.swing.JTextField();
+        monthSelectionCredit = new javax.swing.JComboBox<>();
+        yearSelectionCredit = new javax.swing.JComboBox<>();
+        cvvTextField = new javax.swing.JTextField();
         jLabel44 = new javax.swing.JLabel();
         jLabel45 = new javax.swing.JLabel();
-        jButton8 = new javax.swing.JButton();
+        payCreditBtn1 = new javax.swing.JButton();
+        typeBill = new javax.swing.JLabel();
         PayPal = new javax.swing.JPanel();
         jPanel15 = new javax.swing.JPanel();
         jLabel41 = new javax.swing.JLabel();
@@ -118,102 +120,103 @@ public class ResidentMainPage extends javax.swing.JFrame {
         jButton9 = new javax.swing.JButton();
         jPasswordField1 = new javax.swing.JPasswordField();
         jLabel48 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         ManagementForum = new javax.swing.JPanel();
         jPanel18 = new javax.swing.JPanel();
         jLabel49 = new javax.swing.JLabel();
         jScrollPane11 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
-        jButton10 = new javax.swing.JButton();
+        managementForumTable = new javax.swing.JTable();
+        createManagementPost = new javax.swing.JButton();
         ResidentForum = new javax.swing.JPanel();
         jPanel19 = new javax.swing.JPanel();
         jLabel50 = new javax.swing.JLabel();
         jScrollPane12 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
-        jButton11 = new javax.swing.JButton();
+        residentForumTable = new javax.swing.JTable();
+        createResidentPostbtn = new javax.swing.JButton();
         CreatePost = new javax.swing.JPanel();
         jPanel24 = new javax.swing.JPanel();
         jLabel57 = new javax.swing.JLabel();
-        jButton16 = new javax.swing.JButton();
+        backToManagementForum = new javax.swing.JButton();
         jPanel25 = new javax.swing.JPanel();
         jLabel61 = new javax.swing.JLabel();
         jScrollPane17 = new javax.swing.JScrollPane();
-        jTextArea7 = new javax.swing.JTextArea();
+        postContentTextField = new javax.swing.JTextArea();
         jLabel62 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
-        jButton17 = new javax.swing.JButton();
+        postTitleTextField = new javax.swing.JTextField();
+        createPostbtn = new javax.swing.JButton();
+        typeForumLabel = new javax.swing.JLabel();
         ViewPost = new javax.swing.JPanel();
         jPanel20 = new javax.swing.JPanel();
         jLabel51 = new javax.swing.JLabel();
         jScrollPane13 = new javax.swing.JScrollPane();
-        jTable5 = new javax.swing.JTable();
-        jButton12 = new javax.swing.JButton();
+        repliesTable = new javax.swing.JTable();
+        replyPostbtn = new javax.swing.JButton();
         jPanel21 = new javax.swing.JPanel();
         jLabel52 = new javax.swing.JLabel();
         jLabel53 = new javax.swing.JLabel();
         jLabel54 = new javax.swing.JLabel();
         jLabel55 = new javax.swing.JLabel();
         jScrollPane14 = new javax.swing.JScrollPane();
-        jTextArea5 = new javax.swing.JTextArea();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jButton14 = new javax.swing.JButton();
+        postContentLabel = new javax.swing.JTextArea();
+        postAuthorLabel = new javax.swing.JTextField();
+        postTitleLabel = new javax.swing.JTextField();
+        postDateLabel = new javax.swing.JTextField();
+        backToForumTable = new javax.swing.JButton();
+        typeForum = new javax.swing.JLabel();
+        forumID = new javax.swing.JLabel();
         ReplyPost = new javax.swing.JPanel();
         jPanel22 = new javax.swing.JPanel();
         jLabel56 = new javax.swing.JLabel();
-        jButton13 = new javax.swing.JButton();
+        backToForumBtn2 = new javax.swing.JButton();
         jPanel23 = new javax.swing.JPanel();
         jLabel60 = new javax.swing.JLabel();
         jScrollPane16 = new javax.swing.JScrollPane();
-        jTextArea6 = new javax.swing.JTextArea();
-        jButton15 = new javax.swing.JButton();
+        commentTextField = new javax.swing.JTextArea();
+        replyBtn = new javax.swing.JButton();
         ViewReply = new javax.swing.JPanel();
         Notifications = new javax.swing.JPanel();
         jPanel26 = new javax.swing.JPanel();
         jLabel58 = new javax.swing.JLabel();
         jScrollPane15 = new javax.swing.JScrollPane();
-        jTable6 = new javax.swing.JTable();
-        jButton18 = new javax.swing.JButton();
+        notificationTable = new javax.swing.JTable();
         jPanel29 = new javax.swing.JPanel();
-        jLabel59 = new javax.swing.JLabel();
         jLabel63 = new javax.swing.JLabel();
         jLabel64 = new javax.swing.JLabel();
         jLabel65 = new javax.swing.JLabel();
         jScrollPane18 = new javax.swing.JScrollPane();
-        jTextArea8 = new javax.swing.JTextArea();
-        jTextField9 = new javax.swing.JTextField();
-        jTextField10 = new javax.swing.JTextField();
-        jTextField11 = new javax.swing.JTextField();
+        noticeContentLabel = new javax.swing.JTextArea();
+        noticeTitleLabel = new javax.swing.JTextField();
+        noticeDateLabel = new javax.swing.JTextField();
         jButton19 = new javax.swing.JButton();
         Profile = new javax.swing.JPanel();
         jPanel30 = new javax.swing.JPanel();
         jLabel66 = new javax.swing.JLabel();
         jPanel31 = new javax.swing.JPanel();
         jSeparator2 = new javax.swing.JSeparator();
-        jTextField15 = new javax.swing.JTextField();
-        jButton20 = new javax.swing.JButton();
+        residentUnitLabel = new javax.swing.JTextField();
+        editResidentbtn = new javax.swing.JButton();
         jButton21 = new javax.swing.JButton();
         jPanel33 = new javax.swing.JPanel();
         jScrollPane20 = new javax.swing.JScrollPane();
-        jTable8 = new javax.swing.JTable();
+        residentVehicleTable = new javax.swing.JTable();
         jLabel69 = new javax.swing.JLabel();
         jLabel70 = new javax.swing.JLabel();
         jLabel71 = new javax.swing.JLabel();
         jTextField14 = new javax.swing.JTextField();
-        jTextField13 = new javax.swing.JTextField();
-        jTextField12 = new javax.swing.JTextField();
+        residentICLabel = new javax.swing.JTextField();
+        residentNameLabel = new javax.swing.JTextField();
         jLabel67 = new javax.swing.JLabel();
         jLabel72 = new javax.swing.JLabel();
         jTextField17 = new javax.swing.JTextField();
         jLabel73 = new javax.swing.JLabel();
         jLabel74 = new javax.swing.JLabel();
         jLabel75 = new javax.swing.JLabel();
-        jTextField18 = new javax.swing.JTextField();
-        jTextField19 = new javax.swing.JTextField();
+        residentEmailLabel = new javax.swing.JTextField();
+        residentPhoneLabel = new javax.swing.JTextField();
         jLabel76 = new javax.swing.JLabel();
-        jButton26 = new javax.swing.JButton();
-        jButton27 = new javax.swing.JButton();
-        jButton28 = new javax.swing.JButton();
+        addVehiclebtn = new javax.swing.JButton();
+        editVehiclebtn = new javax.swing.JButton();
+        deleteVehiclebtn = new javax.swing.JButton();
         EditProfile = new javax.swing.JPanel();
         jPanel34 = new javax.swing.JPanel();
         jLabel68 = new javax.swing.JLabel();
@@ -224,16 +227,16 @@ public class ResidentMainPage extends javax.swing.JFrame {
         jLabel80 = new javax.swing.JLabel();
         jLabel81 = new javax.swing.JLabel();
         jLabel82 = new javax.swing.JLabel();
-        jTextField20 = new javax.swing.JTextField();
-        jTextField21 = new javax.swing.JTextField();
+        residentNameTextField = new javax.swing.JTextField();
+        residentICTextField = new javax.swing.JTextField();
         jSpinner1 = new javax.swing.JSpinner();
         jSpinner2 = new javax.swing.JSpinner();
         jLabel83 = new javax.swing.JLabel();
         jLabel84 = new javax.swing.JLabel();
-        jTextField22 = new javax.swing.JTextField();
-        jTextField23 = new javax.swing.JTextField();
-        jButton24 = new javax.swing.JButton();
-        jButton25 = new javax.swing.JButton();
+        residentPhoneTextField = new javax.swing.JTextField();
+        residentEmailTextField = new javax.swing.JTextField();
+        backToProfilebtn = new javax.swing.JButton();
+        saveEditbtn = new javax.swing.JButton();
         AddVehicle = new javax.swing.JPanel();
         jPanel41 = new javax.swing.JPanel();
         jLabel98 = new javax.swing.JLabel();
@@ -243,12 +246,12 @@ public class ResidentMainPage extends javax.swing.JFrame {
         jLabel101 = new javax.swing.JLabel();
         jLabel102 = new javax.swing.JLabel();
         jLabel103 = new javax.swing.JLabel();
-        jTextField28 = new javax.swing.JTextField();
-        jTextField29 = new javax.swing.JTextField();
-        jTextField32 = new javax.swing.JTextField();
-        jTextField33 = new javax.swing.JTextField();
+        brandTextField = new javax.swing.JTextField();
+        modelTextField = new javax.swing.JTextField();
+        colorTextField = new javax.swing.JTextField();
+        plateTextField = new javax.swing.JTextField();
         jButton33 = new javax.swing.JButton();
-        jButton34 = new javax.swing.JButton();
+        saveVehiclebtn = new javax.swing.JButton();
         EditVehicle = new javax.swing.JPanel();
         jPanel39 = new javax.swing.JPanel();
         jLabel92 = new javax.swing.JLabel();
@@ -258,12 +261,13 @@ public class ResidentMainPage extends javax.swing.JFrame {
         jLabel95 = new javax.swing.JLabel();
         jLabel96 = new javax.swing.JLabel();
         jLabel97 = new javax.swing.JLabel();
-        jTextField26 = new javax.swing.JTextField();
-        jTextField27 = new javax.swing.JTextField();
-        jTextField30 = new javax.swing.JTextField();
-        jTextField31 = new javax.swing.JTextField();
-        jButton31 = new javax.swing.JButton();
-        jButton32 = new javax.swing.JButton();
+        editBrandTextField = new javax.swing.JTextField();
+        editModelTextField = new javax.swing.JTextField();
+        editColorTextField = new javax.swing.JTextField();
+        editPlateTextField = new javax.swing.JTextField();
+        backToProfilebtn2 = new javax.swing.JButton();
+        saveEditVehiclebtn = new javax.swing.JButton();
+        vehicleIDTextField = new javax.swing.JLabel();
         ChangePassword = new javax.swing.JPanel();
         jPanel43 = new javax.swing.JPanel();
         jLabel104 = new javax.swing.JLabel();
@@ -271,16 +275,16 @@ public class ResidentMainPage extends javax.swing.JFrame {
         jLabel105 = new javax.swing.JLabel();
         jLabel106 = new javax.swing.JLabel();
         jLabel109 = new javax.swing.JLabel();
-        jPasswordField2 = new javax.swing.JPasswordField();
-        jPasswordField3 = new javax.swing.JPasswordField();
-        jPasswordField4 = new javax.swing.JPasswordField();
-        jButton35 = new javax.swing.JButton();
-        jButton36 = new javax.swing.JButton();
+        currentPasswordField = new javax.swing.JPasswordField();
+        newPasswordField = new javax.swing.JPasswordField();
+        confirmNewField = new javax.swing.JPasswordField();
+        backToProfile2 = new javax.swing.JButton();
+        saveNewPassbtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(1350, 1024));
-        setMinimumSize(new java.awt.Dimension(1350, 1024));
-        setPreferredSize(new java.awt.Dimension(1350, 1024));
+        setMaximumSize(new java.awt.Dimension(1400, 1024));
+        setMinimumSize(new java.awt.Dimension(1400, 1024));
+        setPreferredSize(new java.awt.Dimension(1400, 1024));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         MenuBarPanel.setBackground(new java.awt.Color(232, 239, 239));
@@ -288,7 +292,15 @@ public class ResidentMainPage extends javax.swing.JFrame {
         MenuBarPanel.setMinimumSize(new java.awt.Dimension(288, 942));
         MenuBarPanel.setPreferredSize(new java.awt.Dimension(288, 942));
 
-        profilePanelbtn.setText("Home");
+        homePanelbtn.setText("Home");
+        homePanelbtn.setPreferredSize(new java.awt.Dimension(268, 61));
+        homePanelbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                homePanelbtnActionPerformed(evt);
+            }
+        });
+
+        profilePanelbtn.setText("Profile");
         profilePanelbtn.setPreferredSize(new java.awt.Dimension(268, 61));
         profilePanelbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -296,43 +308,35 @@ public class ResidentMainPage extends javax.swing.JFrame {
             }
         });
 
-        profilePanelbtn1.setText("Profile");
-        profilePanelbtn1.setPreferredSize(new java.awt.Dimension(268, 61));
-        profilePanelbtn1.addActionListener(new java.awt.event.ActionListener() {
+        billPanelbtn.setText("Bills");
+        billPanelbtn.setPreferredSize(new java.awt.Dimension(268, 61));
+        billPanelbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                profilePanelbtn1ActionPerformed(evt);
+                billPanelbtnActionPerformed(evt);
             }
         });
 
-        profilePanelbtn2.setText("Bills");
-        profilePanelbtn2.setPreferredSize(new java.awt.Dimension(268, 61));
-        profilePanelbtn2.addActionListener(new java.awt.event.ActionListener() {
+        forumPanelbtn.setText("Management Forum");
+        forumPanelbtn.setPreferredSize(new java.awt.Dimension(268, 61));
+        forumPanelbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                profilePanelbtn2ActionPerformed(evt);
+                forumPanelbtnActionPerformed(evt);
             }
         });
 
-        profilePanelbtn3.setText("Management Forum");
-        profilePanelbtn3.setPreferredSize(new java.awt.Dimension(268, 61));
-        profilePanelbtn3.addActionListener(new java.awt.event.ActionListener() {
+        residentForumPanelbtn.setText("Resident Forum");
+        residentForumPanelbtn.setPreferredSize(new java.awt.Dimension(268, 61));
+        residentForumPanelbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                profilePanelbtn3ActionPerformed(evt);
+                residentForumPanelbtnActionPerformed(evt);
             }
         });
 
-        profilePanelbtn4.setText("Resident Forum");
-        profilePanelbtn4.setPreferredSize(new java.awt.Dimension(268, 61));
-        profilePanelbtn4.addActionListener(new java.awt.event.ActionListener() {
+        notificationPanelbtn.setText("Notifications");
+        notificationPanelbtn.setPreferredSize(new java.awt.Dimension(268, 61));
+        notificationPanelbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                profilePanelbtn4ActionPerformed(evt);
-            }
-        });
-
-        profilePanelbtn5.setText("Notifications");
-        profilePanelbtn5.setPreferredSize(new java.awt.Dimension(268, 61));
-        profilePanelbtn5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                profilePanelbtn5ActionPerformed(evt);
+                notificationPanelbtnActionPerformed(evt);
             }
         });
 
@@ -343,29 +347,29 @@ public class ResidentMainPage extends javax.swing.JFrame {
             .addGroup(MenuBarPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(MenuBarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(profilePanelbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(profilePanelbtn1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(profilePanelbtn2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(profilePanelbtn3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(profilePanelbtn4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(profilePanelbtn5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(homePanelbtn, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
+                    .addComponent(profilePanelbtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(billPanelbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(forumPanelbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(residentForumPanelbtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(notificationPanelbtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         MenuBarPanelLayout.setVerticalGroup(
             MenuBarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MenuBarPanelLayout.createSequentialGroup()
                 .addGap(29, 29, 29)
+                .addComponent(homePanelbtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(profilePanelbtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(profilePanelbtn1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(billPanelbtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(profilePanelbtn2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(forumPanelbtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(profilePanelbtn3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(residentForumPanelbtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(profilePanelbtn4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(profilePanelbtn5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(notificationPanelbtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(535, Short.MAX_VALUE))
         );
 
@@ -404,53 +408,6 @@ public class ResidentMainPage extends javax.swing.JFrame {
 
         jLabel29.setFont(new java.awt.Font("Segoe UI", 1, 28)); // NOI18N
         jLabel29.setText("Welcome Resident!");
-
-        jPanel1.setBackground(new java.awt.Color(232, 239, 239));
-        jPanel1.setMaximumSize(new java.awt.Dimension(32767, 82));
-        jPanel1.setMinimumSize(new java.awt.Dimension(100, 82));
-        jPanel1.setPreferredSize(new java.awt.Dimension(100, 82));
-
-        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 371, Short.MAX_VALUE)
-        );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
-        );
-
-        profilePanelbtn6.setText("Log Out");
-        profilePanelbtn6.setPreferredSize(new java.awt.Dimension(268, 61));
-        profilePanelbtn6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                profilePanelbtn6ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(profilePanelbtn6, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(122, 122, 122))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(profilePanelbtn6, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(14, Short.MAX_VALUE))
-        );
 
         jLabel30.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel30.setText("Tutorial");
@@ -573,22 +530,32 @@ public class ResidentMainPage extends javax.swing.JFrame {
                 .addGap(18, 18, 18))
         );
 
+        logOutbtn.setText("Log Out");
+        logOutbtn.setPreferredSize(new java.awt.Dimension(268, 61));
+        logOutbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logOutbtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout ResHomeLayout = new javax.swing.GroupLayout(ResHome);
         ResHome.setLayout(ResHomeLayout);
         ResHomeLayout.setHorizontalGroup(
             ResHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1167, Short.MAX_VALUE)
             .addGroup(ResHomeLayout.createSequentialGroup()
                 .addGroup(ResHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ResHomeLayout.createSequentialGroup()
                         .addGap(22, 22, 22)
-                        .addGroup(ResHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(ResHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 1015, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(ResHomeLayout.createSequentialGroup()
                                 .addComponent(jLabel28)
                                 .addGap(317, 317, 317)
                                 .addGroup(ResHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel29)
+                                    .addGroup(ResHomeLayout.createSequentialGroup()
+                                        .addComponent(jLabel29)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(logOutbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(ResHomeLayout.createSequentialGroup()
                                         .addGap(88, 88, 88)
                                         .addComponent(jLabel30))))))
@@ -604,19 +571,28 @@ public class ResidentMainPage extends javax.swing.JFrame {
                             .addGroup(ResHomeLayout.createSequentialGroup()
                                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(495, 495, 495)))))
-                .addContainerGap(130, Short.MAX_VALUE))
+                .addContainerGap(142, Short.MAX_VALUE))
+            .addGroup(ResHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(ResHomeLayout.createSequentialGroup()
+                    .addGap(589, 589, 589)
+                    .addComponent(residentIDLabel)
+                    .addContainerGap(590, Short.MAX_VALUE)))
         );
         ResHomeLayout.setVerticalGroup(
             ResHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ResHomeLayout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(ResHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ResHomeLayout.createSequentialGroup()
-                        .addGap(31, 31, 31)
+                        .addGap(113, 113, 113)
                         .addComponent(jLabel28))
                     .addGroup(ResHomeLayout.createSequentialGroup()
-                        .addGap(55, 55, 55)
-                        .addComponent(jLabel29)
+                        .addGroup(ResHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(ResHomeLayout.createSequentialGroup()
+                                .addGap(137, 137, 137)
+                                .addComponent(jLabel29))
+                            .addGroup(ResHomeLayout.createSequentialGroup()
+                                .addGap(94, 94, 94)
+                                .addComponent(logOutbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel30)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -629,7 +605,12 @@ public class ResidentMainPage extends javax.swing.JFrame {
                 .addGroup(ResHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(187, Short.MAX_VALUE))
+                .addContainerGap(261, Short.MAX_VALUE))
+            .addGroup(ResHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(ResHomeLayout.createSequentialGroup()
+                    .addGap(584, 584, 584)
+                    .addComponent(residentIDLabel)
+                    .addContainerGap(585, Short.MAX_VALUE)))
         );
 
         jTabbedPane3.addTab("tab1", ResHome);
@@ -642,7 +623,7 @@ public class ResidentMainPage extends javax.swing.JFrame {
         jLabel35.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel35.setText("Bills");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        pendingTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -654,7 +635,7 @@ public class ResidentMainPage extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Double.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false
@@ -668,9 +649,9 @@ public class ResidentMainPage extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane9.setViewportView(jTable1);
+        jScrollPane9.setViewportView(pendingTable);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        historyTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -682,7 +663,7 @@ public class ResidentMainPage extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
@@ -696,7 +677,7 @@ public class ResidentMainPage extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane10.setViewportView(jTable2);
+        jScrollPane10.setViewportView(historyTable);
 
         jLabel36.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel36.setText("Pending Payment");
@@ -708,14 +689,14 @@ public class ResidentMainPage extends javax.swing.JFrame {
         jPanel11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85)));
         jPanel11.setForeground(new java.awt.Color(54, 84, 85));
 
-        jButton1.setBackground(new java.awt.Color(204, 204, 255));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(54, 84, 85));
-        jButton1.setText("Credit Card");
-        jButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85), 2));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        paymentCreditMaintainencebtn.setBackground(new java.awt.Color(204, 204, 255));
+        paymentCreditMaintainencebtn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        paymentCreditMaintainencebtn.setForeground(new java.awt.Color(54, 84, 85));
+        paymentCreditMaintainencebtn.setText("Credit Card");
+        paymentCreditMaintainencebtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85), 2));
+        paymentCreditMaintainencebtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                paymentCreditMaintainencebtnActionPerformed(evt);
             }
         });
 
@@ -731,7 +712,7 @@ public class ResidentMainPage extends javax.swing.JFrame {
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addGap(82, 82, 82)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(paymentCreditMaintainencebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(82, 82, 82))
@@ -741,7 +722,7 @@ public class ResidentMainPage extends javax.swing.JFrame {
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(paymentCreditMaintainencebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
@@ -756,14 +737,14 @@ public class ResidentMainPage extends javax.swing.JFrame {
         jPanel12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85)));
         jPanel12.setForeground(new java.awt.Color(54, 84, 85));
 
-        jButton4.setBackground(new java.awt.Color(204, 204, 255));
-        jButton4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(54, 84, 85));
-        jButton4.setText("Credit Card");
-        jButton4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85), 2));
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        paySinkingCredit.setBackground(new java.awt.Color(204, 204, 255));
+        paySinkingCredit.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        paySinkingCredit.setForeground(new java.awt.Color(54, 84, 85));
+        paySinkingCredit.setText("Credit Card");
+        paySinkingCredit.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85), 2));
+        paySinkingCredit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                paySinkingCreditActionPerformed(evt);
             }
         });
 
@@ -779,7 +760,7 @@ public class ResidentMainPage extends javax.swing.JFrame {
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addGap(82, 82, 82)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(paySinkingCredit, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(82, 82, 82))
@@ -789,7 +770,7 @@ public class ResidentMainPage extends javax.swing.JFrame {
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(paySinkingCredit, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
@@ -814,7 +795,7 @@ public class ResidentMainPage extends javax.swing.JFrame {
                             .addComponent(jLabel37)
                             .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 556, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(149, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -872,9 +853,9 @@ public class ResidentMainPage extends javax.swing.JFrame {
         jLabel43.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel43.setText("Card Number");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "mm", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
+        monthSelectionCredit.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "mm", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "yyyy", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030" }));
+        yearSelectionCredit.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "yyyy", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030" }));
 
         jLabel44.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel44.setText("End Date");
@@ -882,11 +863,16 @@ public class ResidentMainPage extends javax.swing.JFrame {
         jLabel45.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel45.setText("CVV");
 
-        jButton8.setBackground(new java.awt.Color(164, 221, 221));
-        jButton8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton8.setForeground(new java.awt.Color(54, 84, 85));
-        jButton8.setText("Pay Now");
-        jButton8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85), 2));
+        payCreditBtn1.setBackground(new java.awt.Color(164, 221, 221));
+        payCreditBtn1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        payCreditBtn1.setForeground(new java.awt.Color(54, 84, 85));
+        payCreditBtn1.setText("Pay Now");
+        payCreditBtn1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85), 2));
+        payCreditBtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                payCreditBtn1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
@@ -895,22 +881,22 @@ public class ResidentMainPage extends javax.swing.JFrame {
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addGap(93, 93, 93)
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField2)
-                    .addComponent(jTextField1)
+                    .addComponent(payCreditBtn1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cardNumberTextField)
+                    .addComponent(cardHolderTextField)
                     .addComponent(jLabel43)
                     .addComponent(jLabel42)
                     .addGroup(jPanel14Layout.createSequentialGroup()
                         .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel14Layout.createSequentialGroup()
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(monthSelectionCredit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(49, 49, 49)
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(yearSelectionCredit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel44))
                         .addGap(93, 93, 93)
                         .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel45)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE))))
+                            .addComponent(cvvTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE))))
                 .addContainerGap(88, Short.MAX_VALUE))
         );
         jPanel14Layout.setVerticalGroup(
@@ -919,22 +905,22 @@ public class ResidentMainPage extends javax.swing.JFrame {
                 .addGap(47, 47, 47)
                 .addComponent(jLabel42)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cardHolderTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel43)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cardNumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel44)
                     .addComponent(jLabel45))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(monthSelectionCredit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(yearSelectionCredit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cvvTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(53, 53, 53)
-                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(payCreditBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(60, Short.MAX_VALUE))
         );
 
@@ -949,17 +935,22 @@ public class ResidentMainPage extends javax.swing.JFrame {
                         .addComponent(jLabel39))
                     .addGroup(jPanel13Layout.createSequentialGroup()
                         .addGap(160, 160, 160)
-                        .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(172, Short.MAX_VALUE))
+                        .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addGap(368, 368, 368)
+                        .addComponent(typeBill)))
+                .addContainerGap(354, Short.MAX_VALUE))
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(jLabel39)
-                .addGap(149, 149, 149)
+                .addGap(9, 9, 9)
+                .addComponent(typeBill)
+                .addGap(123, 123, 123)
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(415, Short.MAX_VALUE))
+                .addContainerGap(540, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout CreditCardLayout = new javax.swing.GroupLayout(CreditCard);
@@ -1000,7 +991,8 @@ public class ResidentMainPage extends javax.swing.JFrame {
         jButton9.setText("Pay Now");
         jButton9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85), 2));
 
-        jLabel48.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/apartment_system/paypal_logo_small.png"))); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
+        jLabel1.setText("PayPal");
 
         javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
         jPanel17.setLayout(jPanel17Layout);
@@ -1018,15 +1010,22 @@ public class ResidentMainPage extends javax.swing.JFrame {
                             .addComponent(jTextField4)))
                     .addGroup(jPanel17Layout.createSequentialGroup()
                         .addGap(162, 162, 162)
-                        .addComponent(jLabel48)))
+                        .addComponent(jLabel48)
+                        .addGap(169, 169, 169)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(102, Short.MAX_VALUE))
         );
         jPanel17Layout.setVerticalGroup(
             jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel17Layout.createSequentialGroup()
-                .addGap(79, 79, 79)
-                .addComponent(jLabel48)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel17Layout.createSequentialGroup()
+                        .addGap(92, 92, 92)
+                        .addComponent(jLabel48))
+                    .addGroup(jPanel17Layout.createSequentialGroup()
+                        .addGap(76, 76, 76)
+                        .addComponent(jLabel1)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                 .addComponent(jLabel46)
                 .addGap(18, 18, 18)
                 .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1051,7 +1050,7 @@ public class ResidentMainPage extends javax.swing.JFrame {
                     .addGroup(jPanel15Layout.createSequentialGroup()
                         .addGap(160, 160, 160)
                         .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(158, Short.MAX_VALUE))
+                .addContainerGap(268, Short.MAX_VALUE))
         );
         jPanel15Layout.setVerticalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1060,7 +1059,7 @@ public class ResidentMainPage extends javax.swing.JFrame {
                 .addComponent(jLabel41)
                 .addGap(149, 149, 149)
                 .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(298, Short.MAX_VALUE))
+                .addContainerGap(489, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout PayPalLayout = new javax.swing.GroupLayout(PayPal);
@@ -1085,27 +1084,43 @@ public class ResidentMainPage extends javax.swing.JFrame {
         jLabel49.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel49.setText("Management Forum");
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        managementForumTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title", "Poster", "Date"
+                "ID", "Title", "Author", "Content", "Date"
             }
-        ));
-        jScrollPane11.setViewportView(jTable3);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
 
-        jButton10.setBackground(new java.awt.Color(164, 221, 221));
-        jButton10.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton10.setForeground(new java.awt.Color(54, 84, 85));
-        jButton10.setText("Create Post");
-        jButton10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85), 2));
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        managementForumTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                managementForumTableMouseClicked(evt);
+            }
+        });
+        jScrollPane11.setViewportView(managementForumTable);
+        if (managementForumTable.getColumnModel().getColumnCount() > 0) {
+            managementForumTable.getColumnModel().getColumn(3).setResizable(false);
+        }
+
+        createManagementPost.setBackground(new java.awt.Color(164, 221, 221));
+        createManagementPost.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        createManagementPost.setForeground(new java.awt.Color(54, 84, 85));
+        createManagementPost.setText("Create Post");
+        createManagementPost.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85), 2));
+        createManagementPost.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
+                createManagementPostActionPerformed(evt);
             }
         });
 
@@ -1118,19 +1133,19 @@ public class ResidentMainPage extends javax.swing.JFrame {
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel49)
                     .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 995, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(45, Short.MAX_VALUE))
+                    .addComponent(createManagementPost, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(155, Short.MAX_VALUE))
         );
         jPanel18Layout.setVerticalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel18Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addGap(63, 63, 63)
                 .addComponent(jLabel49)
-                .addGap(85, 85, 85)
-                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47)
+                .addComponent(createManagementPost, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 613, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(284, Short.MAX_VALUE))
+                .addContainerGap(347, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout ManagementForumLayout = new javax.swing.GroupLayout(ManagementForum);
@@ -1156,27 +1171,40 @@ public class ResidentMainPage extends javax.swing.JFrame {
         jLabel50.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel50.setText("Resident Forum");
 
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+        residentForumTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title", "Poster", "Date"
+                "ID", "Title", "Author", "Content", "Date"
             }
-        ));
-        jScrollPane12.setViewportView(jTable4);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
 
-        jButton11.setBackground(new java.awt.Color(164, 221, 221));
-        jButton11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton11.setForeground(new java.awt.Color(54, 84, 85));
-        jButton11.setText("Create Post");
-        jButton11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85), 2));
-        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        residentForumTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                residentForumTableMouseClicked(evt);
+            }
+        });
+        jScrollPane12.setViewportView(residentForumTable);
+
+        createResidentPostbtn.setBackground(new java.awt.Color(164, 221, 221));
+        createResidentPostbtn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        createResidentPostbtn.setForeground(new java.awt.Color(54, 84, 85));
+        createResidentPostbtn.setText("Create Post");
+        createResidentPostbtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85), 2));
+        createResidentPostbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton11ActionPerformed(evt);
+                createResidentPostbtnActionPerformed(evt);
             }
         });
 
@@ -1189,19 +1217,19 @@ public class ResidentMainPage extends javax.swing.JFrame {
                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel50)
                     .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 995, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(45, Short.MAX_VALUE))
+                    .addComponent(createResidentPostbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(155, Short.MAX_VALUE))
         );
         jPanel19Layout.setVerticalGroup(
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel19Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addGap(63, 63, 63)
                 .addComponent(jLabel50)
-                .addGap(85, 85, 85)
-                .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47)
+                .addComponent(createResidentPostbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 613, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(284, Short.MAX_VALUE))
+                .addContainerGap(347, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout ResidentForumLayout = new javax.swing.GroupLayout(ResidentForum);
@@ -1225,14 +1253,14 @@ public class ResidentMainPage extends javax.swing.JFrame {
         jLabel57.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel57.setText("Create Post");
 
-        jButton16.setBackground(new java.awt.Color(164, 221, 221));
-        jButton16.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton16.setForeground(new java.awt.Color(54, 84, 85));
-        jButton16.setText("Back");
-        jButton16.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85), 2));
-        jButton16.addActionListener(new java.awt.event.ActionListener() {
+        backToManagementForum.setBackground(new java.awt.Color(164, 221, 221));
+        backToManagementForum.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        backToManagementForum.setForeground(new java.awt.Color(54, 84, 85));
+        backToManagementForum.setText("Back");
+        backToManagementForum.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85), 2));
+        backToManagementForum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton16ActionPerformed(evt);
+                backToManagementForumActionPerformed(evt);
             }
         });
 
@@ -1243,9 +1271,9 @@ public class ResidentMainPage extends javax.swing.JFrame {
         jLabel61.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel61.setText("Content:");
 
-        jTextArea7.setColumns(20);
-        jTextArea7.setRows(5);
-        jScrollPane17.setViewportView(jTextArea7);
+        postContentTextField.setColumns(20);
+        postContentTextField.setRows(5);
+        jScrollPane17.setViewportView(postContentTextField);
 
         jLabel62.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel62.setText("Title:");
@@ -1257,7 +1285,7 @@ public class ResidentMainPage extends javax.swing.JFrame {
             .addGroup(jPanel25Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField8)
+                    .addComponent(postTitleTextField)
                     .addComponent(jLabel62)
                     .addComponent(jLabel61)
                     .addComponent(jScrollPane17, javax.swing.GroupLayout.DEFAULT_SIZE, 927, Short.MAX_VALUE))
@@ -1269,7 +1297,7 @@ public class ResidentMainPage extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addComponent(jLabel62)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(postTitleTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addComponent(jLabel61)
                 .addGap(18, 18, 18)
@@ -1277,16 +1305,19 @@ public class ResidentMainPage extends javax.swing.JFrame {
                 .addGap(34, 34, 34))
         );
 
-        jButton17.setBackground(new java.awt.Color(164, 221, 221));
-        jButton17.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton17.setForeground(new java.awt.Color(54, 84, 85));
-        jButton17.setText("Reply");
-        jButton17.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85), 2));
-        jButton17.addActionListener(new java.awt.event.ActionListener() {
+        createPostbtn.setBackground(new java.awt.Color(164, 221, 221));
+        createPostbtn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        createPostbtn.setForeground(new java.awt.Color(54, 84, 85));
+        createPostbtn.setText("Post");
+        createPostbtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85), 2));
+        createPostbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton17ActionPerformed(evt);
+                createPostbtnActionPerformed(evt);
             }
         });
+
+        typeForumLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 1)); // NOI18N
+        typeForumLabel.setText("jLabel1");
 
         javax.swing.GroupLayout jPanel24Layout = new javax.swing.GroupLayout(jPanel24);
         jPanel24.setLayout(jPanel24Layout);
@@ -1296,26 +1327,32 @@ public class ResidentMainPage extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel24Layout.createSequentialGroup()
-                        .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(backToManagementForum, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(637, 637, 637)
-                        .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(createPostbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel57)
                         .addComponent(jPanel25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(155, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel24Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(typeForumLabel)
+                .addGap(371, 371, 371))
         );
         jPanel24Layout.setVerticalGroup(
             jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel24Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addGap(52, 52, 52)
                 .addComponent(jLabel57)
-                .addGap(88, 88, 88)
+                .addGap(18, 18, 18)
+                .addComponent(typeForumLabel)
+                .addGap(26, 26, 26)
                 .addComponent(jPanel25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42)
                 .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(406, Short.MAX_VALUE))
+                    .addComponent(backToManagementForum, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(createPostbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(502, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout CreatePostLayout = new javax.swing.GroupLayout(CreatePost);
@@ -1340,27 +1377,42 @@ public class ResidentMainPage extends javax.swing.JFrame {
         jLabel51.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel51.setText("View Post");
 
-        jTable5.setModel(new javax.swing.table.DefaultTableModel(
+        repliesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Replies", "Poster", "Date"
+                "ID", "Replies", "Commenter", "Date"
             }
-        ));
-        jScrollPane13.setViewportView(jTable5);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                true, true, true, false
+            };
 
-        jButton12.setBackground(new java.awt.Color(164, 221, 221));
-        jButton12.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton12.setForeground(new java.awt.Color(54, 84, 85));
-        jButton12.setText("Reply Post");
-        jButton12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85), 2));
-        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane13.setViewportView(repliesTable);
+
+        replyPostbtn.setBackground(new java.awt.Color(164, 221, 221));
+        replyPostbtn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        replyPostbtn.setForeground(new java.awt.Color(54, 84, 85));
+        replyPostbtn.setText("Reply Post");
+        replyPostbtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85), 2));
+        replyPostbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton12ActionPerformed(evt);
+                replyPostbtnActionPerformed(evt);
             }
         });
 
@@ -1369,7 +1421,7 @@ public class ResidentMainPage extends javax.swing.JFrame {
         jPanel21.setForeground(new java.awt.Color(54, 84, 85));
 
         jLabel52.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel52.setText("Poster:");
+        jLabel52.setText("Author:");
 
         jLabel53.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel53.setText("Title:");
@@ -1380,26 +1432,26 @@ public class ResidentMainPage extends javax.swing.JFrame {
         jLabel55.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel55.setText("Content:");
 
-        jTextArea5.setEditable(false);
-        jTextArea5.setBackground(new java.awt.Color(232, 239, 239));
-        jTextArea5.setColumns(20);
-        jTextArea5.setRows(5);
-        jScrollPane14.setViewportView(jTextArea5);
+        postContentLabel.setEditable(false);
+        postContentLabel.setBackground(new java.awt.Color(232, 239, 239));
+        postContentLabel.setColumns(20);
+        postContentLabel.setRows(5);
+        jScrollPane14.setViewportView(postContentLabel);
 
-        jTextField5.setEditable(false);
-        jTextField5.setBackground(new java.awt.Color(232, 239, 239));
-        jTextField5.setText("(content)");
-        jTextField5.setBorder(null);
+        postAuthorLabel.setEditable(false);
+        postAuthorLabel.setBackground(new java.awt.Color(232, 239, 239));
+        postAuthorLabel.setText("(content)");
+        postAuthorLabel.setBorder(null);
 
-        jTextField6.setEditable(false);
-        jTextField6.setBackground(new java.awt.Color(232, 239, 239));
-        jTextField6.setText("(content)");
-        jTextField6.setBorder(null);
+        postTitleLabel.setEditable(false);
+        postTitleLabel.setBackground(new java.awt.Color(232, 239, 239));
+        postTitleLabel.setText("(content)");
+        postTitleLabel.setBorder(null);
 
-        jTextField7.setEditable(false);
-        jTextField7.setBackground(new java.awt.Color(232, 239, 239));
-        jTextField7.setText("(content)");
-        jTextField7.setBorder(null);
+        postDateLabel.setEditable(false);
+        postDateLabel.setBackground(new java.awt.Color(232, 239, 239));
+        postDateLabel.setText("(content)");
+        postDateLabel.setBorder(null);
 
         javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
         jPanel21.setLayout(jPanel21Layout);
@@ -1417,9 +1469,9 @@ public class ResidentMainPage extends javax.swing.JFrame {
                             .addComponent(jLabel55))
                         .addGap(24, 24, 24)
                         .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(postDateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(postTitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(postAuthorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel21Layout.setVerticalGroup(
@@ -1428,14 +1480,14 @@ public class ResidentMainPage extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel52)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(postAuthorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(6, 6, 6)
                 .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel53)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(postTitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(postDateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel54))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel55)
@@ -1444,46 +1496,63 @@ public class ResidentMainPage extends javax.swing.JFrame {
                 .addContainerGap(28, Short.MAX_VALUE))
         );
 
-        jButton14.setBackground(new java.awt.Color(164, 221, 221));
-        jButton14.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton14.setForeground(new java.awt.Color(54, 84, 85));
-        jButton14.setText("Back");
-        jButton14.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85), 2));
-        jButton14.addActionListener(new java.awt.event.ActionListener() {
+        backToForumTable.setBackground(new java.awt.Color(164, 221, 221));
+        backToForumTable.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        backToForumTable.setForeground(new java.awt.Color(54, 84, 85));
+        backToForumTable.setText("Back");
+        backToForumTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85), 2));
+        backToForumTable.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton14ActionPerformed(evt);
+                backToForumTableActionPerformed(evt);
             }
         });
+
+        typeForum.setFont(new java.awt.Font("Helvetica Neue", 0, 1)); // NOI18N
+
+        forumID.setFont(new java.awt.Font("Helvetica Neue", 0, 1)); // NOI18N
+        forumID.setText("jLabel1");
 
         javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
         jPanel20.setLayout(jPanel20Layout);
         jPanel20Layout.setHorizontalGroup(
             jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel20Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
                 .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel51)
-                        .addComponent(jScrollPane13, javax.swing.GroupLayout.DEFAULT_SIZE, 995, Short.MAX_VALUE)
-                        .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jPanel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(45, Short.MAX_VALUE))
+                    .addGroup(jPanel20Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(backToForumTable, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(jPanel20Layout.createSequentialGroup()
+                                    .addComponent(jLabel51)
+                                    .addGap(291, 291, 291)
+                                    .addComponent(forumID))
+                                .addComponent(jScrollPane13, javax.swing.GroupLayout.DEFAULT_SIZE, 995, Short.MAX_VALUE)
+                                .addComponent(replyPostbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jPanel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(jPanel20Layout.createSequentialGroup()
+                        .addGap(49, 49, 49)
+                        .addComponent(typeForum)))
+                .addContainerGap(155, Short.MAX_VALUE))
         );
         jPanel20Layout.setVerticalGroup(
             jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel20Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(jLabel51)
+                .addContainerGap()
+                .addComponent(typeForum)
+                .addGap(2, 2, 2)
+                .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel51)
+                    .addComponent(forumID))
                 .addGap(38, 38, 38)
                 .addComponent(jPanel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47)
-                .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(55, 55, 55)
+                .addComponent(replyPostbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(232, Short.MAX_VALUE))
+                .addComponent(backToForumTable, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(316, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout ViewPostLayout = new javax.swing.GroupLayout(ViewPost);
@@ -1508,14 +1577,14 @@ public class ResidentMainPage extends javax.swing.JFrame {
         jLabel56.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel56.setText("Reply Post");
 
-        jButton13.setBackground(new java.awt.Color(164, 221, 221));
-        jButton13.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton13.setForeground(new java.awt.Color(54, 84, 85));
-        jButton13.setText("Back");
-        jButton13.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85), 2));
-        jButton13.addActionListener(new java.awt.event.ActionListener() {
+        backToForumBtn2.setBackground(new java.awt.Color(164, 221, 221));
+        backToForumBtn2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        backToForumBtn2.setForeground(new java.awt.Color(54, 84, 85));
+        backToForumBtn2.setText("Back");
+        backToForumBtn2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85), 2));
+        backToForumBtn2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton13ActionPerformed(evt);
+                backToForumBtn2ActionPerformed(evt);
             }
         });
 
@@ -1526,9 +1595,9 @@ public class ResidentMainPage extends javax.swing.JFrame {
         jLabel60.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel60.setText("Content:");
 
-        jTextArea6.setColumns(20);
-        jTextArea6.setRows(5);
-        jScrollPane16.setViewportView(jTextArea6);
+        commentTextField.setColumns(20);
+        commentTextField.setRows(5);
+        jScrollPane16.setViewportView(commentTextField);
 
         javax.swing.GroupLayout jPanel23Layout = new javax.swing.GroupLayout(jPanel23);
         jPanel23.setLayout(jPanel23Layout);
@@ -1551,14 +1620,14 @@ public class ResidentMainPage extends javax.swing.JFrame {
                 .addContainerGap(42, Short.MAX_VALUE))
         );
 
-        jButton15.setBackground(new java.awt.Color(164, 221, 221));
-        jButton15.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton15.setForeground(new java.awt.Color(54, 84, 85));
-        jButton15.setText("Reply");
-        jButton15.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85), 2));
-        jButton15.addActionListener(new java.awt.event.ActionListener() {
+        replyBtn.setBackground(new java.awt.Color(164, 221, 221));
+        replyBtn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        replyBtn.setForeground(new java.awt.Color(54, 84, 85));
+        replyBtn.setText("Reply");
+        replyBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85), 2));
+        replyBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton15ActionPerformed(evt);
+                replyBtnActionPerformed(evt);
             }
         });
 
@@ -1570,13 +1639,13 @@ public class ResidentMainPage extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel22Layout.createSequentialGroup()
-                        .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(backToForumBtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(637, 637, 637)
-                        .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(replyBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel56)
                         .addComponent(jPanel23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(155, Short.MAX_VALUE))
         );
         jPanel22Layout.setVerticalGroup(
             jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1587,9 +1656,9 @@ public class ResidentMainPage extends javax.swing.JFrame {
                 .addComponent(jPanel23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(47, 47, 47)
                 .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(511, Short.MAX_VALUE))
+                    .addComponent(backToForumBtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(replyBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(577, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout ReplyPostLayout = new javax.swing.GroupLayout(ReplyPost);
@@ -1613,11 +1682,11 @@ public class ResidentMainPage extends javax.swing.JFrame {
         ViewReply.setLayout(ViewReplyLayout);
         ViewReplyLayout.setHorizontalGroup(
             ViewReplyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1069, Short.MAX_VALUE)
+            .addGap(0, 1179, Short.MAX_VALUE)
         );
         ViewReplyLayout.setVerticalGroup(
             ViewReplyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1108, Short.MAX_VALUE)
+            .addGap(0, 1169, Short.MAX_VALUE)
         );
 
         jTabbedPane3.addTab("tab9", ViewReply);
@@ -1631,7 +1700,7 @@ public class ResidentMainPage extends javax.swing.JFrame {
         jLabel58.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel58.setText("Notifications");
 
-        jTable6.setModel(new javax.swing.table.DefaultTableModel(
+        notificationTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -1639,36 +1708,27 @@ public class ResidentMainPage extends javax.swing.JFrame {
                 {null, null, null}
             },
             new String [] {
-                "Title", "Poster", "Date"
+                "Title", "Content", "Date"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
-        jScrollPane15.setViewportView(jTable6);
-
-        jButton18.setBackground(new java.awt.Color(164, 221, 221));
-        jButton18.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton18.setForeground(new java.awt.Color(54, 84, 85));
-        jButton18.setText("View Notification");
-        jButton18.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85), 2));
-        jButton18.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton18ActionPerformed(evt);
+        notificationTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                notificationTableMouseClicked(evt);
             }
         });
+        jScrollPane15.setViewportView(notificationTable);
 
         jPanel29.setBackground(new java.awt.Color(232, 239, 239));
         jPanel29.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85)));
         jPanel29.setForeground(new java.awt.Color(54, 84, 85));
-
-        jLabel59.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel59.setText("Poster:");
 
         jLabel63.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel63.setText("Title:");
@@ -1679,26 +1739,21 @@ public class ResidentMainPage extends javax.swing.JFrame {
         jLabel65.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel65.setText("Content:");
 
-        jTextArea8.setEditable(false);
-        jTextArea8.setBackground(new java.awt.Color(232, 239, 239));
-        jTextArea8.setColumns(20);
-        jTextArea8.setRows(5);
-        jScrollPane18.setViewportView(jTextArea8);
+        noticeContentLabel.setEditable(false);
+        noticeContentLabel.setBackground(new java.awt.Color(232, 239, 239));
+        noticeContentLabel.setColumns(20);
+        noticeContentLabel.setRows(5);
+        jScrollPane18.setViewportView(noticeContentLabel);
 
-        jTextField9.setEditable(false);
-        jTextField9.setBackground(new java.awt.Color(232, 239, 239));
-        jTextField9.setText("(content)");
-        jTextField9.setBorder(null);
+        noticeTitleLabel.setEditable(false);
+        noticeTitleLabel.setBackground(new java.awt.Color(232, 239, 239));
+        noticeTitleLabel.setText("(content)");
+        noticeTitleLabel.setBorder(null);
 
-        jTextField10.setEditable(false);
-        jTextField10.setBackground(new java.awt.Color(232, 239, 239));
-        jTextField10.setText("(content)");
-        jTextField10.setBorder(null);
-
-        jTextField11.setEditable(false);
-        jTextField11.setBackground(new java.awt.Color(232, 239, 239));
-        jTextField11.setText("(content)");
-        jTextField11.setBorder(null);
+        noticeDateLabel.setEditable(false);
+        noticeDateLabel.setBackground(new java.awt.Color(232, 239, 239));
+        noticeDateLabel.setText("(content)");
+        noticeDateLabel.setBorder(null);
 
         javax.swing.GroupLayout jPanel29Layout = new javax.swing.GroupLayout(jPanel29);
         jPanel29.setLayout(jPanel29Layout);
@@ -1710,31 +1765,25 @@ public class ResidentMainPage extends javax.swing.JFrame {
                     .addComponent(jScrollPane18, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel29Layout.createSequentialGroup()
                         .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel59)
                             .addComponent(jLabel63)
                             .addComponent(jLabel64)
                             .addComponent(jLabel65))
                         .addGap(24, 24, 24)
                         .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(noticeDateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(noticeTitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
         jPanel29Layout.setVerticalGroup(
             jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel29Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel59)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(6, 6, 6)
+                .addGap(50, 50, 50)
                 .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel63)
-                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(noticeTitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(noticeDateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel64))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel65)
@@ -1767,21 +1816,17 @@ public class ResidentMainPage extends javax.swing.JFrame {
                             .addComponent(jLabel58)))
                     .addGroup(jPanel26Layout.createSequentialGroup()
                         .addGap(23, 23, 23)
-                        .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jPanel29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(148, Short.MAX_VALUE))
         );
         jPanel26Layout.setVerticalGroup(
             jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel26Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(jLabel58)
-                .addGap(54, 54, 54)
-                .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addGap(132, 132, 132)
                 .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane15))
@@ -1817,23 +1862,32 @@ public class ResidentMainPage extends javax.swing.JFrame {
 
         jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
 
-        jTextField15.setEditable(false);
-        jTextField15.setBackground(new java.awt.Color(232, 239, 239));
-        jTextField15.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jTextField15.setText("(Unit)");
-        jTextField15.setBorder(null);
+        residentUnitLabel.setEditable(false);
+        residentUnitLabel.setBackground(new java.awt.Color(232, 239, 239));
+        residentUnitLabel.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        residentUnitLabel.setBorder(null);
 
-        jButton20.setBackground(new java.awt.Color(164, 221, 221));
-        jButton20.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton20.setForeground(new java.awt.Color(54, 84, 85));
-        jButton20.setText("Edit Resident Info");
-        jButton20.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85), 2));
+        editResidentbtn.setBackground(new java.awt.Color(164, 221, 221));
+        editResidentbtn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        editResidentbtn.setForeground(new java.awt.Color(54, 84, 85));
+        editResidentbtn.setText("Edit Resident Info");
+        editResidentbtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85), 2));
+        editResidentbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editResidentbtnActionPerformed(evt);
+            }
+        });
 
         jButton21.setBackground(new java.awt.Color(164, 221, 221));
         jButton21.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButton21.setForeground(new java.awt.Color(54, 84, 85));
         jButton21.setText("Change Password");
         jButton21.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85), 2));
+        jButton21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton21ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel31Layout = new javax.swing.GroupLayout(jPanel31);
         jPanel31.setLayout(jPanel31Layout);
@@ -1843,8 +1897,8 @@ public class ResidentMainPage extends javax.swing.JFrame {
                 .addGap(14, 14, 14)
                 .addGroup(jPanel31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jSeparator2)
-                    .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(residentUnitLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(editResidentbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton21, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
@@ -1852,11 +1906,11 @@ public class ResidentMainPage extends javax.swing.JFrame {
             jPanel31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel31Layout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(residentUnitLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(45, 45, 45)
-                .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(editResidentbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton21, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(22, Short.MAX_VALUE))
@@ -1866,22 +1920,22 @@ public class ResidentMainPage extends javax.swing.JFrame {
         jPanel33.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85)));
         jPanel33.setForeground(new java.awt.Color(54, 84, 85));
 
-        jTable8.setModel(new javax.swing.table.DefaultTableModel(
+        residentVehicleTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Brand", "Model", "Plate Number", "Color"
+                "ID", "Brand", "Model", "Plate Number", "Color"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                true, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -1892,36 +1946,44 @@ public class ResidentMainPage extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane20.setViewportView(jTable8);
+        jScrollPane20.setViewportView(residentVehicleTable);
 
+        jLabel69.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         jLabel69.setText("Resident Owner:");
 
+        jLabel70.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         jLabel70.setText("IC No.:");
 
+        jLabel71.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         jLabel71.setText("No. of Family Members:");
 
         jTextField14.setEditable(false);
         jTextField14.setBackground(new java.awt.Color(232, 239, 239));
+        jTextField14.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         jTextField14.setText("(content)");
         jTextField14.setBorder(null);
 
-        jTextField13.setEditable(false);
-        jTextField13.setBackground(new java.awt.Color(232, 239, 239));
-        jTextField13.setText("(content)");
-        jTextField13.setBorder(null);
+        residentICLabel.setEditable(false);
+        residentICLabel.setBackground(new java.awt.Color(232, 239, 239));
+        residentICLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
+        residentICLabel.setText("(content)");
+        residentICLabel.setBorder(null);
 
-        jTextField12.setEditable(false);
-        jTextField12.setBackground(new java.awt.Color(232, 239, 239));
-        jTextField12.setText("(content)");
-        jTextField12.setBorder(null);
+        residentNameLabel.setEditable(false);
+        residentNameLabel.setBackground(new java.awt.Color(232, 239, 239));
+        residentNameLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
+        residentNameLabel.setText("(content)");
+        residentNameLabel.setBorder(null);
 
         jLabel67.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel67.setText("BASIC INFORMATION");
 
+        jLabel72.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         jLabel72.setText("No. of Pets:");
 
         jTextField17.setEditable(false);
         jTextField17.setBackground(new java.awt.Color(232, 239, 239));
+        jTextField17.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         jTextField17.setText("(content)");
         jTextField17.setBorder(null);
         jTextField17.addActionListener(new java.awt.event.ActionListener() {
@@ -1933,53 +1995,57 @@ public class ResidentMainPage extends javax.swing.JFrame {
         jLabel73.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel73.setText("CONTACT INFORMATION");
 
+        jLabel74.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         jLabel74.setText("Phone:");
 
+        jLabel75.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         jLabel75.setText("Email:");
 
-        jTextField18.setEditable(false);
-        jTextField18.setBackground(new java.awt.Color(232, 239, 239));
-        jTextField18.setText("(content)");
-        jTextField18.setBorder(null);
+        residentEmailLabel.setEditable(false);
+        residentEmailLabel.setBackground(new java.awt.Color(232, 239, 239));
+        residentEmailLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
+        residentEmailLabel.setText("(content)");
+        residentEmailLabel.setBorder(null);
 
-        jTextField19.setEditable(false);
-        jTextField19.setBackground(new java.awt.Color(232, 239, 239));
-        jTextField19.setText("(content)");
-        jTextField19.setBorder(null);
+        residentPhoneLabel.setEditable(false);
+        residentPhoneLabel.setBackground(new java.awt.Color(232, 239, 239));
+        residentPhoneLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
+        residentPhoneLabel.setText("(content)");
+        residentPhoneLabel.setBorder(null);
 
         jLabel76.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel76.setText("VEHICLE INFORMATION");
 
-        jButton26.setBackground(new java.awt.Color(164, 221, 221));
-        jButton26.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton26.setForeground(new java.awt.Color(54, 84, 85));
-        jButton26.setText("Add Vehicle");
-        jButton26.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85), 2));
-        jButton26.addActionListener(new java.awt.event.ActionListener() {
+        addVehiclebtn.setBackground(new java.awt.Color(164, 221, 221));
+        addVehiclebtn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        addVehiclebtn.setForeground(new java.awt.Color(54, 84, 85));
+        addVehiclebtn.setText("Add Vehicle");
+        addVehiclebtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85), 2));
+        addVehiclebtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton26ActionPerformed(evt);
+                addVehiclebtnActionPerformed(evt);
             }
         });
 
-        jButton27.setBackground(new java.awt.Color(164, 221, 221));
-        jButton27.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton27.setForeground(new java.awt.Color(54, 84, 85));
-        jButton27.setText("Edit Vehicle");
-        jButton27.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85), 2));
-        jButton27.addActionListener(new java.awt.event.ActionListener() {
+        editVehiclebtn.setBackground(new java.awt.Color(164, 221, 221));
+        editVehiclebtn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        editVehiclebtn.setForeground(new java.awt.Color(54, 84, 85));
+        editVehiclebtn.setText("Edit Vehicle");
+        editVehiclebtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85), 2));
+        editVehiclebtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton27ActionPerformed(evt);
+                editVehiclebtnActionPerformed(evt);
             }
         });
 
-        jButton28.setBackground(new java.awt.Color(164, 221, 221));
-        jButton28.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton28.setForeground(new java.awt.Color(54, 84, 85));
-        jButton28.setText("Delete Vehicle");
-        jButton28.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85), 2));
-        jButton28.addActionListener(new java.awt.event.ActionListener() {
+        deleteVehiclebtn.setBackground(new java.awt.Color(164, 221, 221));
+        deleteVehiclebtn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        deleteVehiclebtn.setForeground(new java.awt.Color(54, 84, 85));
+        deleteVehiclebtn.setText("Delete Vehicle");
+        deleteVehiclebtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85), 2));
+        deleteVehiclebtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton28ActionPerformed(evt);
+                deleteVehiclebtnActionPerformed(evt);
             }
         });
 
@@ -2000,8 +2066,8 @@ public class ResidentMainPage extends javax.swing.JFrame {
                                 .addComponent(jLabel74))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jTextField19, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jTextField18, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(residentPhoneLabel, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(residentEmailLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel33Layout.createSequentialGroup()
                             .addComponent(jLabel72)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -2014,16 +2080,16 @@ public class ResidentMainPage extends javax.swing.JFrame {
                             .addGap(24, 24, 24)
                             .addGroup(jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jTextField13, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField12, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(residentICLabel, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(residentNameLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(jTextField14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(jScrollPane20, javax.swing.GroupLayout.PREFERRED_SIZE, 643, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel33Layout.createSequentialGroup()
-                        .addComponent(jButton26, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(addVehiclebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton27, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(editVehiclebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton28, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(deleteVehiclebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
         jPanel33Layout.setVerticalGroup(
@@ -2036,11 +2102,11 @@ public class ResidentMainPage extends javax.swing.JFrame {
                     .addGroup(jPanel33Layout.createSequentialGroup()
                         .addGroup(jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel69)
-                            .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(residentNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(6, 6, 6)
                         .addGroup(jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel70)
-                            .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(residentICLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2056,16 +2122,16 @@ public class ResidentMainPage extends javax.swing.JFrame {
                         .addGap(6, 6, 6)
                         .addComponent(jLabel74))
                     .addGroup(jPanel33Layout.createSequentialGroup()
-                        .addComponent(jTextField18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(residentEmailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(6, 6, 6)
-                        .addComponent(jTextField19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(residentPhoneLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addComponent(jLabel76)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton26, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton27, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton28, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(addVehiclebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(editVehiclebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(deleteVehiclebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane20, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36))
@@ -2083,20 +2149,20 @@ public class ResidentMainPage extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel30Layout.createSequentialGroup()
                         .addComponent(jPanel31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
                         .addComponent(jPanel33, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(43, 43, 43))))
+                        .addGap(67, 67, 67))))
         );
         jPanel30Layout.setVerticalGroup(
             jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel30Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addGap(16, 16, 16)
                 .addComponent(jLabel66)
-                .addGap(55, 55, 55)
+                .addGap(64, 64, 64)
                 .addGroup(jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel33, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(150, Short.MAX_VALUE))
+                .addContainerGap(252, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout ProfileLayout = new javax.swing.GroupLayout(Profile);
@@ -2138,9 +2204,9 @@ public class ResidentMainPage extends javax.swing.JFrame {
         jLabel82.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel82.setText("CONTACT INFORMATION");
 
-        jLabel83.setText("Resident Owner:");
+        jLabel83.setText("Email");
 
-        jLabel84.setText("IC No.:");
+        jLabel84.setText("Phone Number:");
 
         javax.swing.GroupLayout jPanel36Layout = new javax.swing.GroupLayout(jPanel36);
         jPanel36.setLayout(jPanel36Layout);
@@ -2148,7 +2214,7 @@ public class ResidentMainPage extends javax.swing.JFrame {
             jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel36Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addGroup(jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel36Layout.createSequentialGroup()
                         .addGroup(jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel36Layout.createSequentialGroup()
@@ -2162,23 +2228,20 @@ public class ResidentMainPage extends javax.swing.JFrame {
                                     .addComponent(jLabel78, javax.swing.GroupLayout.Alignment.LEADING))
                                 .addGap(27, 27, 27)))
                         .addGroup(jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField20, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
-                            .addComponent(jTextField21)
+                            .addComponent(residentNameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
+                            .addComponent(residentICTextField)
                             .addComponent(jSpinner1)
                             .addComponent(jSpinner2)))
                     .addComponent(jLabel80)
+                    .addComponent(jLabel82)
                     .addGroup(jPanel36Layout.createSequentialGroup()
                         .addGroup(jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel36Layout.createSequentialGroup()
-                                .addComponent(jLabel83)
-                                .addGap(88, 88, 88))
-                            .addGroup(jPanel36Layout.createSequentialGroup()
-                                .addComponent(jLabel84)
-                                .addGap(27, 27, 27)))
-                        .addGroup(jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField23)
-                            .addComponent(jTextField22, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jLabel82))
+                            .addComponent(jLabel83)
+                            .addComponent(jLabel84, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+                        .addGroup(jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(residentEmailTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(residentPhoneTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(471, Short.MAX_VALUE))
         );
         jPanel36Layout.setVerticalGroup(
@@ -2189,11 +2252,11 @@ public class ResidentMainPage extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel77)
-                    .addComponent(jTextField20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(residentNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(11, 11, 11)
                 .addGroup(jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel78)
-                    .addComponent(jTextField21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(residentICTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel79)
@@ -2207,25 +2270,35 @@ public class ResidentMainPage extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel83)
-                    .addComponent(jTextField23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(residentEmailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(11, 11, 11)
                 .addGroup(jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel84)
-                    .addComponent(jTextField22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(residentPhoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(98, Short.MAX_VALUE))
         );
 
-        jButton24.setBackground(new java.awt.Color(164, 221, 221));
-        jButton24.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton24.setForeground(new java.awt.Color(54, 84, 85));
-        jButton24.setText("Back");
-        jButton24.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85), 2));
+        backToProfilebtn.setBackground(new java.awt.Color(164, 221, 221));
+        backToProfilebtn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        backToProfilebtn.setForeground(new java.awt.Color(54, 84, 85));
+        backToProfilebtn.setText("Back");
+        backToProfilebtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85), 2));
+        backToProfilebtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backToProfilebtnActionPerformed(evt);
+            }
+        });
 
-        jButton25.setBackground(new java.awt.Color(164, 221, 221));
-        jButton25.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton25.setForeground(new java.awt.Color(54, 84, 85));
-        jButton25.setText("Save");
-        jButton25.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85), 2));
+        saveEditbtn.setBackground(new java.awt.Color(164, 221, 221));
+        saveEditbtn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        saveEditbtn.setForeground(new java.awt.Color(54, 84, 85));
+        saveEditbtn.setText("Save");
+        saveEditbtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85), 2));
+        saveEditbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveEditbtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel34Layout = new javax.swing.GroupLayout(jPanel34);
         jPanel34.setLayout(jPanel34Layout);
@@ -2237,35 +2310,41 @@ public class ResidentMainPage extends javax.swing.JFrame {
                     .addComponent(jLabel68)
                     .addGroup(jPanel34Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(jPanel34Layout.createSequentialGroup()
-                            .addComponent(jButton24, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(backToProfilebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton25, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(saveEditbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(jPanel36, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addContainerGap(201, Short.MAX_VALUE))
         );
         jPanel34Layout.setVerticalGroup(
             jPanel34Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel34Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(jLabel68)
-                .addGap(52, 52, 52)
+                .addGap(37, 37, 37)
                 .addComponent(jPanel36, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42)
                 .addGroup(jPanel34Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton24, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton25, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(399, Short.MAX_VALUE))
+                    .addComponent(backToProfilebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(saveEditbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(497, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout EditProfileLayout = new javax.swing.GroupLayout(EditProfile);
         EditProfile.setLayout(EditProfileLayout);
         EditProfileLayout.setHorizontalGroup(
             EditProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel34, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(EditProfileLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel34, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         EditProfileLayout.setVerticalGroup(
             EditProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel34, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(EditProfileLayout.createSequentialGroup()
+                .addGap(52, 52, 52)
+                .addComponent(jPanel34, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jTabbedPane3.addTab("tab13", EditProfile);
@@ -2273,7 +2352,7 @@ public class ResidentMainPage extends javax.swing.JFrame {
         jPanel41.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel98.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel98.setText("Edit Vehicle");
+        jLabel98.setText("Add Vehicle");
 
         jPanel42.setBackground(new java.awt.Color(232, 239, 239));
         jPanel42.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85)));
@@ -2306,10 +2385,10 @@ public class ResidentMainPage extends javax.swing.JFrame {
                             .addComponent(jLabel99))
                         .addGap(27, 27, 27)
                         .addGroup(jPanel42Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField28)
-                            .addComponent(jTextField29)
-                            .addComponent(jTextField33)
-                            .addComponent(jTextField32, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(brandTextField)
+                            .addComponent(modelTextField)
+                            .addComponent(plateTextField)
+                            .addComponent(colorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel102))
                 .addContainerGap(579, Short.MAX_VALUE))
         );
@@ -2321,18 +2400,18 @@ public class ResidentMainPage extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel42Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel99)
-                    .addComponent(jTextField28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(brandTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(11, 11, 11)
                 .addGroup(jPanel42Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel100)
-                    .addComponent(jTextField29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(modelTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(13, 13, 13)
                 .addGroup(jPanel42Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel101)
-                    .addComponent(jTextField33, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(plateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(11, 11, 11)
                 .addGroup(jPanel42Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField32, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(colorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel103))
                 .addContainerGap(236, Short.MAX_VALUE))
         );
@@ -2343,11 +2422,16 @@ public class ResidentMainPage extends javax.swing.JFrame {
         jButton33.setText("Back");
         jButton33.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85), 2));
 
-        jButton34.setBackground(new java.awt.Color(164, 221, 221));
-        jButton34.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton34.setForeground(new java.awt.Color(54, 84, 85));
-        jButton34.setText("Save");
-        jButton34.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85), 2));
+        saveVehiclebtn.setBackground(new java.awt.Color(164, 221, 221));
+        saveVehiclebtn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        saveVehiclebtn.setForeground(new java.awt.Color(54, 84, 85));
+        saveVehiclebtn.setText("Save");
+        saveVehiclebtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85), 2));
+        saveVehiclebtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveVehiclebtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel41Layout = new javax.swing.GroupLayout(jPanel41);
         jPanel41.setLayout(jPanel41Layout);
@@ -2361,9 +2445,9 @@ public class ResidentMainPage extends javax.swing.JFrame {
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel41Layout.createSequentialGroup()
                             .addComponent(jButton33, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton34, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(saveVehiclebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(jPanel42, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(181, Short.MAX_VALUE))
         );
         jPanel41Layout.setVerticalGroup(
             jPanel41Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2375,8 +2459,8 @@ public class ResidentMainPage extends javax.swing.JFrame {
                 .addGap(42, 42, 42)
                 .addGroup(jPanel41Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton33, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton34, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(321, Short.MAX_VALUE))
+                    .addComponent(saveVehiclebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(519, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout AddVehicleLayout = new javax.swing.GroupLayout(AddVehicle);
@@ -2428,10 +2512,10 @@ public class ResidentMainPage extends javax.swing.JFrame {
                             .addComponent(jLabel93))
                         .addGap(27, 27, 27)
                         .addGroup(jPanel40Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField26)
-                            .addComponent(jTextField27)
-                            .addComponent(jTextField31)
-                            .addComponent(jTextField30, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(editBrandTextField)
+                            .addComponent(editModelTextField)
+                            .addComponent(editPlateTextField)
+                            .addComponent(editColorTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel96))
                 .addContainerGap(579, Short.MAX_VALUE))
         );
@@ -2443,63 +2527,79 @@ public class ResidentMainPage extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel40Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel93)
-                    .addComponent(jTextField26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(editBrandTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(11, 11, 11)
                 .addGroup(jPanel40Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel94)
-                    .addComponent(jTextField27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel40Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel40Layout.createSequentialGroup()
-                        .addGap(44, 44, 44)
-                        .addGroup(jPanel40Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel97)
-                            .addComponent(jTextField30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel40Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel95)))
-                .addContainerGap(241, Short.MAX_VALUE))
+                    .addComponent(editModelTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel40Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel95)
+                    .addComponent(editPlateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
+                .addGroup(jPanel40Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel97)
+                    .addComponent(editColorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(238, Short.MAX_VALUE))
         );
 
-        jButton31.setBackground(new java.awt.Color(164, 221, 221));
-        jButton31.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton31.setForeground(new java.awt.Color(54, 84, 85));
-        jButton31.setText("Back");
-        jButton31.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85), 2));
+        backToProfilebtn2.setBackground(new java.awt.Color(164, 221, 221));
+        backToProfilebtn2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        backToProfilebtn2.setForeground(new java.awt.Color(54, 84, 85));
+        backToProfilebtn2.setText("Back");
+        backToProfilebtn2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85), 2));
+        backToProfilebtn2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backToProfilebtn2ActionPerformed(evt);
+            }
+        });
 
-        jButton32.setBackground(new java.awt.Color(164, 221, 221));
-        jButton32.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton32.setForeground(new java.awt.Color(54, 84, 85));
-        jButton32.setText("Save");
-        jButton32.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85), 2));
+        saveEditVehiclebtn.setBackground(new java.awt.Color(164, 221, 221));
+        saveEditVehiclebtn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        saveEditVehiclebtn.setForeground(new java.awt.Color(54, 84, 85));
+        saveEditVehiclebtn.setText("Save");
+        saveEditVehiclebtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85), 2));
+        saveEditVehiclebtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveEditVehiclebtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel39Layout = new javax.swing.GroupLayout(jPanel39);
         jPanel39.setLayout(jPanel39Layout);
         jPanel39Layout.setHorizontalGroup(
             jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel39Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
                 .addGroup(jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel92)
-                    .addGroup(jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel39Layout.createSequentialGroup()
-                            .addComponent(jButton31, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton32, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jPanel40, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(35, Short.MAX_VALUE))
+                    .addGroup(jPanel39Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addGroup(jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel92)
+                            .addGroup(jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel39Layout.createSequentialGroup()
+                                    .addComponent(backToProfilebtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(saveEditVehiclebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jPanel40, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel39Layout.createSequentialGroup()
+                        .addGap(78, 78, 78)
+                        .addComponent(vehicleIDTextField)))
+                .addContainerGap(181, Short.MAX_VALUE))
         );
         jPanel39Layout.setVerticalGroup(
             jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel39Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(jLabel92)
-                .addGap(52, 52, 52)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(vehicleIDTextField)
+                .addGap(29, 29, 29)
                 .addComponent(jPanel40, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42)
                 .addGroup(jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton31, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton32, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(415, Short.MAX_VALUE))
+                    .addComponent(backToProfilebtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(saveEditVehiclebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(534, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout EditVehicleLayout = new javax.swing.GroupLayout(EditVehicle);
@@ -2542,10 +2642,10 @@ public class ResidentMainPage extends javax.swing.JFrame {
                     .addComponent(jLabel109))
                 .addGap(84, 84, 84)
                 .addGroup(jPanel44Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPasswordField3, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPasswordField4, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(579, Short.MAX_VALUE))
+                    .addComponent(currentPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(newPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(confirmNewField, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(521, Short.MAX_VALUE))
         );
         jPanel44Layout.setVerticalGroup(
             jPanel44Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2553,29 +2653,34 @@ public class ResidentMainPage extends javax.swing.JFrame {
                 .addGap(47, 47, 47)
                 .addGroup(jPanel44Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel105)
-                    .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(currentPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel44Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel106)
-                    .addComponent(jPasswordField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(newPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel44Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel109)
-                    .addComponent(jPasswordField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(confirmNewField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(320, Short.MAX_VALUE))
         );
 
-        jButton35.setBackground(new java.awt.Color(164, 221, 221));
-        jButton35.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton35.setForeground(new java.awt.Color(54, 84, 85));
-        jButton35.setText("Back");
-        jButton35.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85), 2));
+        backToProfile2.setBackground(new java.awt.Color(164, 221, 221));
+        backToProfile2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        backToProfile2.setForeground(new java.awt.Color(54, 84, 85));
+        backToProfile2.setText("Back");
+        backToProfile2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85), 2));
 
-        jButton36.setBackground(new java.awt.Color(164, 221, 221));
-        jButton36.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton36.setForeground(new java.awt.Color(54, 84, 85));
-        jButton36.setText("Save");
-        jButton36.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85), 2));
+        saveNewPassbtn.setBackground(new java.awt.Color(164, 221, 221));
+        saveNewPassbtn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        saveNewPassbtn.setForeground(new java.awt.Color(54, 84, 85));
+        saveNewPassbtn.setText("Save");
+        saveNewPassbtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85), 2));
+        saveNewPassbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveNewPassbtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel43Layout = new javax.swing.GroupLayout(jPanel43);
         jPanel43.setLayout(jPanel43Layout);
@@ -2584,14 +2689,16 @@ public class ResidentMainPage extends javax.swing.JFrame {
             .addGroup(jPanel43Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addGroup(jPanel43Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel104)
-                    .addGroup(jPanel43Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel43Layout.createSequentialGroup()
-                            .addComponent(jButton35, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton36, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jPanel44, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel43Layout.createSequentialGroup()
+                        .addComponent(backToProfile2, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(saveNewPassbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(126, 126, 126))
+                    .addGroup(jPanel43Layout.createSequentialGroup()
+                        .addGroup(jPanel43Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel104)
+                            .addComponent(jPanel44, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(124, Short.MAX_VALUE))))
         );
         jPanel43Layout.setVerticalGroup(
             jPanel43Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2602,9 +2709,9 @@ public class ResidentMainPage extends javax.swing.JFrame {
                 .addComponent(jPanel44, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42)
                 .addGroup(jPanel43Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton35, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton36, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(312, Short.MAX_VALUE))
+                    .addComponent(backToProfile2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(saveNewPassbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(495, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout ChangePasswordLayout = new javax.swing.GroupLayout(ChangePassword);
@@ -2625,9 +2732,14 @@ public class ResidentMainPage extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void homePanelbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homePanelbtnActionPerformed
+        jTabbedPane3.setSelectedIndex(0);
+
+    }//GEN-LAST:event_homePanelbtnActionPerformed
+
     private void profilePanelbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profilePanelbtnActionPerformed
-        jTabbedPane1.setSelectedIndex(0);
-        DefaultTableModel residentCar = (DefaultTableModel)residentVehicleTabel.getModel();
+         jTabbedPane3.setSelectedIndex(11);
+        DefaultTableModel residentCar = (DefaultTableModel)residentVehicleTable.getModel();
         residentCar.setRowCount(0);
         residentNameLabel.setText("");
         residentICLabel.setText("");
@@ -2636,73 +2748,319 @@ public class ResidentMainPage extends javax.swing.JFrame {
         loadResident();
     }//GEN-LAST:event_profilePanelbtnActionPerformed
 
-    private void profilePanelbtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profilePanelbtn1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_profilePanelbtn1ActionPerformed
+    private void billPanelbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_billPanelbtnActionPerformed
+         jTabbedPane3.setSelectedIndex(1);
+         DefaultTableModel pending = (DefaultTableModel)pendingTable.getModel();
+         pending.setRowCount(0);
+          DefaultTableModel history = (DefaultTableModel)historyTable.getModel();
+         history.setRowCount(0);
+         loadPendingPayment();
+         loadHistoryPayment();
+    }//GEN-LAST:event_billPanelbtnActionPerformed
 
-    private void profilePanelbtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profilePanelbtn2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_profilePanelbtn2ActionPerformed
+    private void forumPanelbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_forumPanelbtnActionPerformed
+         jTabbedPane3.setSelectedIndex(4);
+         DefaultTableModel management_forum = (DefaultTableModel)managementForumTable.getModel();
+        management_forum.setRowCount(0);
+         loadManagementForum();
+    }//GEN-LAST:event_forumPanelbtnActionPerformed
 
-    private void profilePanelbtn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profilePanelbtn3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_profilePanelbtn3ActionPerformed
+    private void residentForumPanelbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_residentForumPanelbtnActionPerformed
+        jTabbedPane3.setSelectedIndex(5);
+        DefaultTableModel resident_forum = (DefaultTableModel)residentForumTable.getModel();
+        resident_forum.setRowCount(0);
+        loadResidentForum();
+    }//GEN-LAST:event_residentForumPanelbtnActionPerformed
 
-    private void profilePanelbtn4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profilePanelbtn4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_profilePanelbtn4ActionPerformed
+    private void notificationPanelbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_notificationPanelbtnActionPerformed
+         jTabbedPane3.setSelectedIndex(10);
+         
+         loadNotification();
+         
+    }//GEN-LAST:event_notificationPanelbtnActionPerformed
 
-    private void profilePanelbtn5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profilePanelbtn5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_profilePanelbtn5ActionPerformed
+    private void logOutbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logOutbtnActionPerformed
+        
+    }//GEN-LAST:event_logOutbtnActionPerformed
 
-    private void profilePanelbtn6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profilePanelbtn6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_profilePanelbtn6ActionPerformed
+    private void paymentCreditMaintainencebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paymentCreditMaintainencebtnActionPerformed
+        jTabbedPane3.setSelectedIndex(2);
+        typeBill.setText("Maintance fee");
+        
+    }//GEN-LAST:event_paymentCreditMaintainencebtnActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void paySinkingCreditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paySinkingCreditActionPerformed
+        jTabbedPane3.setSelectedIndex(2);
+        typeBill.setText("Sinking fee");
+    }//GEN-LAST:event_paySinkingCreditActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    private void createManagementPostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createManagementPostActionPerformed
+        jTabbedPane3.setSelectedIndex(6);
+        typeForumLabel.setText("Management");
+        
+        
+    }//GEN-LAST:event_createManagementPostActionPerformed
 
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton10ActionPerformed
+    private void createResidentPostbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createResidentPostbtnActionPerformed
+        jTabbedPane3.setSelectedIndex(6);
+        typeForumLabel.setText("Resident");
+        
+    }//GEN-LAST:event_createResidentPostbtnActionPerformed
 
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton11ActionPerformed
+    private void replyPostbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_replyPostbtnActionPerformed
+       
+        jTabbedPane3.setSelectedIndex(8);
+        
+    }//GEN-LAST:event_replyPostbtnActionPerformed
 
-    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton12ActionPerformed
+    private void backToForumBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToForumBtn2ActionPerformed
+        jTabbedPane3.setSelectedIndex(7);
+    }//GEN-LAST:event_backToForumBtn2ActionPerformed
 
-    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton13ActionPerformed
+    private void backToForumTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToForumTableActionPerformed
+        String type = typeForum.getText();
+        if(type.equals("Management")){
+            jTabbedPane3.setSelectedIndex(4);
+        }else {
+            jTabbedPane3.setSelectedIndex(5);
+        }
+        
+    }//GEN-LAST:event_backToForumTableActionPerformed
 
-    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton14ActionPerformed
+    private void replyBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_replyBtnActionPerformed
+        String forum_id = forumID.getText();
+        String type = typeForum.getText();
+        String unit = residentUnitLabel.getText();
+        String comment = commentTextField.getText();
+        String date = getCurrentDate();
+        System.out.println(forum_id);
+            System.out.println(type);
+            System.out.println(comment);
+        if(type.equals("Management")){
+            
+            conn = sqliteConn2.connect();
+            String sql = "INSERT INTO management_forum_replies (forum_id,replyer,comment,reply_date) values (?,?,?,?)";
+            if(comment.equals("")){
+                JOptionPane.showMessageDialog(this, "Please leave a reply.");
+            }else{
+                try{
+                pst = conn.prepareStatement(sql);
+                pst.setString(1,forum_id);
+                pst.setString(2,unit);
+                pst.setString(3,comment);
+                pst.setString(4,date);
+                pst.execute();
+                JOptionPane.showMessageDialog(null,"Reply successfully");
+                commentTextField.setText("");
+                DefaultTableModel replies = (DefaultTableModel)repliesTable.getModel();
+                replies.setRowCount(0);
+                loadManagementReply(forum_id);
+                jTabbedPane3.setSelectedIndex(7);
+                
+                }catch(SQLException e){
+                   JOptionPane.showMessageDialog(null,e);
+                }
+                    finally {
+            // Close resources (result set, statement, connection)
+                    if (rs != null) {
+                        try {
+                            rs.close();
+                        } catch (SQLException e) {
+                            // Handle exception
+                        }
+                    }
+                    if (pst != null) {
+                        try {
+                            pst.close();
+                        } catch (SQLException e) {
+                            // Handle exception
+                        }
+                    }
+                    if (conn != null) {
+                        try {
+                            conn.close();
+                        } catch (SQLException e) {
+                            // Handle exception
+                        }
+                    }
+                }
+            }
 
-    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton15ActionPerformed
+        }else{
+             conn = sqliteConn2.connect();
+            String sql = "INSERT INTO resident_forum_replies (forum_id,replyer,comment,reply_date) values (?,?,?,?)";
+            if(comment.equals("")){
+                JOptionPane.showMessageDialog(this, "Please leave a reply.");
+            }else{
+                try{
+                pst = conn.prepareStatement(sql);
+                pst.setString(1,forum_id);
+                pst.setString(2,unit);
+                pst.setString(3,comment);
+                pst.setString(4,date);
+                pst.execute();
+                JOptionPane.showMessageDialog(null,"Reply successfully");
+                commentTextField.setText("");
+                DefaultTableModel replies = (DefaultTableModel)repliesTable.getModel();
+                replies.setRowCount(0);
+                loadManagementReply(forum_id);
+                jTabbedPane3.setSelectedIndex(7);
+                loadManagementReply(forum_id);
+                }catch(SQLException e){
+                   JOptionPane.showMessageDialog(null,e);
+                }
+                    finally {
+            // Close resources (result set, statement, connection)
+                    if (rs != null) {
+                        try {
+                            rs.close();
+                        } catch (SQLException e) {
+                            // Handle exception
+                        }
+                    }
+                    if (pst != null) {
+                        try {
+                            pst.close();
+                        } catch (SQLException e) {
+                            // Handle exception
+                        }
+                    }
+                    if (conn != null) {
+                        try {
+                            conn.close();
+                        } catch (SQLException e) {
+                            // Handle exception
+                        }
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_replyBtnActionPerformed
 
-    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton16ActionPerformed
+    private void backToManagementForumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToManagementForumActionPerformed
+       String type = typeForumLabel.getText();
+       if(type.equals("Management")){
+           jTabbedPane3.setSelectedIndex(4);
+           DefaultTableModel management_forum = (DefaultTableModel)managementForumTable.getModel();
+           management_forum.setRowCount(0);
+           loadManagementForum();
+       }else{
+           jTabbedPane3.setSelectedIndex(5);
+           DefaultTableModel resident_forum = (DefaultTableModel)residentForumTable.getModel();
+           resident_forum.setRowCount(0);
+           loadResidentForum();
+       }
+    }//GEN-LAST:event_backToManagementForumActionPerformed
 
-    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton17ActionPerformed
+    private void createPostbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createPostbtnActionPerformed
+        String type = typeForumLabel.getText();
+        String date =getCurrentDate();
+        String title = postTitleTextField.getText();
+        String content = postContentTextField.getText();
+        String unit = residentUnitLabel.getText();
+        if(type.equals("Management")){
+            conn = sqliteConn2.connect();
+            String sql = "INSERT INTO management_forum (forum_title,forum_author,forum_content,created_date) values (?,?,?,?)";
+            if(title.equals("") || content.equals("")){
+                JOptionPane.showMessageDialog(this, "Please fill up all the fields.");
+            }else{
+                try{
+                    pst = conn.prepareStatement(sql);
+                    pst.setString(1,title);
+                    pst.setString(2,unit);
+                    pst.setString(3,content);
+                    pst.setString(4,date);
+                    pst.execute();
+                    JOptionPane.showMessageDialog(null,"Post created successfully");
+                    postTitleTextField.setText("");
+                    postContentTextField.setText("");
+                    residentIDLabel.setText("");
+                    DefaultTableModel management_forum = (DefaultTableModel)managementForumTable.getModel();
+                    management_forum.setRowCount(0);
+                    loadManagementForum();
+                    jTabbedPane3.setSelectedIndex(4);
+                }catch(SQLException e){
+                   JOptionPane.showMessageDialog(null,e);
+                }
+                    finally {
+            // Close resources (result set, statement, connection)
+                    if (rs != null) {
+                        try {
+                            rs.close();
+                        } catch (SQLException e) {
+                            // Handle exception
+                        }
+                    }
+                    if (pst != null) {
+                        try {
+                            pst.close();
+                        } catch (SQLException e) {
+                            // Handle exception
+                        }
+                    }
+                    if (conn != null) {
+                        try {
+                            conn.close();
+                        } catch (SQLException e) {
+                            // Handle exception
+                        }
+                    }
+                }
+            }
+            
+        }else{
+            conn = sqliteConn2.connect();
+                String sql = "INSERT INTO resident_forum (forum_title,forum_author,forum_content,created_date) values(?,?,?,?)";
+                if(title.equals("") || content.equals("")){
+                    JOptionPane.showMessageDialog(this, "Please fill up all the fields.");
+                }else{
+                    try{
+                        pst = conn.prepareStatement(sql);
+                        pst.setString(1,title);
+                        pst.setString(2,unit);
+                        pst.setString(3,content);
+                        pst.setString(4,date);
+                        pst.execute();
+                        JOptionPane.showMessageDialog(null,"Post created successfully");
+                        postTitleTextField.setText("");
+                        postContentTextField.setText("");
+                        residentIDLabel.setText("");
+                        DefaultTableModel resident_forum = (DefaultTableModel)residentForumTable.getModel();
+                        resident_forum.setRowCount(0);
+                        loadResidentForum();
+                        jTabbedPane3.setSelectedIndex(5);
+                        
+                    }catch(SQLException e){
+                       JOptionPane.showMessageDialog(null,e);
+                }
+                        finally {
+                // Close resources (result set, statement, connection)
+                        if (rs != null) {
+                            try {
+                                rs.close();
+                            } catch (SQLException e) {
+                                // Handle exception
+                            }
+                        }
+                        if (pst != null) {
+                            try {
+                                pst.close();
+                            } catch (SQLException e) {
+                                // Handle exception
+                            }
+                        }
+                        if (conn != null) {
+                            try {
+                                conn.close();
+                            } catch (SQLException e) {
+                                // Handle exception
+                            }
+                        }
+                    }
+                }
 
-    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton18ActionPerformed
+        }
+    }//GEN-LAST:event_createPostbtnActionPerformed
 
     private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
         // TODO add your handling code here:
@@ -2712,52 +3070,312 @@ public class ResidentMainPage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField17ActionPerformed
 
-    private void jButton26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton26ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton26ActionPerformed
+    private void addVehiclebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addVehiclebtnActionPerformed
+        jTabbedPane3.setSelectedIndex(13);
+    }//GEN-LAST:event_addVehiclebtnActionPerformed
 
-    private void jButton27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton27ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton27ActionPerformed
+    private void editVehiclebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editVehiclebtnActionPerformed
+    DefaultTableModel vehicleTable = (DefaultTableModel) residentVehicleTable.getModel();
+        conn = sqliteConn2.connect();
+        int row = residentVehicleTable.getSelectedRow();
+        if(residentVehicleTable.getSelectedRowCount() ==1){
+            jTabbedPane3.setSelectedIndex(14);
+            String id = residentVehicleTable.getModel().getValueAt(row, 0).toString();
+            String brand = residentVehicleTable.getModel().getValueAt(row, 1).toString();
+            String model = residentVehicleTable.getModel().getValueAt(row, 2).toString();
+            String plate = residentVehicleTable.getModel().getValueAt(row, 3).toString();
+            String color = residentVehicleTable.getModel().getValueAt(row, 4).toString();
+            String sql = "UPDATE resident_vehicle SET brand =? ,model=?, plate_number=?,color =?   WHERE id=?";
+            
+           
+            editBrandTextField.setText(brand);
+            editModelTextField.setText(model);
+            editPlateTextField.setText(plate);
+            editColorTextField.setText(color);
+            vehicleIDTextField.setText(id);
+            
+           
+                 
+        }else{
+                if(residentVehicleTable.getRowCount()==0){
+                    JOptionPane.showMessageDialog(this, "This table is empty");
+                }else{
+                    JOptionPane.showMessageDialog(this, "Please select one row of table to edit");
+                }
+     }
 
-    private void jButton28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton28ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton28ActionPerformed
-    public void loadResident(){
-        DefaultTableModel residentCar = (DefaultTableModel)residentVehicleTabel.getModel();
+    }//GEN-LAST:event_editVehiclebtnActionPerformed
+
+    private void deleteVehiclebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteVehiclebtnActionPerformed
+        DefaultTableModel vehicleTable = (DefaultTableModel) residentVehicleTable.getModel();
+        conn = sqliteConn2.connect();
+        int row = residentVehicleTable.getSelectedRow();
+        if(residentVehicleTable.getSelectedRowCount() ==1){
+            
+            String id = residentVehicleTable.getModel().getValueAt(row, 0).toString();
+            
+            String sql = "DELETE  FROM resident_vehicle WHERE id=?";
+            
+           
+            vehicleTable.removeRow(residentVehicleTable.getSelectedRow());
+            
+           
+            try{
+                pst = conn.prepareStatement(sql);
+                pst.setString(1,id);
+                pst.executeUpdate();
+                JOptionPane.showMessageDialog(null,"Vechile unregistered successfully");
+   
+                
+                
+            }catch(SQLException e){
+                   JOptionPane.showMessageDialog(null,e);
+            }
+            finally {
+    // Close resources (result set, statement, connection)
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+            if (pst != null) {
+                try {
+                    pst.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+        }      
+        }else{
+                if(residentVehicleTable.getRowCount()==0){
+                    JOptionPane.showMessageDialog(this, "This table is empty");
+                }else{
+                    JOptionPane.showMessageDialog(this, "Please select one row of table to delete");
+                }
+     }
+
+
+    }//GEN-LAST:event_deleteVehiclebtnActionPerformed
+
+    private void saveNewPassbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveNewPassbtnActionPerformed
+        conn = sqliteConn2.connect();
+        char [] currentpassword = currentPasswordField.getPassword();
+       String currentps = new String(currentpassword);
+        char [] password = newPasswordField.getPassword();
+       String ps = new String(password);
+       char [] repassword = confirmNewField.getPassword();
+       String reps = new String(repassword);
+       String id  = residentIDLabel.getText();
+       
+       String sql = "UPDATE resident_account SET password = ? WHERE id=?";
+       String sql2 ="SELECT password FROM resident_account WHERE id =?";
+       
         
+       
+       if(!ps.equals(reps) || !reps.equals(ps)){
+           JOptionPane.showMessageDialog(null,"Password Not Same");
+       }else if(ps.equals("") || reps.equals("")){
+           JOptionPane.showMessageDialog(null,"Please fill up all the fields");
+       }else{
+           if(conn !=null){
+                                       System.out.println(id);
+                try{
+                    pst = conn.prepareStatement(sql2);
+                    pst.setString(1,id);
+                    rs = pst.executeQuery();
+                    while(rs.next()){
+                        String currentPassword = rs.getString("password");
+                                                              System.out.println(currentPassword);
+                        if(!currentps.equals(currentPassword)){
+                            JOptionPane.showMessageDialog(null,"Current Password is incorrect");
+                            }
+                        else{
+                            pst = conn.prepareStatement(sql);
+                            pst.setString(1,ps);
+                            pst.setString(2,id);
+                            pst.execute();
+                            JOptionPane.showMessageDialog(null,"Reset Password Sucessfully");
+                            jTabbedPane3.setSelectedIndex(11);
+                            currentPasswordField.setText("");
+                            newPasswordField.setText("");
+                            confirmNewField.setText("");
+                        }
+                }
+           
+       }catch(SQLException e){
+                   JOptionPane.showMessageDialog(null,e);
+                   JOptionPane.showMessageDialog(null,"hello1");
+       }finally {
+                    // Close resources (result set, statement, connection)
+                    if (rs != null) {
+                        try {
+                            rs.close();
+                        } catch (SQLException e) {
+                            // Handle exception
+                        }
+                    }
+                    if (pst != null) {
+                        try {
+                            pst.close();
+                        } catch (SQLException e) {
+                            // Handle exception
+                        }
+                    }
+                    if (conn != null) {
+                        try {
+                            conn.close();
+                        } catch (SQLException e) {
+                            // Handle exception
+                        }
+                    }
+                }
+           }
+
+
+       }        // TODO add your handling code here:
+    }//GEN-LAST:event_saveNewPassbtnActionPerformed
+
+    private void payCreditBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_payCreditBtn1ActionPerformed
+        payByCredit(typeBill.getText());
+    }//GEN-LAST:event_payCreditBtn1ActionPerformed
+
+    private void editResidentbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editResidentbtnActionPerformed
+        jTabbedPane3.setSelectedIndex(12);
+        String name = residentNameLabel.getText();
+        String IC = residentICLabel.getText();
+        String Phone = residentPhoneLabel.getText();
+        String Email = residentEmailLabel.getText();
+        residentNameTextField.setText(name);
+       
+        residentICTextField.setText(IC);
+        residentPhoneTextField.setText(Phone);
+        residentEmailTextField.setText(Email);
         
+    }//GEN-LAST:event_editResidentbtnActionPerformed
+
+    private void saveEditbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveEditbtnActionPerformed
         conn = sqliteConn2.connect();
         
         String id = residentIDLabel.getText();
-        String sql = "SELECT r.name ,rv.brand,rv.model,rv.plate_number,rv.color,r.ic,r.contact,r.email FROM resident_account r,resident_vehicle rv  WHERE r.id = rv.resident_id AND rv.resident_id = ?";
+        String rname = residentNameTextField.getText();
+        String ric = residentICTextField.getText();
+        String rphone = residentPhoneTextField.getText();
+        String remail = residentEmailTextField.getText();
+        String sql1 = "UPDATE resident_account SET name =?,ic = ? ,contact=? ,email=? WHERE id= ? " ;
+       if(conn !=null){
+           if(rname.equals("")|| ric.equals("")|| rphone.equals("")|| remail.equals("")){
+               JOptionPane.showMessageDialog(null,"Please fill all the fields");
+           }else if(ric.length() < 12 || ric.length() >12){
+               JOptionPane.showMessageDialog(null,"IC length incorrect");
+           }else if(!isNumeric(ric)){
+               JOptionPane.showMessageDialog(null,"IC must be numeric");
+           }else if(rphone.length() <10 || rphone.length() <11 ){
+               JOptionPane.showMessageDialog(null,"Invalid Phone number");
+           }
+           else if(!isValidEmail(remail)){
+               JOptionPane.showMessageDialog(null,"Email format incorrect");
+           }
+           else{
+               try{
+                pst =conn.prepareStatement(sql1);
+                pst.setString(1,rname);
+                pst.setString(2,ric);
+                pst.setString(3,rphone);
+                pst.setString(4,remail);
+                pst.setString(5,id);
+                pst.execute();
+                JOptionPane.showMessageDialog(null,"Save Successfully");
+                jTabbedPane3.setSelectedIndex(11);
+                residentNameTextField.setText("");
+                residentICTextField.setText("");
+                residentPhoneTextField.setText("");
+                residentEmailTextField.setText("");
+            
+           
+        }catch(SQLException e){
+                   JOptionPane.showMessageDialog(null,e);
+            }finally {
+    // Close resources (result set, statement, connection)
+                if (rs != null) {
+                    try {
+                        rs.close();
+                    } catch (SQLException e) {
+                        // Handle exception
+                    }
+                }
+                if (pst != null) {
+                    try {
+                        pst.close();
+                    } catch (SQLException e) {
+                        // Handle exception
+                    }
+                }
+                if (conn != null) {
+                    try {
+                        conn.close();
+                    } catch (SQLException e) {
+                        // Handle exception
+                    }
+                }
+            }
+           }
         
-        try{
-            pst = conn.prepareStatement(sql);
+       }
+    }//GEN-LAST:event_saveEditbtnActionPerformed
+
+    private void backToProfilebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToProfilebtnActionPerformed
+        jTabbedPane3.setSelectedIndex(11);
+        residentNameTextField.setText("");
+        residentICTextField.setText("");
+        residentPhoneTextField.setText("");
+        residentEmailTextField.setText("");
+    }//GEN-LAST:event_backToProfilebtnActionPerformed
+
+    private void saveVehiclebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveVehiclebtnActionPerformed
+         conn = sqliteConn2.connect();
+        ResidentMainPage main = new ResidentMainPage();
+        String id = residentIDLabel.getText();
+        String brand = brandTextField.getText().toUpperCase();
+        String model = modelTextField.getText().toUpperCase();
+        String color = colorTextField.getText().toUpperCase();
+        String plate = plateTextField.getText().toUpperCase();
+        System.out.println(id);
+        String sql = "INSERT INTO resident_vehicle (resident_id,plate_number,brand,model,color) values (?,?,?,?,?)";
+        if(brand.equals("")|| model.equals("") ||color.equals("") || plate.equals("")){
+            JOptionPane.showMessageDialog(null,"Please fill up all the fields");
+        }else if(!isAlphabetic(brand)){
+            JOptionPane.showMessageDialog(null," Number not accepted! ");
+        }else if(!isAlphabetic(color)){
+            JOptionPane.showMessageDialog(null," Number not accepted! ");
+        }
+        else{
+            try{
+            
+            pst =conn.prepareStatement(sql);
             pst.setString(1,id);
-            rs = pst.executeQuery();
-            while(rs.next()){
-                
-                String model = rs.getString("model");
-                String brand = rs.getString("brand");
-                String color = rs.getString("color");
-                String plate_number = rs.getString("plate_number");
-                String tbData[] ={brand,model,plate_number,color};
-                
-                residentCar.addRow(tbData);
-                String name = rs.getString("name");
-                String ic = rs.getString("ic");
-                String contact = rs.getString("contact");
-                String email = rs.getString("email");
-                residentNameLabel.setText(name);
-                residentICLabel.setText(ic);
-                residentPhoneLabel.setText(contact);
-                residentEmailLabel.setText(email);
-                
-            }
-            if(rs.next()){
-                
-            }
+            pst.setString(2,plate);
+            pst.setString(3,brand);
+            pst.setString(4,model);
+            pst.setString(5,color);
+            pst.execute();
+            JOptionPane.showMessageDialog(null,"Register vehicle succesfully");
+             brandTextField.setText("");
+             modelTextField.setText("");
+             colorTextField.setText("");
+             plateTextField.setText("");
+            jTabbedPane3.setSelectedIndex(11);
+            loadResident();
+
+            
         }catch(SQLException e){
                    JOptionPane.showMessageDialog(null,e);
             }finally {
@@ -2784,10 +3402,199 @@ public class ResidentMainPage extends javax.swing.JFrame {
         }
     }
 }
+        }
+    }//GEN-LAST:event_saveVehiclebtnActionPerformed
+
+    private void saveEditVehiclebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveEditVehiclebtnActionPerformed
+        String sql = "UPDATE resident_vehicle SET brand =? ,model=?, plate_number=?,color =?   WHERE id=?";
+        conn = sqliteConn2.connect();
+        String id = vehicleIDTextField.getText();
+            String brand = editBrandTextField.getText().toUpperCase();;
+            String model = editModelTextField.getText().toUpperCase();;
+            String plate = editPlateTextField.getText().toUpperCase();
+            String color = editColorTextField.getText().toUpperCase();
+        try{
+                pst = conn.prepareStatement(sql);
+
+                pst.setString(1,brand);
+                pst.setString(2,model);
+                pst.setString(3,plate);
+                pst.setString(4,color);
+                pst.setString(5,id);
+                pst.executeUpdate();
+                JOptionPane.showMessageDialog(null,"Vehicle Information Updated successfully");
+   
+                jTabbedPane3.setSelectedIndex(7);
+                DefaultTableModel residentCar = (DefaultTableModel)residentVehicleTable.getModel();
+                residentCar.setRowCount(0);
+                loadResident();
+            }catch(SQLException e){
+                   JOptionPane.showMessageDialog(null,e);
+            }
+            finally {
+    // Close resources (result set, statement, connection)
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+            if (pst != null) {
+                try {
+                    pst.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+        }
+    }//GEN-LAST:event_saveEditVehiclebtnActionPerformed
+
+    private void backToProfilebtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToProfilebtn2ActionPerformed
+        jTabbedPane3.setSelectedIndex(11);
+        editModelTextField.setText("");
+        editColorTextField.setText("");
+        editBrandTextField.setText("");
+        editPlateTextField.setText("");
+    }//GEN-LAST:event_backToProfilebtn2ActionPerformed
+
+    private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
+        jTabbedPane3.setSelectedIndex(15);
+    }//GEN-LAST:event_jButton21ActionPerformed
+
+    private void residentForumTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_residentForumTableMouseClicked
+        jTabbedPane3.setSelectedIndex(7);
+        typeForum.setText("Resident");
+        DefaultTableModel resident_forum = (DefaultTableModel)residentForumTable.getModel();
+        int row = residentForumTable.getSelectedRow();
+        if(residentForumTable.getSelectedRowCount() ==1){
+            String id = residentForumTable.getModel().getValueAt(row, 0).toString();
+            String title= residentForumTable.getModel().getValueAt(row, 1).toString();
+            String author = residentForumTable.getModel().getValueAt(row, 2).toString();
+            String content = residentForumTable.getModel().getValueAt(row, 3).toString();
+            String date = residentForumTable.getModel().getValueAt(row, 4).toString();
+
+            postTitleLabel.setText(title);
+            postContentLabel.setText(content);
+            postAuthorLabel.setText(author);
+            postDateLabel.setText(date);
+            DefaultTableModel replies = (DefaultTableModel)repliesTable.getModel();
+            replies.setRowCount(0);
+            loadResidentReply(id);
+            forumID.setText(id);
+        }
+    }//GEN-LAST:event_residentForumTableMouseClicked
+
+    private void managementForumTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_managementForumTableMouseClicked
+        jTabbedPane3.setSelectedIndex(7);
+        typeForum.setText("Management");
+        DefaultTableModel management_forum = (DefaultTableModel)managementForumTable.getModel();
+        int row = managementForumTable.getSelectedRow();
+        if(managementForumTable.getSelectedRowCount() ==1){
+            String id = managementForumTable.getModel().getValueAt(row, 0).toString();
+            String title= managementForumTable.getModel().getValueAt(row, 1).toString();
+            String author = managementForumTable.getModel().getValueAt(row, 2).toString();
+            String content = managementForumTable.getModel().getValueAt(row, 3).toString();
+            String date = managementForumTable.getModel().getValueAt(row, 4).toString();
+
+            postTitleLabel.setText(title);
+            postContentLabel.setText(content);
+            postAuthorLabel.setText(author);
+            postDateLabel.setText(date);
+            DefaultTableModel replies = (DefaultTableModel)repliesTable.getModel();
+            replies.setRowCount(0);
+            loadManagementReply(id);
+            forumID.setText(id);
+        }
+    }//GEN-LAST:event_managementForumTableMouseClicked
+
+    private void notificationTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_notificationTableMouseClicked
+        int row = notificationTable.getSelectedRow();
+        if(notificationTable.getSelectedRowCount() ==1){
+            
+            String title= notificationTable.getModel().getValueAt(row, 0).toString();
+            
+            String content = notificationTable.getModel().getValueAt(row, 1).toString();
+            String date = notificationTable.getModel().getValueAt(row, 2).toString();
+
+            noticeTitleLabel.setText(title);
+            noticeContentLabel.setText(content);
+            
+            noticeDateLabel.setText(date);
+            
+            
+        }
+    }//GEN-LAST:event_notificationTableMouseClicked
+    public void loadResident(){
+        DefaultTableModel residentCar = (DefaultTableModel)residentVehicleTable.getModel();
+        
+        
+        conn = sqliteConn2.connect();
+        
+        String id = residentIDLabel.getText();
+        String sql = "SELECT rv.id ,r.name ,rv.brand,rv.model,rv.plate_number,rv.color,r.ic,r.contact,r.email FROM resident_account r,resident_vehicle rv  WHERE r.id = rv.resident_id AND rv.resident_id = ?";
+        
+        try{
+            pst = conn.prepareStatement(sql);
+            pst.setString(1,id);
+            rs = pst.executeQuery();
+            while(rs.next()){
+                String ID = rs.getString("id");
+                String model = rs.getString("model");
+                String brand = rs.getString("brand");
+                String color = rs.getString("color");
+                String plate_number = rs.getString("plate_number");
+                String tbData[] ={ID,brand,model,plate_number,color};
+                
+                residentCar.addRow(tbData);
+                String name = rs.getString("name");
+                String ic = rs.getString("ic");
+                String contact = rs.getString("contact");
+                String email = rs.getString("email");
+                residentNameLabel.setText(name);
+                residentICLabel.setText(ic);
+                residentPhoneLabel.setText(contact);
+                residentEmailLabel.setText(email);
+                
+            }
+
+        }catch(SQLException e){
+                   JOptionPane.showMessageDialog(null,e);
+        }finally {
+            // Close resources (result set, statement, connection)
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+            if (pst != null) {
+                try {
+                    pst.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+        }
     }
     
     public void loadResident2(){
-        DefaultTableModel vehicle = (DefaultTableModel)editVehicleTable.getModel();
+        
         
         
         conn = sqliteConn2.connect();
@@ -2807,15 +3614,12 @@ public class ResidentMainPage extends javax.swing.JFrame {
                 String plate_number = rs.getString("plate_number");
                 String tbData[] ={tblid,brand,model,plate_number,color};
                 
-                vehicle.addRow(tbData);
+                
                 String name = rs.getString("name");
                 String ic = rs.getString("ic");
                 String contact = rs.getString("contact");
                 String email = rs.getString("email");
-                 residentNameTextField.setText(name);
-                residentICTextField.setText(ic);
-                residentPhoneTextField.setText(contact);
-                residentEmailTextField.setText(email);
+                
                
             }
             
@@ -2948,11 +3752,425 @@ public void loadHistoryPayment(){
             }
         }
     }
+public ResultSet getCurrentPassword(String sql, Object... params)throws SQLException{
+     conn = sqliteConn2.connect();
+      try {
+            
+            pst = conn.prepareStatement(sql);
+
+            // Set parameter values
+            for (int i = 0; i < params.length; i++) {
+                pst.setObject(i + 1, params[i]);
+            }
+
+            rs = pst.executeQuery();
+        } catch (SQLException e) {
+            // Handle any exceptions or log errors here
+            JOptionPane.showMessageDialog(null,"hello");
+            e.printStackTrace();
+        } finally {
+            // Close the resources in reverse order of their creation
+           if (rs != null) {
+                    try {
+                        rs.close();
+                    } catch (SQLException e) {
+                        // Handle exception
+                    }
+                }
+                if (pst != null) {
+                    try {
+                        pst.close();
+                    } catch (SQLException e) {
+                        // Handle exception
+                    }
+                }
+                if (conn != null) {
+                    try {
+                        conn.close();
+                    } catch (SQLException e) {
+                        // Handle exception
+                    }
+                }
+        }
+
+        return rs;
+    }
+
+
+public void payByCredit(String type){
+        
+        conn = sqliteConn2.connect();
+            String cardName = cardHolderTextField.getText().toUpperCase();
+            String cardNum = cardNumberTextField.getText().toUpperCase();
+            String date = getCurrentDate();
+            String cvv =cvvTextField.getText();
+            String sql = "UPDATE bill_record SET payment_date=? ,payment_status='true' ,payment_method ='credit card' WHERE payment_status='false' AND floor_unit =? AND bill_type=?";
+            
+            if(cardName.equals("") || cardNum.equals("") || cvv.equals("")){
+                JOptionPane.showMessageDialog(null,"Please fill up all the fields");
+            }else if(cardNum.length()<16 || cardNum.length()>16){
+                JOptionPane.showMessageDialog(null,"Card number length is incorrect");
+            }else if(cvv.length()!=3){
+                JOptionPane.showMessageDialog(null,"CVV length is incorrect");
+            }else if(!isNumeric(cvv)){
+                JOptionPane.showMessageDialog(null,"Invalid CVV");
+            }else if(!isAlphabetic(cardName)){
+                JOptionPane.showMessageDialog(null,"Invalid Name");
+            }
+            else{
+               try{
+                pst = conn.prepareStatement(sql);
+                pst.setString(1, date);
+                
+                pst.setString(2, residentUnitLabel.getText());
+                pst.setString(3, typeBill.getText());
+                pst.execute();
+                JOptionPane.showMessageDialog(null,"Payment Successfully");
+                cardHolderTextField.setText("");
+                cardNumberTextField.setText("");
+                cvvTextField.setText("");
+                jTabbedPane3.setSelectedIndex(1);
+                DefaultTableModel pending = (DefaultTableModel)pendingTable.getModel();
+                pending.setRowCount(0);
+                DefaultTableModel history = (DefaultTableModel)historyTable.getModel();
+                history.setRowCount(0);
+                loadPendingPayment();
+                loadHistoryPayment();
+                
+                }catch(SQLException e){
+                   JOptionPane.showMessageDialog(null,e);
+                    }finally {
+                    // Close resources (result set, statement, connection)
+                    if (rs != null) {
+                        try {
+                            rs.close();
+                        } catch (SQLException e) {
+                            // Handle exception
+                        }
+                    }
+                    if (pst != null) {
+                        try {
+                            pst.close();
+                        } catch (SQLException e) {
+                            // Handle exception
+                        }
+                    }
+                    if (conn != null) {
+                        try {
+                            conn.close();
+                        } catch (SQLException e) {
+                            // Handle exception
+                        }
+                    }
+                }
+            }
+
+}
+
+public void paySinkingByCredit(){
+        
+        conn = sqliteConn2.connect();
+            String cardName = cardHolderTextField.getText().toUpperCase();
+            String cardNum = cardNumberTextField.getText().toUpperCase();
+            String date = getCurrentDate();
+            String cvv =cvvTextField.getText();
+            String sql = "UPDATE bill_record SET payment_date=? ,payment_status='true' ,payment_method ='credit card' WHERE payment_status='false' AND floor_unit =? AND bill_type='Sinking fee'";
+            
+            if(cardName.equals("") || cardNum.equals("") || cvv.equals("")){
+                JOptionPane.showMessageDialog(null,"Please fill up all the fields");
+            }else if(cardNum.length()<16 || cardNum.length()>16){
+                JOptionPane.showMessageDialog(null,"Card number length is incorrect");
+            }else if(cvv.length()!=3){
+                JOptionPane.showMessageDialog(null,"CVV length is incorrect");
+            }else if(!isNumeric(cvv)){
+                JOptionPane.showMessageDialog(null,"Invalid CVV");
+            }
+            else{
+               try{
+                pst = conn.prepareStatement(sql);
+                pst.setString(1, date);
+                
+                pst.setString(2, residentUnitLabel.getText());
+                pst.execute();
+                JOptionPane.showMessageDialog(null,"Payment Successfully");
+                jTabbedPane3.setSelectedIndex(1);
+                DefaultTableModel pending = (DefaultTableModel)pendingTable.getModel();
+                pending.setRowCount(0);
+                DefaultTableModel history = (DefaultTableModel)historyTable.getModel();
+                history.setRowCount(0);
+                loadPendingPayment();
+                loadHistoryPayment();
+                
+                }catch(SQLException e){
+                   JOptionPane.showMessageDialog(null,e);
+                    }finally {
+                    // Close resources (result set, statement, connection)
+                    if (rs != null) {
+                        try {
+                            rs.close();
+                        } catch (SQLException e) {
+                            // Handle exception
+                        }
+                    }
+                    if (pst != null) {
+                        try {
+                            pst.close();
+                        } catch (SQLException e) {
+                            // Handle exception
+                        }
+                    }
+                    if (conn != null) {
+                        try {
+                            conn.close();
+                        } catch (SQLException e) {
+                            // Handle exception
+                        }
+                    }
+                }
+            }
+
+}
+
+public void loadManagementForum(){
+        DefaultTableModel forum = (DefaultTableModel)managementForumTable.getModel();
+        conn = sqliteConn2.connect();
+        forum.setRowCount(0);
+        String sql = "SELECT id,forum_title,forum_content,forum_author,created_date FROM management_forum";
+        try{
+            pst = conn.prepareStatement(sql);
+            rs = pst.executeQuery();
+            while(rs.next()){
+                String id = rs.getString("id");
+                 String title = rs.getString("forum_title");
+                 String author = rs.getString("forum_author");
+                 String content = rs.getString("forum_content");
+                 String date = rs.getString("created_date");
+                 String tbData[] ={id,title,author,content,date};
+                 
+                 forum.addRow(tbData);
+            }
+           
+        }catch(SQLException e){
+                   JOptionPane.showMessageDialog(null,e);
+        }finally {
+            // Close resources (result set, statement, connection)
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+            if (pst != null) {
+                try {
+                    pst.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+        }
+}
+
+
+public void loadResidentForum(){
+        DefaultTableModel resident_forum = (DefaultTableModel)residentForumTable.getModel();
+        conn = sqliteConn2.connect();
+        resident_forum.setRowCount(0);
+        String sql = "SELECT id,forum_title,forum_content,forum_author,created_date FROM resident_forum";
+        try{
+            pst = conn.prepareStatement(sql);
+            rs = pst.executeQuery();
+            while(rs.next()){
+                String id = rs.getString("id");
+                 String title = rs.getString("forum_title");
+                 String author = rs.getString("forum_author");
+                 String content = rs.getString("forum_content");
+                 String date = rs.getString("created_date");
+                 String tbData[] ={id,title,author,content,date};
+                 
+                 resident_forum.addRow(tbData);
+            }
+           
+        }catch(SQLException e){
+                   JOptionPane.showMessageDialog(null,e);
+        }finally {
+            // Close resources (result set, statement, connection)
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+            if (pst != null) {
+                try {
+                    pst.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+        }
+}
+
+public void loadManagementReply(String forum_id){
+    conn = sqliteConn2.connect();
+    DefaultTableModel replies = (DefaultTableModel)repliesTable.getModel();
+    String sql = "SELECT * FROM management_forum_replies where forum_id =?";
+    try{
+        pst = conn.prepareStatement(sql);
+        pst.setString(1, forum_id);
+        rs = pst.executeQuery();
+        while(rs.next()){
+            String id = rs.getString("id");
+            String replyer = rs.getString("replyer");
+            String comment = rs.getString("comment");
+            String date = rs.getString("reply_date");
+            String tbData[] ={id,comment,replyer,date};
+                 
+            replies.addRow(tbData);
+        }
+    }catch(SQLException e){
+            JOptionPane.showMessageDialog(null,e);
+        }finally {
+            // Close resources (result set, statement, connection)
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+            if (pst != null) {
+                try {
+                    pst.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+        }
+}
+
+
+public void loadResidentReply(String forum_id){
+    conn = sqliteConn2.connect();
+    DefaultTableModel replies = (DefaultTableModel)repliesTable.getModel();
+    String sql = "SELECT * FROM resident_forum_replies where forum_id =?";
+    try{
+        pst = conn.prepareStatement(sql);
+        pst.setString(1, forum_id);
+        rs = pst.executeQuery();
+        while(rs.next()){
+            String id = rs.getString("id");
+            String replyer = rs.getString("replyer");
+            String comment = rs.getString("comment");
+            String date = rs.getString("reply_date");
+            String tbData[] ={id,comment,replyer,date};
+                 
+            replies.addRow(tbData);
+        }
+    }catch(SQLException e){
+            JOptionPane.showMessageDialog(null,e);
+        }finally {
+            // Close resources (result set, statement, connection)
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+            if (pst != null) {
+                try {
+                    pst.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+        }
+}
+
+public void loadNotification(){
+        conn = sqliteConn2.connect();
+        DefaultTableModel notice = (DefaultTableModel)notificationTable.getModel();
+        String unit = residentUnitLabel.getText();
+        String sql ="SELECT title,content,created_date from bill_notification WHERE unit=?";
+        try{
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, unit);
+            rs = pst.executeQuery();
+            while(rs.next()){
+                String title = rs.getString("title");
+                String content = rs.getString("content");
+                String date = rs.getString("created_date");
+                String tbData[] ={title,content,date};
+                notice.addRow(tbData);
+            }
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null,e);
+        }finally {
+            // Close resources (result set, statement, connection)
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+            if (pst != null) {
+                try {
+                    pst.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+        }
+}
+
 private String getCurrentDate() {
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     Date currentDate = new Date();
     return dateFormat.format(currentDate);
     }
+
+public static boolean isAlphabetic(String input) {
+    return input.matches("[a-zA-Z]+");
+}
+  
 public static boolean isNumeric(String input) {
     try {
         double d = Double.parseDouble(input);
@@ -2963,6 +4181,11 @@ public static boolean isNumeric(String input) {
         return false;
     }
 }
+private boolean isValidEmail(String email) {
+        String emailPattern = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+        Pattern pattern = Pattern.compile(emailPattern);
+        return pattern.matcher(email).matches();
+    } 
     /**
      * @param args the command line arguments
      */
@@ -3017,37 +4240,43 @@ public static boolean isNumeric(String input) {
     private javax.swing.JPanel ResidentForum;
     private javax.swing.JPanel ViewPost;
     private javax.swing.JPanel ViewReply;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton13;
-    private javax.swing.JButton jButton14;
-    private javax.swing.JButton jButton15;
-    private javax.swing.JButton jButton16;
-    private javax.swing.JButton jButton17;
-    private javax.swing.JButton jButton18;
+    private javax.swing.JButton addVehiclebtn;
+    private javax.swing.JButton backToForumBtn2;
+    private javax.swing.JButton backToForumTable;
+    private javax.swing.JButton backToManagementForum;
+    private javax.swing.JButton backToProfile2;
+    private javax.swing.JButton backToProfilebtn;
+    private javax.swing.JButton backToProfilebtn2;
+    private javax.swing.JButton billPanelbtn;
+    private javax.swing.JTextField brandTextField;
+    private javax.swing.JTextField cardHolderTextField;
+    private javax.swing.JTextField cardNumberTextField;
+    private javax.swing.JTextField colorTextField;
+    private javax.swing.JTextArea commentTextField;
+    private javax.swing.JPasswordField confirmNewField;
+    private javax.swing.JButton createManagementPost;
+    private javax.swing.JButton createPostbtn;
+    private javax.swing.JButton createResidentPostbtn;
+    private javax.swing.JPasswordField currentPasswordField;
+    private javax.swing.JTextField cvvTextField;
+    private javax.swing.JButton deleteVehiclebtn;
+    private javax.swing.JTextField editBrandTextField;
+    private javax.swing.JTextField editColorTextField;
+    private javax.swing.JTextField editModelTextField;
+    private javax.swing.JTextField editPlateTextField;
+    private javax.swing.JButton editResidentbtn;
+    private javax.swing.JButton editVehiclebtn;
+    private javax.swing.JLabel forumID;
+    private javax.swing.JButton forumPanelbtn;
+    private javax.swing.JTable historyTable;
+    private javax.swing.JButton homePanelbtn;
     private javax.swing.JButton jButton19;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton20;
     private javax.swing.JButton jButton21;
-    private javax.swing.JButton jButton24;
-    private javax.swing.JButton jButton25;
-    private javax.swing.JButton jButton26;
-    private javax.swing.JButton jButton27;
-    private javax.swing.JButton jButton28;
-    private javax.swing.JButton jButton31;
-    private javax.swing.JButton jButton32;
     private javax.swing.JButton jButton33;
-    private javax.swing.JButton jButton34;
-    private javax.swing.JButton jButton35;
-    private javax.swing.JButton jButton36;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel100;
     private javax.swing.JLabel jLabel101;
     private javax.swing.JLabel jLabel102;
@@ -3087,7 +4316,6 @@ public static boolean isNumeric(String input) {
     private javax.swing.JLabel jLabel56;
     private javax.swing.JLabel jLabel57;
     private javax.swing.JLabel jLabel58;
-    private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel60;
     private javax.swing.JLabel jLabel61;
     private javax.swing.JLabel jLabel62;
@@ -3122,7 +4350,6 @@ public static boolean isNumeric(String input) {
     private javax.swing.JLabel jLabel97;
     private javax.swing.JLabel jLabel98;
     private javax.swing.JLabel jLabel99;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
@@ -3155,12 +4382,8 @@ public static boolean isNumeric(String input) {
     private javax.swing.JPanel jPanel44;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JPasswordField jPasswordField2;
-    private javax.swing.JPasswordField jPasswordField3;
-    private javax.swing.JPasswordField jPasswordField4;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane12;
@@ -3181,57 +4404,59 @@ public static boolean isNumeric(String input) {
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JSpinner jSpinner2;
     private javax.swing.JTabbedPane jTabbedPane3;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
-    private javax.swing.JTable jTable4;
-    private javax.swing.JTable jTable5;
-    private javax.swing.JTable jTable6;
-    private javax.swing.JTable jTable8;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextArea jTextArea3;
     private javax.swing.JTextArea jTextArea4;
-    private javax.swing.JTextArea jTextArea5;
-    private javax.swing.JTextArea jTextArea6;
-    private javax.swing.JTextArea jTextArea7;
-    private javax.swing.JTextArea jTextArea8;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField13;
     private javax.swing.JTextField jTextField14;
-    private javax.swing.JTextField jTextField15;
     private javax.swing.JTextField jTextField17;
-    private javax.swing.JTextField jTextField18;
-    private javax.swing.JTextField jTextField19;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField20;
-    private javax.swing.JTextField jTextField21;
-    private javax.swing.JTextField jTextField22;
-    private javax.swing.JTextField jTextField23;
-    private javax.swing.JTextField jTextField26;
-    private javax.swing.JTextField jTextField27;
-    private javax.swing.JTextField jTextField28;
-    private javax.swing.JTextField jTextField29;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField30;
-    private javax.swing.JTextField jTextField31;
-    private javax.swing.JTextField jTextField32;
-    private javax.swing.JTextField jTextField33;
     private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JButton logOutbtn;
+    private javax.swing.JTable managementForumTable;
+    private javax.swing.JTextField modelTextField;
+    private javax.swing.JComboBox<String> monthSelectionCredit;
+    private javax.swing.JPasswordField newPasswordField;
+    private javax.swing.JTextArea noticeContentLabel;
+    private javax.swing.JTextField noticeDateLabel;
+    private javax.swing.JTextField noticeTitleLabel;
+    private javax.swing.JButton notificationPanelbtn;
+    private javax.swing.JTable notificationTable;
+    private javax.swing.JButton payCreditBtn1;
+    private javax.swing.JButton paySinkingCredit;
+    private javax.swing.JButton paymentCreditMaintainencebtn;
+    private javax.swing.JTable pendingTable;
+    private javax.swing.JTextField plateTextField;
+    private javax.swing.JTextField postAuthorLabel;
+    private javax.swing.JTextArea postContentLabel;
+    private javax.swing.JTextArea postContentTextField;
+    private javax.swing.JTextField postDateLabel;
+    private javax.swing.JTextField postTitleLabel;
+    private javax.swing.JTextField postTitleTextField;
     private javax.swing.JButton profilePanelbtn;
-    private javax.swing.JButton profilePanelbtn1;
-    private javax.swing.JButton profilePanelbtn2;
-    private javax.swing.JButton profilePanelbtn3;
-    private javax.swing.JButton profilePanelbtn4;
-    private javax.swing.JButton profilePanelbtn5;
-    private javax.swing.JButton profilePanelbtn6;
+    private javax.swing.JTable repliesTable;
+    private javax.swing.JButton replyBtn;
+    private javax.swing.JButton replyPostbtn;
+    private javax.swing.JTextField residentEmailLabel;
+    private javax.swing.JTextField residentEmailTextField;
+    private javax.swing.JButton residentForumPanelbtn;
+    private javax.swing.JTable residentForumTable;
+    private javax.swing.JTextField residentICLabel;
+    private javax.swing.JTextField residentICTextField;
+    public javax.swing.JLabel residentIDLabel;
+    private javax.swing.JTextField residentNameLabel;
+    private javax.swing.JTextField residentNameTextField;
+    private javax.swing.JTextField residentPhoneLabel;
+    private javax.swing.JTextField residentPhoneTextField;
+    public javax.swing.JTextField residentUnitLabel;
+    private javax.swing.JTable residentVehicleTable;
+    private javax.swing.JButton saveEditVehiclebtn;
+    private javax.swing.JButton saveEditbtn;
+    private javax.swing.JButton saveNewPassbtn;
+    private javax.swing.JButton saveVehiclebtn;
+    private javax.swing.JLabel typeBill;
+    private javax.swing.JLabel typeForum;
+    private javax.swing.JLabel typeForumLabel;
+    private javax.swing.JLabel vehicleIDTextField;
+    private javax.swing.JComboBox<String> yearSelectionCredit;
     // End of variables declaration//GEN-END:variables
 }
