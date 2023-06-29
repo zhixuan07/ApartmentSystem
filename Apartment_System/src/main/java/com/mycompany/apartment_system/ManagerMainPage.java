@@ -134,6 +134,7 @@ public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
         jScrollPane3 = new javax.swing.JScrollPane();
         resident_vehicle = new javax.swing.JTable();
         jLabel17 = new javax.swing.JLabel();
+        resident_unit = new javax.swing.JLabel();
         BillPanel = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -603,7 +604,7 @@ public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
                 .addGap(85, 85, 85))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, residentaccPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(addAcc_btn)
+                .addComponent(addAcc_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(deleteAccountbtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -747,20 +748,31 @@ public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
                 {null, null, null, null}
             },
             new String [] {
-                "License Plate Number", "Brand ", "Color", "Emergency Contact"
+                "Model", "Brand ", "License Plate Number", "Color"
             }
         ) {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, true, true, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
         jScrollPane3.setViewportView(resident_vehicle);
+        if (resident_vehicle.getColumnModel().getColumnCount() > 0) {
+            resident_vehicle.getColumnModel().getColumn(0).setResizable(false);
+            resident_vehicle.getColumnModel().getColumn(3).setResizable(false);
+        }
 
-        jLabel17.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jLabel17.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel17.setText("Vehicle Information");
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
@@ -770,67 +782,71 @@ public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel17)
-                    .addComponent(jLabel16)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 665, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(resident_ic, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(resident_contact, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addComponent(jLabel16)
+                        .addGap(18, 18, 18)
+                        .addComponent(resident_unit, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel12Layout.createSequentialGroup()
                         .addComponent(jLabel10)
-                        .addGap(27, 27, 27)
+                        .addGap(52, 52, 52)
                         .addComponent(resident_name, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel12Layout.createSequentialGroup()
-                        .addGap(83, 83, 83)
-                        .addComponent(resident_ic, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel12Layout.createSequentialGroup()
-                        .addGap(148, 148, 148)
-                        .addComponent(resident_contact, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 665, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(594, 594, 594)))
+                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(451, Short.MAX_VALUE))
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addComponent(jLabel6)
-                .addGap(30, 30, 30)
-                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(resident_name, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(resident_ic, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7)
-                .addGap(29, 29, 29)
-                .addComponent(resident_contact, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4)
-                .addComponent(jLabel9)
-                .addGap(44, 44, 44)
-                .addComponent(jLabel16)
-                .addGap(118, 118, 118)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(30, 30, 30)
+                        .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel10)
+                            .addComponent(resident_name, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(34, 34, 34)
+                        .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel7)
+                            .addComponent(resident_ic, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(37, 37, 37)
+                        .addComponent(jLabel9))
+                    .addComponent(resident_contact, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel16)
+                    .addComponent(resident_unit, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(81, 81, 81)
                 .addComponent(jLabel17)
-                .addGap(18, 18, 18)
+                .addGap(29, 29, 29)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(114, Short.MAX_VALUE))
+                .addContainerGap(188, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout residentAccountInfoLayout = new javax.swing.GroupLayout(residentAccountInfo);
         residentAccountInfo.setLayout(residentAccountInfoLayout);
         residentAccountInfoLayout.setHorizontalGroup(
             residentAccountInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(residentAccountInfoLayout.createSequentialGroup()
-                .addGap(32, 32, 32)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, residentAccountInfoLayout.createSequentialGroup()
+                .addContainerGap(32, Short.MAX_VALUE)
                 .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         residentAccountInfoLayout.setVerticalGroup(
             residentAccountInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(residentAccountInfoLayout.createSequentialGroup()
-                .addGap(36, 36, 36)
+                .addGap(32, 32, 32)
                 .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(169, Short.MAX_VALUE))
+                .addContainerGap(167, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("tab4", residentAccountInfo);
@@ -1744,26 +1760,36 @@ public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
 
     private void viewResidentDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewResidentDetailsActionPerformed
         int index = resident_table.getSelectedRow();
-        TableModel model = resident_table.getModel();
-        String username = model.getValueAt(index, 1).toString();
+        TableModel resident_model = resident_table.getModel();
+        DefaultTableModel vehicle = (DefaultTableModel)resident_vehicle.getModel();
+        String username = resident_model.getValueAt(index, 1).toString();
         conn = sqliteConn2.connect();
 
         if(conn!= null){
             jTabbedPane2.setSelectedIndex(3);
             resident_name.setText(username);
-              
-              
-            String sql = "SELECT resident_account.ic,resident_account.contact, apartment_unit.floor_unit FROM resident_account ,apartment_unit WHERE resident_account.username =?";
+            String sql = "SELECT resident_account.ic,resident_account.name,resident_account.contact, apartment_unit.floor_unit ,resident_vehicle.brand,\n" +
+                "resident_vehicle.model,resident_vehicle.plate_number,resident_vehicle.color\n" +
+                "FROM resident_account ,apartment_unit ,resident_vehicle\n" +
+                "WHERE resident_account.username =? \n" +
+                "AND resident_account.id = apartment_unit.resident_id";
             try{
                pst = conn.prepareStatement(sql);
                pst.setString(1,username);
                rs = pst.executeQuery();
+               while(rs.next()){
                resident_ic.setText(rs.getString("ic"));
-              
-                      
-              
-          
-        
+               resident_contact.setText(rs.getString("contact"));
+               resident_unit.setText(rs.getString("floor_unit"));
+               resident_name.setText(rs.getString("name"));
+               String model = rs.getString("model");
+               String brand = rs.getString("brand");
+               String plate = rs.getString("plate_number");
+               String color = rs.getString("color");
+              String  tbData[] ={model,brand,plate,color};
+              vehicle.addRow(tbData);
+               
+               }
                
             }catch (Exception e){
                 JOptionPane.showMessageDialog(null,e);
@@ -2933,6 +2959,7 @@ public ResultSet floor_unitList() {
     public javax.swing.JLabel resident_ic;
     public javax.swing.JLabel resident_name;
     private javax.swing.JTable resident_table;
+    public javax.swing.JLabel resident_unit;
     public javax.swing.JTable resident_vehicle;
     private javax.swing.JPanel residentaccPanel;
     private javax.swing.JTextField searchVisitorInput;

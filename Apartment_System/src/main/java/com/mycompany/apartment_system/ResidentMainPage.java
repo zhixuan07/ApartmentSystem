@@ -1742,6 +1742,7 @@ public class ResidentMainPage extends javax.swing.JFrame {
         noticeContentLabel.setEditable(false);
         noticeContentLabel.setBackground(new java.awt.Color(232, 239, 239));
         noticeContentLabel.setColumns(20);
+        noticeContentLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         noticeContentLabel.setRows(5);
         jScrollPane18.setViewportView(noticeContentLabel);
 
