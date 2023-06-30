@@ -4,6 +4,8 @@
  */
 package com.mycompany.apartment_system;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author ching
@@ -33,10 +35,10 @@ public class SecurityLogin extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jTextField1 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        guardUsername = new javax.swing.JTextField();
+        guardPassword = new javax.swing.JPasswordField();
         jSeparator2 = new javax.swing.JSeparator();
-        jButton1 = new javax.swing.JButton();
+        guardLoginBtn = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
@@ -86,23 +88,23 @@ public class SecurityLogin extends javax.swing.JFrame {
         jSeparator1.setForeground(new java.awt.Color(75, 98, 99));
         jSeparator1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(54, 84, 85), 2, true));
 
-        jTextField1.setBackground(new java.awt.Color(232, 239, 239));
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField1.setBorder(null);
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        guardUsername.setBackground(new java.awt.Color(232, 239, 239));
+        guardUsername.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        guardUsername.setForeground(new java.awt.Color(255, 255, 255));
+        guardUsername.setBorder(null);
+        guardUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                guardUsernameActionPerformed(evt);
             }
         });
 
-        jPasswordField1.setBackground(new java.awt.Color(232, 239, 239));
-        jPasswordField1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jPasswordField1.setForeground(new java.awt.Color(51, 51, 51));
-        jPasswordField1.setBorder(null);
-        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
+        guardPassword.setBackground(new java.awt.Color(232, 239, 239));
+        guardPassword.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        guardPassword.setForeground(new java.awt.Color(51, 51, 51));
+        guardPassword.setBorder(null);
+        guardPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPasswordField1ActionPerformed(evt);
+                guardPasswordActionPerformed(evt);
             }
         });
 
@@ -110,14 +112,14 @@ public class SecurityLogin extends javax.swing.JFrame {
         jSeparator2.setForeground(new java.awt.Color(75, 98, 99));
         jSeparator2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(54, 84, 85), 2, true));
 
-        jButton1.setBackground(new java.awt.Color(164, 221, 221));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(54, 84, 85));
-        jButton1.setText("Log In");
-        jButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85), 2));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        guardLoginBtn.setBackground(new java.awt.Color(164, 221, 221));
+        guardLoginBtn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        guardLoginBtn.setForeground(new java.awt.Color(54, 84, 85));
+        guardLoginBtn.setText("Log In");
+        guardLoginBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85), 2));
+        guardLoginBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                guardLoginBtnActionPerformed(evt);
             }
         });
 
@@ -163,9 +165,9 @@ public class SecurityLogin extends javax.swing.JFrame {
                         .addGap(327, 327, 327))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGap(133, 133, 133)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addComponent(guardLoginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(guardUsername, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE)
+                    .addComponent(guardPassword, javax.swing.GroupLayout.Alignment.LEADING))
                 .addGap(84, 84, 84))
         );
         jPanel1Layout.setVerticalGroup(
@@ -178,17 +180,17 @@ public class SecurityLogin extends javax.swing.JFrame {
                 .addGap(158, 158, 158)
                 .addComponent(jLabel7)
                 .addGap(0, 0, 0)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(guardUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(jLabel4)
                 .addGap(0, 0, 0)
-                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(guardPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(guardLoginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -221,13 +223,13 @@ public class SecurityLogin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void guardUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardUsernameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_guardUsernameActionPerformed
 
-    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
+    private void guardPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardPasswordActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordField1ActionPerformed
+    }//GEN-LAST:event_guardPasswordActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
@@ -238,9 +240,28 @@ public class SecurityLogin extends javax.swing.JFrame {
         dispose(); //close current frame (manager login frame) after open main login frame
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void guardLoginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardLoginBtnActionPerformed
+        String username = guardUsername.getText();
+        char [] ps = guardPassword.getPassword();
+        String password = new String(ps);
+        
+        if(username.equals("") && password.equals("")){
+                    JOptionPane.showMessageDialog(null, "Please provide username and password");
+         
+        }else{
+            if(username.equals("GUARD") && password.equals("GUARD111")){
+
+                JOptionPane.showMessageDialog(null, "Login Successfully");
+                 SecurityHomeUI guard = new SecurityHomeUI();
+                 guard.setVisible(true);
+                 dispose();
+            }else{
+                JOptionPane.showMessageDialog(null, "Credential Incorrect!");
+            }
+            
+        }
+        
+    }//GEN-LAST:event_guardLoginBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -272,24 +293,24 @@ public class SecurityLogin extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ResidentLogin().setVisible(true);
+                new SecurityLogin().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton guardLoginBtn;
+    private javax.swing.JPasswordField guardPassword;
+    private javax.swing.JTextField guardUsername;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JTextField jTextField1;
     private java.awt.Panel panel1;
     private java.awt.Panel panel2;
     // End of variables declaration//GEN-END:variables

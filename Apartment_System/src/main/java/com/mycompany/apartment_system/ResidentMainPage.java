@@ -2780,7 +2780,11 @@ public class ResidentMainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_notificationPanelbtnActionPerformed
 
     private void logOutbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logOutbtnActionPerformed
-        
+                ResidentLoginNew login = new ResidentLoginNew();
+        login.setVisible(true);
+        dispose();
+        JOptionPane.showMessageDialog(null,"Log out successfully");
+       
     }//GEN-LAST:event_logOutbtnActionPerformed
 
     private void paymentCreditMaintainencebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paymentCreditMaintainencebtnActionPerformed

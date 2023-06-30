@@ -13,6 +13,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -36,9 +37,10 @@ public class SecurityHomeUI extends javax.swing.JFrame implements Runnable{
         defaultTableModel.setColumnIdentifiers(columns);
         visitor_table.setModel(defaultTableModel);
         DateLabel.setText(date);
+        loadVisitor();
        Thread t = new Thread( this);
        t.start();
-        loadVisitor();
+        
     }
 
     /**
@@ -298,9 +300,9 @@ public class SecurityHomeUI extends javax.swing.JFrame implements Runnable{
                         .addGap(393, 393, 393)
                         .addComponent(jLabel30))
                     .addGroup(homePanelLayout.createSequentialGroup()
-                        .addGap(91, 91, 91)
+                        .addGap(79, 79, 79)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(109, 109, 109)
+                        .addGap(102, 102, 102)
                         .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(100, 100, 100)
                         .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1362,30 +1364,7 @@ public String getLastSevenDays(){
             return rs;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
-        }finally {
-    // Close resources (result set, statement, connection)
-    if (rs != null) {
-        try {
-            rs.close();
-        } catch (SQLException e) {
-            // Handle exception
         }
-    }
-    if (pst != null) {
-        try {
-            pst.close();
-        } catch (SQLException e) {
-            // Handle exception
-        }
-    }
-    if (conn != null) {
-        try {
-            conn.close();
-        } catch (SQLException e) {
-            // Handle exception
-        }
-    }
-}
 
         return null; // Return null if an exception occurs
     }
@@ -1505,6 +1484,16 @@ public String getLastSevenDays(){
 
     @Override
     public void run() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        while(true){
+            Calendar cal = Calendar.getInstance();
+            hour = cal.get(Calendar.HOUR_OF_DAY);
+            minutes = cal.get(Calendar.MINUTE);
+            second = cal.get(Calendar.SECOND);
+            
+            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+            Date dat = cal.getTime();
+            String time = sdf.format(dat);
+            TimeLabel.setText(time);
+        }
     }
 }
