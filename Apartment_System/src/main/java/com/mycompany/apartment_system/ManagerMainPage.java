@@ -811,7 +811,7 @@ public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
                     .addGroup(jPanel12Layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addGap(30, 30, 30)
-                        .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel10)
                             .addComponent(resident_name, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(34, 34, 34)
@@ -837,7 +837,7 @@ public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
         residentAccountInfoLayout.setHorizontalGroup(
             residentAccountInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, residentAccountInfoLayout.createSequentialGroup()
-                .addContainerGap(32, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -974,7 +974,7 @@ public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
         generateBillPanel.setBackground(new java.awt.Color(232, 239, 239));
 
         jLabel15.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        jLabel15.setText("Gererate Bill");
+        jLabel15.setText("Create Bill");
 
         billTypeSelection.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Maintance fee", "Sinking fee", " " }));
         billTypeSelection.addActionListener(new java.awt.event.ActionListener() {
