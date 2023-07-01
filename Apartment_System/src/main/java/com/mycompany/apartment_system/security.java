@@ -1,16 +1,33 @@
 
 package com.mycompany.apartment_system;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.Date;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
  * @author Erik Yeong
  */
 public class security extends javax.swing.JFrame {
+    Connection conn = null;
+    ResultSet rs = null;
+    PreparedStatement pst = null;
+    DefaultTableModel  defaultTableModel = new DefaultTableModel();
+    String date = getCurrentDate();
 
     /**
      * Creates new form security
@@ -39,13 +56,13 @@ public class security extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        visitorqty_today_display = new javax.swing.JTextField();
+        todayVisitor = new javax.swing.JTextField();
         jPanel13 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        visitorqty_last7days_display = new javax.swing.JTextField();
+        lastVisitor = new javax.swing.JTextField();
         jPanel14 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        visitorqty_yesterday_display = new javax.swing.JTextField();
+        yesterdayVisitor = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel9 = new javax.swing.JLabel();
@@ -262,11 +279,11 @@ public class security extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel3.setText("Today");
 
-        visitorqty_today_display.setEditable(false);
-        visitorqty_today_display.setBackground(new java.awt.Color(204, 204, 255));
-        visitorqty_today_display.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        visitorqty_today_display.setText("(content)");
-        visitorqty_today_display.setBorder(null);
+        todayVisitor.setEditable(false);
+        todayVisitor.setBackground(new java.awt.Color(204, 204, 255));
+        todayVisitor.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        todayVisitor.setText("(content)");
+        todayVisitor.setBorder(null);
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -276,7 +293,7 @@ public class security extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addComponent(visitorqty_today_display, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(todayVisitor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(78, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
@@ -285,7 +302,7 @@ public class security extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                .addComponent(visitorqty_today_display, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(todayVisitor, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22))
         );
 
@@ -295,11 +312,11 @@ public class security extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel4.setText("Last 7 Days");
 
-        visitorqty_last7days_display.setEditable(false);
-        visitorqty_last7days_display.setBackground(new java.awt.Color(255, 204, 204));
-        visitorqty_last7days_display.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        visitorqty_last7days_display.setText("(content)");
-        visitorqty_last7days_display.setBorder(null);
+        lastVisitor.setEditable(false);
+        lastVisitor.setBackground(new java.awt.Color(255, 204, 204));
+        lastVisitor.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        lastVisitor.setText("(content)");
+        lastVisitor.setBorder(null);
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
@@ -309,7 +326,7 @@ public class security extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
-                    .addComponent(visitorqty_last7days_display, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lastVisitor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(78, Short.MAX_VALUE))
         );
         jPanel13Layout.setVerticalGroup(
@@ -318,7 +335,7 @@ public class security extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                .addComponent(visitorqty_last7days_display, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lastVisitor, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18))
         );
 
@@ -328,11 +345,11 @@ public class security extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel5.setText("Yesterday");
 
-        visitorqty_yesterday_display.setEditable(false);
-        visitorqty_yesterday_display.setBackground(new java.awt.Color(255, 204, 255));
-        visitorqty_yesterday_display.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        visitorqty_yesterday_display.setText("(content)");
-        visitorqty_yesterday_display.setBorder(null);
+        yesterdayVisitor.setEditable(false);
+        yesterdayVisitor.setBackground(new java.awt.Color(255, 204, 255));
+        yesterdayVisitor.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        yesterdayVisitor.setText("(content)");
+        yesterdayVisitor.setBorder(null);
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
@@ -341,7 +358,7 @@ public class security extends javax.swing.JFrame {
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(visitorqty_yesterday_display, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(yesterdayVisitor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addContainerGap(76, Short.MAX_VALUE))
         );
@@ -351,7 +368,7 @@ public class security extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                .addComponent(visitorqty_yesterday_display, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(yesterdayVisitor, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
         );
 
@@ -433,7 +450,7 @@ public class security extends javax.swing.JFrame {
                     .addComponent(jPanel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(788, Short.MAX_VALUE))
+                .addContainerGap(542, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout SecurityHomeLayout = new javax.swing.GroupLayout(SecurityHome);
@@ -446,7 +463,7 @@ public class security extends javax.swing.JFrame {
             SecurityHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SecurityHomeLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 1233, Short.MAX_VALUE))
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 987, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("tab1", SecurityHome);
@@ -561,7 +578,7 @@ public class security extends javax.swing.JFrame {
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(72, 72, 72)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 637, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(363, Short.MAX_VALUE))
+                .addContainerGap(117, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout SecurityVisitorLayout = new javax.swing.GroupLayout(SecurityVisitor);
@@ -758,7 +775,7 @@ public class security extends javax.swing.JFrame {
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addvisitor_backbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addvisitor_savebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(225, Short.MAX_VALUE))
+                .addContainerGap(194, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout AddVisitorLayout = new javax.swing.GroupLayout(AddVisitor);
@@ -955,7 +972,7 @@ public class security extends javax.swing.JFrame {
                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(editvisitor_backbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(editvisitor_savebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(225, Short.MAX_VALUE))
+                .addContainerGap(194, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout EditVisitorLayout = new javax.swing.GroupLayout(EditVisitor);
@@ -1221,7 +1238,7 @@ public class security extends javax.swing.JFrame {
                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(viewvisitor_backbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(viewvisitor_save, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(208, Short.MAX_VALUE))
+                .addContainerGap(177, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout ViewVisitor_confirmationLayout = new javax.swing.GroupLayout(ViewVisitor_confirmation);
@@ -1494,7 +1511,7 @@ public class security extends javax.swing.JFrame {
                 .addComponent(jPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, 672, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(viewonly_visitor_backbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(414, Short.MAX_VALUE))
+                .addContainerGap(168, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout ViewVisitor_viewonlyLayout = new javax.swing.GroupLayout(ViewVisitor_viewonly);
@@ -1574,6 +1591,93 @@ public class security extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+    public String getYesterday(){
+        String currentDate = getCurrentDate();
+            LocalDate date
+                = LocalDate.parse(currentDate);
+                LocalDate returnvalue
+                = date.minusDays(-1);
+            String yesterdaydate = returnvalue.toString();
+            return yesterdaydate;
+        }
+
+    public String getLastSevenDays(){
+    String currentDate = getCurrentDate();
+        LocalDate date
+            = LocalDate.parse(currentDate);
+        LocalDate returnvalue
+            = date.minusDays(-7);
+        String lastsevendate = returnvalue.toString();
+
+        return lastsevendate;
+    }
+    public void loadVisitor(){
+        conn = sqliteConn2.connect();
+        String currentDate = getCurrentDate();
+        String yesterdayDate = getYesterday();
+        String sevenday = getLastSevenDays();
+        String current = "SELECT COUNT(name) as total FROM visitor WHERE date =? ";
+        String yesterday =  "SELECT COUNT(name)as total FROM visitor WHERE date =? ";
+        String lastSeven = "SELECT COUNT(name) as total FROM visitor WHERE date BETWEEN ? AND ? ";
+
+        try{
+            pst = conn.prepareStatement(current);
+            pst.setString(1, currentDate);
+            rs= pst.executeQuery();
+            if(rs.next()){
+                todayVisitor.setText(rs.getString("total"));
+            }
+        }catch(SQLException e){
+                       JOptionPane.showMessageDialog(null,e);
+                }
+
+        try{
+            pst = conn.prepareStatement(yesterday);
+
+            pst.setString(1, yesterdayDate);
+            rs =pst.executeQuery();
+            if(rs.next()){
+                yesterdayVisitor.setText(rs.getString("total"));
+            }
+        }catch(SQLException e){
+                       JOptionPane.showMessageDialog(null,e);
+                }
+
+        try{
+            pst = conn.prepareStatement(lastSeven);
+            pst.setString(1, currentDate);
+            pst.setString(2, sevenday);
+            rs=pst.executeQuery();
+            if(rs.next()){
+                lastVisitor.setText(rs.getString("total"));
+            }
+        }catch(SQLException e){
+                       JOptionPane.showMessageDialog(null,e);
+                }finally {
+        // Close resources (result set, statement, connection)
+        if (rs != null) {
+            try {
+                rs.close();
+            } catch (SQLException e) {
+                // Handle exception
+            }
+        }
+        if (pst != null) {
+            try {
+                pst.close();
+            } catch (SQLException e) {
+                // Handle exception
+            }
+        }
+        if (conn != null) {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                // Handle exception
+            }
+        }
+    }
+    }
        private String getCurrentDate() {
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     Date currentDate = new Date();
@@ -1724,10 +1828,12 @@ public class security extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField lastVisitor;
     private javax.swing.JButton secuityhome_btn;
     private javax.swing.JTextField security_codename_display;
     private javax.swing.JButton security_logout_btn1;
     private javax.swing.JButton securityvisitors_btn;
+    private javax.swing.JTextField todayVisitor;
     private javax.swing.JButton viewonly_visitor_backbtn;
     private javax.swing.JTextField viewonly_visitoraddress_display;
     private javax.swing.JTextField viewonly_visitoric_display;
@@ -1752,9 +1858,7 @@ public class security extends javax.swing.JFrame {
     private javax.swing.JTextField viewvisitorresident_display;
     private javax.swing.JTextField viewvisitorstatus_display;
     private javax.swing.JTextField viewvisitortype_display;
-    private javax.swing.JTextField visitorqty_last7days_display;
-    private javax.swing.JTextField visitorqty_today_display;
-    private javax.swing.JTextField visitorqty_yesterday_display;
     private javax.swing.JTable visitors_table;
+    private javax.swing.JTextField yesterdayVisitor;
     // End of variables declaration//GEN-END:variables
 }

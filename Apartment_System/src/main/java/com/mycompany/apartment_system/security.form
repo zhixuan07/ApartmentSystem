@@ -206,7 +206,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jPanel3" pref="1233" max="32767" attributes="0"/>
+                      <Component id="jPanel3" pref="987" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -284,7 +284,7 @@
                               <Component id="jPanel14" alignment="1" min="-2" max="-2" attributes="0"/>
                               <Component id="jPanel13" alignment="1" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="788" max="32767" attributes="0"/>
+                          <EmptySpace pref="542" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -317,7 +317,7 @@
                               <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="visitorqty_today_display" min="-2" max="-2" attributes="0"/>
+                                  <Component id="todayVisitor" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace pref="78" max="32767" attributes="0"/>
                           </Group>
@@ -329,7 +329,7 @@
                               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                               <EmptySpace pref="32" max="32767" attributes="0"/>
-                              <Component id="visitorqty_today_display" min="-2" pref="46" max="-2" attributes="0"/>
+                              <Component id="todayVisitor" min="-2" pref="46" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -344,7 +344,7 @@
                         <Property name="text" type="java.lang.String" value="Today"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="visitorqty_today_display">
+                    <Component class="javax.swing.JTextField" name="todayVisitor">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -380,7 +380,7 @@
                               <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="visitorqty_last7days_display" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lastVisitor" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace pref="78" max="32767" attributes="0"/>
                           </Group>
@@ -392,7 +392,7 @@
                               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                               <EmptySpace pref="36" max="32767" attributes="0"/>
-                              <Component id="visitorqty_last7days_display" min="-2" pref="46" max="-2" attributes="0"/>
+                              <Component id="lastVisitor" min="-2" pref="46" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -407,7 +407,7 @@
                         <Property name="text" type="java.lang.String" value="Last 7 Days"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="visitorqty_last7days_display">
+                    <Component class="javax.swing.JTextField" name="lastVisitor">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -442,7 +442,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="visitorqty_yesterday_display" min="-2" max="-2" attributes="0"/>
+                                  <Component id="yesterdayVisitor" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace pref="76" max="32767" attributes="0"/>
@@ -455,7 +455,7 @@
                               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                               <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                               <EmptySpace pref="33" max="32767" attributes="0"/>
-                              <Component id="visitorqty_yesterday_display" min="-2" pref="46" max="-2" attributes="0"/>
+                              <Component id="yesterdayVisitor" min="-2" pref="46" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -470,7 +470,7 @@
                         <Property name="text" type="java.lang.String" value="Yesterday"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="visitorqty_yesterday_display">
+                    <Component class="javax.swing.JTextField" name="yesterdayVisitor">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -632,7 +632,7 @@
                           </Group>
                           <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
                           <Component id="jScrollPane1" min="-2" pref="637" max="-2" attributes="0"/>
-                          <EmptySpace pref="363" max="32767" attributes="0"/>
+                          <EmptySpace pref="117" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -909,7 +909,7 @@
                               <Component id="addvisitor_backbtn" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
                               <Component id="addvisitor_savebtn" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="225" max="32767" attributes="0"/>
+                          <EmptySpace pref="194" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1304,7 +1304,7 @@
                               <Component id="editvisitor_backbtn" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
                               <Component id="editvisitor_savebtn" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="225" max="32767" attributes="0"/>
+                          <EmptySpace pref="194" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1699,7 +1699,7 @@
                               <Component id="viewvisitor_backbtn" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
                               <Component id="viewvisitor_save" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="208" max="32767" attributes="0"/>
+                          <EmptySpace pref="177" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -2202,7 +2202,7 @@
                           <Component id="jPanel22" min="-2" pref="672" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="viewonly_visitor_backbtn" min="-2" pref="42" max="-2" attributes="0"/>
-                          <EmptySpace pref="414" max="32767" attributes="0"/>
+                          <EmptySpace pref="168" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
