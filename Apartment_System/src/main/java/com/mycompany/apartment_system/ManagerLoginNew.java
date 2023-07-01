@@ -4,6 +4,8 @@
  */
 package com.mycompany.apartment_system;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,7 +19,7 @@ import javax.swing.JOptionPane;
  * @author zhixu
  */
 public class ManagerLoginNew extends javax.swing.JFrame {
-
+    private boolean isLoggedIn;
     /**
      * Creates new form ManagerLoginNew
      */
@@ -203,8 +205,8 @@ public class ManagerLoginNew extends javax.swing.JFrame {
        String username = username_input.getText();
        char [] password = password_field.getPassword();
        String ps = new String(password);
-       if(username.equals("admin") || ps.equals("admin")){
-       
+       if(username.equals("admin") && ps.equals("admin")){
+            isLoggedIn = true;
        ManagerMainPage MainPage = new ManagerMainPage();
        MainPage.setVisible(true);
        dispose();
@@ -214,8 +216,16 @@ public class ManagerLoginNew extends javax.swing.JFrame {
        else{
            JOptionPane.showMessageDialog(null, "Username or password invalid");
        }
+        loginbtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Trigger function
+                System.out.println("Button Clicked!");
+                // Perform other actions or operations here
+            }
+        });
+           
         
-             
+       
     }//GEN-LAST:event_loginbtnActionPerformed
     public void close(){
         WindowEvent closewindow = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
@@ -224,6 +234,17 @@ public class ManagerLoginNew extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+    public void triggerLogin() {
+        // Simulate a button click event
+        ActionEvent event = new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "login");
+        for (ActionListener listener : loginbtn.getActionListeners()) {
+            listener.actionPerformed(event);
+        }
+    }
+     public boolean isLoggedIn() {
+        return isLoggedIn;
+    }
+   
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -266,8 +287,8 @@ public class ManagerLoginNew extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JButton loginbtn;
-    private javax.swing.JPasswordField password_field;
-    private javax.swing.JTextField username_input;
+    public javax.swing.JButton loginbtn;
+    public javax.swing.JPasswordField password_field;
+    public javax.swing.JTextField username_input;
     // End of variables declaration//GEN-END:variables
 }
