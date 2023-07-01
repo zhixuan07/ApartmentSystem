@@ -2584,6 +2584,11 @@ public class ResidentMainPage extends javax.swing.JFrame {
         backToProfile2.setForeground(new java.awt.Color(54, 84, 85));
         backToProfile2.setText("Back");
         backToProfile2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85), 2));
+        backToProfile2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backToProfile2ActionPerformed(evt);
+            }
+        });
 
         saveNewPassbtn.setBackground(new java.awt.Color(164, 221, 221));
         saveNewPassbtn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -3462,7 +3467,21 @@ public class ResidentMainPage extends javax.swing.JFrame {
 
     private void jButton33ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton33ActionPerformed
         // TODO add your handling code here:
+        jTabbedPane3.setSelectedIndex(11);
+        brandTextField.setText("");
+        modelTextField.setText("");
+        plateTextField.setText("");
+        colorTextField.setText("");
+        
     }//GEN-LAST:event_jButton33ActionPerformed
+
+    private void backToProfile2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToProfile2ActionPerformed
+        // TODO add your handling code here:
+        jTabbedPane3.setSelectedIndex(11);
+        currentPasswordTextField.setText("");
+        newPasswordTextField.setText("");
+        confirmPasswordTextField.setText("");
+    }//GEN-LAST:event_backToProfile2ActionPerformed
     public void loadResident(){
         DefaultTableModel residentCar = (DefaultTableModel)residentVehicleTable.getModel();
         
