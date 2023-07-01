@@ -227,10 +227,11 @@ public class ResidentLogin extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         //go back to login main page
+        dispose();
         LoginMain mainloginframe = new LoginMain();
         mainloginframe.show(); //display manager login frame here
         
-        dispose(); //close current frame (manager login frame) after open main login frame
+         //close current frame (manager login frame) after open main login frame
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

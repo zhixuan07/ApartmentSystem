@@ -4,14 +4,18 @@
  */
 package com.mycompany.apartment_system;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -21,17 +25,24 @@ import javax.swing.table.TableModel;
  *
  * @author zhixu
  */
-public class SecurityHomeUI extends javax.swing.JFrame {
-
+public class SecurityHomeUI extends javax.swing.JFrame implements Runnable{
+    private boolean isSave ;
+    private boolean isLoad;
     Connection conn = null;
     ResultSet rs = null;
     PreparedStatement pst = null;
     DefaultTableModel  defaultTableModel = new DefaultTableModel();
+    String date = getCurrentDate();
+    int hour,minutes,second;
     public SecurityHomeUI() {
         initComponents();
         Object columns[] = {"ID","Visitor","IC","Contact","Resident Unit","Plate number","Time in","Time out","Date","Status","Reason"};
         defaultTableModel.setColumnIdentifiers(columns);
         visitor_table.setModel(defaultTableModel);
+        DateLabel.setText(date);
+        loadVisitor();
+       Thread t = new Thread( this);
+       t.start();
         
     }
 
@@ -49,18 +60,24 @@ public class SecurityHomeUI extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         homePanel = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        logout_btn = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jPanel6 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        todayVisitor = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        jPanel8 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
+        lastVisitor = new javax.swing.JLabel();
+        jPanel11 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        DateLabel = new javax.swing.JLabel();
+        TimeLabel = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
+        jPanel10 = new javax.swing.JPanel();
+        jLabel27 = new javax.swing.JLabel();
+        jSeparator3 = new javax.swing.JSeparator();
+        yesterdayVisitor = new javax.swing.JLabel();
         visitorPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         visitor_table = new javax.swing.JTable();
@@ -83,7 +100,7 @@ public class SecurityHomeUI extends javax.swing.JFrame {
         visitorContactTextField = new javax.swing.JTextField();
         residentUnitListBox = new javax.swing.JComboBox<>();
         visitReasonTextField = new javax.swing.JTextField();
-        AddVistorbtn = new javax.swing.JButton();
+        AddVisitorbtn = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
         visitorCarPlateTextField = new javax.swing.JTextField();
         viewVisitorPanel = new javax.swing.JPanel();
@@ -110,6 +127,8 @@ public class SecurityHomeUI extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         Home_btn = new javax.swing.JButton();
         Visitor_btn = new javax.swing.JButton();
+        jPanel9 = new javax.swing.JPanel();
+        jLabel85 = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
         jLabel1.setText("Sparrow Apartment");
@@ -129,127 +148,149 @@ public class SecurityHomeUI extends javax.swing.JFrame {
         homePanel.setBackground(new java.awt.Color(255, 255, 255));
         homePanel.setPreferredSize(new java.awt.Dimension(1350, 1049));
 
-        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel5.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(225, 227, 226), 1, true));
-
-        jLabel2.setText("Date");
-
-        jLabel3.setText("Time");
-
-        logout_btn.setText("Log out");
-        logout_btn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                logout_btnActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(98, 98, 98)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 936, Short.MAX_VALUE)
-                .addComponent(logout_btn)
-                .addGap(66, 66, 66))
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2)
-                    .addComponent(logout_btn))
-                .addContainerGap(12, Short.MAX_VALUE))
-        );
-
         jPanel4.setBackground(new java.awt.Color(255, 153, 153));
 
+        jLabel4.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         jLabel4.setText("Total vistor today");
+
+        jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
+
+        todayVisitor.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        todayVisitor.setText("jLabel2");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabel4)
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(jLabel4))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(83, 83, 83)
+                        .addComponent(todayVisitor)))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
+                .addGap(19, 19, 19)
                 .addComponent(jLabel4)
-                .addContainerGap(25, Short.MAX_VALUE))
-        );
-
-        jPanel6.setBackground(new java.awt.Color(251, 240, 141));
-
-        jLabel5.setText("Total yesterday visitors");
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(jLabel5)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(todayVisitor)
+                .addContainerGap(61, Short.MAX_VALUE))
         );
 
         jPanel7.setBackground(new java.awt.Color(201, 210, 251));
         jPanel7.setPreferredSize(new java.awt.Dimension(150, 56));
 
+        jLabel6.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         jLabel6.setText("Total last 7 days visitor");
+
+        jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
+
+        lastVisitor.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        lastVisitor.setText("jLabel2");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabel6)
-                .addContainerGap(82, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel6)
+                        .addGap(26, 26, 26))))
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(88, 88, 88)
+                .addComponent(lastVisitor)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lastVisitor)
+                .addContainerGap(68, Short.MAX_VALUE))
+        );
+
+        jPanel11.setBackground(new java.awt.Color(99, 178, 178));
+        jPanel11.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jPanel11.setForeground(new java.awt.Color(0, 102, 102));
+        jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel3.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Date:");
+        jPanel11.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, -1, -1));
+
+        jLabel25.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        jLabel25.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel25.setText("Time:");
+        jPanel11.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 40, -1, -1));
+
+        DateLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        DateLabel.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel11.add(DateLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, 110, 20));
+
+        TimeLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        TimeLabel.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel11.add(TimeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 40, 110, 20));
+
+        jLabel30.setFont(new java.awt.Font("Segoe UI", 1, 28)); // NOI18N
+        jLabel30.setText("Welcome Security!");
+
+        jPanel10.setBackground(new java.awt.Color(251, 240, 141));
+
+        jLabel27.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        jLabel27.setText("Total yesterday visitors");
+
+        jSeparator3.setForeground(new java.awt.Color(0, 0, 0));
+
+        yesterdayVisitor.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        yesterdayVisitor.setText("jLabel2");
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addComponent(jSeparator3)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                .addContainerGap(21, Short.MAX_VALUE)
+                .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14))
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGap(86, 86, 86)
+                .addComponent(yesterdayVisitor)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        jPanel8.setBackground(new java.awt.Color(82, 223, 82));
-
-        jLabel7.setText("Total visitor till today");
-
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jLabel7)
-                .addContainerGap(51, Short.MAX_VALUE))
-        );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addComponent(jLabel7)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addComponent(jLabel27)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(yesterdayVisitor)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout homePanelLayout = new javax.swing.GroupLayout(homePanel);
@@ -257,31 +298,32 @@ public class SecurityHomeUI extends javax.swing.JFrame {
         homePanelLayout.setHorizontalGroup(
             homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(homePanelLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52)
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(64, 64, 64)
-                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(homePanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(homePanelLayout.createSequentialGroup()
+                        .addGap(393, 393, 393)
+                        .addComponent(jLabel30))
+                    .addGroup(homePanelLayout.createSequentialGroup()
+                        .addGap(79, 79, 79)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(102, 102, 102)
+                        .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(100, 100, 100)
+                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, 1078, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(262, Short.MAX_VALUE))
         );
         homePanelLayout.setVerticalGroup(
             homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(homePanelLayout.createSequentialGroup()
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(56, 56, 56)
+                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(jLabel30)
+                .addGap(70, 70, 70)
                 .addGroup(homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 884, Short.MAX_VALUE))
+                    .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(660, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("tab1", homePanel);
@@ -335,7 +377,7 @@ public class SecurityHomeUI extends javax.swing.JFrame {
             }
         });
 
-        jLabel9.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
         jLabel9.setText("Visitor Management");
 
         inputTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -372,33 +414,33 @@ public class SecurityHomeUI extends javax.swing.JFrame {
         visitorPanelLayout.setHorizontalGroup(
             visitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, visitorPanelLayout.createSequentialGroup()
-                .addGroup(visitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(visitorPanelLayout.createSequentialGroup()
-                        .addContainerGap(372, Short.MAX_VALUE)
-                        .addComponent(searchVisitorListBox, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(inputTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
-                        .addComponent(searchVisitorbtn)
-                        .addGap(30, 30, 30)
-                        .addComponent(Add_visitor_btn)
-                        .addGap(30, 30, 30)
-                        .addComponent(Delete_visitor_btn)
-                        .addGap(27, 27, 27)
-                        .addComponent(viewVisitorbtn)))
-                .addGap(276, 276, 276))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(searchVisitorListBox, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(inputTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addComponent(searchVisitorbtn)
+                .addGap(18, 18, 18)
+                .addComponent(Add_visitor_btn)
+                .addGap(18, 18, 18)
+                .addComponent(Delete_visitor_btn)
+                .addGap(33, 33, 33)
+                .addComponent(viewVisitorbtn)
+                .addGap(310, 310, 310))
             .addGroup(visitorPanelLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1039, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 301, Short.MAX_VALUE))
+            .addGroup(visitorPanelLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
                 .addComponent(jLabel9)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         visitorPanelLayout.setVerticalGroup(
             visitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(visitorPanelLayout.createSequentialGroup()
-                .addGap(121, 121, 121)
+                .addGap(48, 48, 48)
                 .addComponent(jLabel9)
-                .addGap(18, 18, 18)
+                .addGap(91, 91, 91)
                 .addGroup(visitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(searchVisitorbtn)
                     .addComponent(inputTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -408,14 +450,14 @@ public class SecurityHomeUI extends javax.swing.JFrame {
                     .addComponent(viewVisitorbtn))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(444, Short.MAX_VALUE))
+                .addContainerGap(437, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("tab2", visitorPanel);
 
         addVisitorPanel.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel8.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel8.setText("Add new visitor");
 
         jLabel10.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
@@ -433,12 +475,18 @@ public class SecurityHomeUI extends javax.swing.JFrame {
         jLabel15.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
         jLabel15.setText("Reason to visit:");
 
+        visitorICTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                visitorICTextFieldActionPerformed(evt);
+            }
+        });
+
         residentUnitListBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
 
-        AddVistorbtn.setText("Save");
-        AddVistorbtn.addActionListener(new java.awt.event.ActionListener() {
+        AddVisitorbtn.setText("Save");
+        AddVisitorbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AddVistorbtnActionPerformed(evt);
+                AddVisitorbtnActionPerformed(evt);
             }
         });
 
@@ -482,7 +530,7 @@ public class SecurityHomeUI extends javax.swing.JFrame {
                         .addComponent(jLabel8))
                     .addGroup(addVisitorPanelLayout.createSequentialGroup()
                         .addGap(485, 485, 485)
-                        .addComponent(AddVistorbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(AddVisitorbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(372, Short.MAX_VALUE))
         );
         addVisitorPanelLayout.setVerticalGroup(
@@ -515,8 +563,8 @@ public class SecurityHomeUI extends javax.swing.JFrame {
                     .addComponent(jLabel15)
                     .addComponent(visitReasonTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(159, 159, 159)
-                .addComponent(AddVistorbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(566, Short.MAX_VALUE))
+                .addComponent(AddVisitorbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(560, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("tab3", addVisitorPanel);
@@ -690,7 +738,7 @@ public class SecurityHomeUI extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jPanel2.setBackground(new java.awt.Color(92, 178, 178));
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(214, 214, 214), 1, true));
         jPanel2.setPreferredSize(new java.awt.Dimension(240, 1170));
 
@@ -710,21 +758,50 @@ public class SecurityHomeUI extends javax.swing.JFrame {
             }
         });
 
+        jPanel9.setBackground(new java.awt.Color(98, 178, 178));
+
+        jLabel85.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel85.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel85.setText("SPARROW");
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+                .addContainerGap(101, Short.MAX_VALUE)
+                .addComponent(jLabel85, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(57, 57, 57))
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jLabel85)
+                .addContainerGap(22, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Home_btn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(Visitor_btn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
+            .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Home_btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Visitor_btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(69, 69, 69)
+                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22)
                 .addComponent(Home_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addGap(18, 18, 18)
                 .addComponent(Visitor_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(943, Short.MAX_VALUE))
+                .addContainerGap(930, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -732,7 +809,7 @@ public class SecurityHomeUI extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1201, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -755,15 +832,19 @@ public class SecurityHomeUI extends javax.swing.JFrame {
           jTabbedPane2.setSelectedIndex(0); 
     }//GEN-LAST:event_Home_btnActionPerformed
 
-    private void logout_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logout_btnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_logout_btnActionPerformed
-
     private void Visitor_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Visitor_btnActionPerformed
         jTabbedPane2.setSelectedIndex(1); 
          DefaultTableModel model = (DefaultTableModel) visitor_table.getModel();
          model.setRowCount(0);
         load_data();
+        Visitor_btn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Trigger function
+                System.out.println("Button Clicked!");
+                // Perform other actions or operations here
+            }
+        });
+        
         
     }//GEN-LAST:event_Visitor_btnActionPerformed
 
@@ -771,19 +852,25 @@ public class SecurityHomeUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_inputTextFieldActionPerformed
 
-    private void AddVistorbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddVistorbtnActionPerformed
+    private void AddVisitorbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddVisitorbtnActionPerformed
         conn = sqliteConn2.connect();
         String sql = "INSERT INTO visitor (name,IC,resident_unit,plate_number,time_in,status,date,reason,contact_number) values (?,?,?,?,?,?,?,?,?)";
-        String name = visitorNameTextField.getText();
+        String name = visitorNameTextField.getText().toUpperCase();
         String ic = visitorICTextField.getText();
         String contact = visitorContactTextField.getText();
-        String car_plate = visitorCarPlateTextField.getText();
+        String car_plate = visitorCarPlateTextField.getText().toUpperCase();
         String unit = residentUnitListBox.getSelectedItem().toString();
         String reason = visitReasonTextField.getText();
         String date = getCurrentDate();
         String time = getCurrentTime();
-        
-        try{
+        if(name.equals("")|| ic.equals("")||contact.equals("")||car_plate.equals("")||reason.equals("")){
+            JOptionPane.showMessageDialog(null,"Please fill all the field");
+        }else if (ic.length() != 12 ){
+            JOptionPane.showMessageDialog(null,"IC length incorrect,please remove '-'");
+        } else if(contact.length() <10 || contact.length()>11){
+            JOptionPane.showMessageDialog(null,"Phone length incorrect,please remove '-'");
+        }else{
+            try{
             pst = conn.prepareStatement(sql);
             pst.setString(1,name);
             pst.setString(2,ic);
@@ -796,6 +883,7 @@ public class SecurityHomeUI extends javax.swing.JFrame {
             pst.setString(9,contact);
             pst.execute();
             JOptionPane.showMessageDialog(null,"Visitor Added");
+            isSave = true;
             visitorNameTextField.setText("");
             visitorICTextField.setText("");
             visitorContactTextField.setText("");
@@ -804,35 +892,44 @@ public class SecurityHomeUI extends javax.swing.JFrame {
             DefaultTableModel model = (DefaultTableModel) visitor_table.getModel();
             model.setRowCount(0);
             jTabbedPane2.setSelectedIndex(1);
+            AddVisitorbtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Trigger function
+                System.out.println("Button Clicked!");
+                // Perform other actions or operations here
+            }
+        });
         }catch(SQLException e){
                    JOptionPane.showMessageDialog(null,e);
             }finally {
-    // Close resources (result set, statement, connection)
-    if (rs != null) {
-        try {
-            rs.close();
-        } catch (SQLException e) {
-            // Handle exception
+                // Close resources (result set, statement, connection)
+                if (rs != null) {
+                    try {
+                        rs.close();
+                    } catch (SQLException e) {
+                        // Handle exception
+                    }
+                }
+                if (pst != null) {
+                    try {
+                        pst.close();
+                    } catch (SQLException e) {
+                        // Handle exception
+                    }
+                }
+                if (conn != null) {
+                    try {
+                        conn.close();
+                    } catch (SQLException e) {
+                        // Handle exception
+                    }
+                }
+            }
         }
-    }
-    if (pst != null) {
-        try {
-            pst.close();
-        } catch (SQLException e) {
-            // Handle exception
-        }
-    }
-    if (conn != null) {
-        try {
-            conn.close();
-        } catch (SQLException e) {
-            // Handle exception
-        }
-    }
-}
+        
 
         
-    }//GEN-LAST:event_AddVistorbtnActionPerformed
+    }//GEN-LAST:event_AddVisitorbtnActionPerformed
 
     private void Add_visitor_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Add_visitor_btnActionPerformed
         jTabbedPane2.setSelectedIndex(2);
@@ -849,6 +946,13 @@ public class SecurityHomeUI extends javax.swing.JFrame {
         }catch(Exception e){
             JOptionPane.showMessageDialog(null,e);
         }
+        Add_visitor_btn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Trigger function
+                System.out.println("Button Clicked!");
+                // Perform other actions or operations here
+            }
+        });
     }//GEN-LAST:event_Add_visitor_btnActionPerformed
 
     private void viewVisitorbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewVisitorbtnActionPerformed
@@ -856,12 +960,14 @@ public class SecurityHomeUI extends javax.swing.JFrame {
         TableModel model = visitor_table.getModel();
         String id = model.getValueAt(index, 0).toString();
         conn = sqliteConn2.connect();
-
+        String timeOut = model.getValueAt(index, 9).toString();
         if(conn!= null){
             jTabbedPane2.setSelectedIndex(3);
-            if(timeOutLabel.equals("OUT")){
+            if(timeOut.equals("OUT")){
                   saveTimeOutbtn.setVisible(false);
-              } 
+              } else{
+                saveTimeOutbtn.setVisible(true);
+            }
               
               
             String sql = "SELECT name,ic,resident_unit,contact_number,plate_number,time_in,time_out,date,status,reason FROM visitor WHERE id =?";
@@ -869,6 +975,7 @@ public class SecurityHomeUI extends javax.swing.JFrame {
                pst = conn.prepareStatement(sql);
                pst.setString(1,id);
                rs = pst.executeQuery();
+               if(rs.next()){
                visitorIDLabel.setText(id);
                visitorNameLabel.setText(rs.getString("name"));
                visitorICLabel.setText(rs.getString("ic"));
@@ -880,7 +987,7 @@ public class SecurityHomeUI extends javax.swing.JFrame {
                timeInLabel.setText(rs.getString("time_in"));
                timeOutLabel.setText(rs.getString("time_out"));
                
-              
+               }
                 
                       
               
@@ -928,35 +1035,38 @@ public class SecurityHomeUI extends javax.swing.JFrame {
             System.out.println(id);
             pst.setString(1,time);
             pst.setString(2, id);
-            pst.execute();
+            pst.executeUpdate();
             JOptionPane.showMessageDialog(null,"Check out successfully");
-            
+            DefaultTableModel model = (DefaultTableModel) visitor_table.getModel();
+            model.setRowCount(0);
+            load_data();
+            jTabbedPane2.setSelectedIndex(1);
         }catch(SQLException e){
                    JOptionPane.showMessageDialog(null,e);
-            }finally {
-    // Close resources (result set, statement, connection)
-    if (rs != null) {
-        try {
-            rs.close();
-        } catch (SQLException e) {
-            // Handle exception
+       }finally {
+            // Close resources (result set, statement, connection)
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+            if (pst != null) {
+                try {
+                    pst.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
         }
-    }
-    if (pst != null) {
-        try {
-            pst.close();
-        } catch (SQLException e) {
-            // Handle exception
-        }
-    }
-    if (conn != null) {
-        try {
-            conn.close();
-        } catch (SQLException e) {
-            // Handle exception
-        }
-    }
-}
 
     }//GEN-LAST:event_saveTimeOutbtnActionPerformed
 
@@ -1132,8 +1242,13 @@ public class SecurityHomeUI extends javax.swing.JFrame {
      }
     }//GEN-LAST:event_Delete_visitor_btnActionPerformed
 
+    private void visitorICTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_visitorICTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_visitorICTextFieldActionPerformed
+
     public void load_data(){
         conn = sqliteConn2.connect();
+        int row =0;
         if(conn != null){   
             String sql = "SELECT id,name,ic,resident_unit,contact_number,plate_number,time_in,time_out,date,status,reason FROM visitor";
             try {
@@ -1153,7 +1268,10 @@ public class SecurityHomeUI extends javax.swing.JFrame {
                        columnData[9] = rs.getString("status");
                        columnData[10] = rs.getString("reason");
                        defaultTableModel.addRow(columnData);
-                       
+                       row++;
+                }
+                if(row>0){
+                     isLoad = true;
                 }
             }catch(SQLException e){
                    JOptionPane.showMessageDialog(null,e);
@@ -1191,10 +1309,100 @@ public class SecurityHomeUI extends javax.swing.JFrame {
     return dateFormat.format(currentDate);
     }
     
-    private String getCurrentTime(){
+    public void loadVisitor(){
+        conn = sqliteConn2.connect();
+        String currentDate = getCurrentDate();
+        String yesterdayDate = getYesterday();
+        String sevenday = getLastSevenDays();
+        String current = "SELECT COUNT(name) as total FROM visitor WHERE date =? ";
+        String yesterday =  "SELECT COUNT(name)as total FROM visitor WHERE date =? ";
+        String lastSeven = "SELECT COUNT(name) as total FROM visitor WHERE date BETWEEN ? AND ? ";
+
+        try{
+            pst = conn.prepareStatement(current);
+            pst.setString(1, currentDate);
+            rs= pst.executeQuery();
+            if(rs.next()){
+                todayVisitor.setText(rs.getString("total"));
+            }
+        }catch(SQLException e){
+                       JOptionPane.showMessageDialog(null,e);
+                }
+
+        try{
+            pst = conn.prepareStatement(yesterday);
+
+            pst.setString(1, yesterdayDate);
+            rs =pst.executeQuery();
+            if(rs.next()){
+                yesterdayVisitor.setText(rs.getString("total"));
+            }
+        }catch(SQLException e){
+                       JOptionPane.showMessageDialog(null,e);
+                }
+
+        try{
+            pst = conn.prepareStatement(lastSeven);
+            pst.setString(1, currentDate);
+            pst.setString(2, sevenday);
+            rs=pst.executeQuery();
+            if(rs.next()){
+                lastVisitor.setText(rs.getString("total"));
+            }
+        }catch(SQLException e){
+                       JOptionPane.showMessageDialog(null,e);
+                }finally {
+        // Close resources (result set, statement, connection)
+        if (rs != null) {
+            try {
+                rs.close();
+            } catch (SQLException e) {
+                // Handle exception
+            }
+        }
+        if (pst != null) {
+            try {
+                pst.close();
+            } catch (SQLException e) {
+                // Handle exception
+            }
+        }
+        if (conn != null) {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                // Handle exception
+            }
+        }
+    }
+    }
+    public String getYesterday(){
+        String currentDate = getCurrentDate();
+            LocalDate date
+                = LocalDate.parse(currentDate);
+                LocalDate returnvalue
+                = date.minusDays(-1);
+            String yesterdaydate = returnvalue.toString();
+            return yesterdaydate;
+        }
+
+    public String getLastSevenDays(){
+    String currentDate = getCurrentDate();
+        LocalDate date
+            = LocalDate.parse(currentDate);
+        LocalDate returnvalue
+            = date.minusDays(-7);
+        String lastsevendate = returnvalue.toString();
+            
+        return lastsevendate;
+    }
+    public String getCurrentTime(){
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
         LocalTime localTime = LocalTime.now();
+        
         return dtf.format(localTime);
+        
+        
     }
     
     public ResultSet floor_unitList() {
@@ -1206,35 +1414,38 @@ public class SecurityHomeUI extends javax.swing.JFrame {
             return rs;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
-        }finally {
-    // Close resources (result set, statement, connection)
-    if (rs != null) {
-        try {
-            rs.close();
-        } catch (SQLException e) {
-            // Handle exception
         }
-    }
-    if (pst != null) {
-        try {
-            pst.close();
-        } catch (SQLException e) {
-            // Handle exception
-        }
-    }
-    if (conn != null) {
-        try {
-            conn.close();
-        } catch (SQLException e) {
-            // Handle exception
-        }
-    }
-}
 
         return null; // Return null if an exception occurs
     }
+    public void openVisitorPanel() {
+        // Simulate a button click event
+        ActionEvent event = new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "open visitor panel");
+        for (ActionListener listener : Visitor_btn.getActionListeners()) {
+            listener.actionPerformed(event);
+        }
+    }
+    public void openAddVisitorPanel() {
+        // Simulate a button click event
+        ActionEvent event = new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "login");
+        for (ActionListener listener : Add_visitor_btn.getActionListeners()) {
+            listener.actionPerformed(event);
+        }
+    }
+    public void triggerSaveVisitor() {
+        // Simulate a button click event
+        ActionEvent event = new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "login");
+        for (ActionListener listener : AddVisitorbtn.getActionListeners()) {
+            listener.actionPerformed(event);
+        }
+    }
     
-    
+    public boolean isSaveVisitor() {
+        return isSave;
+    }
+    public boolean isLoad() {
+        return isLoad;
+    }
     /**
      * @param args the command line arguments
      */
@@ -1271,10 +1482,12 @@ public class SecurityHomeUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton AddVistorbtn;
-    private javax.swing.JButton Add_visitor_btn;
+    public javax.swing.JButton AddVisitorbtn;
+    public javax.swing.JButton Add_visitor_btn;
+    private javax.swing.JLabel DateLabel;
     private javax.swing.JButton Delete_visitor_btn;
     private javax.swing.JButton Home_btn;
+    private javax.swing.JLabel TimeLabel;
     private javax.swing.JButton Visitor_btn;
     private javax.swing.JPanel addVisitorPanel;
     private javax.swing.JPanel homePanel;
@@ -1290,52 +1503,73 @@ public class SecurityHomeUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel85;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JButton logout_btn;
+    private javax.swing.JLabel lastVisitor;
     private javax.swing.JLabel reasonVisitLabel;
     private javax.swing.JLabel residentUnitLabel;
-    private javax.swing.JComboBox<String> residentUnitListBox;
+    public javax.swing.JComboBox<String> residentUnitListBox;
     private javax.swing.JButton saveTimeOutbtn;
     private javax.swing.JComboBox<String> searchVisitorListBox;
     private javax.swing.JButton searchVisitorbtn;
     private javax.swing.JLabel statusLabel;
     private javax.swing.JLabel timeInLabel;
     private javax.swing.JLabel timeOutLabel;
+    private javax.swing.JLabel todayVisitor;
     private javax.swing.JPanel viewVisitorPanel;
     private javax.swing.JButton viewVisitorbtn;
-    private javax.swing.JTextField visitReasonTextField;
+    public javax.swing.JTextField visitReasonTextField;
     private javax.swing.JLabel visitorCarPlateLabel;
-    private javax.swing.JTextField visitorCarPlateTextField;
+    public javax.swing.JTextField visitorCarPlateTextField;
     private javax.swing.JLabel visitorContactLabel;
-    private javax.swing.JTextField visitorContactTextField;
+    public javax.swing.JTextField visitorContactTextField;
     private javax.swing.JLabel visitorICLabel;
-    private javax.swing.JTextField visitorICTextField;
+    public javax.swing.JTextField visitorICTextField;
     private javax.swing.JLabel visitorIDLabel;
     private javax.swing.JLabel visitorNameLabel;
-    private javax.swing.JTextField visitorNameTextField;
+    public javax.swing.JTextField visitorNameTextField;
     private javax.swing.JPanel visitorPanel;
     javax.swing.JTable visitor_table;
+    private javax.swing.JLabel yesterdayVisitor;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void run() {
+        while(true){
+            Calendar cal = Calendar.getInstance();
+            hour = cal.get(Calendar.HOUR_OF_DAY);
+            minutes = cal.get(Calendar.MINUTE);
+            second = cal.get(Calendar.SECOND);
+            
+            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+            Date dat = cal.getTime();
+            String time = sdf.format(dat);
+            TimeLabel.setText(time);
+        }
+    }
 }

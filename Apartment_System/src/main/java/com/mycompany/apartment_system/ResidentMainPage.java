@@ -201,13 +201,9 @@ public class ResidentMainPage extends javax.swing.JFrame {
         residentVehicleTable = new javax.swing.JTable();
         jLabel69 = new javax.swing.JLabel();
         jLabel70 = new javax.swing.JLabel();
-        jLabel71 = new javax.swing.JLabel();
-        jTextField14 = new javax.swing.JTextField();
         residentICLabel = new javax.swing.JTextField();
         residentNameLabel = new javax.swing.JTextField();
         jLabel67 = new javax.swing.JLabel();
-        jLabel72 = new javax.swing.JLabel();
-        jTextField17 = new javax.swing.JTextField();
         jLabel73 = new javax.swing.JLabel();
         jLabel74 = new javax.swing.JLabel();
         jLabel75 = new javax.swing.JLabel();
@@ -223,14 +219,10 @@ public class ResidentMainPage extends javax.swing.JFrame {
         jPanel36 = new javax.swing.JPanel();
         jLabel77 = new javax.swing.JLabel();
         jLabel78 = new javax.swing.JLabel();
-        jLabel79 = new javax.swing.JLabel();
         jLabel80 = new javax.swing.JLabel();
-        jLabel81 = new javax.swing.JLabel();
         jLabel82 = new javax.swing.JLabel();
         residentNameTextField = new javax.swing.JTextField();
         residentICTextField = new javax.swing.JTextField();
-        jSpinner1 = new javax.swing.JSpinner();
-        jSpinner2 = new javax.swing.JSpinner();
         jLabel83 = new javax.swing.JLabel();
         jLabel84 = new javax.swing.JLabel();
         residentPhoneTextField = new javax.swing.JTextField();
@@ -1955,15 +1947,6 @@ public class ResidentMainPage extends javax.swing.JFrame {
         jLabel70.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         jLabel70.setText("IC No.:");
 
-        jLabel71.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
-        jLabel71.setText("No. of Family Members:");
-
-        jTextField14.setEditable(false);
-        jTextField14.setBackground(new java.awt.Color(232, 239, 239));
-        jTextField14.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
-        jTextField14.setText("(content)");
-        jTextField14.setBorder(null);
-
         residentICLabel.setEditable(false);
         residentICLabel.setBackground(new java.awt.Color(232, 239, 239));
         residentICLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
@@ -1978,20 +1961,6 @@ public class ResidentMainPage extends javax.swing.JFrame {
 
         jLabel67.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel67.setText("BASIC INFORMATION");
-
-        jLabel72.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
-        jLabel72.setText("No. of Pets:");
-
-        jTextField17.setEditable(false);
-        jTextField17.setBackground(new java.awt.Color(232, 239, 239));
-        jTextField17.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
-        jTextField17.setText("(content)");
-        jTextField17.setBorder(null);
-        jTextField17.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField17ActionPerformed(evt);
-            }
-        });
 
         jLabel73.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel73.setText("CONTACT INFORMATION");
@@ -2056,41 +2025,33 @@ public class ResidentMainPage extends javax.swing.JFrame {
             jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel33Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addGroup(jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel67)
-                    .addComponent(jLabel76)
-                    .addComponent(jLabel73)
-                    .addGroup(jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(jPanel33Layout.createSequentialGroup()
-                            .addGroup(jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel75)
-                                .addComponent(jLabel74))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(residentPhoneLabel, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(residentEmailLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel33Layout.createSequentialGroup()
-                            .addComponent(jLabel72)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel33Layout.createSequentialGroup()
-                            .addGroup(jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel69)
-                                .addComponent(jLabel70)
-                                .addComponent(jLabel71))
-                            .addGap(24, 24, 24)
-                            .addGroup(jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(residentICLabel, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(residentNameLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jTextField14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(jScrollPane20, javax.swing.GroupLayout.PREFERRED_SIZE, 643, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel33Layout.createSequentialGroup()
+                .addGroup(jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel67, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel76, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel73, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel33Layout.createSequentialGroup()
+                        .addGroup(jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel69)
+                            .addComponent(jLabel70))
+                        .addGap(76, 76, 76)
+                        .addGroup(jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(residentICLabel, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(residentNameLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane20, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 643, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel33Layout.createSequentialGroup()
                         .addComponent(addVehiclebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(editVehiclebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(deleteVehiclebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(deleteVehiclebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel33Layout.createSequentialGroup()
+                        .addGroup(jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel75)
+                            .addComponent(jLabel74))
+                        .addGap(144, 144, 144)
+                        .addGroup(jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(residentPhoneLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(residentEmailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
         jPanel33Layout.setVerticalGroup(
@@ -2099,33 +2060,23 @@ public class ResidentMainPage extends javax.swing.JFrame {
                 .addGap(45, 45, 45)
                 .addComponent(jLabel67)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel33Layout.createSequentialGroup()
-                        .addGroup(jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel69)
-                            .addComponent(residentNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(6, 6, 6)
-                        .addGroup(jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel70)
-                            .addComponent(residentICLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel71))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel72)
-                            .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(36, 36, 36)
-                        .addComponent(jLabel73)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel75)
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabel74))
-                    .addGroup(jPanel33Layout.createSequentialGroup()
-                        .addComponent(residentEmailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6)
-                        .addComponent(residentPhoneLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel69)
+                    .addComponent(residentNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
+                .addGroup(jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel70)
+                    .addComponent(residentICLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(88, 88, 88)
+                .addComponent(jLabel73)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel75)
+                    .addComponent(residentEmailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
+                .addGroup(jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel74)
+                    .addComponent(residentPhoneLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addComponent(jLabel76)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -2195,12 +2146,8 @@ public class ResidentMainPage extends javax.swing.JFrame {
 
         jLabel78.setText("IC No.:");
 
-        jLabel79.setText("No. of Family Members:");
-
         jLabel80.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel80.setText("BASIC INFORMATION");
-
-        jLabel81.setText("No. of Pets:");
 
         jLabel82.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel82.setText("CONTACT INFORMATION");
@@ -2222,17 +2169,11 @@ public class ResidentMainPage extends javax.swing.JFrame {
                                 .addComponent(jLabel77)
                                 .addGap(88, 88, 88))
                             .addGroup(jPanel36Layout.createSequentialGroup()
-                                .addGroup(jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jLabel81, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel79))
-                                    .addComponent(jLabel78, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addGap(27, 27, 27)))
+                                .addComponent(jLabel78)
+                                .addGap(127, 127, 127)))
                         .addGroup(jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(residentNameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
-                            .addComponent(residentICTextField)
-                            .addComponent(jSpinner1)
-                            .addComponent(jSpinner2)))
+                            .addComponent(residentICTextField)))
                     .addComponent(jLabel80)
                     .addComponent(jLabel82)
                     .addGroup(jPanel36Layout.createSequentialGroup()
@@ -2258,15 +2199,7 @@ public class ResidentMainPage extends javax.swing.JFrame {
                 .addGroup(jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel78)
                     .addComponent(residentICTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel79)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(14, 14, 14)
-                .addGroup(jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel81)
-                    .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
+                .addGap(96, 96, 96)
                 .addComponent(jLabel82)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -2453,11 +2386,11 @@ public class ResidentMainPage extends javax.swing.JFrame {
         jPanel41Layout.setVerticalGroup(
             jPanel41Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel41Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addGap(59, 59, 59)
                 .addComponent(jLabel98)
-                .addGap(52, 52, 52)
-                .addComponent(jPanel42, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42)
+                .addComponent(jPanel42, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel41Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton33, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(saveVehiclebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -2571,36 +2504,37 @@ public class ResidentMainPage extends javax.swing.JFrame {
         jPanel39Layout.setHorizontalGroup(
             jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel39Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
                 .addGroup(jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel39Layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addGroup(jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel92)
-                            .addGroup(jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel39Layout.createSequentialGroup()
-                                    .addComponent(backToProfilebtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(saveEditVehiclebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jPanel40, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel39Layout.createSequentialGroup()
-                        .addGap(78, 78, 78)
-                        .addComponent(vehicleIDTextField)))
+                        .addComponent(jLabel92)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(vehicleIDTextField))
+                    .addGroup(jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel39Layout.createSequentialGroup()
+                            .addComponent(backToProfilebtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(saveEditVehiclebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jPanel40, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(181, Short.MAX_VALUE))
         );
         jPanel39Layout.setVerticalGroup(
             jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel39Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addGap(61, 61, 61)
                 .addComponent(jLabel92)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(vehicleIDTextField)
-                .addGap(29, 29, 29)
+                .addGap(75, 75, 75)
                 .addComponent(jPanel40, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
-                .addGroup(jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(backToProfilebtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(saveEditVehiclebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(534, Short.MAX_VALUE))
+                .addGroup(jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel39Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(backToProfilebtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel39Layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(saveEditVehiclebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(466, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout EditVehicleLayout = new javax.swing.GroupLayout(EditVehicle);
@@ -2781,13 +2715,25 @@ public class ResidentMainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_notificationPanelbtnActionPerformed
 
     private void logOutbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logOutbtnActionPerformed
-        
+                ResidentLoginNew login = new ResidentLoginNew();
+        login.setVisible(true);
+        dispose();
+        JOptionPane.showMessageDialog(null,"Log out successfully");
+       
     }//GEN-LAST:event_logOutbtnActionPerformed
 
     private void paymentCreditMaintainencebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paymentCreditMaintainencebtnActionPerformed
-        jTabbedPane3.setSelectedIndex(2);
-        typeBill.setText("Maintance fee");
-        
+        rs = getCurrentMaintancePayment();
+        try{
+            if(!rs.next()){
+                 JOptionPane.showMessageDialog(null,"No pending maintance payment");
+            }else{
+                jTabbedPane3.setSelectedIndex(2);
+                typeBill.setText("Maintance fee");
+            }
+        }catch(SQLException e){
+                   JOptionPane.showMessageDialog(null,e);
+                }
     }//GEN-LAST:event_paymentCreditMaintainencebtnActionPerformed
 
     private void paySinkingCreditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paySinkingCreditActionPerformed
@@ -3067,10 +3013,6 @@ public class ResidentMainPage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton19ActionPerformed
 
-    private void jTextField17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField17ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField17ActionPerformed
-
     private void addVehiclebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addVehiclebtnActionPerformed
         jTabbedPane3.setSelectedIndex(13);
     }//GEN-LAST:event_addVehiclebtnActionPerformed
@@ -3279,7 +3221,7 @@ public class ResidentMainPage extends javax.swing.JFrame {
                JOptionPane.showMessageDialog(null,"IC length incorrect");
            }else if(!isNumeric(ric)){
                JOptionPane.showMessageDialog(null,"IC must be numeric");
-           }else if(rphone.length() <10 || rphone.length() <11 ){
+           }else if(rphone.length() <10 || rphone.length() >11 ){
                JOptionPane.showMessageDialog(null,"Invalid Phone number");
            }
            else if(!isValidEmail(remail)){
@@ -3374,7 +3316,10 @@ public class ResidentMainPage extends javax.swing.JFrame {
              colorTextField.setText("");
              plateTextField.setText("");
             jTabbedPane3.setSelectedIndex(11);
-            loadResident();
+            DefaultTableModel residentCar = (DefaultTableModel)residentVehicleTable.getModel();
+                residentCar.setRowCount(0);
+                loadResident();
+            
 
             
         }catch(SQLException e){
@@ -3414,7 +3359,11 @@ public class ResidentMainPage extends javax.swing.JFrame {
             String model = editModelTextField.getText().toUpperCase();;
             String plate = editPlateTextField.getText().toUpperCase();
             String color = editColorTextField.getText().toUpperCase();
-        try{
+            
+        if(brand.equals("") ||model.equals("")||plate.equals("")|| color.equals("")){
+            JOptionPane.showMessageDialog(null,"Please fill all the fields");
+        }else{
+                    try{
                 pst = conn.prepareStatement(sql);
 
                 pst.setString(1,brand);
@@ -3425,7 +3374,7 @@ public class ResidentMainPage extends javax.swing.JFrame {
                 pst.executeUpdate();
                 JOptionPane.showMessageDialog(null,"Vehicle Information Updated successfully");
    
-                jTabbedPane3.setSelectedIndex(7);
+                jTabbedPane3.setSelectedIndex(11);
                 DefaultTableModel residentCar = (DefaultTableModel)residentVehicleTable.getModel();
                 residentCar.setRowCount(0);
                 loadResident();
@@ -3456,6 +3405,8 @@ public class ResidentMainPage extends javax.swing.JFrame {
                 }
             }
         }
+        }
+
     }//GEN-LAST:event_saveEditVehiclebtnActionPerformed
 
     private void backToProfilebtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToProfilebtn2ActionPerformed
@@ -3753,6 +3704,47 @@ public void loadHistoryPayment(){
             }
         }
     }
+
+public ResultSet getCurrentMaintancePayment(){
+        conn = sqliteConn2.connect();
+        String unit = residentUnitLabel.getText();
+        String sql = "SELECT id,bill_type,bill_amount FROM bill_record WHERE floor_unit = ? AND payment_status ='false' and bill_type='Maintance fee' ";
+        try{
+            pst = conn.prepareStatement(sql);
+            pst.setString(1,unit);
+            rs = pst.executeQuery();
+            
+            return rs;
+        }catch(SQLException e){
+                   JOptionPane.showMessageDialog(null,e);
+            }finally {
+            // Close resources (result set, statement, connection)
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+            if (pst != null) {
+                try {
+                    pst.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+        }
+        return null;
+        
+}
+
 public ResultSet getCurrentPassword(String sql, Object... params)throws SQLException{
      conn = sqliteConn2.connect();
       try {
@@ -4328,17 +4320,13 @@ private boolean isValidEmail(String email) {
     private javax.swing.JLabel jLabel68;
     private javax.swing.JLabel jLabel69;
     private javax.swing.JLabel jLabel70;
-    private javax.swing.JLabel jLabel71;
-    private javax.swing.JLabel jLabel72;
     private javax.swing.JLabel jLabel73;
     private javax.swing.JLabel jLabel74;
     private javax.swing.JLabel jLabel75;
     private javax.swing.JLabel jLabel76;
     private javax.swing.JLabel jLabel77;
     private javax.swing.JLabel jLabel78;
-    private javax.swing.JLabel jLabel79;
     private javax.swing.JLabel jLabel80;
-    private javax.swing.JLabel jLabel81;
     private javax.swing.JLabel jLabel82;
     private javax.swing.JLabel jLabel83;
     private javax.swing.JLabel jLabel84;
@@ -4402,15 +4390,11 @@ private boolean isValidEmail(String email) {
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JSpinner jSpinner2;
     private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextArea jTextArea3;
     private javax.swing.JTextArea jTextArea4;
-    private javax.swing.JTextField jTextField14;
-    private javax.swing.JTextField jTextField17;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JButton logOutbtn;
     private javax.swing.JTable managementForumTable;
