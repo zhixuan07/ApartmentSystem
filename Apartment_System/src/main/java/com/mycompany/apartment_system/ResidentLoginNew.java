@@ -4,6 +4,8 @@
  */
 package com.mycompany.apartment_system;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -20,6 +22,7 @@ public class ResidentLoginNew extends javax.swing.JFrame {
     Connection conn = null;
     ResultSet rs = null;
     PreparedStatement pst = null;
+    private boolean isLoggedIn;
     /**
      * Creates new form ResidentLoginNew
      */
@@ -44,7 +47,7 @@ public class ResidentLoginNew extends javax.swing.JFrame {
         residentUsernameInput = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        residentLoginBtn = new javax.swing.JButton();
         residentPasswordInput = new javax.swing.JPasswordField();
         jButton3 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -108,14 +111,14 @@ public class ResidentLoginNew extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(54, 84, 85));
         jLabel4.setText("Password");
 
-        jButton1.setBackground(new java.awt.Color(164, 221, 221));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(54, 84, 85));
-        jButton1.setText("Log In");
-        jButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85), 2));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        residentLoginBtn.setBackground(new java.awt.Color(164, 221, 221));
+        residentLoginBtn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        residentLoginBtn.setForeground(new java.awt.Color(54, 84, 85));
+        residentLoginBtn.setText("Log In");
+        residentLoginBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85), 2));
+        residentLoginBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                residentLoginBtnActionPerformed(evt);
             }
         });
 
@@ -159,7 +162,7 @@ public class ResidentLoginNew extends javax.swing.JFrame {
                             .addComponent(residentPasswordInput, javax.swing.GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(185, 185, 185)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(residentLoginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(106, 106, 106)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -181,7 +184,7 @@ public class ResidentLoginNew extends javax.swing.JFrame {
                 .addGap(44, 44, 44)
                 .addComponent(residentPasswordInput, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(99, 99, 99)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(residentLoginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -223,7 +226,7 @@ public class ResidentLoginNew extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_residentUsernameInputActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void residentLoginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_residentLoginBtnActionPerformed
         conn = sqliteConn2.connect();
         String unit = residentUsernameInput.getText();
         char [] ps = residentPasswordInput.getPassword();
@@ -247,11 +250,19 @@ public class ResidentLoginNew extends javax.swing.JFrame {
                 resident.loadResident();
                 residentUsernameInput.setText("");
                 residentPasswordInput.setText("");
+                
                 JOptionPane.showMessageDialog(null,"Login successfully");
+                isLoggedIn =true;
                 dispose();
                  
                 resident.setVisible(true);
-               
+            residentLoginBtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Trigger function
+                System.out.println("Button Clicked!");
+                // Perform other actions or operations here
+            }
+        });
                 
                 
                 
@@ -290,7 +301,7 @@ public class ResidentLoginNew extends javax.swing.JFrame {
         }
 
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_residentLoginBtnActionPerformed
 
     private void residentPasswordInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_residentPasswordInputActionPerformed
         // TODO add your handling code here:
@@ -304,6 +315,17 @@ public class ResidentLoginNew extends javax.swing.JFrame {
     public void close(){
         WindowEvent closewindow = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
         Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closewindow);
+    }
+    
+    public void triggerLogin() {
+        // Simulate a button click event
+        ActionEvent event = new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "login");
+        for (ActionListener listener : residentLoginBtn.getActionListeners()) {
+            listener.actionPerformed(event);
+        }
+    }
+    public boolean isLoggedIn() {
+        return isLoggedIn;
     }
     /**
      * @param args the command line arguments
@@ -341,7 +363,6 @@ public class ResidentLoginNew extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -351,7 +372,8 @@ public class ResidentLoginNew extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JPasswordField residentPasswordInput;
-    private javax.swing.JTextField residentUsernameInput;
+    public javax.swing.JButton residentLoginBtn;
+    public javax.swing.JPasswordField residentPasswordInput;
+    public javax.swing.JTextField residentUsernameInput;
     // End of variables declaration//GEN-END:variables
 }

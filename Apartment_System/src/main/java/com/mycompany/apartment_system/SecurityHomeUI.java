@@ -4,6 +4,8 @@
  */
 package com.mycompany.apartment_system;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,7 +26,8 @@ import javax.swing.table.TableModel;
  * @author zhixu
  */
 public class SecurityHomeUI extends javax.swing.JFrame implements Runnable{
-
+    private boolean isSave ;
+    private boolean isLoad;
     Connection conn = null;
     ResultSet rs = null;
     PreparedStatement pst = null;
@@ -97,7 +100,7 @@ public class SecurityHomeUI extends javax.swing.JFrame implements Runnable{
         visitorContactTextField = new javax.swing.JTextField();
         residentUnitListBox = new javax.swing.JComboBox<>();
         visitReasonTextField = new javax.swing.JTextField();
-        AddVistorbtn = new javax.swing.JButton();
+        AddVisitorbtn = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
         visitorCarPlateTextField = new javax.swing.JTextField();
         viewVisitorPanel = new javax.swing.JPanel();
@@ -318,9 +321,8 @@ public class SecurityHomeUI extends javax.swing.JFrame implements Runnable{
                 .addGap(70, 70, 70)
                 .addGroup(homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
-                    .addGroup(homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(660, Short.MAX_VALUE))
         );
 
@@ -473,12 +475,18 @@ public class SecurityHomeUI extends javax.swing.JFrame implements Runnable{
         jLabel15.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
         jLabel15.setText("Reason to visit:");
 
+        visitorICTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                visitorICTextFieldActionPerformed(evt);
+            }
+        });
+
         residentUnitListBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
 
-        AddVistorbtn.setText("Save");
-        AddVistorbtn.addActionListener(new java.awt.event.ActionListener() {
+        AddVisitorbtn.setText("Save");
+        AddVisitorbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AddVistorbtnActionPerformed(evt);
+                AddVisitorbtnActionPerformed(evt);
             }
         });
 
@@ -522,7 +530,7 @@ public class SecurityHomeUI extends javax.swing.JFrame implements Runnable{
                         .addComponent(jLabel8))
                     .addGroup(addVisitorPanelLayout.createSequentialGroup()
                         .addGap(485, 485, 485)
-                        .addComponent(AddVistorbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(AddVisitorbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(372, Short.MAX_VALUE))
         );
         addVisitorPanelLayout.setVerticalGroup(
@@ -555,7 +563,7 @@ public class SecurityHomeUI extends javax.swing.JFrame implements Runnable{
                     .addComponent(jLabel15)
                     .addComponent(visitReasonTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(159, 159, 159)
-                .addComponent(AddVistorbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(AddVisitorbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(560, Short.MAX_VALUE))
         );
 
@@ -829,6 +837,14 @@ public class SecurityHomeUI extends javax.swing.JFrame implements Runnable{
          DefaultTableModel model = (DefaultTableModel) visitor_table.getModel();
          model.setRowCount(0);
         load_data();
+        Visitor_btn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Trigger function
+                System.out.println("Button Clicked!");
+                // Perform other actions or operations here
+            }
+        });
+        
         
     }//GEN-LAST:event_Visitor_btnActionPerformed
 
@@ -836,19 +852,25 @@ public class SecurityHomeUI extends javax.swing.JFrame implements Runnable{
         // TODO add your handling code here:
     }//GEN-LAST:event_inputTextFieldActionPerformed
 
-    private void AddVistorbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddVistorbtnActionPerformed
+    private void AddVisitorbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddVisitorbtnActionPerformed
         conn = sqliteConn2.connect();
         String sql = "INSERT INTO visitor (name,IC,resident_unit,plate_number,time_in,status,date,reason,contact_number) values (?,?,?,?,?,?,?,?,?)";
-        String name = visitorNameTextField.getText();
+        String name = visitorNameTextField.getText().toUpperCase();
         String ic = visitorICTextField.getText();
         String contact = visitorContactTextField.getText();
-        String car_plate = visitorCarPlateTextField.getText();
+        String car_plate = visitorCarPlateTextField.getText().toUpperCase();
         String unit = residentUnitListBox.getSelectedItem().toString();
         String reason = visitReasonTextField.getText();
         String date = getCurrentDate();
         String time = getCurrentTime();
-        
-        try{
+        if(name.equals("")|| ic.equals("")||contact.equals("")||car_plate.equals("")||reason.equals("")){
+            JOptionPane.showMessageDialog(null,"Please fill all the field");
+        }else if (ic.length() != 12 ){
+            JOptionPane.showMessageDialog(null,"IC length incorrect,please remove '-'");
+        } else if(contact.length() <10 || contact.length()>11){
+            JOptionPane.showMessageDialog(null,"Phone length incorrect,please remove '-'");
+        }else{
+            try{
             pst = conn.prepareStatement(sql);
             pst.setString(1,name);
             pst.setString(2,ic);
@@ -861,6 +883,7 @@ public class SecurityHomeUI extends javax.swing.JFrame implements Runnable{
             pst.setString(9,contact);
             pst.execute();
             JOptionPane.showMessageDialog(null,"Visitor Added");
+            isSave = true;
             visitorNameTextField.setText("");
             visitorICTextField.setText("");
             visitorContactTextField.setText("");
@@ -869,35 +892,44 @@ public class SecurityHomeUI extends javax.swing.JFrame implements Runnable{
             DefaultTableModel model = (DefaultTableModel) visitor_table.getModel();
             model.setRowCount(0);
             jTabbedPane2.setSelectedIndex(1);
+            AddVisitorbtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Trigger function
+                System.out.println("Button Clicked!");
+                // Perform other actions or operations here
+            }
+        });
         }catch(SQLException e){
                    JOptionPane.showMessageDialog(null,e);
             }finally {
-    // Close resources (result set, statement, connection)
-    if (rs != null) {
-        try {
-            rs.close();
-        } catch (SQLException e) {
-            // Handle exception
+                // Close resources (result set, statement, connection)
+                if (rs != null) {
+                    try {
+                        rs.close();
+                    } catch (SQLException e) {
+                        // Handle exception
+                    }
+                }
+                if (pst != null) {
+                    try {
+                        pst.close();
+                    } catch (SQLException e) {
+                        // Handle exception
+                    }
+                }
+                if (conn != null) {
+                    try {
+                        conn.close();
+                    } catch (SQLException e) {
+                        // Handle exception
+                    }
+                }
+            }
         }
-    }
-    if (pst != null) {
-        try {
-            pst.close();
-        } catch (SQLException e) {
-            // Handle exception
-        }
-    }
-    if (conn != null) {
-        try {
-            conn.close();
-        } catch (SQLException e) {
-            // Handle exception
-        }
-    }
-}
+        
 
         
-    }//GEN-LAST:event_AddVistorbtnActionPerformed
+    }//GEN-LAST:event_AddVisitorbtnActionPerformed
 
     private void Add_visitor_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Add_visitor_btnActionPerformed
         jTabbedPane2.setSelectedIndex(2);
@@ -914,6 +946,13 @@ public class SecurityHomeUI extends javax.swing.JFrame implements Runnable{
         }catch(Exception e){
             JOptionPane.showMessageDialog(null,e);
         }
+        Add_visitor_btn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Trigger function
+                System.out.println("Button Clicked!");
+                // Perform other actions or operations here
+            }
+        });
     }//GEN-LAST:event_Add_visitor_btnActionPerformed
 
     private void viewVisitorbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewVisitorbtnActionPerformed
@@ -1203,8 +1242,13 @@ public class SecurityHomeUI extends javax.swing.JFrame implements Runnable{
      }
     }//GEN-LAST:event_Delete_visitor_btnActionPerformed
 
+    private void visitorICTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_visitorICTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_visitorICTextFieldActionPerformed
+
     public void load_data(){
         conn = sqliteConn2.connect();
+        int row =0;
         if(conn != null){   
             String sql = "SELECT id,name,ic,resident_unit,contact_number,plate_number,time_in,time_out,date,status,reason FROM visitor";
             try {
@@ -1224,7 +1268,10 @@ public class SecurityHomeUI extends javax.swing.JFrame implements Runnable{
                        columnData[9] = rs.getString("status");
                        columnData[10] = rs.getString("reason");
                        defaultTableModel.addRow(columnData);
-                       
+                       row++;
+                }
+                if(row>0){
+                     isLoad = true;
                 }
             }catch(SQLException e){
                    JOptionPane.showMessageDialog(null,e);
@@ -1262,84 +1309,84 @@ public class SecurityHomeUI extends javax.swing.JFrame implements Runnable{
     return dateFormat.format(currentDate);
     }
     
-public void loadVisitor(){
-    conn = sqliteConn2.connect();
-    String currentDate = getCurrentDate();
-    String yesterdayDate = getYesterday();
-    String sevenday = getLastSevenDays();
-    String current = "SELECT COUNT(name) as total FROM visitor WHERE date =? ";
-    String yesterday =  "SELECT COUNT(name)as total FROM visitor WHERE date =? ";
-    String lastSeven = "SELECT COUNT(name) as total FROM visitor WHERE date BETWEEN ? AND ? ";
-    
-    try{
-        pst = conn.prepareStatement(current);
-        pst.setString(1, currentDate);
-        rs= pst.executeQuery();
-        if(rs.next()){
-            todayVisitor.setText(rs.getString("total"));
-        }
-    }catch(SQLException e){
-                   JOptionPane.showMessageDialog(null,e);
-            }
-    
-    try{
-        pst = conn.prepareStatement(yesterday);
-        
-        pst.setString(1, yesterdayDate);
-        rs =pst.executeQuery();
-        if(rs.next()){
-            yesterdayVisitor.setText(rs.getString("total"));
-        }
-    }catch(SQLException e){
-                   JOptionPane.showMessageDialog(null,e);
-            }
-    
-    try{
-        pst = conn.prepareStatement(lastSeven);
-        pst.setString(1, currentDate);
-        pst.setString(2, sevenday);
-        rs=pst.executeQuery();
-        if(rs.next()){
-            lastVisitor.setText(rs.getString("total"));
-        }
-    }catch(SQLException e){
-                   JOptionPane.showMessageDialog(null,e);
-            }finally {
-    // Close resources (result set, statement, connection)
-    if (rs != null) {
-        try {
-            rs.close();
-        } catch (SQLException e) {
-            // Handle exception
-        }
-    }
-    if (pst != null) {
-        try {
-            pst.close();
-        } catch (SQLException e) {
-            // Handle exception
-        }
-    }
-    if (conn != null) {
-        try {
-            conn.close();
-        } catch (SQLException e) {
-            // Handle exception
-        }
-    }
-}
-}
-public String getYesterday(){
-    String currentDate = getCurrentDate();
-        LocalDate date
-            = LocalDate.parse(currentDate);
-            LocalDate returnvalue
-            = date.minusDays(-1);
-        String yesterdaydate = returnvalue.toString();
-        return yesterdaydate;
-    }
+    public void loadVisitor(){
+        conn = sqliteConn2.connect();
+        String currentDate = getCurrentDate();
+        String yesterdayDate = getYesterday();
+        String sevenday = getLastSevenDays();
+        String current = "SELECT COUNT(name) as total FROM visitor WHERE date =? ";
+        String yesterday =  "SELECT COUNT(name)as total FROM visitor WHERE date =? ";
+        String lastSeven = "SELECT COUNT(name) as total FROM visitor WHERE date BETWEEN ? AND ? ";
 
-public String getLastSevenDays(){
+        try{
+            pst = conn.prepareStatement(current);
+            pst.setString(1, currentDate);
+            rs= pst.executeQuery();
+            if(rs.next()){
+                todayVisitor.setText(rs.getString("total"));
+            }
+        }catch(SQLException e){
+                       JOptionPane.showMessageDialog(null,e);
+                }
+
+        try{
+            pst = conn.prepareStatement(yesterday);
+
+            pst.setString(1, yesterdayDate);
+            rs =pst.executeQuery();
+            if(rs.next()){
+                yesterdayVisitor.setText(rs.getString("total"));
+            }
+        }catch(SQLException e){
+                       JOptionPane.showMessageDialog(null,e);
+                }
+
+        try{
+            pst = conn.prepareStatement(lastSeven);
+            pst.setString(1, currentDate);
+            pst.setString(2, sevenday);
+            rs=pst.executeQuery();
+            if(rs.next()){
+                lastVisitor.setText(rs.getString("total"));
+            }
+        }catch(SQLException e){
+                       JOptionPane.showMessageDialog(null,e);
+                }finally {
+        // Close resources (result set, statement, connection)
+        if (rs != null) {
+            try {
+                rs.close();
+            } catch (SQLException e) {
+                // Handle exception
+            }
+        }
+        if (pst != null) {
+            try {
+                pst.close();
+            } catch (SQLException e) {
+                // Handle exception
+            }
+        }
+        if (conn != null) {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                // Handle exception
+            }
+        }
+    }
+    }
+    public String getYesterday(){
+        String currentDate = getCurrentDate();
+            LocalDate date
+                = LocalDate.parse(currentDate);
+                LocalDate returnvalue
+                = date.minusDays(-1);
+            String yesterdaydate = returnvalue.toString();
+            return yesterdaydate;
+        }
+
+    public String getLastSevenDays(){
     String currentDate = getCurrentDate();
         LocalDate date
             = LocalDate.parse(currentDate);
@@ -1349,10 +1396,13 @@ public String getLastSevenDays(){
             
         return lastsevendate;
     }
-    private String getCurrentTime(){
+    public String getCurrentTime(){
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
         LocalTime localTime = LocalTime.now();
+        
         return dtf.format(localTime);
+        
+        
     }
     
     public ResultSet floor_unitList() {
@@ -1368,8 +1418,34 @@ public String getLastSevenDays(){
 
         return null; // Return null if an exception occurs
     }
+    public void openVisitorPanel() {
+        // Simulate a button click event
+        ActionEvent event = new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "open visitor panel");
+        for (ActionListener listener : Visitor_btn.getActionListeners()) {
+            listener.actionPerformed(event);
+        }
+    }
+    public void openAddVisitorPanel() {
+        // Simulate a button click event
+        ActionEvent event = new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "login");
+        for (ActionListener listener : Add_visitor_btn.getActionListeners()) {
+            listener.actionPerformed(event);
+        }
+    }
+    public void triggerSaveVisitor() {
+        // Simulate a button click event
+        ActionEvent event = new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "login");
+        for (ActionListener listener : AddVisitorbtn.getActionListeners()) {
+            listener.actionPerformed(event);
+        }
+    }
     
-    
+    public boolean isSaveVisitor() {
+        return isSave;
+    }
+    public boolean isLoad() {
+        return isLoad;
+    }
     /**
      * @param args the command line arguments
      */
@@ -1406,8 +1482,8 @@ public String getLastSevenDays(){
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton AddVistorbtn;
-    private javax.swing.JButton Add_visitor_btn;
+    public javax.swing.JButton AddVisitorbtn;
+    public javax.swing.JButton Add_visitor_btn;
     private javax.swing.JLabel DateLabel;
     private javax.swing.JButton Delete_visitor_btn;
     private javax.swing.JButton Home_btn;
@@ -1457,7 +1533,7 @@ public String getLastSevenDays(){
     private javax.swing.JLabel lastVisitor;
     private javax.swing.JLabel reasonVisitLabel;
     private javax.swing.JLabel residentUnitLabel;
-    private javax.swing.JComboBox<String> residentUnitListBox;
+    public javax.swing.JComboBox<String> residentUnitListBox;
     private javax.swing.JButton saveTimeOutbtn;
     private javax.swing.JComboBox<String> searchVisitorListBox;
     private javax.swing.JButton searchVisitorbtn;
@@ -1467,16 +1543,16 @@ public String getLastSevenDays(){
     private javax.swing.JLabel todayVisitor;
     private javax.swing.JPanel viewVisitorPanel;
     private javax.swing.JButton viewVisitorbtn;
-    private javax.swing.JTextField visitReasonTextField;
+    public javax.swing.JTextField visitReasonTextField;
     private javax.swing.JLabel visitorCarPlateLabel;
-    private javax.swing.JTextField visitorCarPlateTextField;
+    public javax.swing.JTextField visitorCarPlateTextField;
     private javax.swing.JLabel visitorContactLabel;
-    private javax.swing.JTextField visitorContactTextField;
+    public javax.swing.JTextField visitorContactTextField;
     private javax.swing.JLabel visitorICLabel;
-    private javax.swing.JTextField visitorICTextField;
+    public javax.swing.JTextField visitorICTextField;
     private javax.swing.JLabel visitorIDLabel;
     private javax.swing.JLabel visitorNameLabel;
-    private javax.swing.JTextField visitorNameTextField;
+    public javax.swing.JTextField visitorNameTextField;
     private javax.swing.JPanel visitorPanel;
     javax.swing.JTable visitor_table;
     private javax.swing.JLabel yesterdayVisitor;

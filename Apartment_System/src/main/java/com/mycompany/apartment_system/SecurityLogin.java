@@ -4,6 +4,8 @@
  */
 package com.mycompany.apartment_system;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 /**
@@ -11,7 +13,7 @@ import javax.swing.JOptionPane;
  * @author ching
  */
 public class SecurityLogin extends javax.swing.JFrame {
-
+    private  boolean isLoggedIn ;
     /**
      * Creates new form ResidentLogin
      */
@@ -252,6 +254,7 @@ public class SecurityLogin extends javax.swing.JFrame {
             if(username.equals("GUARD") && password.equals("GUARD111")){
 
                 JOptionPane.showMessageDialog(null, "Login Successfully");
+                isLoggedIn = true;
                  SecurityHomeUI guard = new SecurityHomeUI();
                  guard.setVisible(true);
                  dispose();
@@ -260,9 +263,25 @@ public class SecurityLogin extends javax.swing.JFrame {
             }
             
         }
-        
-    }//GEN-LAST:event_guardLoginBtnActionPerformed
+        guardLoginBtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Trigger function
+                System.out.println("Button Clicked!");
+                // Perform other actions or operations here
+            }
+        });
 
+    }//GEN-LAST:event_guardLoginBtnActionPerformed
+    public void triggerLogin() {
+        // Simulate a button click event
+        ActionEvent event = new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "login");
+        for (ActionListener listener : guardLoginBtn.getActionListeners()) {
+            listener.actionPerformed(event);
+        }
+    }
+     public boolean isLoggedIn() {
+        return isLoggedIn;
+    }
     /**
      * @param args the command line arguments
      */
@@ -300,8 +319,8 @@ public class SecurityLogin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton guardLoginBtn;
-    private javax.swing.JPasswordField guardPassword;
-    private javax.swing.JTextField guardUsername;
+    public javax.swing.JPasswordField guardPassword;
+    public javax.swing.JTextField guardUsername;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
