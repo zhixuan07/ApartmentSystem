@@ -1,6 +1,11 @@
 
 package com.mycompany.apartment_system;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+
 /**
  *
  * @author Erik Yeong
@@ -1569,6 +1574,17 @@ public class security extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+       private String getCurrentDate() {
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    Date currentDate = new Date();
+    return dateFormat.format(currentDate);
+    }
+    
+    private String getCurrentTime(){
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
+        LocalTime localTime = LocalTime.now();
+        return dtf.format(localTime);
+    }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -1599,6 +1615,7 @@ public class security extends javax.swing.JFrame {
                 new security().setVisible(true);
             }
         });
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
