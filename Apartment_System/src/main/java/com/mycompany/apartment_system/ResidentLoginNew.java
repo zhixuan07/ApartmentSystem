@@ -79,7 +79,7 @@ public class ResidentLoginNew extends javax.swing.JFrame {
                         .addGap(6, 6, 6)
                         .addComponent(jSeparator3))
                     .addComponent(jLabel1))
-                .addContainerGap(88, Short.MAX_VALUE))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,11 +161,11 @@ public class ResidentLoginNew extends javax.swing.JFrame {
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(residentPasswordInput, javax.swing.GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(185, 185, 185)
-                        .addComponent(residentLoginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(106, 106, 106)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(177, 177, 177)
+                        .addComponent(residentLoginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(443, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -185,7 +185,7 @@ public class ResidentLoginNew extends javax.swing.JFrame {
                 .addComponent(residentPasswordInput, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(99, 99, 99)
                 .addComponent(residentLoginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(336, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -194,7 +194,7 @@ public class ResidentLoginNew extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -251,7 +251,7 @@ public class ResidentLoginNew extends javax.swing.JFrame {
                 residentUsernameInput.setText("");
                 residentPasswordInput.setText("");
                 
-                JOptionPane.showMessageDialog(null,"Login successfully");
+                JOptionPane.showMessageDialog(null,"Login successfull");
                 isLoggedIn =true;
                 dispose();
                  
@@ -269,7 +269,7 @@ public class ResidentLoginNew extends javax.swing.JFrame {
                 
                 
             }else{
-                JOptionPane.showMessageDialog(null,"Username or password invalid");
+                JOptionPane.showMessageDialog(null,"Username or password is invalid");
             }
         
         }catch (Exception e){
