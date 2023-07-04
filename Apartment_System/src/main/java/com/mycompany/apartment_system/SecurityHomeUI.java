@@ -917,7 +917,7 @@ public class SecurityHomeUI extends javax.swing.JFrame implements Runnable{
     }//GEN-LAST:event_inputTextFieldActionPerformed
 
     private void AddVisitorbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddVisitorbtnActionPerformed
-        conn = sqliteConn2.connect();
+        conn = sqliteConn3.connect();
         String sql = "INSERT INTO visitor (name,IC,resident_unit,plate_number,time_in,status,date,reason,contact_number) values (?,?,?,?,?,?,?,?,?)";
         String name = visitorNameTextField.getText().toUpperCase();
         String ic = visitorICTextField.getText();
@@ -1023,7 +1023,7 @@ public class SecurityHomeUI extends javax.swing.JFrame implements Runnable{
         int index = visitor_table.getSelectedRow();
         TableModel model = visitor_table.getModel();
         String id = model.getValueAt(index, 0).toString();
-        conn = sqliteConn2.connect();
+        conn = sqliteConn3.connect();
         String timeOut = model.getValueAt(index, 9).toString();
         if(conn!= null){
             jTabbedPane2.setSelectedIndex(3);
@@ -1090,7 +1090,7 @@ public class SecurityHomeUI extends javax.swing.JFrame implements Runnable{
     }//GEN-LAST:event_viewVisitorbtnActionPerformed
 
     private void saveTimeOutbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveTimeOutbtnActionPerformed
-        conn = sqliteConn2.connect();
+        conn = sqliteConn3.connect();
         String sql = "UPDATE visitor SET time_out =? ,status ='OUT' WHERE id=? ";
         String time = getCurrentTime();
         String id = visitorIDLabel.getText();
@@ -1135,7 +1135,7 @@ public class SecurityHomeUI extends javax.swing.JFrame implements Runnable{
     }//GEN-LAST:event_saveTimeOutbtnActionPerformed
 
     private void searchVisitorbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchVisitorbtnActionPerformed
-        conn = sqliteConn2.connect();
+        conn = sqliteConn3.connect();
         String searchBy  = searchVisitorListBox.getSelectedItem().toString();
         String input = inputTextField.getText();
         
@@ -1270,7 +1270,7 @@ public class SecurityHomeUI extends javax.swing.JFrame implements Runnable{
     }//GEN-LAST:event_searchVisitorbtnActionPerformed
 
     private void Delete_visitor_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Delete_visitor_btnActionPerformed
-        conn = sqliteConn2.connect();
+        conn = sqliteConn3.connect();
         DefaultTableModel visitorTbl = (DefaultTableModel) visitor_table.getModel();
         int row = visitor_table.getSelectedRow();
         if(visitor_table.getSelectedRowCount() ==1){
@@ -1331,7 +1331,7 @@ public class SecurityHomeUI extends javax.swing.JFrame implements Runnable{
     }//GEN-LAST:event_backToTablebtn2ActionPerformed
 
     public void load_data(){
-        conn = sqliteConn2.connect();
+        conn = sqliteConn3.connect();
         int row =0;
         if(conn != null){   
             String sql = "SELECT id,name,ic,resident_unit,contact_number,plate_number,time_in,time_out,date,status,reason FROM visitor";
@@ -1394,7 +1394,7 @@ public class SecurityHomeUI extends javax.swing.JFrame implements Runnable{
     }
     
     public void loadVisitor(){
-        conn = sqliteConn2.connect();
+        conn = sqliteConn3.connect();
         String currentDate = getCurrentDate();
         String yesterdayDate = getYesterday();
         String sevenday = getLastSevenDays();
@@ -1490,7 +1490,7 @@ public class SecurityHomeUI extends javax.swing.JFrame implements Runnable{
     }
     
     public ResultSet floor_unitList() {
-        conn = sqliteConn2.connect();
+        conn = sqliteConn3.connect();
         String sql = "SELECT floor_unit from apartment_unit WHERE registered = 'true'";
         try {
             Statement stm = conn.createStatement();
