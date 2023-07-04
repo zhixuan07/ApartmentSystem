@@ -1553,15 +1553,7 @@ public class security extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void secuityhome_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_secuityhome_btnActionPerformed
-        DefaultTableModel vehicle = (DefaultTableModel)editVehicleTable.getModel();
-        vehicle.setRowCount(0);
-        jTabbedPane1.setSelectedIndex(1);
-        residentNameTextField.setText("");
-        residentICTextField.setText("");
-        residentPhoneTextField.setText("");
-        residentEmailTextField.setText("");
-
-        loadResident2();
+      
 
     }//GEN-LAST:event_secuityhome_btnActionPerformed
 

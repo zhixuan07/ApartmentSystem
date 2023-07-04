@@ -20,6 +20,7 @@ import javax.swing.JFrame;
  */
 public class ResidentLoginNew extends javax.swing.JFrame {
     Connection conn = null;
+   
     ResultSet rs = null;
     PreparedStatement pst = null;
     private boolean isLoggedIn;
@@ -79,7 +80,7 @@ public class ResidentLoginNew extends javax.swing.JFrame {
                         .addGap(6, 6, 6)
                         .addComponent(jSeparator3))
                     .addComponent(jLabel1))
-                .addContainerGap(70, Short.MAX_VALUE))
+                .addContainerGap(88, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -88,7 +89,7 @@ public class ResidentLoginNew extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(498, Short.MAX_VALUE))
+                .addContainerGap(644, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(232, 239, 239));
@@ -164,7 +165,7 @@ public class ResidentLoginNew extends javax.swing.JFrame {
                         .addGap(106, 106, 106)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(177, 177, 177)
+                        .addGap(189, 189, 189)
                         .addComponent(residentLoginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(443, Short.MAX_VALUE))
         );
@@ -183,9 +184,9 @@ public class ResidentLoginNew extends javax.swing.JFrame {
                 .addComponent(jLabel4)
                 .addGap(44, 44, 44)
                 .addComponent(residentPasswordInput, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(99, 99, 99)
+                .addGap(46, 46, 46)
                 .addComponent(residentLoginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(336, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -201,7 +202,7 @@ public class ResidentLoginNew extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 1186, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -216,7 +217,7 @@ public class ResidentLoginNew extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1186, Short.MAX_VALUE)
         );
 
         pack();
@@ -228,7 +229,7 @@ public class ResidentLoginNew extends javax.swing.JFrame {
 
     private void residentLoginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_residentLoginBtnActionPerformed
         // connect database
-        conn = sqliteConn2.connect();
+        conn = sqliteConn3.connect();
         // get inputs
         String unit = residentUsernameInput.getText();
         char [] ps = residentPasswordInput.getPassword();
@@ -257,9 +258,10 @@ public class ResidentLoginNew extends javax.swing.JFrame {
                 
                 JOptionPane.showMessageDialog(null,"Login successfull");
                 isLoggedIn =true;
+                resident.setVisible(true);
                 dispose();
                  
-                resident.setVisible(true);
+                
             residentLoginBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Trigger function
@@ -313,7 +315,7 @@ public class ResidentLoginNew extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
        LoginMain mainloginframe = new LoginMain();
-        mainloginframe.show(); //display manager login frame here
+        mainloginframe.setVisible(true); //display manager login frame here
         
         dispose();
         //go back to login main page

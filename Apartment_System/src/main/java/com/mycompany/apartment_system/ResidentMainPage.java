@@ -2733,10 +2733,8 @@ public class ResidentMainPage extends javax.swing.JFrame {
       
        
         //create connection to database
-        conn = sqliteConn2.connect();
-
-        
-            conn = sqliteConn2.connect();
+      
+       conn = sqliteConn3.connect();
 
         String unit = residentUnitLabel.getText();
         String sql = "SELECT id,bill_type,bill_amount FROM bill_record WHERE floor_unit = ? AND payment_status ='false' and bill_type='Maintance fee' ";
@@ -2795,13 +2793,14 @@ public class ResidentMainPage extends javax.swing.JFrame {
     private void paySinkingCreditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paySinkingCreditActionPerformed
    
         
-            conn = sqliteConn2.connect();
+        conn = sqliteConn3.connect();
         String unit = residentUnitLabel.getText();
         String sql = "SELECT id,bill_type,bill_amount FROM bill_record WHERE floor_unit = ? AND payment_status ='false' and bill_type='Sinking fee' ";
         try{
             pst = conn.prepareStatement(sql);
             pst.setString(1,unit);
             rs = pst.executeQuery();
+            //Check if result set empty
             if(!rs.next() ){
                 String name = rs.getString("id");
                 System.out.println(name);
@@ -2847,6 +2846,7 @@ public class ResidentMainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_paySinkingCreditActionPerformed
 
     private void createManagementPostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createManagementPostActionPerformed
+        // jump to selectedIndex tab when click
         jTabbedPane3.setSelectedIndex(6);
         typeForumLabel.setText("Management");
         
@@ -2854,24 +2854,28 @@ public class ResidentMainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_createManagementPostActionPerformed
 
     private void createResidentPostbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createResidentPostbtnActionPerformed
+        // jump to selectedIndex tab when click
         jTabbedPane3.setSelectedIndex(6);
         typeForumLabel.setText("Resident");
         
     }//GEN-LAST:event_createResidentPostbtnActionPerformed
 
     private void replyPostbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_replyPostbtnActionPerformed
-       
+       // jump to selectedIndex tab when click
         jTabbedPane3.setSelectedIndex(8);
         
     }//GEN-LAST:event_replyPostbtnActionPerformed
 
     private void backToForumBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToForumBtn2ActionPerformed
+        // jump to selectedIndex tab when click
         jTabbedPane3.setSelectedIndex(7);
     }//GEN-LAST:event_backToForumBtn2ActionPerformed
 
     private void backToForumTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToForumTableActionPerformed
+        
         String type = typeForum.getText();
         if(type.equals("Management")){
+            // back to the previous page 
             jTabbedPane3.setSelectedIndex(4);
         }else {
             jTabbedPane3.setSelectedIndex(5);
@@ -2888,14 +2892,17 @@ public class ResidentMainPage extends javax.swing.JFrame {
         System.out.println(forum_id);
             System.out.println(type);
             System.out.println(comment);
+            // validate what type of forum to reply
         if(type.equals("Management")){
             
-            conn = sqliteConn2.connect();
+            conn = sqliteConn3.connect();
+            
             String sql = "INSERT INTO management_forum_replies (forum_id,replyer,comment,reply_date) values (?,?,?,?)";
             if(comment.equals("")){
                 JOptionPane.showMessageDialog(this, "Please leave a reply.");
             }else{
                 try{
+                    // insert reply to database 
                 pst = conn.prepareStatement(sql);
                 pst.setString(1,forum_id);
                 pst.setString(2,unit);
@@ -2939,7 +2946,7 @@ public class ResidentMainPage extends javax.swing.JFrame {
             }
 
         }else{
-             conn = sqliteConn2.connect();
+             conn = sqliteConn3.connect();
             String sql = "INSERT INTO resident_forum_replies (forum_id,replyer,comment,reply_date) values (?,?,?,?)";
             if(comment.equals("")){
                 JOptionPane.showMessageDialog(this, "Please leave a reply.");
@@ -2991,6 +2998,7 @@ public class ResidentMainPage extends javax.swing.JFrame {
 
     private void backToManagementForumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToManagementForumActionPerformed
        String type = typeForumLabel.getText();
+       // jump to previous page and reload the table
        if(type.equals("Management")){
            jTabbedPane3.setSelectedIndex(4);
            DefaultTableModel management_forum = (DefaultTableModel)managementForumTable.getModel();
@@ -3010,13 +3018,15 @@ public class ResidentMainPage extends javax.swing.JFrame {
         String title = postTitleTextField.getText();
         String content = postContentTextField.getText();
         String unit = residentUnitLabel.getText();
+        //create the post based on which type of forum
         if(type.equals("Management")){
-            conn = sqliteConn2.connect();
+            conn = sqliteConn3.connect();
             String sql = "INSERT INTO management_forum (forum_title,forum_author,forum_content,created_date) values (?,?,?,?)";
             if(title.equals("") || content.equals("")){
                 JOptionPane.showMessageDialog(this, "Please fill up all the fields.");
             }else{
                 try{
+                    //insert post details to database aftet validation
                     pst = conn.prepareStatement(sql);
                     pst.setString(1,title);
                     pst.setString(2,unit);
@@ -3061,7 +3071,7 @@ public class ResidentMainPage extends javax.swing.JFrame {
             }
             
         }else{
-            conn = sqliteConn2.connect();
+            conn = sqliteConn3.connect();
                 String sql = "INSERT INTO resident_forum (forum_title,forum_author,forum_content,created_date) values(?,?,?,?)";
                 if(title.equals("") || content.equals("")){
                     JOptionPane.showMessageDialog(this, "Please fill up all the fields.");
@@ -3119,11 +3129,13 @@ public class ResidentMainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_addVehiclebtnActionPerformed
 
     private void editVehiclebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editVehiclebtnActionPerformed
-    DefaultTableModel vehicleTable = (DefaultTableModel) residentVehicleTable.getModel();
-        conn = sqliteConn2.connect();
+        DefaultTableModel vehicleTable = (DefaultTableModel) residentVehicleTable.getModel();
+        conn = sqliteConn3.connect();
         int row = residentVehicleTable.getSelectedRow();
+        // to validate whether the row is selected if yes, then proceed
         if(residentVehicleTable.getSelectedRowCount() ==1){
             jTabbedPane3.setSelectedIndex(14);
+            //get the values of the row selected to display in the text fields
             String id = residentVehicleTable.getModel().getValueAt(row, 0).toString();
             String brand = residentVehicleTable.getModel().getValueAt(row, 1).toString();
             String model = residentVehicleTable.getModel().getValueAt(row, 2).toString();
@@ -3152,15 +3164,16 @@ public class ResidentMainPage extends javax.swing.JFrame {
 
     private void deleteVehiclebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteVehiclebtnActionPerformed
         DefaultTableModel vehicleTable = (DefaultTableModel) residentVehicleTable.getModel();
-        conn = sqliteConn2.connect();
+        conn = sqliteConn3.connect();
         int row = residentVehicleTable.getSelectedRow();
+        
         if(residentVehicleTable.getSelectedRowCount() ==1){
             
             String id = residentVehicleTable.getModel().getValueAt(row, 0).toString();
             
             String sql = "DELETE  FROM resident_vehicle WHERE id=?";
             
-           
+           //remove the table row that selected
             vehicleTable.removeRow(residentVehicleTable.getSelectedRow());
             
            
@@ -3211,7 +3224,8 @@ public class ResidentMainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_deleteVehiclebtnActionPerformed
 
     private void saveNewPassbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveNewPassbtnActionPerformed
-        conn = sqliteConn2.connect();
+        conn = sqliteConn3.connect();
+        // set variable to get the input 
         char [] currentpassword = currentPasswordField.getPassword();
        String currentps = new String(currentpassword);
         char [] password = newPasswordField.getPassword();
@@ -3224,14 +3238,14 @@ public class ResidentMainPage extends javax.swing.JFrame {
        String sql2 ="SELECT password FROM resident_account WHERE id =?";
        
         
-       
+       // validate the input 
        if(!ps.equals(reps) || !reps.equals(ps)){
            JOptionPane.showMessageDialog(null,"Password Not Same");
        }else if(ps.equals("") || reps.equals("")){
            JOptionPane.showMessageDialog(null,"Please fill up all the fields");
        }else{
            if(conn !=null){
-                                       System.out.println(id);
+                                       
                 try{
                     pst = conn.prepareStatement(sql2);
                     pst.setString(1,id);
@@ -3257,7 +3271,7 @@ public class ResidentMainPage extends javax.swing.JFrame {
            
        }catch(SQLException e){
                    JOptionPane.showMessageDialog(null,e);
-                   JOptionPane.showMessageDialog(null,"hello1");
+                   
        }finally {
                     // Close resources (result set, statement, connection)
                     if (rs != null) {
@@ -3290,6 +3304,7 @@ public class ResidentMainPage extends javax.swing.JFrame {
 
     private void payCreditBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_payCreditBtn1ActionPerformed
         payByCredit(typeBill.getText());
+        // for unit testing purpose simulate the button click
         payCreditBtn1.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         // Trigger function
@@ -3313,7 +3328,7 @@ public class ResidentMainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_editResidentbtnActionPerformed
 
     private void saveEditbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveEditbtnActionPerformed
-        conn = sqliteConn2.connect();
+        conn = sqliteConn3.connect();
         
         String id = residentIDLabel.getText();
         String rname = residentNameTextField.getText();
@@ -3322,6 +3337,7 @@ public class ResidentMainPage extends javax.swing.JFrame {
         String remail = residentEmailTextField.getText();
         String sql1 = "UPDATE resident_account SET name =?,ic = ? ,contact=? ,email=? WHERE id= ? " ;
        if(conn !=null){
+           // validation for inputs
            if(rname.equals("")|| ric.equals("")|| rphone.equals("")|| remail.equals("")){
                JOptionPane.showMessageDialog(null,"Please fill all the fields");
            }else if(ric.length() < 12 || ric.length() >12){
@@ -3336,6 +3352,7 @@ public class ResidentMainPage extends javax.swing.JFrame {
            }
            else{
                try{
+                   // insert the data 
                 pst =conn.prepareStatement(sql1);
                 pst.setString(1,rname);
                 pst.setString(2,ric);
@@ -3351,17 +3368,19 @@ public class ResidentMainPage extends javax.swing.JFrame {
                         System.out.println("Button Clicked!");
                         // Perform other actions or operations here
                     }});
+                //clear the text fields after execution
                 residentNameLabel.setText("");
                 residentICLabel.setText("");
                 residentPhoneLabel.setText("");
                 residentEmailLabel.setText("");
-                loadResident();
-               
+                
+               // jump to profile main page and reload the information
                 jTabbedPane3.setSelectedIndex(11);
                 residentNameTextField.setText("");
                 residentICTextField.setText("");
                 residentPhoneTextField.setText("");
                 residentEmailTextField.setText("");
+                loadResident();
             
            
         }catch(SQLException e){
@@ -3404,8 +3423,9 @@ public class ResidentMainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_backToProfilebtnActionPerformed
 
     private void saveVehiclebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveVehiclebtnActionPerformed
-         conn = sqliteConn2.connect();
+         conn = sqliteConn3.connect();
         ResidentMainPage main = new ResidentMainPage();
+        // set variable to get the input 
         String id = residentIDLabel.getText();
         String brand = brandTextField.getText().toUpperCase();
         String model = modelTextField.getText().toUpperCase();
@@ -3413,6 +3433,7 @@ public class ResidentMainPage extends javax.swing.JFrame {
         String plate = plateTextField.getText().toUpperCase();
         System.out.println(id);
         String sql = "INSERT INTO resident_vehicle (resident_id,plate_number,brand,model,color) values (?,?,?,?,?)";
+        // validation for input
         if(brand.equals("")|| model.equals("") ||color.equals("") || plate.equals("")){
             JOptionPane.showMessageDialog(null,"Please fill up all the fields");
         }else if(!isAlphabetic(brand)){
@@ -3480,7 +3501,7 @@ public class ResidentMainPage extends javax.swing.JFrame {
 
     private void saveEditVehiclebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveEditVehiclebtnActionPerformed
         String sql = "UPDATE resident_vehicle SET brand =? ,model=?, plate_number=?,color =?   WHERE id=?";
-        conn = sqliteConn2.connect();
+        conn = sqliteConn3.connect();
         String id = vehicleIDTextField.getText();
             String brand = editBrandTextField.getText().toUpperCase();;
             String model = editModelTextField.getText().toUpperCase();;
@@ -3633,7 +3654,7 @@ public class ResidentMainPage extends javax.swing.JFrame {
         DefaultTableModel residentCar = (DefaultTableModel)residentVehicleTable.getModel();
         
         
-        conn = sqliteConn2.connect();
+        conn = sqliteConn3.connect();
         int row =0;
         String id = residentIDLabel.getText();
         String sql = "SELECT rv.id ,r.name ,rv.brand,rv.model,rv.plate_number,rv.color,r.ic,r.contact,r.email FROM resident_account r,resident_vehicle rv  WHERE r.id = rv.resident_id AND rv.resident_id = ?";
@@ -3696,7 +3717,7 @@ public class ResidentMainPage extends javax.swing.JFrame {
         
         
         
-        conn = sqliteConn2.connect();
+        conn = sqliteConn3.connect();
         
         String id = residentIDLabel.getText();
         String sql = "SELECT rv.id, r.name ,rv.brand,rv.model,rv.plate_number,rv.color,r.name,r.ic,r.contact,r.email FROM resident_account r,resident_vehicle rv  WHERE r.id = rv.resident_id AND rv.resident_id = ?";
@@ -3753,7 +3774,7 @@ public class ResidentMainPage extends javax.swing.JFrame {
 public void loadPendingPayment(){
         DefaultTableModel pending = (DefaultTableModel)pendingTable.getModel();
        
-        conn = sqliteConn2.connect();
+        conn = sqliteConn3.connect();
         String unit = residentUnitLabel.getText();
         String sql = "SELECT id,bill_type,bill_amount FROM bill_record WHERE floor_unit = ? AND payment_status ='false' ";
         
@@ -3804,7 +3825,7 @@ public void loadPendingPayment(){
 public void loadHistoryPayment(){
         DefaultTableModel history = (DefaultTableModel)historyTable.getModel();
        
-        conn = sqliteConn2.connect();
+        conn = sqliteConn3.connect();
         String unit = residentUnitLabel.getText();
         String sql = "SELECT bill_amount,bill_type,payment_date FROM bill_record WHERE floor_unit = ? AND payment_status ='true' ";
         
@@ -3853,7 +3874,7 @@ public void loadHistoryPayment(){
     }
 
 public ResultSet getCurrentMaintancePayment(){
-        conn = sqliteConn2.connect();
+        conn = sqliteConn3.connect();
         String unit = residentUnitLabel.getText();
         String sql = "SELECT id,bill_type,bill_amount FROM bill_record WHERE floor_unit = ? AND payment_status ='false' and bill_type='Maintance fee' ";
         try{
@@ -3892,7 +3913,7 @@ public ResultSet getCurrentMaintancePayment(){
         
 }
 public ResultSet getCurrentSinkingPayment(){
-            conn = sqliteConn2.connect();
+            conn = sqliteConn3.connect();
         String unit = residentUnitLabel.getText();
         String sql = "SELECT id,bill_type,bill_amount FROM bill_record WHERE floor_unit = ? AND payment_status ='false' and bill_type='Sinking fee' ";
         try{
@@ -3930,7 +3951,7 @@ public ResultSet getCurrentSinkingPayment(){
         return null;
 }
 public ResultSet getCurrentPassword(String sql, Object... params)throws SQLException{
-     conn = sqliteConn2.connect();
+     conn = sqliteConn3.connect();
       try {
             
             pst = conn.prepareStatement(sql);
@@ -3976,7 +3997,7 @@ public ResultSet getCurrentPassword(String sql, Object... params)throws SQLExcep
 
 public void payByCredit(String type){
         
-        conn = sqliteConn2.connect();
+        conn = sqliteConn3.connect();
             String cardName = cardHolderTextField.getText().toUpperCase();
             String cardNum = cardNumberTextField.getText().toUpperCase();
             String date = getCurrentDate();
@@ -4047,7 +4068,7 @@ public void payByCredit(String type){
 
 public void paySinkingByCredit(){
         
-        conn = sqliteConn2.connect();
+        conn = sqliteConn3.connect();
             String cardName = cardHolderTextField.getText().toUpperCase();
             String cardNum = cardNumberTextField.getText().toUpperCase();
             String date = getCurrentDate();
@@ -4111,7 +4132,7 @@ public void paySinkingByCredit(){
 
 public void loadManagementForum(){
         DefaultTableModel forum = (DefaultTableModel)managementForumTable.getModel();
-        conn = sqliteConn2.connect();
+        conn = sqliteConn3.connect();
         forum.setRowCount(0);
         String sql = "SELECT id,forum_title,forum_content,forum_author,created_date FROM management_forum";
         try{
@@ -4159,7 +4180,7 @@ public void loadManagementForum(){
 
 public void loadResidentForum(){
         DefaultTableModel resident_forum = (DefaultTableModel)residentForumTable.getModel();
-        conn = sqliteConn2.connect();
+        conn = sqliteConn3.connect();
         resident_forum.setRowCount(0);
         String sql = "SELECT id,forum_title,forum_content,forum_author,created_date FROM resident_forum";
         try{
@@ -4205,7 +4226,7 @@ public void loadResidentForum(){
 }
 
 public void loadManagementReply(String forum_id){
-    conn = sqliteConn2.connect();
+    conn = sqliteConn3.connect();
     DefaultTableModel replies = (DefaultTableModel)repliesTable.getModel();
     String sql = "SELECT * FROM management_forum_replies where forum_id =?";
     try{
@@ -4251,7 +4272,7 @@ public void loadManagementReply(String forum_id){
 
 
 public void loadResidentReply(String forum_id){
-    conn = sqliteConn2.connect();
+    conn = sqliteConn3.connect();
     DefaultTableModel replies = (DefaultTableModel)repliesTable.getModel();
     String sql = "SELECT * FROM resident_forum_replies where forum_id =?";
     try{
@@ -4296,7 +4317,7 @@ public void loadResidentReply(String forum_id){
 }
 
 public void loadNotification(){
-        conn = sqliteConn2.connect();
+        conn = sqliteConn3.connect();
         DefaultTableModel notice = (DefaultTableModel)notificationTable.getModel();
         String unit = residentUnitLabel.getText();
         String sql ="SELECT title,content,created_date from bill_notification WHERE unit=?";
