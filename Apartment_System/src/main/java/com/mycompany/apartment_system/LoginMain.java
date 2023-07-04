@@ -204,12 +204,11 @@ public class LoginMain extends javax.swing.JFrame {
         //go to manager login page
       ManagerLoginNew manager = new ManagerLoginNew();
         manager.show(); //display security login frame here
-<<<<<<< HEAD
-=======
+
         
         
         //display manager login frame here
->>>>>>> e773d4e (update the code to latest and delete some unused files)
+
         
         
         //display manager login frame here

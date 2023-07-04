@@ -2708,15 +2708,13 @@ public class ResidentMainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_residentForumPanelbtnActionPerformed
 
     private void notificationPanelbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_notificationPanelbtnActionPerformed
-<<<<<<< HEAD
+
           // reset the table and label if their have changes of data in database
         DefaultTableModel resident_notification = (DefaultTableModel)notificationTable.getModel();
         resident_notification.setRowCount(0);
          // jump to the seclected index tab when click button
-=======
-         DefaultTableModel resident_notification = (DefaultTableModel)notificationTable.getModel();
-        resident_notification.setRowCount(0);
->>>>>>> e773d4e (update the code to latest and delete some unused files)
+
+
         jTabbedPane3.setSelectedIndex(10);
          
          loadNotification();
@@ -2734,28 +2732,26 @@ public class ResidentMainPage extends javax.swing.JFrame {
     private void paymentCreditMaintainencebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paymentCreditMaintainencebtnActionPerformed
       
        
-<<<<<<< HEAD
         //create connection to database
         conn = sqliteConn2.connect();
-=======
+
         
             conn = sqliteConn2.connect();
->>>>>>> e773d4e (update the code to latest and delete some unused files)
+
         String unit = residentUnitLabel.getText();
         String sql = "SELECT id,bill_type,bill_amount FROM bill_record WHERE floor_unit = ? AND payment_status ='false' and bill_type='Maintance fee' ";
         try{
             pst = conn.prepareStatement(sql);
             pst.setString(1,unit);
             rs = pst.executeQuery();
-<<<<<<< HEAD
+
             //check the result is empty 
-            if(!rs.next() ){
+         
                 
-=======
-            if(!rs.next() ){
+             if(!rs.next() ){
                 String name = rs.getString("id");
                 System.out.println(name);
->>>>>>> e773d4e (update the code to latest and delete some unused files)
+
                  JOptionPane.showMessageDialog(null,"No pending maintance payment");
                  
             }else{
@@ -3629,9 +3625,9 @@ public class ResidentMainPage extends javax.swing.JFrame {
     private void backToProfile2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToProfile2ActionPerformed
         // TODO add your handling code here:
         jTabbedPane3.setSelectedIndex(11);
-        currentPasswordTextField.setText("");
-        newPasswordTextField.setText("");
-        confirmPasswordTextField.setText("");
+        currentPasswordField.setText("");
+        newPasswordField.setText("");
+        confirmNewField.setText("");
     }//GEN-LAST:event_backToProfile2ActionPerformed
     public void loadResident(){
         DefaultTableModel residentCar = (DefaultTableModel)residentVehicleTable.getModel();
