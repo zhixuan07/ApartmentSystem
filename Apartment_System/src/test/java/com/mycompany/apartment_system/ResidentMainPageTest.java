@@ -46,13 +46,69 @@ public class ResidentMainPageTest {
      */
     @Test
     public void testLoadResident() {
-        System.out.println("loadResident");
-        ResidentMainPage instance = new ResidentMainPage();
-        instance.loadResident();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String username = "A-1-1";
+        String password = "123";
+        Rlogin.residentUsernameInput.setText(username);
+        Rlogin.residentPasswordInput.setText(password);
+        Rlogin.triggerLogin();
+        RMain.loadResident();
+        boolean isLoad = RMain.isLoadResidentProfile();
+        assertTrue(isLoad);
+        System.out.println("Test passed");
+        
     }
-
+    @Test
+    public void testUpdateProfile(){
+        String name = "Lim Chia";
+        String IC = "020110070279";
+        String contact = "0123456789";
+        String email = "lim22@yahoo.com";
+        String id = "1";
+        
+        RMain.residentNameTextField.setText(name);
+        RMain.residentEmailTextField.setText(email);
+        RMain.residentICTextField.setText(IC);
+        RMain.residentPhoneTextField.setText(contact);
+        RMain.residentIDLabel.setText(id);
+        
+        RMain.triggerSaveProfile();
+        assertTrue(RMain.isUpdateProfile());
+        System.out.println("Test passed");
+        
+    }
+    @Test 
+    public void testAddVehicle(){
+            String brand = "Toyota";
+            String model = "Vios";
+            String color = "Red";
+            String plate = "PQS2223";
+            String id = "1";
+            RMain.brandTextField.setText(brand);
+            RMain.modelTextField.setText(model);
+            RMain.colorTextField.setText(color);
+            RMain.plateTextField.setText(plate);
+            RMain.residentIDLabel.setText(id);
+            
+            RMain.triggerAddVehicle();
+            assertTrue(RMain.isAddVehicle());
+            System.out.println("Test passed");
+    }
+    
+    @Test
+    public void testInvalidInputForCreditCardPayment(){
+            String cardName ="CHU2U3"; //invalid name
+            String cardNumber ="1234567890123456";
+            String cvv ="947";
+            String type = "Maintance";
+            RMain.cardHolderTextField.setText(cardName);
+            RMain.cardNumberTextField.setText(cardNumber);
+            RMain.cvvTextField.setText(cvv);
+            RMain.typeBill.setText(type);
+            RMain.triggerPayByCredit();
+            assertFalse(RMain.isNameValid());
+            System.out.println("Test passed");
+            
+    }
     /**
      * Test of loadResident2 method, of class ResidentMainPage.
      */

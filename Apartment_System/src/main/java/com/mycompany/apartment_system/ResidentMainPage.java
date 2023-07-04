@@ -4,6 +4,8 @@
  */
 package com.mycompany.apartment_system;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -25,7 +27,10 @@ public class ResidentMainPage extends javax.swing.JFrame {
     Connection conn = null;
     ResultSet rs = null;
     PreparedStatement pst = null;
-    
+    private boolean isLoadProfile ;
+    private boolean isUpdateProfile;
+    private boolean isAddVehicle ;
+    private boolean isNameValid;
     /**
      * Creates new form ResidentMainPage
      */
@@ -610,20 +615,20 @@ public class ResidentMainPage extends javax.swing.JFrame {
 
         pendingTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "ID", "Bill Type", "Amount"
+                "Bill Type", "Amount"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -638,20 +643,20 @@ public class ResidentMainPage extends javax.swing.JFrame {
 
         historyTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "ID", "Bill Type", "Amount", "Payment Date"
+                "Bill Type", "Amount", "Payment Date"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -908,6 +913,8 @@ public class ResidentMainPage extends javax.swing.JFrame {
                 .addComponent(payCreditBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(60, Short.MAX_VALUE))
         );
+
+        typeBill.setFont(new java.awt.Font("Helvetica Neue", 0, 1)); // NOI18N
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
@@ -2652,12 +2659,15 @@ public class ResidentMainPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void homePanelbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homePanelbtnActionPerformed
+        // jump to the seclected index tab when click button
         jTabbedPane3.setSelectedIndex(0);
 
     }//GEN-LAST:event_homePanelbtnActionPerformed
 
     private void profilePanelbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profilePanelbtnActionPerformed
-         jTabbedPane3.setSelectedIndex(11);
+         // jump to the seclected index tab when click button
+        jTabbedPane3.setSelectedIndex(11);
+        // reset the table and label if their have changes of data in database
         DefaultTableModel residentCar = (DefaultTableModel)residentVehicleTable.getModel();
         residentCar.setRowCount(0);
         residentNameLabel.setText("");
@@ -2668,7 +2678,9 @@ public class ResidentMainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_profilePanelbtnActionPerformed
 
     private void billPanelbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_billPanelbtnActionPerformed
-         jTabbedPane3.setSelectedIndex(1);
+         // jump to the seclected index tab when click button 
+        jTabbedPane3.setSelectedIndex(1);
+          // reset the table and label if their have changes of data in database
          DefaultTableModel pending = (DefaultTableModel)pendingTable.getModel();
          pending.setRowCount(0);
           DefaultTableModel history = (DefaultTableModel)historyTable.getModel();
@@ -2678,51 +2690,160 @@ public class ResidentMainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_billPanelbtnActionPerformed
 
     private void forumPanelbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_forumPanelbtnActionPerformed
-         jTabbedPane3.setSelectedIndex(4);
+         // jump to the seclected index tab when click button
+        jTabbedPane3.setSelectedIndex(4);
+          // reset the table and label if their have changes of data in database
          DefaultTableModel management_forum = (DefaultTableModel)managementForumTable.getModel();
         management_forum.setRowCount(0);
          loadManagementForum();
     }//GEN-LAST:event_forumPanelbtnActionPerformed
 
     private void residentForumPanelbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_residentForumPanelbtnActionPerformed
+         // jump to the seclected index tab when click button
         jTabbedPane3.setSelectedIndex(5);
+          // reset the table and label if their have changes of data in database
         DefaultTableModel resident_forum = (DefaultTableModel)residentForumTable.getModel();
         resident_forum.setRowCount(0);
         loadResidentForum();
     }//GEN-LAST:event_residentForumPanelbtnActionPerformed
 
     private void notificationPanelbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_notificationPanelbtnActionPerformed
-         jTabbedPane3.setSelectedIndex(10);
+
+          // reset the table and label if their have changes of data in database
+        DefaultTableModel resident_notification = (DefaultTableModel)notificationTable.getModel();
+        resident_notification.setRowCount(0);
+         // jump to the seclected index tab when click button
+
+
+        jTabbedPane3.setSelectedIndex(10);
          
          loadNotification();
          
     }//GEN-LAST:event_notificationPanelbtnActionPerformed
 
     private void logOutbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logOutbtnActionPerformed
-                ResidentLoginNew login = new ResidentLoginNew();
+        ResidentLoginNew login = new ResidentLoginNew();
         login.setVisible(true);
         dispose();
-        JOptionPane.showMessageDialog(null,"Log out successfully");
+        
        
     }//GEN-LAST:event_logOutbtnActionPerformed
 
     private void paymentCreditMaintainencebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paymentCreditMaintainencebtnActionPerformed
-        rs = getCurrentMaintancePayment();
+      
+       
+        //create connection to database
+        conn = sqliteConn2.connect();
+
+        
+            conn = sqliteConn2.connect();
+
+        String unit = residentUnitLabel.getText();
+        String sql = "SELECT id,bill_type,bill_amount FROM bill_record WHERE floor_unit = ? AND payment_status ='false' and bill_type='Maintance fee' ";
         try{
-            if(!rs.next()){
+            pst = conn.prepareStatement(sql);
+            pst.setString(1,unit);
+            rs = pst.executeQuery();
+
+            //check the result is empty 
+         
+                
+             if(!rs.next() ){
+                String name = rs.getString("id");
+                System.out.println(name);
+
                  JOptionPane.showMessageDialog(null,"No pending maintance payment");
+                 
             }else{
+                String name = rs.getString("id");
+                System.out.println(name);
                 jTabbedPane3.setSelectedIndex(2);
                 typeBill.setText("Maintance fee");
             }
+            
         }catch(SQLException e){
                    JOptionPane.showMessageDialog(null,e);
+            }finally {
+            // Close resources (result set, statement, connection)
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    // Handle exception
                 }
+            }
+            if (pst != null) {
+                try {
+                    pst.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+        }
+
+            
+       
     }//GEN-LAST:event_paymentCreditMaintainencebtnActionPerformed
 
     private void paySinkingCreditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paySinkingCreditActionPerformed
-        jTabbedPane3.setSelectedIndex(2);
-        typeBill.setText("Sinking fee");
+   
+        
+            conn = sqliteConn2.connect();
+        String unit = residentUnitLabel.getText();
+        String sql = "SELECT id,bill_type,bill_amount FROM bill_record WHERE floor_unit = ? AND payment_status ='false' and bill_type='Sinking fee' ";
+        try{
+            pst = conn.prepareStatement(sql);
+            pst.setString(1,unit);
+            rs = pst.executeQuery();
+            if(!rs.next() ){
+                String name = rs.getString("id");
+                System.out.println(name);
+                 JOptionPane.showMessageDialog(null,"No pending sinking payment");
+                 
+            }else{
+                String name = rs.getString("id");
+                System.out.println(name);
+                jTabbedPane3.setSelectedIndex(2);
+                typeBill.setText("Sinking fee");
+            }
+            
+        }catch(SQLException e){
+                   JOptionPane.showMessageDialog(null,e);
+            }finally {
+            // Close resources (result set, statement, connection)
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+            if (pst != null) {
+                try {
+                    pst.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+        }
+            
+        
+        
+        
     }//GEN-LAST:event_paySinkingCreditActionPerformed
 
     private void createManagementPostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createManagementPostActionPerformed
@@ -3169,6 +3290,12 @@ public class ResidentMainPage extends javax.swing.JFrame {
 
     private void payCreditBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_payCreditBtn1ActionPerformed
         payByCredit(typeBill.getText());
+        payCreditBtn1.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        // Trigger function
+                        System.out.println("Button Clicked!");
+                        // Perform other actions or operations here
+                    }});
     }//GEN-LAST:event_payCreditBtn1ActionPerformed
 
     private void editResidentbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editResidentbtnActionPerformed
@@ -3217,6 +3344,19 @@ public class ResidentMainPage extends javax.swing.JFrame {
                 pst.setString(5,id);
                 pst.execute();
                 JOptionPane.showMessageDialog(null,"Save Successfully");
+                isUpdateProfile = true;
+                saveEditbtn.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        // Trigger function
+                        System.out.println("Button Clicked!");
+                        // Perform other actions or operations here
+                    }});
+                residentNameLabel.setText("");
+                residentICLabel.setText("");
+                residentPhoneLabel.setText("");
+                residentEmailLabel.setText("");
+                loadResident();
+               
                 jTabbedPane3.setSelectedIndex(11);
                 residentNameTextField.setText("");
                 residentICTextField.setText("");
@@ -3291,6 +3431,13 @@ public class ResidentMainPage extends javax.swing.JFrame {
             pst.setString(5,color);
             pst.execute();
             JOptionPane.showMessageDialog(null,"Register vehicle succesfully");
+            saveVehiclebtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Trigger function
+                System.out.println("Button Clicked!");
+                // Perform other actions or operations here
+            }});
+            isAddVehicle =true;
              brandTextField.setText("");
              modelTextField.setText("");
              colorTextField.setText("");
@@ -3478,16 +3625,16 @@ public class ResidentMainPage extends javax.swing.JFrame {
     private void backToProfile2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToProfile2ActionPerformed
         // TODO add your handling code here:
         jTabbedPane3.setSelectedIndex(11);
-        currentPasswordTextField.setText("");
-        newPasswordTextField.setText("");
-        confirmPasswordTextField.setText("");
+        currentPasswordField.setText("");
+        newPasswordField.setText("");
+        confirmNewField.setText("");
     }//GEN-LAST:event_backToProfile2ActionPerformed
     public void loadResident(){
         DefaultTableModel residentCar = (DefaultTableModel)residentVehicleTable.getModel();
         
         
         conn = sqliteConn2.connect();
-        
+        int row =0;
         String id = residentIDLabel.getText();
         String sql = "SELECT rv.id ,r.name ,rv.brand,rv.model,rv.plate_number,rv.color,r.ic,r.contact,r.email FROM resident_account r,resident_vehicle rv  WHERE r.id = rv.resident_id AND rv.resident_id = ?";
         
@@ -3512,9 +3659,11 @@ public class ResidentMainPage extends javax.swing.JFrame {
                 residentICLabel.setText(ic);
                 residentPhoneLabel.setText(contact);
                 residentEmailLabel.setText(email);
-                
+                row++;
             }
-
+            if(row>0){
+                isLoadProfile = true;
+            }
         }catch(SQLException e){
                    JOptionPane.showMessageDialog(null,e);
         }finally {
@@ -3613,11 +3762,11 @@ public void loadPendingPayment(){
             pst.setString(1,unit);
             rs = pst.executeQuery();
             while(rs.next()){
-                String tblid = rs.getString("id");
+                
                 String type = rs.getString("bill_type");
                 String amount = rs.getString("bill_amount");
                 
-                String tbData[] ={tblid,type,amount};
+                String tbData[] ={type,amount};
                 
                 pending.addRow(tbData);
                
@@ -3657,18 +3806,18 @@ public void loadHistoryPayment(){
        
         conn = sqliteConn2.connect();
         String unit = residentUnitLabel.getText();
-        String sql = "SELECT id,bill_type,payment_date FROM bill_record WHERE floor_unit = ? AND payment_status ='true' ";
+        String sql = "SELECT bill_amount,bill_type,payment_date FROM bill_record WHERE floor_unit = ? AND payment_status ='true' ";
         
         try{
             pst = conn.prepareStatement(sql);
             pst.setString(1,unit);
             rs = pst.executeQuery();
             while(rs.next()){
-                String tblid = rs.getString("id");
+                String amount = rs.getString("bill_amount");
                 String type = rs.getString("bill_type");
                 String date = rs.getString("payment_date");
                 
-                String tbData[] ={tblid,type,date};
+                String tbData[] ={type,amount,date};
                 
                 history.addRow(tbData);
                
@@ -3742,7 +3891,44 @@ public ResultSet getCurrentMaintancePayment(){
         return null;
         
 }
-
+public ResultSet getCurrentSinkingPayment(){
+            conn = sqliteConn2.connect();
+        String unit = residentUnitLabel.getText();
+        String sql = "SELECT id,bill_type,bill_amount FROM bill_record WHERE floor_unit = ? AND payment_status ='false' and bill_type='Sinking fee' ";
+        try{
+            pst = conn.prepareStatement(sql);
+            pst.setString(1,unit);
+            rs = pst.executeQuery();
+            
+            return rs;
+        }catch(SQLException e){
+                   JOptionPane.showMessageDialog(null,e);
+            }finally {
+            // Close resources (result set, statement, connection)
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+            if (pst != null) {
+                try {
+                    pst.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    // Handle exception
+                }
+            }
+        }
+        return null;
+}
 public ResultSet getCurrentPassword(String sql, Object... params)throws SQLException{
      conn = sqliteConn2.connect();
       try {
@@ -3807,6 +3993,7 @@ public void payByCredit(String type){
                 JOptionPane.showMessageDialog(null,"Invalid CVV");
             }else if(!isAlphabetic(cardName)){
                 JOptionPane.showMessageDialog(null,"Invalid Name");
+                isNameValid = false;
             }
             else{
                try{
@@ -4172,11 +4359,48 @@ public static boolean isNumeric(String input) {
         return false;
     }
 }
+    public void triggerSaveProfile() {
+        // Simulate a button click event
+        ActionEvent event = new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "save profile");
+        for (ActionListener listener : saveEditbtn.getActionListeners()) {
+            listener.actionPerformed(event);
+        }
+    }
+    
+    public void triggerAddVehicle() {
+        // Simulate a button click event
+        ActionEvent event = new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "save vehicle");
+        for (ActionListener listener : saveVehiclebtn.getActionListeners()) {
+            listener.actionPerformed(event);
+        }
+    }
+    public void triggerPayByCredit(){
+        // Simulate a button click event
+        ActionEvent event = new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "save vehicle");
+        for (ActionListener listener : payCreditBtn1.getActionListeners()) {
+            listener.actionPerformed(event);
+        }
+    }
+    
+
 private boolean isValidEmail(String email) {
         String emailPattern = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
         Pattern pattern = Pattern.compile(emailPattern);
         return pattern.matcher(email).matches();
     } 
+
+public boolean isLoadResidentProfile(){
+    return isLoadProfile;
+}
+public boolean isUpdateProfile(){
+    return isUpdateProfile;
+}
+public boolean isAddVehicle(){
+    return isAddVehicle;
+}
+public boolean isNameValid(){
+    return isNameValid;
+}
     /**
      * @param args the command line arguments
      */
@@ -4239,17 +4463,17 @@ private boolean isValidEmail(String email) {
     private javax.swing.JButton backToProfilebtn;
     private javax.swing.JButton backToProfilebtn2;
     private javax.swing.JButton billPanelbtn;
-    private javax.swing.JTextField brandTextField;
-    private javax.swing.JTextField cardHolderTextField;
-    private javax.swing.JTextField cardNumberTextField;
-    private javax.swing.JTextField colorTextField;
+    public javax.swing.JTextField brandTextField;
+    public javax.swing.JTextField cardHolderTextField;
+    public javax.swing.JTextField cardNumberTextField;
+    public javax.swing.JTextField colorTextField;
     private javax.swing.JTextArea commentTextField;
     private javax.swing.JPasswordField confirmNewField;
     private javax.swing.JButton createManagementPost;
     private javax.swing.JButton createPostbtn;
     private javax.swing.JButton createResidentPostbtn;
     private javax.swing.JPasswordField currentPasswordField;
-    private javax.swing.JTextField cvvTextField;
+    public javax.swing.JTextField cvvTextField;
     private javax.swing.JButton deleteVehiclebtn;
     private javax.swing.JTextField editBrandTextField;
     private javax.swing.JTextField editColorTextField;
@@ -4395,7 +4619,7 @@ private boolean isValidEmail(String email) {
     private javax.swing.JTextField jTextField4;
     private javax.swing.JButton logOutbtn;
     private javax.swing.JTable managementForumTable;
-    private javax.swing.JTextField modelTextField;
+    public javax.swing.JTextField modelTextField;
     private javax.swing.JComboBox<String> monthSelectionCredit;
     private javax.swing.JPasswordField newPasswordField;
     private javax.swing.JTextArea noticeContentLabel;
@@ -4403,11 +4627,11 @@ private boolean isValidEmail(String email) {
     private javax.swing.JTextField noticeTitleLabel;
     private javax.swing.JButton notificationPanelbtn;
     private javax.swing.JTable notificationTable;
-    private javax.swing.JButton payCreditBtn1;
+    public javax.swing.JButton payCreditBtn1;
     private javax.swing.JButton paySinkingCredit;
     private javax.swing.JButton paymentCreditMaintainencebtn;
     private javax.swing.JTable pendingTable;
-    private javax.swing.JTextField plateTextField;
+    public javax.swing.JTextField plateTextField;
     private javax.swing.JTextField postAuthorLabel;
     private javax.swing.JTextArea postContentLabel;
     private javax.swing.JTextArea postContentTextField;
@@ -4419,23 +4643,23 @@ private boolean isValidEmail(String email) {
     private javax.swing.JButton replyBtn;
     private javax.swing.JButton replyPostbtn;
     private javax.swing.JTextField residentEmailLabel;
-    private javax.swing.JTextField residentEmailTextField;
+    public javax.swing.JTextField residentEmailTextField;
     private javax.swing.JButton residentForumPanelbtn;
     private javax.swing.JTable residentForumTable;
     private javax.swing.JTextField residentICLabel;
-    private javax.swing.JTextField residentICTextField;
+    public javax.swing.JTextField residentICTextField;
     public javax.swing.JLabel residentIDLabel;
     private javax.swing.JTextField residentNameLabel;
-    private javax.swing.JTextField residentNameTextField;
+    public javax.swing.JTextField residentNameTextField;
     private javax.swing.JTextField residentPhoneLabel;
-    private javax.swing.JTextField residentPhoneTextField;
+    public javax.swing.JTextField residentPhoneTextField;
     public javax.swing.JTextField residentUnitLabel;
     private javax.swing.JTable residentVehicleTable;
     private javax.swing.JButton saveEditVehiclebtn;
     private javax.swing.JButton saveEditbtn;
     private javax.swing.JButton saveNewPassbtn;
     private javax.swing.JButton saveVehiclebtn;
-    private javax.swing.JLabel typeBill;
+    public javax.swing.JLabel typeBill;
     private javax.swing.JLabel typeForum;
     private javax.swing.JLabel typeForumLabel;
     private javax.swing.JLabel vehicleIDTextField;

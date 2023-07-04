@@ -198,7 +198,10 @@ public class ManagerLoginNew extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+       LoginMain mainloginframe = new LoginMain();
+        mainloginframe.show(); //display manager login frame here
+        
+        dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void loginbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginbtnActionPerformed
@@ -207,14 +210,19 @@ public class ManagerLoginNew extends javax.swing.JFrame {
        String ps = new String(password);
        if(username.equals("admin") && ps.equals("admin")){
             isLoggedIn = true;
+        JOptionPane.showMessageDialog(null, "Login Success");
        ManagerMainPage MainPage = new ManagerMainPage();
        MainPage.setVisible(true);
        dispose();
+       
        }else if(username.equals("")|| ps.equals("")){
            JOptionPane.showMessageDialog(null, "Please enter the username and password");
+           
+           isLoggedIn = false;
        }
        else{
            JOptionPane.showMessageDialog(null, "Username or password invalid");
+           isLoggedIn = false;
        }
         loginbtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

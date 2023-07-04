@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.apartment_system;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -33,6 +35,11 @@ public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
     DefaultTableModel  defaultTableModel = new DefaultTableModel();
     String date = getCurrentDate();
     int hour,minutes,second;
+    private boolean isCreatedAccount;
+    private boolean isLoadResidentInformation;
+    private boolean isLoadBill;
+    private boolean isVisitorSearched;
+    private boolean isGeneratedReport;
     /**
      * Creates new form ManagerMainPage
      */
@@ -113,6 +120,7 @@ public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
         addResidentAccount = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         residentUnitInput = new javax.swing.JComboBox<>();
+        BackToResidentAccountbtn1 = new javax.swing.JButton();
         residentAccountInfo = new javax.swing.JPanel();
         jPanel12 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -127,6 +135,7 @@ public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
         resident_vehicle = new javax.swing.JTable();
         jLabel17 = new javax.swing.JLabel();
         resident_unit = new javax.swing.JLabel();
+        BackToResidentAccountbtn2 = new javax.swing.JButton();
         BillPanel = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -153,6 +162,7 @@ public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
         sendBill = new javax.swing.JButton();
         jLabel22 = new javax.swing.JLabel();
         billAmountTextField = new javax.swing.JTextField();
+        BackToBilltbtn1 = new javax.swing.JButton();
         VisitorPanel = new javax.swing.JPanel();
         jLabel25 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -195,7 +205,6 @@ public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         createBill = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -503,7 +512,7 @@ public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
                         .addComponent(jLabel30)
                         .addGap(262, 262, 262)
                         .addComponent(logOutbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(145, Short.MAX_VALUE))
+                .addContainerGap(119, Short.MAX_VALUE))
         );
         homePanelLayout.setVerticalGroup(
             homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -592,7 +601,7 @@ public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
         residentaccPanelLayout.setHorizontalGroup(
             residentaccPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, residentaccPanelLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1111, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1085, Short.MAX_VALUE)
                 .addGap(85, 85, 85))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, residentaccPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -650,7 +659,11 @@ public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
             }
         });
 
+        addResidentAccount.setBackground(new java.awt.Color(164, 221, 221));
+        addResidentAccount.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        addResidentAccount.setForeground(new java.awt.Color(54, 84, 85));
         addResidentAccount.setText("Add Account");
+        addResidentAccount.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(54, 84, 85), 2, true));
         addResidentAccount.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addResidentAccountActionPerformed(evt);
@@ -666,6 +679,17 @@ public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
             }
         });
 
+        BackToResidentAccountbtn1.setBackground(new java.awt.Color(164, 221, 221));
+        BackToResidentAccountbtn1.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        BackToResidentAccountbtn1.setForeground(new java.awt.Color(54, 84, 85));
+        BackToResidentAccountbtn1.setText("Back");
+        BackToResidentAccountbtn1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(54, 84, 85), 2, true));
+        BackToResidentAccountbtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BackToResidentAccountbtn1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout addaccPanelLayout = new javax.swing.GroupLayout(addaccPanel);
         addaccPanel.setLayout(addaccPanelLayout);
         addaccPanelLayout.setHorizontalGroup(
@@ -673,17 +697,23 @@ public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
             .addGroup(addaccPanelLayout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addGroup(addaccPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(addResidentAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(password_input, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(email_input, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(residentUnitInput, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8)
-                    .addComponent(username_input, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addContainerGap(838, Short.MAX_VALUE))
+                    .addGroup(addaccPanelLayout.createSequentialGroup()
+                        .addGroup(addaccPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(password_input, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(email_input, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(residentUnitInput, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8)
+                            .addComponent(username_input, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(addaccPanelLayout.createSequentialGroup()
+                        .addComponent(BackToResidentAccountbtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 505, Short.MAX_VALUE)
+                        .addComponent(addResidentAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(262, 262, 262))))
         );
         addaccPanelLayout.setVerticalGroup(
             addaccPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -706,9 +736,11 @@ public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(password_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
-                .addComponent(addResidentAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(522, Short.MAX_VALUE))
+                .addGap(63, 63, 63)
+                .addGroup(addaccPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addResidentAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BackToResidentAccountbtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(475, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("tab3", addaccPanel);
@@ -819,10 +851,21 @@ public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
                     .addComponent(resident_unit, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(81, 81, 81)
                 .addComponent(jLabel17)
-                .addGap(29, 29, 29)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(188, Short.MAX_VALUE))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
+
+        BackToResidentAccountbtn2.setBackground(new java.awt.Color(164, 221, 221));
+        BackToResidentAccountbtn2.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        BackToResidentAccountbtn2.setForeground(new java.awt.Color(54, 84, 85));
+        BackToResidentAccountbtn2.setText("Back");
+        BackToResidentAccountbtn2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(54, 84, 85), 2, true));
+        BackToResidentAccountbtn2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BackToResidentAccountbtn2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout residentAccountInfoLayout = new javax.swing.GroupLayout(residentAccountInfo);
         residentAccountInfo.setLayout(residentAccountInfoLayout);
@@ -832,13 +875,19 @@ public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addGroup(residentAccountInfoLayout.createSequentialGroup()
+                .addGap(46, 46, 46)
+                .addComponent(BackToResidentAccountbtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         residentAccountInfoLayout.setVerticalGroup(
             residentAccountInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(residentAccountInfoLayout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(167, Short.MAX_VALUE))
+                .addGap(39, 39, 39)
+                .addComponent(BackToResidentAccountbtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(201, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("tab4", residentAccountInfo);
@@ -856,7 +905,7 @@ public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
                 {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Unit", "Bill Type", "Payment Status", "Payment Date", "Payment Method", "Description", "Created_date"
+                "ID", "Unit", "Bill Type", "Payment Amount", "Payment Status", "Payment Date", "Payment Method", "Description"
             }
         ) {
             Class[] types = new Class [] {
@@ -939,7 +988,7 @@ public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
                         .addComponent(generateReport)
                         .addGap(18, 18, 18)
                         .addComponent(sendReminderbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(164, Short.MAX_VALUE))
+                .addContainerGap(138, Short.MAX_VALUE))
         );
         BillPanelLayout.setVerticalGroup(
             BillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1009,7 +1058,11 @@ public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
             }
         });
 
+        sendBill.setBackground(new java.awt.Color(164, 221, 221));
+        sendBill.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        sendBill.setForeground(new java.awt.Color(54, 84, 85));
         sendBill.setText("Genarate");
+        sendBill.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(54, 84, 85), 2, true));
         sendBill.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sendBillActionPerformed(evt);
@@ -1019,48 +1072,59 @@ public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
         jLabel22.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         jLabel22.setText("Amount:");
 
+        BackToBilltbtn1.setBackground(new java.awt.Color(164, 221, 221));
+        BackToBilltbtn1.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        BackToBilltbtn1.setForeground(new java.awt.Color(54, 84, 85));
+        BackToBilltbtn1.setText("Back");
+        BackToBilltbtn1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(54, 84, 85), 2, true));
+        BackToBilltbtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BackToBilltbtn1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout generateBillPanelLayout = new javax.swing.GroupLayout(generateBillPanel);
         generateBillPanel.setLayout(generateBillPanelLayout);
         generateBillPanelLayout.setHorizontalGroup(
             generateBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(generateBillPanelLayout.createSequentialGroup()
-                .addGap(450, 450, 450)
+                .addGap(403, 403, 403)
                 .addGroup(generateBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(generateBillPanelLayout.createSequentialGroup()
-                        .addGroup(generateBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel22)
-                            .addComponent(jLabel20)
-                            .addComponent(jLabel21))
-                        .addGap(45, 45, 45)
-                        .addGroup(generateBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(billDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(generateBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(unitInput, 0, 101, Short.MAX_VALUE)
-                                .addComponent(billAmountTextField))))
                     .addGroup(generateBillPanelLayout.createSequentialGroup()
                         .addGroup(generateBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel18)
                             .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(60, 60, 60)
+                        .addGap(100, 100, 100)
+                        .addComponent(billTypeSelection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(generateBillPanelLayout.createSequentialGroup()
+                        .addComponent(allUnit)
+                        .addGap(54, 54, 54)
+                        .addComponent(selectedUnit))
+                    .addGroup(generateBillPanelLayout.createSequentialGroup()
                         .addGroup(generateBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(generateBillPanelLayout.createSequentialGroup()
-                                .addComponent(allUnit)
-                                .addGap(54, 54, 54)
-                                .addComponent(selectedUnit))
-                            .addComponent(billTypeSelection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(401, Short.MAX_VALUE))
+                            .addComponent(jLabel22)
+                            .addComponent(jLabel21)
+                            .addComponent(jLabel20))
+                        .addGap(47, 47, 47)
+                        .addGroup(generateBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(billDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(unitInput, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(billAmountTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(433, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, generateBillPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(sendBill, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(522, 522, 522))
+                .addGap(42, 42, 42)
+                .addComponent(BackToBilltbtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(sendBill, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(121, 121, 121))
         );
         generateBillPanelLayout.setVerticalGroup(
             generateBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(generateBillPanelLayout.createSequentialGroup()
-                .addGap(111, 111, 111)
+                .addGap(110, 110, 110)
                 .addComponent(jLabel15)
-                .addGap(54, 54, 54)
+                .addGap(55, 55, 55)
                 .addGroup(generateBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(billTypeSelection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel18))
@@ -1081,9 +1145,11 @@ public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
                 .addGroup(generateBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(billDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel21))
-                .addGap(114, 114, 114)
-                .addComponent(sendBill, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(382, Short.MAX_VALUE))
+                .addGap(81, 81, 81)
+                .addGroup(generateBillPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(sendBill, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BackToBilltbtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(390, Short.MAX_VALUE))
         );
 
         unitInput.setEnabled(false);
@@ -1162,7 +1228,7 @@ public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
                         .addComponent(visitorReportYearSelection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(generateVisitorReport)))
-                .addContainerGap(339, Short.MAX_VALUE))
+                .addContainerGap(313, Short.MAX_VALUE))
             .addGroup(VisitorPanelLayout.createSequentialGroup()
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 1070, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -1232,7 +1298,7 @@ public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
                     .addGroup(managementForumLayout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addComponent(jLabel1)))
-                .addContainerGap(159, Short.MAX_VALUE))
+                .addContainerGap(133, Short.MAX_VALUE))
         );
         managementForumLayout.setVerticalGroup(
             managementForumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1403,7 +1469,7 @@ public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
                                 .addGap(290, 290, 290)
                                 .addComponent(forumID))))
                     .addComponent(jPanel21, javax.swing.GroupLayout.PREFERRED_SIZE, 717, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(411, Short.MAX_VALUE))
+                .addContainerGap(385, Short.MAX_VALUE))
         );
         managementForumDicussionPanelLayout.setVerticalGroup(
             managementForumDicussionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1473,7 +1539,7 @@ public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
                     .addGroup(residentForumLayout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 980, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(191, Short.MAX_VALUE))
+                .addContainerGap(165, Short.MAX_VALUE))
         );
         residentForumLayout.setVerticalGroup(
             residentForumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1491,7 +1557,7 @@ public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1196, Short.MAX_VALUE)
+            .addGap(0, 1170, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1530,9 +1596,6 @@ public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
-
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -1566,10 +1629,22 @@ public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
         DefaultTableModel model = (DefaultTableModel) resident_table.getModel();
         model.setRowCount(0);
         load_residentAccount();
+         account_btn.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    // Trigger function
+                    System.out.println("Button Clicked!");
+                    // Perform other actions or operations here
+                }});
+
     }//GEN-LAST:event_account_btnActionPerformed
 
     private void openBillpanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openBillpanelActionPerformed
-        
+        openBillpanel.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    // Trigger function
+                    System.out.println("Button Clicked!");
+                    // Perform other actions or operations here
+                }});
         jTabbedPane2.setSelectedIndex(4); 
         DefaultTableModel model = (DefaultTableModel) billRecord_table.getModel();
         model.setRowCount(0);
@@ -1588,13 +1663,14 @@ public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
         }
         
         load_billRecord();
+        
 
     }//GEN-LAST:event_openBillpanelActionPerformed
 
     private void vistorPanelbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vistorPanelbtnActionPerformed
         jTabbedPane2.setSelectedIndex(6);  
-        DefaultTableModel model = (DefaultTableModel) visitor_table.getModel();
-        model.setRowCount(0);
+        DefaultTableModel visitorRecord_table = (DefaultTableModel) visitor_table.getModel();
+        visitorRecord_table.setRowCount(0);
         load_visitorRecord();
     }//GEN-LAST:event_vistorPanelbtnActionPerformed
 
@@ -1617,16 +1693,16 @@ public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
             String sql = "INSERT into resident_account(username,email,password,created_date) values (?,?,?,?)";
             String findID = "SELECT id from resident_account WHERE email =?";
             String sql3 = "UPDATE  apartment_unit SET resident_id =? ,registered='true' WHERE floor_unit =?";
-            
-            if(!isValidEmail(email)){
+            if(email.equals("") || username.equals("")  || password.equals("")){
+                JOptionPane.showMessageDialog(null, "Please fill up all the fields", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            else if(!isValidEmail(email)){
                 JOptionPane.showMessageDialog(null, "Invalid email format", "Error", JOptionPane.ERROR_MESSAGE);
             }
-            else if(isEmailAlreadyExists(email)){
+            else if(!isEmailAlreadyExists(email)){
                 
                 JOptionPane.showMessageDialog(null, "Email already exists", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-            
-            else{
+            }else{ 
                 try{
                 pst = conn.prepareStatement(sql);
                 pst.setString(1,username);
@@ -1653,18 +1729,24 @@ public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
                     pst.execute();
                     JOptionPane.showMessageDialog(null,"Unit Created");
                 
-                
-
-                
+                    jTabbedPane2.setSelectedIndex(1);
+                    addResidentAccount.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    // Trigger function
+                    System.out.println("Button Clicked!");
+                    // Perform other actions or operations here
+                }});
+                    isCreatedAccount = true;
                 }catch (Exception e){
                     JOptionPane.showMessageDialog(null,e);
                 }
-                
-                
-         }
+            }
             
-                
+            
+            
         }
+               
+        
         
     }//GEN-LAST:event_addResidentAccountActionPerformed
 
@@ -1674,6 +1756,13 @@ public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
         username_input.setText("");
         email_input.setText("");
         password_input.setText("");
+        residentUnitInput.removeAllItems();
+        addAcc_btn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Trigger function
+                System.out.println("Button Clicked!");
+                // Perform other actions or operations here
+            }});
         String sql = "SELECT floor_unit from apartment_unit WHERE registered ='false' ";
         try{
             Statement stm = conn.createStatement();
@@ -1710,7 +1799,7 @@ public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
         if(resident_table.getSelectedRowCount() ==1){
             String email = resident_table.getModel().getValueAt(row, 3).toString();
             String id = resident_table.getModel().getValueAt(row, 0).toString();
-            System.out.println(email);
+            
             String sql = "DELETE  FROM resident_account WHERE email=?";
             String unregister_unit = " UPDATE apartment_unit SET resident_id ='' , registered = 'false' WHERE resident_id =? ";
            
@@ -1751,23 +1840,25 @@ public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_deleteAccountbtnActionPerformed
 
     private void viewResidentDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewResidentDetailsActionPerformed
+
+
         int index = resident_table.getSelectedRow();
         TableModel resident_model = resident_table.getModel();
         DefaultTableModel vehicle = (DefaultTableModel)resident_vehicle.getModel();
-        String username = resident_model.getValueAt(index, 1).toString();
+        String id = resident_model.getValueAt(index, 0).toString();
         conn = sqliteConn2.connect();
-
+        vehicle.setRowCount(0);
         if(conn!= null){
             jTabbedPane2.setSelectedIndex(3);
-            resident_name.setText(username);
+            resident_name.setText(id);
             String sql = "SELECT resident_account.ic,resident_account.name,resident_account.contact, apartment_unit.floor_unit ,resident_vehicle.brand,\n" +
                 "resident_vehicle.model,resident_vehicle.plate_number,resident_vehicle.color\n" +
                 "FROM resident_account ,apartment_unit ,resident_vehicle\n" +
-                "WHERE resident_account.username =? \n" +
-                "AND resident_account.id = apartment_unit.resident_id";
+                "WHERE resident_account.id =? \n" +
+                "AND resident_account.id = apartment_unit.resident_id AND  resident_account.id = resident_vehicle.resident_id";
             try{
                pst = conn.prepareStatement(sql);
-               pst.setString(1,username);
+               pst.setString(1,id);
                rs = pst.executeQuery();
                while(rs.next()){
                resident_ic.setText(rs.getString("ic"));
@@ -1782,12 +1873,19 @@ public class ManagerMainPage extends javax.swing.JFrame implements Runnable {
               vehicle.addRow(tbData);
                
                }
+               isLoadResidentInformation = true;
                
             }catch (Exception e){
                 JOptionPane.showMessageDialog(null,e);
             }
          
         }
+                 viewResidentDetails.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    // Trigger function
+                    System.out.println("Button Clicked!");
+                    // Perform other actions or operations here
+                }});
     }//GEN-LAST:event_viewResidentDetailsActionPerformed
 
     private void generateReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateReportActionPerformed
@@ -1919,6 +2017,7 @@ try {
                         JOptionPane.showMessageDialog(null,"Bill created");
                         billAmountTextField.setText("");
                         billDescription.setText("");
+                        jTabbedPane2.setSelectedIndex(4);
                     }catch(SQLException e){
                        JOptionPane.showMessageDialog(null,e);
                         }
@@ -2103,6 +2202,12 @@ try {
     }//GEN-LAST:event_searchVisitorInputActionPerformed
 
     private void searchVisitorbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchVisitorbtnActionPerformed
+        searchVisitorbtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Trigger function
+                System.out.println("Button Clicked!");
+                // Perform other actions or operations here
+            }});
         conn = sqliteConn2.connect();
         String searchBy = SearchByListVisitor.getSelectedItem().toString();
         String input = searchVisitorInput.getText();
@@ -2137,10 +2242,11 @@ try {
                      
                        defaultTableModel.addRow(columnData);
                        rowCount++;
-
+                       isVisitorSearched =true;
                 }
                 if(rowCount <=0){
                         JOptionPane.showMessageDialog(null,"Record not found");
+                        isVisitorSearched =false;
                     }
             }catch(SQLException e){
                    JOptionPane.showMessageDialog(null,e);
@@ -2284,6 +2390,12 @@ try {
     }//GEN-LAST:event_searchVisitorbtnActionPerformed
 
     private void generateVisitorReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateVisitorReportActionPerformed
+        generateVisitorReport.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Trigger function
+                System.out.println("Button Clicked!");
+                // Perform other actions or operations here
+            }});
         conn = sqliteConn2.connect();
         String month = visitorReportMonthSelection.getSelectedItem().toString();
         String year = visitorReportYearSelection.getSelectedItem().toString();
@@ -2343,12 +2455,14 @@ try {
                             bw.newLine();
                         }
                         JOptionPane.showMessageDialog(this, "Successfully Saved");
+                        isGeneratedReport = true;
                     } catch (IOException ex) {
                         JOptionPane.showMessageDialog(this, "Error occurred while saving the file", "Error", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "No record found");
+                isGeneratedReport = false;
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -2453,6 +2567,18 @@ try {
         ManagerLoginNew login = new ManagerLoginNew();
         login.setVisible(true);
     }//GEN-LAST:event_logOutbtnActionPerformed
+
+    private void BackToResidentAccountbtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackToResidentAccountbtn1ActionPerformed
+        jTabbedPane2.setSelectedIndex(1);
+    }//GEN-LAST:event_BackToResidentAccountbtn1ActionPerformed
+
+    private void BackToResidentAccountbtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackToResidentAccountbtn2ActionPerformed
+        jTabbedPane2.setSelectedIndex(1);
+    }//GEN-LAST:event_BackToResidentAccountbtn2ActionPerformed
+
+    private void BackToBilltbtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackToBilltbtn1ActionPerformed
+          jTabbedPane2.setSelectedIndex(4);
+    }//GEN-LAST:event_BackToBilltbtn1ActionPerformed
      public void load_residentAccount(){
         conn = sqliteConn2.connect();
         Object columns[] = {"ID","resident_username","floor_unit","resident_email","resident_password","created_date"};
@@ -2506,6 +2632,7 @@ try {
                        bill_table.addRow(columnData);
                        
                 }
+                isLoadBill = true;
             }catch(SQLException e){
                    JOptionPane.showMessageDialog(null,e);
             }
@@ -2780,8 +2907,71 @@ public ResultSet floor_unitList() {
          }
          
      
-        
-
+   public boolean isCreatedAccount(){
+       return isCreatedAccount ;
+   }
+   public boolean isLoadResidentInformation(){
+       return isLoadResidentInformation;
+   }
+      public boolean isLoadBill(){
+       return isLoadBill;
+   }
+      public boolean isVisitorSearched(){
+          return isVisitorSearched;
+      }
+      public boolean isGeneratedReport(){
+       return isGeneratedReport;
+   }
+    public void triggerAddReisdentAccount() {
+        // Simulate a button click event
+        ActionEvent event = new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "Add account");
+        for (ActionListener listener : addResidentAccount.getActionListeners()) {
+            listener.actionPerformed(event);
+        }
+    }
+        public void triggerOpenAddAccountPanel() {
+        // Simulate a button click event
+        ActionEvent event = new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "Add account");
+        for (ActionListener listener : addAcc_btn.getActionListeners()) {
+            listener.actionPerformed(event);
+        }
+    }
+        public void triggerOpenResidentAccountPanel() {
+        // Simulate a button click event
+        ActionEvent event = new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "Add account");
+        for (ActionListener listener : account_btn.getActionListeners()) {
+            listener.actionPerformed(event);
+        }
+    }
+        public void triggerViewResidentInformation() {
+        // Simulate a button click event
+        ActionEvent event = new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "Add account");
+        for (ActionListener listener : viewResidentDetails.getActionListeners()) {
+            listener.actionPerformed(event);
+        }
+    }
+        public void triggerOpenBillPanel() {
+        // Simulate a button click event
+        ActionEvent event = new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "Add account");
+        for (ActionListener listener : openBillpanel.getActionListeners()) {
+            listener.actionPerformed(event);
+        }
+    }
+        public void triggerSearchVisitor() {
+        // Simulate a button click event
+        ActionEvent event = new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "Add account");
+        for (ActionListener listener : searchVisitorbtn.getActionListeners()) {
+            listener.actionPerformed(event);
+        }
+    }
+        public void triggerGenerateReport() {
+        // Simulate a button click event
+        ActionEvent event = new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "Add account");
+        for (ActionListener listener : generateVisitorReport.getActionListeners()) {
+            listener.actionPerformed(event);
+        }
+    }
+    
     
     private String getCurrentDate() {
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -2829,15 +3019,18 @@ public ResultSet floor_unitList() {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton BackToBilltbtn1;
+    public javax.swing.JButton BackToResidentAccountbtn1;
+    public javax.swing.JButton BackToResidentAccountbtn2;
     private javax.swing.JPanel BillPanel;
     private javax.swing.JLabel DateLabel;
-    private javax.swing.JComboBox<String> SearchByListVisitor;
+    public javax.swing.JComboBox<String> SearchByListVisitor;
     private javax.swing.JButton SearchUnitbtn;
     private javax.swing.JLabel TimeLabel;
     private javax.swing.JPanel VisitorPanel;
     private javax.swing.JButton account_btn;
     private javax.swing.JButton addAcc_btn;
-    private javax.swing.JButton addResidentAccount;
+    public javax.swing.JButton addResidentAccount;
     private javax.swing.JPanel addaccPanel;
     private javax.swing.JRadioButton allUnit;
     private javax.swing.JButton backToForumTable;
@@ -2849,11 +3042,11 @@ public ResultSet floor_unitList() {
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JMenuItem createBill;
     private javax.swing.JButton deleteAccountbtn;
-    private javax.swing.JTextField email_input;
+    public javax.swing.JTextField email_input;
     private javax.swing.JLabel forumID;
     private javax.swing.JPanel generateBillPanel;
     private javax.swing.JButton generateReport;
-    private javax.swing.JButton generateVisitorReport;
+    public javax.swing.JButton generateVisitorReport;
     private javax.swing.JPanel homePanel;
     private javax.swing.JButton home_btn;
     private javax.swing.JLabel jLabel1;
@@ -2897,7 +3090,6 @@ public ResultSet floor_unitList() {
     private javax.swing.JLabel jLabel85;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel11;
@@ -2935,8 +3127,8 @@ public ResultSet floor_unitList() {
     private javax.swing.JButton managementForumPanelbtn;
     private javax.swing.JTable managementForumTable;
     private javax.swing.JComboBox<String> monthPicker;
-    private javax.swing.JButton openBillpanel;
-    private javax.swing.JTextField password_input;
+    public javax.swing.JButton openBillpanel;
+    public javax.swing.JTextField password_input;
     private javax.swing.JTextField postAuthorLabel;
     private javax.swing.JTextArea postContentLabel;
     private javax.swing.JTextField postDateLabel;
@@ -2946,26 +3138,26 @@ public ResultSet floor_unitList() {
     private javax.swing.JPanel residentForum;
     private javax.swing.JButton residentForumPanelbtn;
     private javax.swing.JTable residentForumTable;
-    private javax.swing.JComboBox<String> residentUnitInput;
+    public javax.swing.JComboBox<String> residentUnitInput;
     public javax.swing.JLabel resident_contact;
     public javax.swing.JLabel resident_ic;
     public javax.swing.JLabel resident_name;
-    private javax.swing.JTable resident_table;
+    public javax.swing.JTable resident_table;
     public javax.swing.JLabel resident_unit;
     public javax.swing.JTable resident_vehicle;
     private javax.swing.JPanel residentaccPanel;
-    private javax.swing.JTextField searchVisitorInput;
-    private javax.swing.JButton searchVisitorbtn;
+    public javax.swing.JTextField searchVisitorInput;
+    public javax.swing.JButton searchVisitorbtn;
     private javax.swing.JRadioButton selectedUnit;
     private javax.swing.JButton sendBill;
     private javax.swing.JButton sendReminderbtn;
     private javax.swing.JLabel typeForum;
     private javax.swing.JComboBox<String> unitInput;
     private javax.swing.JComboBox<String> unitList;
-    private javax.swing.JTextField username_input;
+    public javax.swing.JTextField username_input;
     private javax.swing.JButton viewResidentDetails;
-    private javax.swing.JComboBox<String> visitorReportMonthSelection;
-    private javax.swing.JComboBox<String> visitorReportYearSelection;
+    public javax.swing.JComboBox<String> visitorReportMonthSelection;
+    public javax.swing.JComboBox<String> visitorReportYearSelection;
     private javax.swing.JTable visitor_table;
     private javax.swing.JButton vistorPanelbtn;
     private javax.swing.JComboBox<String> yearPicker;
