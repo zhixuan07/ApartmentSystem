@@ -2659,12 +2659,15 @@ public class ResidentMainPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void homePanelbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homePanelbtnActionPerformed
+        // jump to the seclected index tab when click button
         jTabbedPane3.setSelectedIndex(0);
 
     }//GEN-LAST:event_homePanelbtnActionPerformed
 
     private void profilePanelbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profilePanelbtnActionPerformed
-         jTabbedPane3.setSelectedIndex(11);
+         // jump to the seclected index tab when click button
+        jTabbedPane3.setSelectedIndex(11);
+        // reset the table and label if their have changes of data in database
         DefaultTableModel residentCar = (DefaultTableModel)residentVehicleTable.getModel();
         residentCar.setRowCount(0);
         residentNameLabel.setText("");
@@ -2675,7 +2678,9 @@ public class ResidentMainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_profilePanelbtnActionPerformed
 
     private void billPanelbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_billPanelbtnActionPerformed
-         jTabbedPane3.setSelectedIndex(1);
+         // jump to the seclected index tab when click button 
+        jTabbedPane3.setSelectedIndex(1);
+          // reset the table and label if their have changes of data in database
          DefaultTableModel pending = (DefaultTableModel)pendingTable.getModel();
          pending.setRowCount(0);
           DefaultTableModel history = (DefaultTableModel)historyTable.getModel();
@@ -2685,22 +2690,28 @@ public class ResidentMainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_billPanelbtnActionPerformed
 
     private void forumPanelbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_forumPanelbtnActionPerformed
-         jTabbedPane3.setSelectedIndex(4);
+         // jump to the seclected index tab when click button
+        jTabbedPane3.setSelectedIndex(4);
+          // reset the table and label if their have changes of data in database
          DefaultTableModel management_forum = (DefaultTableModel)managementForumTable.getModel();
         management_forum.setRowCount(0);
          loadManagementForum();
     }//GEN-LAST:event_forumPanelbtnActionPerformed
 
     private void residentForumPanelbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_residentForumPanelbtnActionPerformed
+         // jump to the seclected index tab when click button
         jTabbedPane3.setSelectedIndex(5);
+          // reset the table and label if their have changes of data in database
         DefaultTableModel resident_forum = (DefaultTableModel)residentForumTable.getModel();
         resident_forum.setRowCount(0);
         loadResidentForum();
     }//GEN-LAST:event_residentForumPanelbtnActionPerformed
 
     private void notificationPanelbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_notificationPanelbtnActionPerformed
-         DefaultTableModel resident_notification = (DefaultTableModel)notificationTable.getModel();
+          // reset the table and label if their have changes of data in database
+        DefaultTableModel resident_notification = (DefaultTableModel)notificationTable.getModel();
         resident_notification.setRowCount(0);
+         // jump to the seclected index tab when click button
         jTabbedPane3.setSelectedIndex(10);
          
          loadNotification();
@@ -2708,7 +2719,7 @@ public class ResidentMainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_notificationPanelbtnActionPerformed
 
     private void logOutbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logOutbtnActionPerformed
-                ResidentLoginNew login = new ResidentLoginNew();
+        ResidentLoginNew login = new ResidentLoginNew();
         login.setVisible(true);
         dispose();
         
@@ -2718,17 +2729,17 @@ public class ResidentMainPage extends javax.swing.JFrame {
     private void paymentCreditMaintainencebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paymentCreditMaintainencebtnActionPerformed
       
        
-        
-            conn = sqliteConn2.connect();
+        //create connection to database
+        conn = sqliteConn2.connect();
         String unit = residentUnitLabel.getText();
         String sql = "SELECT id,bill_type,bill_amount FROM bill_record WHERE floor_unit = ? AND payment_status ='false' and bill_type='Maintance fee' ";
         try{
             pst = conn.prepareStatement(sql);
             pst.setString(1,unit);
             rs = pst.executeQuery();
+            //check the result is empty 
             if(!rs.next() ){
-                String name = rs.getString("id");
-                System.out.println(name);
+                
                  JOptionPane.showMessageDialog(null,"No pending maintance payment");
                  
             }else{

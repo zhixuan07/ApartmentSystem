@@ -207,7 +207,7 @@ public class LoginMain extends javax.swing.JFrame {
         
         
         //display manager login frame here
-        
+       
         dispose(); //close current frame ( main login frame )
     }//GEN-LAST:event_jButton2ActionPerformed
 

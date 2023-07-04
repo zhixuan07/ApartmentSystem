@@ -227,12 +227,16 @@ public class ResidentLoginNew extends javax.swing.JFrame {
     }//GEN-LAST:event_residentUsernameInputActionPerformed
 
     private void residentLoginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_residentLoginBtnActionPerformed
+        // connect database
         conn = sqliteConn2.connect();
+        // get inputs
         String unit = residentUsernameInput.getText();
         char [] ps = residentPasswordInput.getPassword();
         String password = new String(ps);
         
+       
         String sql = "SELECT id, username, password FROM resident_account where username =? AND password =?";
+        // validation for empty fields
         if(unit.equals("") || ps.equals("")){
                 JOptionPane.showMessageDialog(null,"Please fill up all the fields");
         }else{
@@ -319,7 +323,7 @@ public class ResidentLoginNew extends javax.swing.JFrame {
         WindowEvent closewindow = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
         Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closewindow);
     }
-    
+    // for unit testing purpose
     public void triggerLogin() {
         // Simulate a button click event
         ActionEvent event = new ActionEvent(this, ActionEvent.ACTION_PERFORMED, "login");
