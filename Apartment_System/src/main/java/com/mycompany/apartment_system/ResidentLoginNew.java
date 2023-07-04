@@ -308,7 +308,10 @@ public class ResidentLoginNew extends javax.swing.JFrame {
     }//GEN-LAST:event_residentPasswordInputActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+       LoginMain mainloginframe = new LoginMain();
+        mainloginframe.show(); //display manager login frame here
+        
+        dispose();
         //go back to login main page
  //close current frame (manager login frame) after open main login frame
     }//GEN-LAST:event_jButton3ActionPerformed

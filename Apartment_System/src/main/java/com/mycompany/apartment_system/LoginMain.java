@@ -193,7 +193,7 @@ public class LoginMain extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         //go to resident login page
-        ResidentLogin residentloginframe = new ResidentLogin();
+        ResidentLoginNew residentloginframe = new ResidentLoginNew();
         residentloginframe.show(); //display resident login frame here
         
         dispose(); //close current frame ( main login frame )
@@ -202,7 +202,10 @@ public class LoginMain extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         //go to manager login page
-       
+      ManagerLoginNew manager = new ManagerLoginNew();
+        manager.show(); //display security login frame here
+        
+        
         //display manager login frame here
         
         dispose(); //close current frame ( main login frame )

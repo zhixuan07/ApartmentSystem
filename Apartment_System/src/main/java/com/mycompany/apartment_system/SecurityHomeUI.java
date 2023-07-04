@@ -78,6 +78,7 @@ public class SecurityHomeUI extends javax.swing.JFrame implements Runnable{
         jLabel27 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
         yesterdayVisitor = new javax.swing.JLabel();
+        LogOutBtn = new javax.swing.JButton();
         visitorPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         visitor_table = new javax.swing.JTable();
@@ -103,6 +104,7 @@ public class SecurityHomeUI extends javax.swing.JFrame implements Runnable{
         AddVisitorbtn = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
         visitorCarPlateTextField = new javax.swing.JTextField();
+        backToTablebtn = new javax.swing.JButton();
         viewVisitorPanel = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
@@ -124,6 +126,7 @@ public class SecurityHomeUI extends javax.swing.JFrame implements Runnable{
         visitorCarPlateLabel = new javax.swing.JLabel();
         saveTimeOutbtn = new javax.swing.JButton();
         visitorIDLabel = new javax.swing.JLabel();
+        backToTablebtn2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         Home_btn = new javax.swing.JButton();
         Visitor_btn = new javax.swing.JButton();
@@ -135,7 +138,6 @@ public class SecurityHomeUI extends javax.swing.JFrame implements Runnable{
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
-        setPreferredSize(new java.awt.Dimension(1350, 1040));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(1024, 1024));
@@ -293,31 +295,48 @@ public class SecurityHomeUI extends javax.swing.JFrame implements Runnable{
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        LogOutBtn.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        LogOutBtn.setText("Log out");
+        LogOutBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LogOutBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout homePanelLayout = new javax.swing.GroupLayout(homePanel);
         homePanel.setLayout(homePanelLayout);
         homePanelLayout.setHorizontalGroup(
             homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(homePanelLayout.createSequentialGroup()
                 .addGroup(homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, 1078, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(homePanelLayout.createSequentialGroup()
-                        .addGap(393, 393, 393)
-                        .addComponent(jLabel30))
-                    .addGroup(homePanelLayout.createSequentialGroup()
-                        .addGap(79, 79, 79)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(102, 102, 102)
-                        .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(100, 100, 100)
-                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, 1078, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, homePanelLayout.createSequentialGroup()
+                                .addGap(79, 79, 79)
+                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, homePanelLayout.createSequentialGroup()
+                                .addGap(393, 393, 393)
+                                .addComponent(jLabel30)))
+                        .addGroup(homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(homePanelLayout.createSequentialGroup()
+                                .addGap(216, 216, 216)
+                                .addComponent(LogOutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, homePanelLayout.createSequentialGroup()
+                                .addGap(89, 89, 89)
+                                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(262, Short.MAX_VALUE))
         );
         homePanelLayout.setVerticalGroup(
             homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(homePanelLayout.createSequentialGroup()
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addComponent(jLabel30)
+                .addGap(14, 14, 14)
+                .addGroup(homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel30)
+                    .addComponent(LogOutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(70, 70, 70)
                 .addGroup(homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
@@ -483,7 +502,11 @@ public class SecurityHomeUI extends javax.swing.JFrame implements Runnable{
 
         residentUnitListBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
 
+        AddVisitorbtn.setBackground(new java.awt.Color(162, 221, 221));
+        AddVisitorbtn.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        AddVisitorbtn.setForeground(new java.awt.Color(54, 84, 85));
         AddVisitorbtn.setText("Save");
+        AddVisitorbtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85)));
         AddVisitorbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AddVisitorbtnActionPerformed(evt);
@@ -493,6 +516,17 @@ public class SecurityHomeUI extends javax.swing.JFrame implements Runnable{
         jLabel16.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
         jLabel16.setText("Visitor car plate:");
 
+        backToTablebtn.setBackground(new java.awt.Color(162, 221, 221));
+        backToTablebtn.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        backToTablebtn.setForeground(new java.awt.Color(54, 84, 85));
+        backToTablebtn.setText("Back");
+        backToTablebtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85)));
+        backToTablebtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backToTablebtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout addVisitorPanelLayout = new javax.swing.GroupLayout(addVisitorPanel);
         addVisitorPanel.setLayout(addVisitorPanelLayout);
         addVisitorPanelLayout.setHorizontalGroup(
@@ -500,38 +534,41 @@ public class SecurityHomeUI extends javax.swing.JFrame implements Runnable{
             .addGroup(addVisitorPanelLayout.createSequentialGroup()
                 .addGroup(addVisitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(addVisitorPanelLayout.createSequentialGroup()
-                        .addGap(117, 117, 117)
-                        .addGroup(addVisitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(addVisitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(addVisitorPanelLayout.createSequentialGroup()
-                                    .addComponent(jLabel11)
-                                    .addGap(117, 117, 117)
-                                    .addComponent(visitorICTextField))
-                                .addGroup(addVisitorPanelLayout.createSequentialGroup()
-                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(90, 90, 90)
-                                    .addComponent(visitorNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(addVisitorPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel12)
-                                .addGap(26, 26, 26)
-                                .addComponent(visitorContactTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(138, 138, 138)
-                        .addGroup(addVisitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel14)
-                            .addComponent(jLabel15)
-                            .addComponent(jLabel16))
-                        .addGap(37, 37, 37)
-                        .addGroup(addVisitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(visitorCarPlateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(visitReasonTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(residentUnitListBox, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(addVisitorPanelLayout.createSequentialGroup()
                         .addGap(103, 103, 103)
                         .addComponent(jLabel8))
                     .addGroup(addVisitorPanelLayout.createSequentialGroup()
-                        .addGap(485, 485, 485)
-                        .addComponent(AddVisitorbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(372, Short.MAX_VALUE))
+                        .addGap(117, 117, 117)
+                        .addGroup(addVisitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(addVisitorPanelLayout.createSequentialGroup()
+                                .addComponent(backToTablebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(543, 543, 543)
+                                .addComponent(AddVisitorbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(addVisitorPanelLayout.createSequentialGroup()
+                                .addGroup(addVisitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(addVisitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(addVisitorPanelLayout.createSequentialGroup()
+                                            .addComponent(jLabel11)
+                                            .addGap(117, 117, 117)
+                                            .addComponent(visitorICTextField))
+                                        .addGroup(addVisitorPanelLayout.createSequentialGroup()
+                                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(90, 90, 90)
+                                            .addComponent(visitorNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(addVisitorPanelLayout.createSequentialGroup()
+                                        .addComponent(jLabel12)
+                                        .addGap(26, 26, 26)
+                                        .addComponent(visitorContactTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(138, 138, 138)
+                                .addGroup(addVisitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel14)
+                                    .addComponent(jLabel15)
+                                    .addComponent(jLabel16))
+                                .addGap(37, 37, 37)
+                                .addGroup(addVisitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(visitorCarPlateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(visitReasonTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(residentUnitListBox, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(350, Short.MAX_VALUE))
         );
         addVisitorPanelLayout.setVerticalGroup(
             addVisitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -562,9 +599,11 @@ public class SecurityHomeUI extends javax.swing.JFrame implements Runnable{
                     .addComponent(visitorContactTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel15)
                     .addComponent(visitReasonTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(159, 159, 159)
-                .addComponent(AddVisitorbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(560, Short.MAX_VALUE))
+                .addGap(131, 131, 131)
+                .addGroup(addVisitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(AddVisitorbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(backToTablebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(564, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("tab3", addVisitorPanel);
@@ -616,8 +655,11 @@ public class SecurityHomeUI extends javax.swing.JFrame implements Runnable{
 
         visitorCarPlateLabel.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
-        saveTimeOutbtn.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        saveTimeOutbtn.setBackground(new java.awt.Color(168, 224, 224));
+        saveTimeOutbtn.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        saveTimeOutbtn.setForeground(new java.awt.Color(54, 84, 85));
         saveTimeOutbtn.setText("Save Time Out");
+        saveTimeOutbtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(54, 84, 85), 2));
         saveTimeOutbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveTimeOutbtnActionPerformed(evt);
@@ -626,6 +668,17 @@ public class SecurityHomeUI extends javax.swing.JFrame implements Runnable{
 
         visitorIDLabel.setBackground(new java.awt.Color(255, 255, 255));
         visitorIDLabel.setForeground(new java.awt.Color(255, 255, 255));
+
+        backToTablebtn2.setBackground(new java.awt.Color(168, 224, 224));
+        backToTablebtn2.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        backToTablebtn2.setForeground(new java.awt.Color(54, 84, 85));
+        backToTablebtn2.setText("Back");
+        backToTablebtn2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(54, 84, 85), 2, true));
+        backToTablebtn2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backToTablebtn2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout viewVisitorPanelLayout = new javax.swing.GroupLayout(viewVisitorPanel);
         viewVisitorPanel.setLayout(viewVisitorPanelLayout);
@@ -664,12 +717,14 @@ public class SecurityHomeUI extends javax.swing.JFrame implements Runnable{
                             .addComponent(visitorICLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(visitorCarPlateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(viewVisitorPanelLayout.createSequentialGroup()
-                        .addGap(440, 440, 440)
-                        .addComponent(saveTimeOutbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(viewVisitorPanelLayout.createSequentialGroup()
                         .addGap(210, 210, 210)
-                        .addComponent(visitorIDLabel)))
-                .addContainerGap(678, Short.MAX_VALUE))
+                        .addComponent(visitorIDLabel))
+                    .addGroup(viewVisitorPanelLayout.createSequentialGroup()
+                        .addGap(235, 235, 235)
+                        .addComponent(backToTablebtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(178, 178, 178)
+                        .addComponent(saveTimeOutbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(583, Short.MAX_VALUE))
         );
         viewVisitorPanelLayout.setVerticalGroup(
             viewVisitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -684,39 +739,44 @@ public class SecurityHomeUI extends javax.swing.JFrame implements Runnable{
                 .addGroup(viewVisitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel24)
                     .addComponent(visitorCarPlateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                .addGap(34, 34, 34)
                 .addGroup(viewVisitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel13)
-                    .addComponent(visitorICLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(viewVisitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel17)
-                    .addComponent(visitorContactLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addGroup(viewVisitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel18)
-                    .addComponent(residentUnitLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
-                .addGroup(viewVisitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(viewVisitorPanelLayout.createSequentialGroup()
-                        .addComponent(reasonVisitLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-                        .addComponent(statusLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel13)
+                        .addGap(26, 26, 26)
+                        .addGroup(viewVisitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel17)
+                            .addComponent(visitorContactLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30)
+                        .addGroup(viewVisitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel18)
+                            .addComponent(residentUnitLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(32, 32, 32)
+                        .addGroup(viewVisitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(viewVisitorPanelLayout.createSequentialGroup()
+                                .addComponent(reasonVisitLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                                .addComponent(statusLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(viewVisitorPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel21)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel19)))
+                        .addGap(26, 26, 26)
+                        .addGroup(viewVisitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel23)
+                            .addComponent(timeInLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(28, 28, 28)
+                        .addGroup(viewVisitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel22)
+                            .addComponent(timeOutLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(58, 58, 58)
+                        .addGroup(viewVisitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(saveTimeOutbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(backToTablebtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(394, 394, 394))
                     .addGroup(viewVisitorPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel21)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel19)))
-                .addGap(26, 26, 26)
-                .addGroup(viewVisitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel23)
-                    .addComponent(timeInLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
-                .addGroup(viewVisitorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel22)
-                    .addComponent(timeOutLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(55, 55, 55)
-                .addComponent(saveTimeOutbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(430, 430, 430))
+                        .addComponent(visitorICLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         jTabbedPane2.addTab("tab4", viewVisitorPanel);
@@ -729,7 +789,7 @@ public class SecurityHomeUI extends javax.swing.JFrame implements Runnable{
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 1188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 13, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -811,8 +871,8 @@ public class SecurityHomeUI extends javax.swing.JFrame implements Runnable{
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1188, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -829,7 +889,11 @@ public class SecurityHomeUI extends javax.swing.JFrame implements Runnable{
     }// </editor-fold>//GEN-END:initComponents
 
     private void Home_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Home_btnActionPerformed
-          jTabbedPane2.setSelectedIndex(0); 
+        todayVisitor.setText("");
+        yesterdayVisitor.setText("");
+        lastVisitor.setText("");
+        loadVisitor();
+        jTabbedPane2.setSelectedIndex(0); 
     }//GEN-LAST:event_Home_btnActionPerformed
 
     private void Visitor_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Visitor_btnActionPerformed
@@ -1246,6 +1310,26 @@ public class SecurityHomeUI extends javax.swing.JFrame implements Runnable{
         // TODO add your handling code here:
     }//GEN-LAST:event_visitorICTextFieldActionPerformed
 
+    private void LogOutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogOutBtnActionPerformed
+        SecurityLogin guardLogin = new SecurityLogin();
+        dispose();
+        JOptionPane.showMessageDialog(this,"Log Out Successfully");
+        guardLogin.setVisible(true);
+    }//GEN-LAST:event_LogOutBtnActionPerformed
+
+    private void backToTablebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToTablebtnActionPerformed
+        jTabbedPane2.setSelectedIndex(1);
+        visitorNameTextField.setText("");
+        visitorContactTextField.setText("");
+        visitorICTextField.setText("");
+        visitorCarPlateTextField.setText("");
+        visitReasonTextField.setText("");
+    }//GEN-LAST:event_backToTablebtnActionPerformed
+
+    private void backToTablebtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToTablebtn2ActionPerformed
+        jTabbedPane2.setSelectedIndex(1);
+    }//GEN-LAST:event_backToTablebtn2ActionPerformed
+
     public void load_data(){
         conn = sqliteConn2.connect();
         int row =0;
@@ -1487,9 +1571,12 @@ public class SecurityHomeUI extends javax.swing.JFrame implements Runnable{
     private javax.swing.JLabel DateLabel;
     private javax.swing.JButton Delete_visitor_btn;
     private javax.swing.JButton Home_btn;
+    private javax.swing.JButton LogOutBtn;
     private javax.swing.JLabel TimeLabel;
     private javax.swing.JButton Visitor_btn;
     private javax.swing.JPanel addVisitorPanel;
+    public javax.swing.JButton backToTablebtn;
+    private javax.swing.JButton backToTablebtn2;
     private javax.swing.JPanel homePanel;
     private javax.swing.JTextField inputTextField;
     private javax.swing.JLabel jLabel1;
